@@ -6,11 +6,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +22,24 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'role',
     ];
+
+    public function psychologistProfile()
+    {
+        return $this->hasOne(PsychologistProfile::class);
+    }
+
+    public function patientBookings()
+    {
+        return $this->hasMany(Booking::class, 'patient_id');
+    }
+
+    public function psychologistBookings()
+    {
+        return $this->hasMany(Booking::class, 'psychologist_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
