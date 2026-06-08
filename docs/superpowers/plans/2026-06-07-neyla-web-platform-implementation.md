@@ -13,60 +13,61 @@
 ### Task 1: Project Initialization & Database Setup
 
 **Files:**
-- Create: `.env` (modified from .env.example)
-- Modify: `config/database.php`
+- Create: `backend/.env` (modified from backend/.env.example)
+- Modify: `backend/config/database.php`
 
-- [ ] **Step 1: Create Laravel 12 project**
-Run: `composer create-project laravel/laravel:^12.0 .`
+- [x] **Step 1: Create Laravel 12 project**
+Run: `composer create-project laravel/laravel:^12.0 backend`
 
-- [ ] **Step 2: Configure .env with provided credentials**
+- [x] **Step 2: Configure .env with provided credentials**
 Set `DB_USERNAME=root`, `DB_PASSWORD=root`, `DB_DATABASE=neyla`.
 Create database `neyla` if not exists.
 
-- [ ] **Step 3: Install Sanctum & Reverb**
-Run: `php artisan install:api` (Sanctum)
-Run: `php artisan install:broadcasting` (Reverb)
+- [x] **Step 3: Install Sanctum & Reverb**
+Run: `cd backend && php artisan install:api` (Sanctum)
+Run: `cd backend && php artisan install:broadcasting` (Reverb)
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 ```bash
-git add .
+git add backend
 git commit -m "chore: initialize laravel 12 with api and broadcasting"
 ```
 
 ### Task 2: Core Data Models & Migrations
 
 **Files:**
-- Create: `database/migrations/2026_06_07_create_psychologist_profiles_table.php`
-- Create: `database/migrations/2026_06_07_create_bookings_table.php`
-- Create: `database/migrations/2026_06_07_create_payments_table.php`
-- Create: `database/migrations/2026_06_07_create_sessions_table.php`
-- Create: `database/migrations/2026_06_07_create_messages_table.php`
+- Create: `backend/database/migrations/2026_06_07_create_psychologist_profiles_table.php`
+- Create: `backend/database/migrations/2026_06_07_create_bookings_table.php`
+- Create: `backend/database/migrations/2026_06_07_create_payments_table.php`
+- Create: `backend/database/migrations/2026_06_07_create_sessions_table.php`
+- Create: `backend/database/migrations/2026_06_07_create_messages_table.php`
 
 - [ ] **Step 1: Create Migrations**
 Implement schemas for `users` (update default), `psychologist_profiles`, `bookings`, `payments`, `sessions`, and `messages`.
 
 - [ ] **Step 2: Run Migrations**
-Run: `php artisan migrate`
+Run: `cd backend && php artisan migrate`
 
 - [ ] **Step 3: Define Model Relationships**
-Update `User`, `PsychologistProfile`, `Booking`, etc., with `belongsTo`, `hasMany` relationships.
+Update `User`, `PsychologistProfile`, `Booking`, etc., in `backend/app/Models` with `belongsTo`, `hasMany` relationships.
 
 - [ ] **Step 4: Commit**
 ```bash
-git add database/migrations app/Models
+git add backend/database/migrations backend/app/Models
 git commit -m "feat: add core data models and migrations"
 ```
 
 ### Task 3: Authentication API (Sanctum)
 
 **Files:**
-- Create: `app/Http/Controllers/Api/AuthController.php`
-- Modify: `routes/api.php`
+- Create: `backend/app/Http/Controllers/Api/AuthController.php`
+- Modify: `backend/routes/api.php`
 
 - [ ] **Step 1: Create Register & Login Logic**
 Implement `register` and `login` methods returning Sanctum tokens.
 
 - [ ] **Step 2: Add Auth Routes**
+In `backend/routes/api.php`:
 ```php
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -77,7 +78,7 @@ Use Postman or curl to verify token generation.
 
 - [ ] **Step 4: Commit**
 ```bash
-git add app/Http/Controllers/Api/AuthController.php routes/api.php
+git add backend/app/Http/Controllers/Api/AuthController.php backend/routes/api.php
 git commit -m "feat: implement sanctum authentication api"
 ```
 
@@ -106,17 +107,17 @@ git commit -m "chore: initialize react frontend with vite and tailwind v3"
 ### Task 5: Payment & Session Management Logic
 
 **Files:**
-- Create: `app/Http/Controllers/Api/PaymentController.php`
-- Create: `app/Http/Controllers/Api/SessionController.php`
+- Create: `backend/app/Http/Controllers/Api/PaymentController.php`
+- Create: `backend/app/Http/Controllers/Api/SessionController.php`
 
 - [ ] **Step 1: Implement Payment Upload**
-Create `POST /api/payments/upload` to store proof images.
+Create `POST /api/payments/upload` in `backend/routes/api.php` and controller to store proof images.
 
 - [ ] **Step 2: Implement Session Closure**
-Create `POST /api/sessions/{id}/end` for psychologists to close sessions.
+Create `POST /api/sessions/{id}/end` in `backend/routes/api.php` for psychologists to close sessions.
 
 - [ ] **Step 3: Commit**
 ```bash
-git add app/Http/Controllers/Api
+git add backend/app/Http/Controllers/Api
 git commit -m "feat: implement payment upload and session closure logic"
 ```
