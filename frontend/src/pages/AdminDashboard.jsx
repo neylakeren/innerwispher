@@ -40,7 +40,7 @@ export default function AdminDashboard() {
         }
     };
 
-    if (loading) return <div className="flex items-center justify-center h-64"><Loader2 className="animate-spin h-8 w-8 text-indigo-600" /></div>;
+    if (loading) return <div className="flex items-center justify-center h-64"><Loader2 className="animate-spin h-8 w-8 text-primary" /></div>;
 
     return (
         <div className="space-y-6">
@@ -94,7 +94,7 @@ export default function AdminDashboard() {
                                             href={`http://localhost:8000/storage/${booking.payment.proof_image_path}`} 
                                             target="_blank" 
                                             rel="noreferrer"
-                                            className="inline-flex items-center text-indigo-600 hover:text-indigo-500 text-sm font-medium"
+                                            className="inline-flex items-center text-primary hover:text-surface-tint text-sm font-medium"
                                         >
                                             <ExternalLink className="h-4 w-4 mr-1" />
                                             Lihat Gambar

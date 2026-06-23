@@ -30,7 +30,7 @@ export default function AdminPatientList() {
         p.phone.includes(searchTerm)
     );
 
-    if (loading) return <div className="flex justify-center py-12"><Loader2 className="animate-spin h-8 w-8 text-indigo-600" /></div>;
+    if (loading) return <div className="flex justify-center py-12"><Loader2 className="animate-spin h-8 w-8 text-primary" /></div>;
 
     return (
         <div className="space-y-6">
@@ -92,7 +92,7 @@ export default function AdminPatientList() {
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
-                                    <button className="text-indigo-600 hover:text-indigo-900 font-medium">Detail</button>
+                                    <button className="text-primary hover:text-surface-tint font-medium">Detail</button>
                                 </td>
                             </tr>
                         ))}

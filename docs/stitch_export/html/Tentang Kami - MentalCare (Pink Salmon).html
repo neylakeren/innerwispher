@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MentalCare - Tentang Kami</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-dim": "#dbdada",
+                "primary-fixed-dim": "#ffb2bd",
+                "primary-container": "#ff91a4",
+                "on-background": "#1b1c1c",
+                "secondary-container": "#e0ddf6",
+                "on-tertiary-container": "#524042",
+                "inverse-primary": "#ffb2bd",
+                "secondary-fixed-dim": "#c6c4dc",
+                "on-tertiary-fixed": "#26181a",
+                "on-primary-container": "#79273a",
+                "on-surface-variant": "#544244",
+                "on-secondary-fixed-variant": "#464559",
+                "outline-variant": "#dac0c3",
+                "on-tertiary": "#ffffff",
+                "on-primary": "#ffffff",
+                "tertiary": "#6d595b",
+                "on-error": "#ffffff",
+                "surface-tint": "#9a4153",
+                "on-surface": "#1b1c1c",
+                "error-container": "#ffdad6",
+                "on-error-container": "#93000a",
+                "surface-container-highest": "#e4e2e2",
+                "primary": "#9a4153",
+                "inverse-surface": "#303031",
+                "secondary-fixed": "#e3e0f9",
+                "on-secondary-fixed": "#1a1a2c",
+                "on-secondary-container": "#626176",
+                "on-secondary": "#ffffff",
+                "surface": "#fbf9f9",
+                "surface-container-high": "#e9e8e8",
+                "secondary": "#5d5c71",
+                "on-primary-fixed": "#400014",
+                "on-primary-fixed-variant": "#7c293c",
+                "surface-bright": "#fbf9f9",
+                "tertiary-container": "#c4acae",
+                "on-tertiary-fixed-variant": "#544244",
+                "outline": "#877274",
+                "inverse-on-surface": "#f2f0f0",
+                "error": "#ba1a1a",
+                "surface-variant": "#e4e2e2",
+                "tertiary-fixed-dim": "#dac0c2",
+                "background": "#fbf9f9",
+                "surface-container-low": "#f5f3f3",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-fixed": "#f7dcde",
+                "surface-container": "#efeded",
+                "primary-fixed": "#ffd9dd"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "unit": "4px",
+                "stack-md": "16px",
+                "gutter": "24px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "stack-sm": "8px",
+                "stack-lg": "32px",
+                "md": "24px",
+                "container-max": "1200px",
+                "xl": "80px",
+                "sm": "12px",
+                "base": "8px",
+                "lg": "48px",
+                "xs": "4px"
+        },
+        "fontFamily": {
+                "headline-xl-mobile": [
+                        "Plus Jakarta Sans"
+                ],
+                "label-md": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-lg-mobile": [
+                        "Plus Jakarta Sans"
+                ],
+                "label-sm": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-md": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-md": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-xl": [
+                        "Plus Jakarta Sans"
+                ],
+                "caption": ["Plus Jakarta Sans"],
+                "display-lg": ["Plus Jakarta Sans"]
+        },
+        "fontSize": {
+                "headline-xl-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-xl": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "caption": ["12px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .ambient-shadow { box-shadow: 0 4px 12px rgba(41, 75, 88, 0.04); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(41, 75, 88, 0.08); }
+        .soft-outline { border: 1px solid var(--tw-colors-outline-variant); }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopNavBar (Web) -->
+<header class="hidden md:flex bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm transition-transform scale-95 active:scale-90 duration-200">
+<div class="flex justify-between items-center px-gutter py-base max-w-container-max mx-auto w-full">
+<div class="font-headline-md text-headline-md font-bold text-primary">MentalCare</div>
+<nav class="flex space-x-lg font-label-md text-label-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:opacity-90 transition-all duration-200" href="#">Beranda</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:opacity-90 transition-all duration-200" href="#">Layanan</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 hover:opacity-90 transition-all duration-200" href="#">Tentang Kami</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:opacity-90 transition-all duration-200" href="#">Artikel</a>
+</nav>
+<a class="bg-primary text-on-primary rounded-lg px-md py-sm font-label-md text-label-md hover:opacity-90 transition-all duration-200 shadow-md" href="#">Chat di WhatsApp</a>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-xl md:pt-[100px] pb-xl px-gutter max-w-container-max mx-auto w-full">
+<!-- Hero / Mission Section -->
+<section class="mb-xl text-center md:px-lg">
+<h1 class="font-display-lg text-display-lg text-primary mb-md">Dedikasi untuk Kesejahteraan Mental Anda</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto">
+                Di MentalCare, misi kami adalah menyediakan akses yang mudah, aman, dan penuh empati untuk dukungan kesehatan mental. Kami percaya bahwa setiap individu berhak mendapatkan ruang yang tenang untuk memulihkan diri.
+            </p>
+</section>
+<!-- Experts Section (Bento Grid Style) -->
+<section class="mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md text-center">Kenali Para Ahli Kami</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Expert 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-md ambient-shadow hover-lift flex flex-col items-center text-center">
+<div class="w-32 h-32 rounded-full overflow-hidden mb-md border-4 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female psychologist in her 30s, smiling warmly. She is wearing a soft beige blazer over a white blouse, standing in a brightly lit, modern clinic with a blurred background of green indoor plants. The lighting is soft and natural, emphasizing a calm and approachable demeanor. The overall aesthetic is clean, light-mode, and clinical yet welcoming, fitting a mental health care brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwXhxWL2vV0ryHhRTu0TO_WkJ7cwBXMiRrVDHQwy8IvwuZFIVjoMfwuYulDh-xWl2DHfT9JPPPi3Mgx5miy1mjluL-n0mithgKFKMIAloGD31WuAA_YNK8U-1BrkX9szQgA-XKbwd8sCBo_PjqbvBjQZu1PnzC7tfi6wYF88PhMeS70a9Pz70aSCktf9jQVV0C1_owEILYpd11QxXcJlhm9PtMe260NPKHMvr5uOCckGlSNcMt2alr4Es8WHjvqWJnyA2Rds-qpDd6"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Dr. Rina Saraswati</h3>
+<div class="flex flex-wrap justify-center gap-2 mb-sm">
+<span class="bg-secondary-container text-on-secondary-container font-caption text-caption px-3 py-1 rounded-full">Kecemasan</span>
+<span class="bg-secondary-container text-on-secondary-container font-caption text-caption px-3 py-1 rounded-full">Trauma</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Berpengalaman lebih dari 10 tahun membantu individu mengatasi trauma masa lalu dengan pendekatan kognitif perilaku yang berpusat pada klien.</p>
+</div>
+<!-- Expert 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-md ambient-shadow hover-lift flex flex-col items-center text-center">
+<div class="w-32 h-32 rounded-full overflow-hidden mb-md border-4 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a male psychologist in his 40s, with a gentle and reassuring smile. He is wearing a light blue dress shirt, no tie, in a bright and airy office setting. The background features subtle soft pastel tones and soft natural light coming from a nearby window. The mood is highly professional, trustworthy, and empathetic, aligning with a soft minimalist mental health brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdyMWNNBff7geCu4BEI6BAdHNrdu93WslxJX4J6-IqC9Z3Lh0XO_0ApfMLRkqsVc3_mLMcAf64wvzjrdkxMTnGEyD3yutHFtQgrkualttJLszc8nCCberfQ4bfzUJLSAnFSYG5CZPa3BLSv9zDa6I9LtxgUTdIQc84AdrI1ru-a-rwxqQI7EMG311DYcprGZA0A6hP8ZrlN5o_08bjkg2T4o4Qs1h9WqlCYspcb7ClzFHtkBt1YDhgs1Z97jrhtyUnHRDxd0nL2_nJ"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Budi Santoso, M.Psi</h3>
+<div class="flex flex-wrap justify-center gap-2 mb-sm">
+<span class="bg-secondary-container text-on-secondary-container font-caption text-caption px-3 py-1 rounded-full">Depresi</span>
+<span class="bg-secondary-container text-on-secondary-container font-caption text-caption px-3 py-1 rounded-full">Manajemen Stres</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Fokus pada penyembuhan holistik dan mindfulness untuk membantu klien menemukan kedamaian batin di tengah tekanan kehidupan modern.</p>
+</div>
+<!-- Expert 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-md ambient-shadow hover-lift flex flex-col items-center text-center">
+<div class="w-32 h-32 rounded-full overflow-hidden mb-md border-4 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young female psychologist, exuding warmth and approachability. She has a soft smile and is wearing a light olive green cardigan. The setting is a cozy, modern therapy room filled with soft, diffused sunlight. The color palette emphasizes soft greens and warm neutrals, perfectly reflecting an organic, professional, and empathetic clinical environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAYfw_yfmXellTM-7mQ3leLX8_CO55epfwK6bOh781vkdlI-DSlFQfzn9Akx9kA_SK9M4Y8zA8uCse2Y64Gh1ELMtl0mOcJCqSjp5vz-gwK2TPxGmQDn8V9tphK0HiHptPuJ6eKmZnmRLrCCXB9jVdvwx-3cd0SpNiidJ_-c_qREYc-f37GDYrD9VAWomfR7jWNQ7KjPqdadihO5EgzhvcPZ1oimzqC9iyPPkI0g-guxf7gBAYif-oYM9GeMYrtVEk4U79AcvM_xhE"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Siti Aisyah, M.Psi</h3>
+<div class="flex flex-wrap justify-center gap-2 mb-sm">
+<span class="bg-secondary-container text-on-secondary-container font-caption text-caption px-3 py-1 rounded-full">Hubungan</span>
+<span class="bg-secondary-container text-on-secondary-container font-caption text-caption px-3 py-1 rounded-full">Keluarga</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Spesialis dalam konseling pernikahan dan keluarga, membantu membangun kembali komunikasi yang sehat dan empati antar anggota keluarga.</p>
+</div>
+</div>
+</section>
+<!-- Privacy & Security Section -->
+<section class="mb-xl bg-surface-container-low rounded-xl p-lg flex flex-col md:flex-row items-center gap-lg ambient-shadow">
+<div class="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container" style="font-size: 48px; font-variation-settings: 'FILL' 1;">shield_lock</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">Aman &amp; Rahasia</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Privasi Anda adalah prioritas utama kami. Semua sesi konseling dan data pribadi dienkripsi dengan standar medis tertinggi. Kami berkomitmen menyediakan ruang yang 100% rahasia untuk perjalanan pemulihan Anda tanpa rasa khawatir.
+                </p>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="text-center bg-surface-container-highest rounded-xl p-xl ambient-shadow soft-outline">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Ingin mulai bercerita?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Tim ahli kami siap mendengarkan tanpa menghakimi.</p>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-lg py-md rounded-lg shadow-md hover-lift inline-flex items-center gap-sm">
+<span class="material-symbols-outlined">chat</span>
+                Chat Bot kami sekarang
+            </button>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low w-full rounded-t-xl grid grid-cols-1 md:grid-cols-4 gap-gutter px-gutter py-xl max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md font-bold text-primary mb-md">MentalCare</div>
+<p class="font-body-md text-body-md text-on-surface-variant/80 mb-sm">© 2024 MentalCare. Seluruh Hak Cipta Dilindungi.</p>
+</div>
+<div class="col-span-1 md:col-span-3 flex flex-wrap gap-md justify-end items-start opacity-80 hover:opacity-100 transition-opacity">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Kebijakan Privasi</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Syarat &amp; Ketentuan</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Pusat Bantuan</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Karir</a>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-40 bg-surface shadow-[0_-4px_12px_rgba(0,0,0,0.04)] shadow-lg scale-95 active:scale-90 transition-transform">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-caption text-caption">Beranda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">medical_services</span>
+<span class="font-caption text-caption">Layanan</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">info</span>
+<span class="font-caption text-caption">Tentang</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">menu_book</span>
+<span class="font-caption text-caption">Artikel</span>
+</a>
+</div>
+</nav>
+<!-- FAB (Contextual Suppression applies, but for a general about page it might be okay, however, guidelines say suppress on details/settings. We will omit the general FAB to prioritize the main CTA, as per strict layout rules). -->
+</body></html>

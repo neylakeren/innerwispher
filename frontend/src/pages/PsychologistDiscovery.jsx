@@ -38,7 +38,7 @@ export default function PsychologistDiscovery() {
         p.specialization?.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    if (loading) return <div className="flex justify-center py-12"><Loader2 className="animate-spin h-8 w-8 text-indigo-600" /></div>;
+    if (loading) return <div className="flex justify-center py-12"><Loader2 className="animate-spin h-8 w-8 text-primary" /></div>;
 
     return (
         <div className="space-y-6">
@@ -63,7 +63,7 @@ export default function PsychologistDiscovery() {
                     <div key={psy.id} className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
                         <div className="p-6 flex-1">
                             <div className="flex items-start justify-between mb-4">
-                                <div className="h-16 w-16 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                                <div className="h-16 w-16 rounded-2xl bg-primary-container/20 flex items-center justify-center text-primary">
                                     <User className="h-10 w-10" />
                                 </div>
                                 <div className="flex items-center text-amber-500 bg-amber-50 px-2 py-1 rounded-lg text-xs font-bold">
@@ -75,9 +75,9 @@ export default function PsychologistDiscovery() {
                             <div>
                                 <div className="flex items-center">
                                     <h3 className="font-bold text-lg text-slate-900">{psy.name}</h3>
-                                    {psy.is_verified && <ShieldCheck className="h-4 w-4 ml-2 text-indigo-600 fill-indigo-50" />}
+                                    {psy.is_verified && <ShieldCheck className="h-4 w-4 ml-2 text-primary fill-primary-container/30" />}
                                 </div>
-                                <p className="text-indigo-600 text-sm font-semibold">{psy.specialization}</p>
+                                <p className="text-primary text-sm font-semibold">{psy.specialization}</p>
                             </div>
 
                             <p className="mt-4 text-slate-600 text-sm line-clamp-2 leading-relaxed">

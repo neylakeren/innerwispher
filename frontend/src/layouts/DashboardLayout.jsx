@@ -29,13 +29,12 @@ export default function DashboardLayout({ children }) {
 
     const getNavigation = () => {
         const baseNav = [
-            { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+            { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
         ];
 
         if (user?.role === 'admin') {
             return [
                 ...baseNav,
-                { name: 'Verifikasi', href: '/', icon: CheckCircle }, // Admin dashboard covers this
                 { name: 'Daftar Psikolog', href: '/admin/psychologists', icon: Users },
                 { name: 'Data Pasien', href: '/admin/patients', icon: User },
             ];
@@ -60,27 +59,27 @@ export default function DashboardLayout({ children }) {
     const navigation = getNavigation();
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-background font-jakarta">
             {/* Mobile Sidebar Overlay */}
             {isSidebarOpen && (
                 <div 
-                    className="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm lg:hidden"
+                    className="fixed inset-0 z-40 bg-on-background/40 backdrop-blur-sm lg:hidden"
                     onClick={() => setIsSidebarOpen(false)}
                 />
             )}
 
             {/* Sidebar */}
             <aside className={cn(
-                "fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 transform transition-transform duration-200 ease-in-out lg:translate-x-0",
+                "fixed inset-y-0 left-0 z-50 w-64 bg-surface border-r border-outline-variant/30 transform transition-transform duration-200 ease-in-out lg:translate-x-0",
                 !isSidebarOpen && "-translate-x-full"
             )}>
                 <div className="flex flex-col h-full">
                     <div className="p-6">
                         <Link to="/" className="flex items-center space-x-3">
-                            <div className="bg-indigo-600 p-1.5 rounded-lg">
-                                <Heart className="h-5 w-5 text-white" />
+                            <div className="bg-primary text-on-primary p-1.5 rounded-lg">
+                                <Heart className="h-5 w-5" fill="currentColor" />
                             </div>
-                            <span className="text-xl font-bold text-slate-900 tracking-tight">Neyla</span>
+                            <span className="text-xl font-bold text-primary tracking-tight">MentalCare</span>
                         </Link>
                     </div>
 
@@ -92,10 +91,10 @@ export default function DashboardLayout({ children }) {
                                     key={item.name}
                                     to={item.href}
                                     className={cn(
-                                        "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                                        "flex items-center space-x-3 px-3 py-2.5 rounded-lg text-label-md font-medium transition-all",
                                         isActive 
-                                            ? "bg-indigo-50 text-indigo-700" 
-                                            : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                                            ? "bg-primary-container text-on-primary-container font-semibold" 
+                                            : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
                                     )}
                                 >
                                     <item.icon className="h-5 w-5" />
@@ -105,16 +104,16 @@ export default function DashboardLayout({ children }) {
                         })}
                     </nav>
 
-                    <div className="p-4 border-t border-slate-100">
+                    <div className="p-4 border-t border-outline-variant/30">
                         <div className="flex items-center space-x-3 px-3 py-2 mb-2">
-                            <div className="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600">
+                            <div className="h-8 w-8 rounded-full bg-surface-container flex items-center justify-center text-secondary">
                                 <User className="h-5 w-5" />
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-slate-900 truncate">
+                                <p className="text-label-md font-bold text-on-surface truncate">
                                     {user?.name}
                                 </p>
-                                <p className="text-xs text-slate-500 truncate capitalize">
+                                <p className="text-caption text-on-surface-variant truncate capitalize">
                                     {user?.role}
                                 </p>
                             </div>
@@ -122,7 +121,7 @@ export default function DashboardLayout({ children }) {
                         <Button
                             variant="ghost"
                             size="sm"
-                            className="w-full justify-start text-rose-600 hover:text-rose-700 hover:bg-rose-50"
+                            className="w-full justify-start text-error hover:bg-error-container/20"
                             onClick={handleLogout}
                         >
                             <LogOut className="h-5 w-5 mr-3" />
@@ -134,11 +133,11 @@ export default function DashboardLayout({ children }) {
 
             {/* Main Content */}
             <div className="lg:pl-64">
-                <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200">
+                <header className="sticky top-0 z-30 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
                     <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
                         <button
                             type="button"
-                            className="p-2 text-slate-600 lg:hidden"
+                            className="p-2 text-on-surface-variant lg:hidden"
                             onClick={() => setIsSidebarOpen(true)}
                         >
                             <Menu className="h-6 w-6" />

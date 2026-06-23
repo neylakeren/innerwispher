@@ -96,7 +96,7 @@ export default function ChatRoom() {
     };
 
     if (loading) return <div className="h-[calc(100vh-12rem)] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600" />
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
     </div>;
 
     const isSessionClosed = session?.status === 'closed';
@@ -109,7 +109,7 @@ export default function ChatRoom() {
                     <button onClick={() => navigate('/bookings')} className="p-2 -ml-2 text-slate-400 hover:text-slate-600">
                         <ArrowLeft className="h-5 w-5" />
                     </button>
-                    <div className="h-10 w-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">
+                    <div className="h-10 w-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
                         <User className="h-6 w-6" />
                     </div>
                     <div>
@@ -146,7 +146,7 @@ export default function ChatRoom() {
                             <div className={cn(
                                 "px-4 py-2.5 rounded-2xl text-sm shadow-sm",
                                 isMe 
-                                    ? "bg-indigo-600 text-white rounded-tr-none" 
+                                    ? "bg-primary text-on-primary rounded-tr-none" 
                                     : "bg-white text-slate-900 border border-slate-100 rounded-tl-none"
                             )}>
                                 {msg.content}
@@ -155,7 +155,7 @@ export default function ChatRoom() {
                                 <span className="text-[10px] text-slate-400 font-medium">
                                     {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                 </span>
-                                {isMe && <CheckCheck className="h-3 w-3 text-indigo-400" />}
+                                {isMe && <CheckCheck className="h-3 w-3 text-primary-container" />}
                             </div>
                         </div>
                     );

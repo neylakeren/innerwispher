@@ -57,17 +57,17 @@ export default function Dashboard() {
 
     return (
         <div className="space-y-8">
-            <div className="bg-indigo-600 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl shadow-indigo-100">
+            <div className="bg-primary rounded-3xl p-8 text-white relative overflow-hidden shadow-lg">
                 <div className="relative z-10">
                     <h1 className="text-3xl font-bold">Halo, {user?.name}!</h1>
-                    <p className="text-indigo-100 mt-2 text-lg">
+                    <p className="text-primary-fixed mt-2 text-lg opacity-90">
                         {user?.role === 'psychologist' 
                             ? 'Anda memiliki beberapa sesi konsultasi yang dijadwalkan hari ini.'
                             : 'Pantau status pendaftaran dan sesi konseling Anda di sini.'}
                     </p>
                 </div>
                 <div className="absolute right-0 top-0 -mr-16 -mt-16 bg-white/10 h-64 w-64 rounded-full blur-3xl" />
-                <div className="absolute left-0 bottom-0 -ml-16 -mb-16 bg-indigo-400/20 h-48 w-48 rounded-full blur-2xl" />
+                <div className="absolute left-0 bottom-0 -ml-16 -mb-16 bg-primary-container/20 h-48 w-48 rounded-full blur-2xl" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -75,7 +75,7 @@ export default function Dashboard() {
                     title="Total Booking" 
                     value={stats.total} 
                     icon={Calendar} 
-                    color="bg-indigo-50 text-indigo-600"
+                    color="bg-primary-container/20 text-primary"
                 />
                 <StatCard 
                     title="Menunggu" 
@@ -93,14 +93,14 @@ export default function Dashboard() {
                     title="Selesai" 
                     value={stats.completed} 
                     icon={TrendingUp} 
-                    color="bg-blue-50 text-blue-600"
+                    color="bg-secondary-container/20 text-secondary"
                 />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
                     <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center">
-                        <Users className="h-5 w-5 mr-3 text-indigo-600" />
+                        <Users className="h-5 w-5 mr-3 text-primary" />
                         Info Akun
                     </h3>
                     <div className="space-y-4">

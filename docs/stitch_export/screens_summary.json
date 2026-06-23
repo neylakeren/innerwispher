@@ -1,0 +1,82 @@
+﻿[
+    {
+        "Title":  "Artikel \u0026 Edukasi - MentalCare (Pink Salmon)",
+        "ID":  "6f56812b0e754f5386d3f5940fe614b4",
+        "Type":  "DESIGN",
+        "Device":  "DESKTOP",
+        "Width":  "2560",
+        "Height":  "5312",
+        "HasScreenshot":  true,
+        "HasHTML":  true
+    },
+    {
+        "Title":  "Tentang Kami - MentalCare (Pink Salmon)",
+        "ID":  "0a274bc1712543dc9afd35b870129b2d",
+        "Type":  "DESIGN",
+        "Device":  "DESKTOP",
+        "Width":  "2560",
+        "Height":  "3692",
+        "HasScreenshot":  true,
+        "HasHTML":  true
+    },
+    {
+        "Title":  "Beranda - MentalCare (Pink Salmon)",
+        "ID":  "807a2ac05ce7480f9eb67c9fa4d2fa36",
+        "Type":  "DESIGN",
+        "Device":  "DESKTOP",
+        "Width":  "2560",
+        "Height":  "3520",
+        "HasScreenshot":  true,
+        "HasHTML":  true
+    },
+    {
+        "Title":  "Layanan - MentalCare (Pink Salmon)",
+        "ID":  "abc4ccb81d054c669960668c809a4142",
+        "Type":  "DESIGN",
+        "Device":  "DESKTOP",
+        "Width":  "2560",
+        "Height":  "2884",
+        "HasScreenshot":  true,
+        "HasHTML":  true
+    },
+    {
+        "Title":  "Beranda - MentalCare",
+        "ID":  "7ca3a7169baa4b69b7bd0bbbd0b6148f",
+        "Type":  "DESIGN",
+        "Device":  "DESKTOP",
+        "Width":  "2560",
+        "Height":  "3544",
+        "HasScreenshot":  true,
+        "HasHTML":  true
+    },
+    {
+        "Title":  "Layanan - MentalCare",
+        "ID":  "c98f5919bc3e428ea870f2b6c63719a0",
+        "Type":  "DESIGN",
+        "Device":  "DESKTOP",
+        "Width":  "2560",
+        "Height":  "3044",
+        "HasScreenshot":  true,
+        "HasHTML":  true
+    },
+    {
+        "Title":  "Artikel \u0026 Edukasi - MentalCare",
+        "ID":  "c7c1cdfbe30f4c1d87263b9d2b313dab",
+        "Type":  "DESIGN",
+        "Device":  "DESKTOP",
+        "Width":  "2560",
+        "Height":  "5398",
+        "HasScreenshot":  true,
+        "HasHTML":  true
+    },
+    {
+        "Title":  "Tentang Kami - MentalCare",
+        "ID":  "3214fad628dc4cd4b9533c54571f590a",
+        "Type":  "DESIGN",
+        "Device":  "DESKTOP",
+        "Width":  "2560",
+        "Height":  "3750",
+        "HasScreenshot":  true,
+        "HasHTML":  true
+    }
+]

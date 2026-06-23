@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import DashboardLayout from './layouts/DashboardLayout';
+import LandingLayout from './layouts/LandingLayout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -12,6 +13,13 @@ import ChatRoom from './pages/ChatRoom';
 import AdminPsychologistList from './pages/AdminPsychologistList';
 import AdminPatientList from './pages/AdminPatientList';
 import PsychologistDiscovery from './pages/PsychologistDiscovery';
+import SessionNotes from './pages/SessionNotes';
+
+// Landing Pages
+import Beranda from './pages/landing/Beranda';
+import Layanan from './pages/landing/Layanan';
+import TentangKami from './pages/landing/TentangKami';
+import Artikel from './pages/landing/Artikel';
 
 const ProtectedRoute = ({ children }) => {
     const { user, loading } = useAuth();
@@ -31,10 +39,26 @@ function HomeRouter() {
 function AppRoutes() {
     return (
         <Routes>
+            {/* Landing Pages (Public) */}
+            <Route path="/" element={
+                <LandingLayout><Beranda /></LandingLayout>
+            } />
+            <Route path="/layanan" element={
+                <LandingLayout><Layanan /></LandingLayout>
+            } />
+            <Route path="/tentang-kami" element={
+                <LandingLayout><TentangKami /></LandingLayout>
+            } />
+            <Route path="/artikel" element={
+                <LandingLayout><Artikel /></LandingLayout>
+            } />
+
+            {/* Auth Pages */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
-            <Route path="/" element={
+            {/* Dashboard (Protected) */}
+            <Route path="/dashboard" element={
                 <ProtectedRoute>
                     <HomeRouter />
                 </ProtectedRoute>
@@ -43,6 +67,12 @@ function AppRoutes() {
             <Route path="/bookings" element={
                 <ProtectedRoute>
                     <BookingList />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/notes" element={
+                <ProtectedRoute>
+                    <SessionNotes />
                 </ProtectedRoute>
             } />
 

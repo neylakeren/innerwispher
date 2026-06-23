@@ -6,6 +6,7 @@ import {
     Calendar, 
     Clock, 
     Users, 
+    User,
     MessageSquare,
     ClipboardList,
     Plus
@@ -48,10 +49,10 @@ export default function PsychologistDashboard() {
                     <section className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                         <div className="p-6 border-b border-slate-100 flex items-center justify-between">
                             <h2 className="font-bold text-slate-900 flex items-center">
-                                <Users className="h-5 w-5 mr-3 text-indigo-600" />
+                                <Users className="h-5 w-5 mr-3 text-primary" />
                                 Sesi Aktif / Mendatang
                             </h2>
-                            <Link to="/bookings" className="text-sm text-indigo-600 font-medium hover:underline">
+                            <Link to="/bookings" className="text-sm text-primary font-medium hover:underline">
                                 Lihat Semua
                             </Link>
                         </div>
@@ -91,13 +92,13 @@ export default function PsychologistDashboard() {
                         </div>
                     </section>
                 </div>
-
+ 
                 {/* Right: Schedule management summary */}
                 <div className="space-y-6">
                     <section className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                         <div className="p-6 border-b border-slate-100 flex items-center justify-between">
                             <h2 className="font-bold text-slate-900 flex items-center">
-                                <Clock className="h-5 w-5 mr-3 text-indigo-600" />
+                                <Clock className="h-5 w-5 mr-3 text-primary" />
                                 Jadwal Praktik
                             </h2>
                             <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
@@ -125,13 +126,13 @@ export default function PsychologistDashboard() {
                             </Button>
                         </div>
                     </section>
-
-                    <section className="bg-indigo-600 rounded-2xl p-6 text-white shadow-lg shadow-indigo-100">
+ 
+                    <section className="bg-primary rounded-2xl p-6 text-white shadow-lg">
                         <h3 className="font-bold flex items-center">
                             <ClipboardList className="h-5 w-5 mr-2" />
                             Tips Hari Ini
                         </h3>
-                        <p className="text-indigo-100 text-xs mt-3 leading-relaxed">
+                        <p className="text-primary-fixed text-xs mt-3 leading-relaxed opacity-90">
                             Jangan lupa untuk mengisi catatan sesi segera setelah konsultasi berakhir untuk menjaga akurasi diagnosa pasien.
                         </p>
                     </section>

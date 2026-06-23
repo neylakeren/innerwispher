@@ -31,7 +31,7 @@ export default function AdminPsychologistList() {
         p.specialization?.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    if (loading) return <div className="flex justify-center py-12"><Loader2 className="animate-spin h-8 w-8 text-indigo-600" /></div>;
+    if (loading) return <div className="flex justify-center py-12"><Loader2 className="animate-spin h-8 w-8 text-primary" /></div>;
 
     return (
         <div className="space-y-6">
@@ -55,7 +55,7 @@ export default function AdminPsychologistList() {
                 {filtered.map(psy => (
                     <div key={psy.id} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
                         <div className="flex items-start justify-between">
-                            <div className="h-12 w-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                            <div className="h-12 w-12 rounded-2xl bg-primary-container/20 flex items-center justify-center text-primary">
                                 <User className="h-7 w-7" />
                             </div>
                             {psy.is_verified && (
@@ -68,7 +68,7 @@ export default function AdminPsychologistList() {
                         
                         <div className="mt-4">
                             <h3 className="font-bold text-lg text-slate-900">{psy.name}</h3>
-                            <p className="text-indigo-600 text-sm font-medium">{psy.specialization}</p>
+                            <p className="text-primary text-sm font-medium">{psy.specialization}</p>
                         </div>
 
                         <div className="mt-6 space-y-3">

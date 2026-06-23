@@ -19,7 +19,7 @@ const StatusBadge = ({ status }) => {
         confirmed: { label: 'Dikonfirmasi', color: 'bg-blue-100 text-blue-700 border-blue-200' },
         paid: { label: 'Sudah Bayar', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
         cancelled: { label: 'Dibatalkan', color: 'bg-slate-100 text-slate-600 border-slate-200' },
-        completed: { label: 'Selesai', color: 'bg-indigo-100 text-indigo-700 border-indigo-200' },
+        completed: { label: 'Selesai', color: 'bg-primary-container text-on-primary-container border-primary-container/30' },
     };
     
     const config = statuses[status] || statuses.pending;

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Layanan - MentalCare</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#254630",
+                        "surface-tint": "#44664e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#1b1c19",
+                        "inverse-primary": "#abcfb2",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#d1e4fb",
+                        "primary-fixed": "#c6eccd",
+                        "outline-variant": "#c2c8c0",
+                        "on-primary-fixed": "#00210f",
+                        "secondary": "#416370",
+                        "surface-variant": "#d1e4fb",
+                        "on-secondary-fixed-variant": "#294b58",
+                        "inverse-surface": "#203243",
+                        "secondary-fixed": "#c4e8f8",
+                        "surface-container-low": "#edf4ff",
+                        "surface-bright": "#f7f9ff",
+                        "tertiary-fixed": "#e4e2dd",
+                        "surface-dim": "#c9dcf3",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#424842",
+                        "primary": "#44664e",
+                        "tertiary-fixed-dim": "#c8c6c2",
+                        "surface": "#f7f9ff",
+                        "primary-fixed-dim": "#abcfb2",
+                        "surface-container-high": "#d9eaff",
+                        "inverse-on-surface": "#e8f2ff",
+                        "tertiary-container": "#abaaa6",
+                        "tertiary": "#5e5e5b",
+                        "outline": "#727972",
+                        "on-background": "#091d2e",
+                        "surface-container": "#e3efff",
+                        "on-primary-fixed-variant": "#2d4e37",
+                        "on-tertiary-container": "#3e3f3c",
+                        "on-tertiary-fixed-variant": "#474744",
+                        "on-surface": "#091d2e",
+                        "secondary-container": "#c4e8f8",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#001f28",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#476976",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f7f9ff",
+                        "primary-container": "#8fb397",
+                        "secondary-fixed-dim": "#a9ccdb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "container-max": "1200px",
+                        "xl": "80px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "lg": "48px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["12px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .ambient-shadow { box-shadow: 0 4px 12px rgba(9, 29, 46, 0.04); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(9, 29, 46, 0.08); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col pt-20">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm dark:shadow-none hidden md:flex">
+<div class="flex justify-between items-center px-gutter py-base max-w-container-max mx-auto w-full">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">MentalCare</div>
+<nav class="flex gap-gutter items-center">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Beranda</a>
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1" href="#">Layanan</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Tentang Kami</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Artikel</a>
+</nav>
+<button class="font-label-md text-label-md bg-primary text-on-primary px-4 py-2 rounded-full hover:opacity-90 transition-all duration-200 scale-95 active:scale-90 transition-transform">
+                Chat di WhatsApp
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pb-24 md:pb-0">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-gutter py-xl">
+<div class="text-center max-w-3xl mx-auto space-y-md">
+<h1 class="font-display-lg text-display-lg text-on-surface">Layanan Kami</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    Temukan ruang aman untuk berbicara, tumbuh, dan menyembuhkan. Kami menyediakan berbagai layanan psikologi profesional yang disesuaikan dengan kebutuhan Anda, didukung oleh tenaga ahli yang empati dan berpengalaman.
+                </p>
+</div>
+</section>
+<!-- Services Bento Grid -->
+<section class="max-w-container-max mx-auto px-gutter pb-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Service 1: Individual -->
+<div class="bg-surface-container-lowest rounded-xl p-md ambient-shadow hover-lift flex flex-col border border-outline-variant/30">
+<div class="bg-primary-container/20 w-16 h-16 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Individual Counseling</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow mb-md">Ruang aman untuk pertumbuhan pribadi.</p>
+<button class="w-full font-label-md text-label-md bg-secondary text-on-secondary py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat</span> Booking via WA
+                    </button>
+</div>
+<!-- Service 2: Couple -->
+<div class="bg-surface-container-lowest rounded-xl p-md ambient-shadow hover-lift flex flex-col border border-outline-variant/30">
+<div class="bg-secondary-container/20 w-16 h-16 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Couple Therapy</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow mb-md">Membangun komunikasi dan harmoni kembali.</p>
+<button class="w-full font-label-md text-label-md bg-secondary text-on-secondary py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat</span> Booking via WA
+                    </button>
+</div>
+<!-- Service 3: Career -->
+<div class="bg-surface-container-lowest rounded-xl p-md ambient-shadow hover-lift flex flex-col border border-outline-variant/30 lg:col-span-1 md:col-span-2">
+<div class="bg-tertiary-container/20 w-16 h-16 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">work</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Career Stress</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow mb-md">Mengelola tekanan kerja dan keseimbangan hidup.</p>
+<button class="w-full font-label-md text-label-md bg-secondary text-on-secondary py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat</span> Booking via WA
+                    </button>
+</div>
+</div>
+</section>
+<!-- Why Choose Us Section -->
+<section class="bg-surface-container-low py-xl">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Mengapa memilih layanan kami?</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="text-center space-y-sm">
+<div class="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-md text-primary">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Psikolog Tersertifikasi</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Ditangani oleh tenaga profesional yang terdaftar dan memiliki jam terbang tinggi.</p>
+</div>
+<div class="text-center space-y-sm">
+<div class="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-md text-primary">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">schedule</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Akses 24/7</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Dukungan darurat dan pemesanan layanan kapan saja Anda membutuhkannya.</p>
+</div>
+<div class="text-center space-y-sm">
+<div class="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-md text-primary">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">event_available</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Jadwal Fleksibel</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Pilih waktu konseling yang paling sesuai dengan kesibukan Anda dengan mudah.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-lowest w-full rounded-t-xl hidden md:block">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-gutter py-xl max-w-container-max mx-auto w-full">
+<div class="col-span-1 md:col-span-2">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed mb-sm">MentalCare</div>
+<p class="font-body-md text-body-md text-secondary dark:text-secondary-fixed mb-md">Menyediakan ruang aman untuk kesehatan mental Anda.</p>
+<p class="font-body-md text-body-md text-secondary dark:text-secondary-fixed">© 2024 MentalCare. Seluruh Hak Cipta Dilindungi.</p>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary font-bold mb-sm">Tautan</h4>
+<ul class="space-y-2">
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant/80 hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Kebijakan Privasi</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant/80 hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Syarat &amp; Ketentuan</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary font-bold mb-sm">Bantuan</h4>
+<ul class="space-y-2">
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant/80 hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Pusat Bantuan</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant/80 hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Karir</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-40 md:hidden bg-surface dark:bg-surface-dim shadow-[0_-4px_12px_rgba(0,0,0,0.04)]">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant/70 hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors scale-95 active:scale-90 transition-transform p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-caption text-caption">Beranda</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-on-primary-fixed rounded-xl px-4 py-1 hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+<span class="font-caption text-caption font-bold">Layanan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant/70 hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors scale-95 active:scale-90 transition-transform p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">info</span>
+<span class="font-caption text-caption">Tentang</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant/70 hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors scale-95 active:scale-90 transition-transform p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">menu_book</span>
+<span class="font-caption text-caption">Artikel</span>
+</a>
+</div>
+</nav>
+<!-- WhatsApp FAB (Mobile Context) -->
+<a class="fixed bottom-20 right-4 z-50 md:hidden bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-105 transition-transform flex items-center justify-center" href="#">
+<span class="material-symbols-outlined">chat</span>
+</a>
+</body></html>
