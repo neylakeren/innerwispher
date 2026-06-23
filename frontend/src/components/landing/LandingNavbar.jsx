@@ -16,7 +16,7 @@ export default function LandingNavbar() {
     <header className="hidden md:flex bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm">
       <div className="flex justify-between items-center px-8 md:px-16 lg:px-24 py-4 w-full">
         <Link to="/" className="text-headline-md font-bold text-primary">
-          MentalCare
+          InnerWhisper
         </Link>
         <nav className="flex items-center gap-gutter">
           {navItems.map((item) => (

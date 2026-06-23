@@ -29,7 +29,7 @@ export default function TentangKami() {
       <section className="mb-24 text-center md:px-12">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-8">Dedikasi untuk Kesejahteraan Mental Anda</h1>
         <p className="text-body-lg md:text-xl text-on-surface-variant max-w-5xl mx-auto leading-relaxed">
-          Di MentalCare, misi kami adalah menyediakan akses yang mudah, aman, dan penuh empati untuk dukungan kesehatan mental. Kami percaya bahwa setiap individu berhak mendapatkan ruang yang tenang untuk memulihkan diri.
+          Di InnerWhisper, misi kami adalah menyediakan akses yang mudah, aman, dan penuh empati untuk dukungan kesehatan mental. Kami percaya bahwa setiap individu berhak mendapatkan ruang yang tenang untuk memulihkan diri.
         </p>
       </section>
 

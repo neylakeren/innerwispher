@@ -1,4 +1,4 @@
-# Project Memory: MentalCare Landing Page & Dashboard Integration
+# Project Memory: InnerWhisper Landing Page & Dashboard Integration
 
 This document serves as the project memory for the frontend landing page and dashboard development.
 
@@ -52,7 +52,7 @@ This document serves as the project memory for the frontend landing page and das
 
 ### 5. Unified Dashboard & Role-Specific Page Customizations
 - **File:** [DashboardLayout.jsx](file:///D:/Coding/neyla/frontend/src/layouts/DashboardLayout.jsx)
-  - Aligned dashboard layout structure, sidebar, brand typography ("Neyla" -> "MentalCare"), active navigation highlights, avatar boxes, and logout options to use the salmon theme.
+  - Aligned dashboard layout structure, sidebar, brand typography ("Neyla" -> "InnerWhisper"), active navigation highlights, avatar boxes, and logout options to use the salmon theme.
 - **Pages Modified:**
   - [Dashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/Dashboard.jsx)
   - [AdminDashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminDashboard.jsx)

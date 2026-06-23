@@ -7,13 +7,13 @@ export default function LandingFooter() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter px-8 md:px-16 lg:px-24 py-20 w-full">
         <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
           <Link to="/" className="text-headline-md font-bold text-primary">
-            MentalCare
+            InnerWhisper
           </Link>
           <p className="text-body-md text-secondary max-w-sm">
             Berkomitmen untuk menyediakan ruang aman dan dukungan profesional bagi perjalanan kesehatan mental Anda.
           </p>
           <p className="text-label-sm text-secondary mt-4">
-            &copy; 2024 MentalCare. Seluruh Hak Cipta Dilindungi.
+            &copy; 2024 InnerWhisper. Seluruh Hak Cipta Dilindungi.
           </p>
         </div>
         <div className="col-span-1 flex flex-col gap-3 text-label-md">

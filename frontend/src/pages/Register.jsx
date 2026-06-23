@@ -61,7 +61,7 @@ export default function Register() {
                     Daftar Akun Baru
                 </h2>
                 <p className="mt-2 text-center text-body-md text-on-surface-variant">
-                    Bergabunglah dengan MentalCare untuk mendapatkan layanan konseling terbaik
+                    Bergabunglah dengan InnerWhisper untuk mendapatkan layanan konseling terbaik
                 </p>
             </div>
 

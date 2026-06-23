@@ -49,7 +49,7 @@ export default function Login() {
                     </div>
                 </div>
                 <h2 className="mt-6 text-center text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface">
-                    Selamat datang di MentalCare
+                    Selamat datang di InnerWhisper
                 </h2>
                 <p className="mt-2 text-center text-body-md text-on-surface-variant">
                     Masuk untuk melanjutkan sesi konseling Anda

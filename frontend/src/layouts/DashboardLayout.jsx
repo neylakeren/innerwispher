@@ -79,7 +79,7 @@ export default function DashboardLayout({ children }) {
                             <div className="bg-primary text-on-primary p-1.5 rounded-lg">
                                 <Heart className="h-5 w-5" fill="currentColor" />
                             </div>
-                            <span className="text-xl font-bold text-primary tracking-tight">MentalCare</span>
+                            <span className="text-xl font-bold text-primary tracking-tight">InnerWhisper</span>
                         </Link>
                     </div>
 

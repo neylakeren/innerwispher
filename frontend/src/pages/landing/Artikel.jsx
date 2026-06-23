@@ -180,7 +180,7 @@ export default function Artikel() {
           <div className="mt-16 bg-surface-container-low rounded-2xl p-10 md:p-12 border border-outline-variant/30 text-center flex flex-col items-center gap-6">
             <h3 className="text-xl md:text-2xl font-bold text-on-surface">Butuh tempat bercerita tentang masalah serupa?</h3>
             <p className="text-body-md text-on-surface-variant max-w-2xl leading-relaxed">
-              Jangan menanggung beban Anda sendiri. Tim psikolog kami di MentalCare siap membantu dan mendengarkan keluh kesah Anda secara empatik tanpa menghakimi.
+              Jangan menanggung beban Anda sendiri. Tim psikolog kami di InnerWhisper siap membantu dan mendengarkan keluh kesah Anda secara empatik tanpa menghakimi.
             </p>
             <a
               href="https://wa.me/6281234567890"
