@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import client from '../api/client';
 import { Button, Input } from '../components/ui';
-import { User, ShieldCheck, Search, Loader2, Star, Calendar } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { User, ShieldCheck, Search, Loader2, Star, Calendar, XCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function PsychologistDiscovery() {
+    const navigate = useNavigate();
     const [psychologists, setPsychologists] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    
+    // Booking states
+    const [bookingPsychologist, setBookingPsychologist] = useState(null);
+    const [bookingDate, setBookingDate] = useState('');
+    const [isBooking, setIsBooking] = useState(false);
 
     useEffect(() => {
         fetchPsychologists();
@@ -15,21 +21,32 @@ export default function PsychologistDiscovery() {
 
     const fetchPsychologists = async () => {
         try {
-            // Mock data for discovery
-            setPsychologists([
-                { 
-                    id: 2, 
-                    name: 'Dr. Stevano, M.Psi', 
-                    specialization: 'Anxiety & Self-Growth', 
-                    bio: 'Spesialis kecemasan dan pengembangan diri dengan pengalaman lebih dari 10 tahun.',
-                    price: 150000,
-                    rating: 4.9,
-                    reviews: 124,
-                    is_verified: true 
-                }
-            ]);
+            const res = await client.get('/psychologists');
+            setPsychologists(res.data);
+        } catch (err) {
+            console.error('Gagal mengambil data psikolog:', err);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleCreateBooking = async (e) => {
+        e.preventDefault();
+        if (!bookingPsychologist || !bookingDate) return;
+
+        setIsBooking(true);
+        try {
+            await client.post('/bookings', {
+                psychologist_id: bookingPsychologist.id,
+                date: bookingDate
+            });
+            setBookingPsychologist(null);
+            setBookingDate('');
+            navigate('/bookings');
+        } catch (err) {
+            alert(err.response?.data?.message || 'Gagal membuat booking');
+        } finally {
+            setIsBooking(false);
         }
     };
 
@@ -37,6 +54,9 @@ export default function PsychologistDiscovery() {
         p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
         p.specialization?.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    // Get today's date formatted as YYYY-MM-DD for date picker input minimum
+    const todayStr = new Date().toISOString().split('T')[0];
 
     if (loading) return <div className="flex justify-center py-12"><Loader2 className="animate-spin h-8 w-8 text-primary" /></div>;
 
@@ -97,7 +117,13 @@ export default function PsychologistDiscovery() {
                         </div>
 
                         <div className="p-4 bg-slate-50 border-t border-slate-100">
-                            <Button className="w-full">
+                            <Button 
+                                className="w-full"
+                                onClick={() => {
+                                    setBookingPsychologist(psy);
+                                    setBookingDate(todayStr);
+                                }}
+                            >
                                 <Calendar className="h-4 w-4 mr-2" />
                                 Jadwalkan Konseling
                             </Button>
@@ -105,6 +131,68 @@ export default function PsychologistDiscovery() {
                     </div>
                 ))}
             </div>
+
+            {/* Booking Modal */}
+            {bookingPsychologist && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+                    <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl border border-slate-100">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-xl font-bold text-slate-900">Jadwalkan Sesi Konseling</h3>
+                            <button 
+                                onClick={() => setBookingPsychologist(null)} 
+                                className="text-slate-400 hover:text-slate-600"
+                            >
+                                <XCircle className="h-6 w-6" />
+                            </button>
+                        </div>
+                        
+                        <div className="mb-6 p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-center space-x-3">
+                            <div className="h-12 w-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary">
+                                <User className="h-8 w-8" />
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-slate-900">{bookingPsychologist.name}</h4>
+                                <p className="text-primary text-xs font-semibold">{bookingPsychologist.specialization}</p>
+                                <p className="text-slate-800 text-sm font-bold mt-1">Rp {bookingPsychologist.price.toLocaleString('id-ID')}</p>
+                            </div>
+                        </div>
+
+                        <form onSubmit={handleCreateBooking} className="space-y-4">
+                            <Input
+                                label="Pilih Tanggal Sesi"
+                                type="date"
+                                required
+                                min={todayStr}
+                                value={bookingDate}
+                                onChange={(e) => setBookingDate(e.target.value)}
+                            />
+                            
+                            <div className="flex space-x-3 mt-6">
+                                <Button 
+                                    type="button" 
+                                    variant="ghost" 
+                                    className="flex-1"
+                                    onClick={() => setBookingPsychologist(null)}
+                                >
+                                    Batal
+                                </Button>
+                                <Button 
+                                    type="submit" 
+                                    className="flex-1"
+                                    disabled={isBooking}
+                                >
+                                    {isBooking ? (
+                                        <>
+                                            <Loader2 className="animate-spin h-4 w-4 mr-2" />
+                                            Membuat...
+                                        </>
+                                    ) : 'Konfirmasi Booking'}
+                                </Button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

@@ -9,9 +9,11 @@ import {
     User, 
     ArrowLeft, 
     MoreVertical,
+    Check,
     CheckCheck,
     Lock,
-    XCircle
+    XCircle,
+    Clock
 } from 'lucide-react';
 
 export default function ChatRoom() {
@@ -23,6 +25,7 @@ export default function ChatRoom() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [loading, setLoading] = useState(true);
+    const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
@@ -32,7 +35,10 @@ export default function ChatRoom() {
         const channel = echo.private(`session.${id}`)
             .listen('.MessageSent', (e) => {
                 console.log('Echo Message Received:', e);
-                setMessages((prev) => [...prev, e.message]);
+                setMessages((prev) => {
+                    if (prev.some(m => m.id === e.message.id)) return prev;
+                    return [...prev, { ...e.message, status: 'read' }];
+                });
             });
 
         channel.on('pusher:subscription_succeeded', () => {
@@ -57,7 +63,11 @@ export default function ChatRoom() {
         try {
             const res = await client.get(`/sessions/${id}`);
             setSession(res.data);
-            setMessages(res.data.messages || []);
+            const initialMessages = (res.data.messages || []).map(m => ({
+                ...m,
+                status: 'read'
+            }));
+            setMessages(initialMessages);
         } finally {
             setLoading(false);
         }
@@ -74,13 +84,45 @@ export default function ChatRoom() {
         const content = newMessage;
         setNewMessage('');
 
+        const tempId = 'temp-' + Date.now();
+        const tempMessage = {
+            id: tempId,
+            sender_id: user.id,
+            content: content,
+            created_at: new Date().toISOString(),
+            status: 'sending'
+        };
+
+        setMessages((prev) => [...prev, tempMessage]);
+
         try {
             const res = await client.post(`/sessions/${id}/messages`, { content });
-            // The message will also be received via Echo, so we handle duplication or just let Echo handle it
-            // To avoid lag, we could add it optimistically, but let's keep it simple for now
-            // setMessages((prev) => [...prev, res.data]); 
+            
+            // Update temporary message to 'sent'
+            setMessages((prev) => prev.map(m => m.id === tempId ? { ...res.data, status: 'sent' } : m));
+
+            // 1. Simulate Delivered (two gray ticks) after 800ms
+            setTimeout(() => {
+                setMessages((prev) => prev.map(m => m.id === res.data.id ? { ...m, status: 'delivered' } : m));
+            }, 800);
+
+            // 2. Trigger Psychologist typing indicator after 600ms (only if user is patient)
+            if (user.role === 'patient') {
+                setTimeout(() => {
+                    setIsTyping(true);
+                }, 600);
+            }
+
+            // 3. Simulate Read (two blue ticks) & stop typing indicator after 2000ms
+            setTimeout(() => {
+                setMessages((prev) => prev.map(m => m.id === res.data.id ? { ...m, status: 'read' } : m));
+                setIsTyping(false);
+            }, 2000);
+
         } catch (err) {
             alert('Gagal mengirim pesan');
+            // Remove the temporary message on error
+            setMessages((prev) => prev.filter(m => m.id !== tempId));
         }
     };
 
@@ -116,10 +158,21 @@ export default function ChatRoom() {
                         <h3 className="font-bold text-slate-900">
                             {user.role === 'patient' ? session?.booking?.psychologist?.name : session?.booking?.patient?.name}
                         </h3>
-                        <p className="text-xs text-emerald-500 flex items-center font-medium">
-                            <span className="h-2 w-2 bg-emerald-500 rounded-full mr-1.5 animate-pulse" />
-                            Sesi Aktif
-                        </p>
+                        {isSessionClosed ? (
+                            <p className="text-xs text-slate-400 flex items-center font-medium">
+                                <span className="h-2 w-2 bg-slate-300 rounded-full mr-1.5" />
+                                Offline
+                            </p>
+                        ) : isTyping ? (
+                            <p className="text-xs text-primary flex items-center font-semibold animate-pulse">
+                                sedang mengetik...
+                            </p>
+                        ) : (
+                            <p className="text-xs text-emerald-500 flex items-center font-medium">
+                                <span className="h-2 w-2 bg-emerald-500 rounded-full mr-1.5 animate-pulse" />
+                                Online
+                            </p>
+                        )}
                     </div>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -155,7 +208,22 @@ export default function ChatRoom() {
                                 <span className="text-[10px] text-slate-400 font-medium">
                                     {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                 </span>
-                                {isMe && <CheckCheck className="h-3 w-3 text-primary-container" />}
+                                {isMe && (
+                                    <span className="inline-flex items-center ml-1">
+                                        {msg.status === 'sending' && (
+                                            <Clock className="h-3 w-3 text-slate-400 animate-pulse" />
+                                        )}
+                                        {msg.status === 'sent' && (
+                                            <Check className="h-3.5 w-3.5 text-slate-400" />
+                                        )}
+                                        {msg.status === 'delivered' && (
+                                            <CheckCheck className="h-3.5 w-3.5 text-slate-400" />
+                                        )}
+                                        {(msg.status === 'read' || !msg.status) && (
+                                            <CheckCheck className="h-3.5 w-3.5 text-sky-500" />
+                                        )}
+                                    </span>
+                                )}
                             </div>
                         </div>
                     );
@@ -172,13 +240,14 @@ export default function ChatRoom() {
                     </div>
                 ) : (
                     <form onSubmit={handleSendMessage} className="flex items-center space-x-3">
-                        <Input
-                            className="flex-1"
-                            placeholder="Ketik pesan Anda..."
-                            value={newMessage}
-                            onChange={(e) => setNewMessage(e.target.value)}
-                        />
-                        <Button type="submit" size="md" className="shrink-0 rounded-full h-10 w-10 p-0">
+                        <div className="flex-1">
+                            <Input
+                                placeholder="Ketik pesan Anda..."
+                                value={newMessage}
+                                onChange={(e) => setNewMessage(e.target.value)}
+                            />
+                        </div>
+                        <Button type="submit" size="md" className="shrink-0 rounded-full h-10 w-10 p-0 flex items-center justify-center">
                             <Send className="h-5 w-5" />
                         </Button>
                     </form>

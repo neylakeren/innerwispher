@@ -51,6 +51,11 @@ class CounselingSessionController extends Controller
         \Illuminate\Support\Facades\Log::info('Broadcasting message', ['session' => $id, 'sender' => $user->id]);
         broadcast(new \App\Events\MessageSent($message->load('sender')))->toOthers();
 
+        if ($user->role === 'patient') {
+            $booking = $session->booking;
+            \App\Jobs\SendBotReplyJob::dispatch($session->id, $booking->psychologist_id);
+        }
+
         return response()->json($message->load('sender'));
     }
 

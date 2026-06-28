@@ -81,7 +81,89 @@ This document serves as the project memory for the frontend landing page and das
   - Filled out all article items with rich, detailed content structures (paragraphs, subheadings, and quotes).
   - Added a state-driven premium reading mode that dynamically displays the chosen article with typeset details and a dedicated WhatsApp counseling CTA without page reloads.
 
-## Status and Verification
-- **Build Status:** Verified (Vite production build succeeds in 2.02 seconds with **zero** errors and warnings).
-- **Runtime Status:** Vite dev server ([http://localhost:5173/](http://localhost:5173/)), Laravel backend server ([http://127.0.0.1:8000/](http://127.0.0.1:8000/)), and Laravel Reverb server (port 8080) are all running smoothly.
+## Recent Fixes & Features (June 27, 2026)
+- **File:** [PaymentController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/PaymentController.php) & [api.php](file:///D:/Coding/neyla/backend/routes/api.php)
+  - Implemented the `/admin/payments/{id}/verify` endpoint, protected under the `role:admin` middleware group.
+  - When verified, the payment status transitions to `verified`, the corresponding Booking status transitions to `paid`, and an active `CounselingSession` is automatically created.
+  - Rejection reverts status and keeps Booking in waiting status.
+- **File:** [BookingController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/BookingController.php) & [api.php](file:///D:/Coding/neyla/backend/routes/api.php)
+  - Implemented `POST /bookings` endpoint to allow patients to create new sessions.
+  - Status is set to `'confirmed'` upon booking creation to immediately enable the payment flow.
+  - Implemented `GET /psychologists` to return verified psychologist profiles from the database dynamically.
+- **File:** [PsychologistDiscovery.jsx](file:///D:/Coding/neyla/frontend/src/pages/PsychologistDiscovery.jsx)
+  - Added a modern date-selection modal when clicking "Jadwalkan Konseling" on a psychologist's profile.
+  - Submits the booking details to the new backend endpoint and redirects the patient to the Booking List page on success.
+  - Replaced hardcoded mock psychologist listing with dynamic fetching from the new `GET /psychologists` endpoint.
+- **File:** [BookingList.jsx](file:///D:/Coding/neyla/frontend/src/pages/BookingList.jsx)
+  - Enhanced the status badge logic to dynamically display "Menunggu Pembayaran", "Menunggu Verifikasi", or "Pembayaran Ditolak" based on payment record status.
+  - Replaced the persistent "Bayar" button with a dynamic conditional action (hidden when verification is pending; changes to "Bayar Ulang" if rejected).
+  - Implemented a "Bukti Bayar" button that opens an immersive modal allowing the patient to view details of their transfer (amount, status, receipt image) anytime.
+- **File:** [PaymentVerificationTest.php](file:///D:/Coding/neyla/backend/tests/Feature/PaymentVerificationTest.php)
+  - Created comprehensive feature tests asserting:
+    1. Successful admin payment verification leading to status transitions and session creation.
+    2. Admin rejecting payment.
+    3. Access control restrictions for non-admin roles trying to hit the verify endpoint.
+    4. Successful patient booking creation and role-based block on other roles.
+    5. Dynamically fetching psychologists lists with proper structure.
+    6. Emitting messages in active counseling sessions and dispatching auto-reply bot jobs.
+- **File:** [SendBotReplyJob.php](file:///D:/Coding/neyla/backend/app/Jobs/SendBotReplyJob.php) & [CounselingSessionController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/CounselingSessionController.php)
+  - Created an queueable `SendBotReplyJob` which acts as a psychologist simulator.
+  - Configured `sendMessage` to dispatch the job when a patient sends a chat message, yielding a realistic WebSocket response after 2 seconds.
+- **File:** [ChatRoom.jsx](file:///D:/Coding/neyla/frontend/src/pages/ChatRoom.jsx)
+  - Implemented optimistic UI rendering on message submission with duplicate validation, eliminating lag and assuring local persistence before broadcast completes.
+  - Fixed the chat input styling bug where the text field appeared collapsed/small by wrapping the custom `Input` component inside a `flex-1` block container.
+  - Integrated WA-style dynamic message statuses: "sending" (clock icon), "sent" (single gray check), "delivered" (double gray check after 800ms), and "read" (double blue check after 2000ms).
+  - Added simulated Psychologist "sedang mengetik..." status that triggers as the bot is preparing its response, and dynamic "Online" / "Offline" status tracking in the header.
+- **File:** [DatabaseSeeder.php](file:///D:/Coding/neyla/backend/database/seeders/DatabaseSeeder.php)
+  - Removed "Dr. Stevano, M.Psi" from the seed script.
+  - Added multiple verified psychologists (Dian Sastro, Rian Adi, Siti Aminah) with customized bios, specializations, prices, and weekly schedules.
+  - Linked sample bookings to Dian Sastro, M.Psi., as the primary psychologist for testing.
+- **File:** [Pitch_Deck_Guidance.md](file:///D:/Coding/neyla/docs/Pitch_Deck_Guidance.md)
+  - Created a comprehensive markdown guide analyzing the pitch deck rules, slides order, and general principles from `Pitch Deck Guidance.pdf`.
+  - Contextualized the general structure directly to the **InnerWhisper** platform, highlighting problem statements, solutions, target audience, and business models for investor presentations.
+- **Directory:** [docs/pitch_deck/](file:///D:/Coding/neyla/docs/pitch_deck/README.md)
+  - Split the pitch deck guide into **14 separate markdown files** (one for each slide).
+  - Every file is highly detailed and contains the Slide Goal, customized InnerWhisper slide contents, a ready-to-use **Presentation Script (Narasi)** in Indonesian, and official Investor Tips from the PDF.
+  - Integrated the exact Cost Structure table from `Template cost structure.xlsx` inside Slide 13 ([13_financials.md](file:///D:/Coding/neyla/docs/pitch_deck/13_financials.md)), filling it with realistic Rupiah allocations for InnerWhisper matching the Q1 COGS total (Rp 228.000.000).
+
+## 📍 Last Known State
+- **Frontend:** Built and deployed to VPS `bleber` (served by Nginx at `https://innerwhisper.my.id`).
+- **Backend:** Deployed to VPS `bleber` (served via PHP 8.4-FPM on Unix Socket under Nginx at `https://innerwhisper.my.id/api`).
+- **WebSockets:** Laravel Reverb running on local port `8082` (managed by Supervisor as `innerwhisper-reverb`) and reverse-proxied under SSL (`wss://innerwhisper.my.id/app`).
+- **Queue Listener:** Managed by Supervisor as `innerwhisper-queue` (`php artisan queue:work` database queue).
+- **Database:** MySQL database `innerwhisper` configured locally on the VPS and seeded with default psychologist data and schedules.
+- **SSL Certificate:** Active Let's Encrypt SSL certificates configured automatically by Certbot for `innerwhisper.my.id` and `www.innerwhisper.my.id`.
+
+## 📋 Task History & Context
+- **June 28, 2026:** VPS deployment of the full-stack system.
+  - Verified local NPM build of the frontend targeting live URL.
+  - Packaged and synchronized the backend codebase.
+  - Created and seeded the live MySQL database `innerwhisper`.
+  - Configured Nginx virtual host, enabled symlinks, and verified config syntax.
+  - Automated SSL deployment and redirect configuration using Certbot.
+  - Configured and activated Supervisor group processes (`innerwhisper-reverb` and `innerwhisper-queue`).
+  - Tested live health status on `https://innerwhisper.my.id/up` and root domain, yielding 200 OK.
+- **June 27, 2026:** Payment verification, booking flows, bot reply queue, chat optimistic UI features, database seeders, and pitch deck guides.
+- **June 23, 2026:** Style updates, router redirection fixes, custom input theme colors, and article layout fixes.
+
+## 🛠️ Local Environment Notes
+- **VPS Environment (vps-bleber):**
+  - OS: Ubuntu 22.04.5 LTS
+  - Nginx: Active
+  - PHP: PHP 8.4.22 (CLI & FPM)
+  - Node: v20.20.2
+  - MySQL: 8.0.46
+  - Composer: 2.9.5
+  - Supervisor: 4.2.1
+  - PM2: 6.0.14
+- **Local Dev Stack:**
+  - Vite dev server: `http://localhost:5173/`
+  - Laravel backend: `http://localhost:8000/`
+
+## 🚧 Active/Pending Tasks
+- Monitor Supervisor logs for Reverb and Queue workers (`/var/www/innerwhisper/backend/storage/logs/`).
+- Enable daily database backups on the VPS.
+- Implement production-level log rotation or external tracking.
+
+
 

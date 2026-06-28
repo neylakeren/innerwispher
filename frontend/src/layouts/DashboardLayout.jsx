@@ -76,9 +76,7 @@ export default function DashboardLayout({ children }) {
                 <div className="flex flex-col h-full">
                     <div className="p-6">
                         <Link to="/" className="flex items-center space-x-3">
-                            <div className="bg-primary text-on-primary p-1.5 rounded-lg">
-                                <Heart className="h-5 w-5" fill="currentColor" />
-                            </div>
+                            <img src="/logo.png" alt="InnerWhisper" className="h-8 w-8 object-contain" />
                             <span className="text-xl font-bold text-primary tracking-tight">InnerWhisper</span>
                         </Link>
                     </div>

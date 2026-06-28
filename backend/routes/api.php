@@ -21,9 +21,15 @@ Route::middleware('auth:sanctum')->group(function () {
     // Bookings
     Route::get('/bookings', [\App\Http\Controllers\Api\BookingController::class, 'index']);
     Route::get('/bookings/{id}', [\App\Http\Controllers\Api\BookingController::class, 'show']);
+    Route::post('/bookings', [\App\Http\Controllers\Api\BookingController::class, 'store']);
+    Route::get('/psychologists', [\App\Http\Controllers\Api\BookingController::class, 'getPsychologists']);
 
     // Payment
     Route::post('/payments/upload', [PaymentController::class, 'uploadProof']);
+
+    Route::middleware('role:admin')->group(function () {
+        Route::post('/admin/payments/{id}/verify', [PaymentController::class, 'verify']);
+    });
 
     // Sessions
     Route::get('/sessions/{id}', [CounselingSessionController::class, 'show']);

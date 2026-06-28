@@ -44,9 +44,7 @@ export default function Login() {
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
                 <div className="flex justify-center">
-                    <div className="bg-primary-container text-on-primary-container p-3 rounded-xl shadow-md">
-                        <Heart className="h-8 w-8 text-primary" fill="currentColor" />
-                    </div>
+                    <img src="/logo.png" alt="InnerWhisper Logo" className="h-14 w-14 object-contain shadow-md rounded-xl p-1 bg-surface" />
                 </div>
                 <h2 className="mt-6 text-center text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface">
                     Selamat datang di InnerWhisper

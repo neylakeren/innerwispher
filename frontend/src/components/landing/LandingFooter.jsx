@@ -6,7 +6,8 @@ export default function LandingFooter() {
     <footer className="bg-surface-container-low w-full rounded-t-xl hidden md:block">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter px-8 md:px-16 lg:px-24 py-20 w-full">
         <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
-          <Link to="/" className="text-headline-md font-bold text-primary">
+          <Link to="/" className="flex items-center gap-2 text-headline-md font-bold text-primary">
+            <img src="/logo.png" alt="InnerWhisper" className="h-8 w-8 object-contain" />
             InnerWhisper
           </Link>
           <p className="text-body-md text-secondary max-w-sm">

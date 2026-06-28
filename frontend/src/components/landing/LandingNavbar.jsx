@@ -15,7 +15,8 @@ export default function LandingNavbar() {
   return (
     <header className="hidden md:flex bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm">
       <div className="flex justify-between items-center px-8 md:px-16 lg:px-24 py-4 w-full">
-        <Link to="/" className="text-headline-md font-bold text-primary">
+        <Link to="/" className="flex items-center gap-2 text-headline-md font-bold text-primary">
+          <img src="/logo.png" alt="InnerWhisper" className="h-8 w-8 object-contain" />
           InnerWhisper
         </Link>
         <nav className="flex items-center gap-gutter">

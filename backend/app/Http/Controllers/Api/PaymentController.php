@@ -40,4 +40,42 @@ class PaymentController extends Controller
 
         return response()->json(['message' => 'Upload failed.'], 400);
     }
+
+    public function verify(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:verified,rejected',
+        ]);
+
+        $payment = Payment::with('booking')->findOrFail($id);
+        $booking = $payment->booking;
+
+        $payment->update([
+            'status' => $request->status,
+            'verified_at' => $request->status === 'verified' ? now() : null,
+        ]);
+
+        if ($request->status === 'verified') {
+            $booking->update([
+                'status' => 'paid',
+            ]);
+
+            // Automatically create a counseling session if it doesn't exist
+            if (!$booking->counselingSession) {
+                $booking->counselingSession()->create([
+                    'status' => 'active',
+                    'started_at' => now(),
+                ]);
+            }
+        } else {
+            $booking->update([
+                'status' => 'confirmed', // revert to waiting payment
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Payment verification processed successfully.',
+            'payment' => $payment->load('booking.counselingSession'),
+        ]);
+    }
 }
