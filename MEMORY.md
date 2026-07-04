@@ -135,6 +135,13 @@ This document serves as the project memory for the frontend landing page and das
 - **Files:** [sitemap.xml](file:///D:/Coding/neyla/frontend/public/sitemap.xml) & [robots.txt](file:///D:/Coding/neyla/frontend/public/robots.txt)
   - Created `robots.txt` to define crawler rules (allowing landing/public pages, blocking search bots from indexing dashboard and chat paths).
   - Created `sitemap.xml` detailing the priority, update frequency, and canonical URLs of all public routes (Beranda, Layanan, Tentang Kami, Artikel, Login, Register).
+- **Deployment & Git Workflow:**
+  - Staged, committed, and pushed all updates to GitHub repository `Stevano016/psychologi` main branch.
+  - Re-compiled the React frontend locally, zipped the `dist/` directory, uploaded it to VPS `bleber` under `/tmp/`, and unpacked it to `/var/www/innerwhisper/frontend-dist`.
+  - Configured proper user permissions (`www-data:www-data`) and verified HTTPS access for `/robots.txt` and `/sitemap.xml`.
+- **Google Search Console Verification:**
+  - Added the HTML verification file `google3df3cb5e37125a8e.html` to `frontend/public/` and committed to main.
+  - Uploaded the file directly to `/var/www/innerwhisper/frontend-dist/` on VPS `bleber` and verified `200 OK` response.
 
 ## 📍 Last Known State
 - **Frontend:** Built and deployed to VPS `bleber` (served by Nginx at `https://innerwhisper.my.id`).
