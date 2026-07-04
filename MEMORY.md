@@ -126,6 +126,16 @@ This document serves as the project memory for the frontend landing page and das
   - Every file is highly detailed and contains the Slide Goal, customized InnerWhisper slide contents, a ready-to-use **Presentation Script (Narasi)** in Indonesian, and official Investor Tips from the PDF.
   - Integrated the exact Cost Structure table from `Template cost structure.xlsx` inside Slide 13 ([13_financials.md](file:///D:/Coding/neyla/docs/pitch_deck/13_financials.md)), filling it with realistic Rupiah allocations for InnerWhisper matching the Q1 COGS total (Rp 228.000.000).
 
+## Recent Fixes & Features (July 4, 2026)
+- **File:** [index.html](file:///D:/Coding/neyla/frontend/index.html)
+  - Configured language attribute to Indonesian (`lang="id"`).
+  - Added essential SEO meta tags including Description, Keywords, Author, Robots, and Canonical URL.
+  - Implemented Open Graph (Facebook) and Twitter Card tags to ensure premium and consistent social sharing previews.
+  - Added structured data markup (`JSON-LD` schema) using `MedicalBusiness` type to improve Local SEO and search engine visibility.
+- **Files:** [sitemap.xml](file:///D:/Coding/neyla/frontend/public/sitemap.xml) & [robots.txt](file:///D:/Coding/neyla/frontend/public/robots.txt)
+  - Created `robots.txt` to define crawler rules (allowing landing/public pages, blocking search bots from indexing dashboard and chat paths).
+  - Created `sitemap.xml` detailing the priority, update frequency, and canonical URLs of all public routes (Beranda, Layanan, Tentang Kami, Artikel, Login, Register).
+
 ## 📍 Last Known State
 - **Frontend:** Built and deployed to VPS `bleber` (served by Nginx at `https://innerwhisper.my.id`).
 - **Backend:** Deployed to VPS `bleber` (served via PHP 8.4-FPM on Unix Socket under Nginx at `https://innerwhisper.my.id/api`).
@@ -135,7 +145,14 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificates configured automatically by Certbot for `innerwhisper.my.id` and `www.innerwhisper.my.id`.
 
 ## 📋 Task History & Context
-- **June 28, 2026:** VPS deployment of the full-stack system.
+- **June 28, 2026 (Part 2):** Logo and icon integration.
+  - Processed and converted the new logo image (`WhatsApp Image...jpeg`) to transparent PNG formats (`logo.png` and `favicon.png`) via Pillow.
+  - Updated frontend logo elements in `LandingNavbar.jsx`, `LandingFooter.jsx`, `DashboardLayout.jsx`, `Login.jsx`, and `Register.jsx`.
+  - Updated `index.html` with the new favicon and a professional page title.
+  - Re-compiled the frontend locally and redeployed assets to `/var/www/innerwhisper/frontend-dist`.
+  - Staged, committed, and pushed all updates to the remote Git repository (`Stevano016/psychologi` main branch).
+  - Synchronized the backend to the VPS, performed fresh database migrations and seeders, reset directory permissions, and restarted the Reverb and Queue Supervisor worker processes.
+- **June 28, 2026 (Part 1):** Initial VPS deployment of the full-stack system.
   - Verified local NPM build of the frontend targeting live URL.
   - Packaged and synchronized the backend codebase.
   - Created and seeded the live MySQL database `innerwhisper`.

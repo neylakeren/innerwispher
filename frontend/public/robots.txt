@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Allow: /layanan
+Allow: /tentang-kami
+Allow: /artikel
+Allow: /login
+Allow: /register
+Disallow: /dashboard
+Disallow: /bookings
+Disallow: /notes
+Disallow: /psychologists
+Disallow: /admin/
+Disallow: /sessions/
+
+Sitemap: https://innerwhisper.my.id/sitemap.xml
