@@ -152,6 +152,11 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificates configured automatically by Certbot for `innerwhisper.my.id` and `www.innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **September 23, 2026:** GitHub multi-account configuration & repository migration.
+  - Configured local Git author to `neylakeren` (`neyla.andi04@gmail.com`).
+  - Switched repository remote to `https://github.com/neylakeren/innerwispher.git` authenticated via PAT.
+  - Successfully pushed all commits and tracked `main` branch to the `neylakeren/innerwispher` repository.
+  - Updated `.gitignore` to exclude `*.h2d` design files.
 - **June 28, 2026 (Part 2):** Logo and icon integration.
   - Processed and converted the new logo image (`WhatsApp Image...jpeg`) to transparent PNG formats (`logo.png` and `favicon.png`) via Pillow.
   - Updated frontend logo elements in `LandingNavbar.jsx`, `LandingFooter.jsx`, `DashboardLayout.jsx`, `Login.jsx`, and `Register.jsx`.
