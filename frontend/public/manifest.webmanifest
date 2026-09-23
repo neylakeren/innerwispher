@@ -1,0 +1,57 @@
+{
+  "name": "InnerWhisper - Konseling Psikologi Online",
+  "short_name": "InnerWhisper",
+  "description": "Layanan konseling psikologi online profesional bersama psikolog klinis berlisensi.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf9f9",
+  "theme_color": "#9a4153",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Layanan Konseling",
+      "short_name": "Layanan",
+      "description": "Lihat paket dan jenis layanan konseling psikologi",
+      "url": "/layanan",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Psikolog Kami",
+      "short_name": "Psikolog",
+      "description": "Lihat daftar psikolog klinis profesional kami",
+      "url": "/tentang-kami",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "categories": ["medical", "health", "lifestyle"]
+}

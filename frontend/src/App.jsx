@@ -21,6 +21,9 @@ import Layanan from './pages/landing/Layanan';
 import TentangKami from './pages/landing/TentangKami';
 import Artikel from './pages/landing/Artikel';
 
+// Components
+import PWAInstallBanner from './components/PWAInstallBanner';
+
 const ProtectedRoute = ({ children }) => {
     const { user, loading } = useAuth();
     if (loading) return <div>Loading...</div>;
@@ -108,6 +111,7 @@ function App() {
         <AuthProvider>
             <Router>
                 <AppRoutes />
+                <PWAInstallBanner />
             </Router>
         </AuthProvider>
     );
