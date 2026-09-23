@@ -152,6 +152,14 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificates configured automatically by Certbot for `innerwhisper.my.id` and `www.innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **September 23, 2026 (Part 4):** Comprehensive Mobile UX/UI Polish & PWA Alignment.
+  - Re-architected mobile bottom navigation (`BottomNavBar.jsx`) with native tab styling, active indicator pills, safe-area padding (`pb-safe`), and fixed z-index/overlap issues.
+  - Added dedicated mobile sticky top app bar in `LandingNavbar.jsx` with logo and quick "Masuk" action.
+  - Resized and adjusted `WhatsAppFAB.jsx` (`bottom-20 right-4 w-12 h-12`) so it no longer obscures bottom navigation tabs or touches.
+  - Optimized container paddings (`px-4 sm:px-8` instead of harsh `px-8`), responsive typography (`text-2xl` to `text-6xl`), and touch targets across `Beranda.jsx`, `TentangKami.jsx`, `Layanan.jsx`, and `Artikel.jsx`.
+  - Fixed extreme `p-24` and `px-16` spacing in `TentangKami.jsx` CTA that broke small viewport boundaries.
+  - Added mobile category chip horizontal scroll with `no-scrollbar` in `Artikel.jsx`.
+  - Re-built and deployed updated frontend to VPS `bleber`.
 - **September 23, 2026 (Part 3):** Production Deployment to VPS `bleber`.
   - Re-compiled production React build with PWA assets and Workbox Service Worker.
   - Uploaded and deployed build to `/var/www/innerwhisper/frontend-dist/` with correct `www-data:www-data` permissions.

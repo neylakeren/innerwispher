@@ -1,4 +1,3 @@
-import React from 'react';
 import { ShieldCheck, MessageCircle } from 'lucide-react';
 
 export default function TentangKami() {
@@ -24,63 +23,87 @@ export default function TentangKami() {
   ];
 
   return (
-    <div className="pt-28 md:pt-[150px] pb-24 px-8 md:px-16 lg:px-24 w-full">
+    <div className="pt-20 md:pt-[130px] pb-28 md:pb-24 px-4 sm:px-8 md:px-16 lg:px-24 w-full">
       {/* Hero / Mission */}
-      <section className="mb-24 text-center md:px-12">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-8">Dedikasi untuk Kesejahteraan Mental Anda</h1>
-        <p className="text-body-lg md:text-xl text-on-surface-variant max-w-5xl mx-auto leading-relaxed">
+      <section className="mb-10 sm:mb-16 md:mb-20 text-center">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-3 sm:mb-6 leading-tight">
+          Dedikasi untuk Kesejahteraan Mental Anda
+        </h1>
+        <p className="text-xs sm:text-base md:text-xl text-on-surface-variant max-w-4xl mx-auto leading-relaxed">
           Di InnerWhisper, misi kami adalah menyediakan akses yang mudah, aman, dan penuh empati untuk dukungan kesehatan mental. Kami percaya bahwa setiap individu berhak mendapatkan ruang yang tenang untuk memulihkan diri.
         </p>
       </section>
 
       {/* Experts */}
-      <section className="mb-24">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-12 text-center">Kenali Para Ahli Kami</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="mb-10 sm:mb-16 md:mb-20">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-primary mb-6 sm:mb-10 text-center">
+          Kenali Para Ahli Kami
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {experts.map((expert, index) => (
-            <div key={index} className="bg-surface-container-lowest rounded-xl p-8 ambient-shadow hover-lift flex flex-col items-center text-center">
-              <div className="w-36 h-36 rounded-full overflow-hidden mb-8 border-4 border-primary-container">
-                <img className="w-full h-full object-cover animate-fade-in" alt={expert.name} src={expert.image} />
+            <div
+              key={index}
+              className="bg-surface-container-lowest rounded-2xl p-5 sm:p-6 md:p-8 ambient-shadow hover-lift flex flex-col items-center text-center border border-outline-variant/30"
+            >
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 border-3 sm:border-4 border-primary-container shadow-sm">
+                <img
+                  className="w-full h-full object-cover animate-fade-in"
+                  alt={expert.name}
+                  src={expert.image}
+                />
               </div>
-              <h3 className="text-2xl font-bold text-on-surface mb-2">{expert.name}</h3>
-              <div className="flex flex-wrap justify-center gap-2 mb-4">
+              <h3 className="text-lg sm:text-2xl font-bold text-on-surface mb-2">
+                {expert.name}
+              </h3>
+              <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                 {expert.tags.map((tag) => (
-                  <span key={tag} className="bg-secondary-container text-on-secondary-container text-caption px-4 py-1.5 rounded-full font-medium">
+                  <span
+                    key={tag}
+                    className="bg-secondary-container text-on-secondary-container text-xs px-3 py-1 rounded-full font-medium"
+                  >
                     {tag}
                   </span>
                 ))}
               </div>
-              <p className="text-body-lg text-on-surface-variant leading-relaxed">{expert.description}</p>
+              <p className="text-xs sm:text-sm md:text-base text-on-surface-variant leading-relaxed">
+                {expert.description}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Privacy & Security */}
-      <section className="mb-24 bg-surface-container-low rounded-2xl p-16 flex flex-col md:flex-row items-center gap-16 ambient-shadow">
-        <div className="w-28 h-28 bg-primary-container rounded-full flex items-center justify-center shrink-0">
-          <ShieldCheck size={56} className="text-on-primary-container" strokeWidth={1.5} />
+      <section className="mb-10 sm:mb-16 md:mb-20 bg-surface-container-low rounded-2xl p-6 sm:p-10 md:p-14 flex flex-col sm:flex-row items-center gap-5 sm:gap-8 md:gap-12 ambient-shadow border border-outline-variant/20">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary-container rounded-2xl flex items-center justify-center shrink-0 text-on-primary-container shadow-sm">
+          <ShieldCheck className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={1.5} />
         </div>
-        <div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-4">Aman &amp; Rahasia</h2>
-          <p className="text-body-lg md:text-xl text-on-surface-variant leading-relaxed">
+        <div className="text-center sm:text-left">
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-primary mb-2 sm:mb-3">
+            Aman &amp; Rahasia
+          </h2>
+          <p className="text-xs sm:text-base md:text-lg text-on-surface-variant leading-relaxed">
             Privasi Anda adalah prioritas utama kami. Semua sesi konseling dan data pribadi dienkripsi dengan standar medis tertinggi. Kami berkomitmen menyediakan ruang yang 100% rahasia untuk perjalanan pemulihan Anda tanpa rasa khawatir.
           </p>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="text-center bg-surface-container-highest rounded-2xl p-24 ambient-shadow border border-outline-variant/30">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-4">Ingin mulai bercerita?</h2>
-        <p className="text-body-lg md:text-xl text-on-surface-variant mb-8 font-medium">Tim ahli kami siap mendengarkan tanpa menghakimi.</p>
+      <section className="text-center bg-surface-container-highest rounded-2xl p-6 sm:p-10 md:p-14 ambient-shadow border border-outline-variant/30">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-primary mb-2 sm:mb-3">
+          Ingin mulai bercerita?
+        </h2>
+        <p className="text-xs sm:text-base md:text-lg text-on-surface-variant mb-5 sm:mb-8 font-medium">
+          Tim ahli kami siap mendengarkan tanpa menghakimi.
+        </p>
         <a
           href="https://wa.me/6281234567890"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-primary text-on-primary text-body-lg px-16 py-6 rounded-lg shadow-md hover-lift inline-flex items-center gap-3 font-semibold"
+          className="w-full sm:w-auto bg-primary hover:bg-[#833344] text-on-primary text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-md hover-lift inline-flex items-center justify-center gap-2.5 font-semibold transition-all active:scale-95"
         >
-          <MessageCircle size={22} />
-          Chat Bot kami sekarang
+          <MessageCircle size={20} />
+          <span>Chat Bot kami sekarang</span>
         </a>
       </section>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const categories = ['Semua Topik', 'Kecemasan', 'Hubungan', 'Perawatan Diri', 'Produktivitas'];
@@ -6,7 +6,7 @@ const categories = ['Semua Topik', 'Kecemasan', 'Hubungan', 'Perawatan Diri', 'P
 const featuredArticle = {
   id: 'featured-1',
   title: 'Menemukan Ketenangan di Tengah Kesibukan Sehari-hari',
-  description: 'Langkah-langbah sederhana namun efektif untuk membangun rutinitas perawatan diri yang berkelanjutan, bahkan ketika jadwal Anda terasa sangat padat.',
+  description: 'Langkah-langkah sederhana namun efektif untuk membangun rutinitas perawatan diri yang berkelanjutan, bahkan ketika jadwal Anda terasa sangat padat.',
   category: 'Perawatan Diri',
   author: 'Dr. Amanda Setiawan',
   authorTitle: 'Psikolog Klinis',
@@ -58,49 +58,30 @@ const articles = [
     readTime: '4 Min Baca',
     hasImage: false,
     content: [
-      { type: 'paragraph', text: 'Keluarga adalah sistem pendukung utama kita. Namun, hubungan keluarga yang terlalu erat tanpa batas yang jelas sering kali dapat memicu konflik dan stres emosional. Membangun batasan sehat (boundaries) bukanlah bentuk pemberontakan atau hilangnya kasih sayang, melainkan cara menjaga kesehatan mental bersama.' },
+      { type: 'paragraph', text: 'Keluarga adalah tempat pertama kita belajar tentang cinta dan penerimaan. Namun, sering kali hubungan keluarga menjadi sumber stres emosional terbesar ketika batasan pribadi (boundaries) tidak dihormati atau bahkan tidak pernah ditetapkan.' },
       { type: 'subheading', text: 'Mengapa Batasan Itu Penting?' },
-      { type: 'paragraph', text: 'Tanpa batasan yang jelas, Anda mungkin merasa bertanggung jawab atas kebahagiaan emosional anggota keluarga lain, mengorbankan kebutuhan pribadi demi menyenangkan mereka, atau merasa privasi Anda terus-menerus dilanggar. Batasan yang sehat mendefinisikan di mana diri Anda berakhir dan orang lain dimulai.' },
-      { type: 'quote', text: '“Batasan yang sehat bukanlah tembok untuk menjauhkan orang lain, melainkan pintu gerbang yang menentukan bagaimana orang lain boleh memperlakukan kita.”' },
-      { type: 'subheading', text: 'Langkah Mengomunikasikan Batasan secara Asertif' },
-      { type: 'paragraph', text: 'Sampaikan batasan Anda dengan tenang, jelas, dan tanpa nada menyalahkan. Gunakan pernyataan "Saya" (I-statement). Contoh: "Saya sangat menghargai saran Ibu, tetapi untuk keputusan karir ini, saya ingin menentukannya sendiri dan bertanggung jawab atas pilihan saya." Bersiaplah menghadapi penolakan awal, karena keluarga memerlukan waktu untuk beradaptasi dengan perubahan dinamika hubungan Anda.' }
+      { type: 'paragraph', text: 'Banyak orang merasa bersalah ketika ingin menolak permintaan keluarga. Kita takut dicap durhaka atau egois. Padahal, menetapkan batasan yang jelas justru bertujuan untuk menjaga hubungan tetap sehat dalam jangka panjang. Tanpa batasan, rasa kesal dan dendam terpendam akan perlahan mengikis kasih sayang yang tulus.' },
+      { type: 'quote', text: '“Batasan yang sehat adalah cara kita mencintai diri sendiri tanpa berhenti menghargai dan menyayangi orang lain.”' },
+      { type: 'subheading', text: 'Langkah Awal Mengomunikasikan Batasan' },
+      { type: 'paragraph', text: 'Gunakan kalimat "Saya" (I-statement) daripada kalimat yang menyalahkan. Misalnya: "Saya sangat menghargai saran Ibu, tetapi saat ini saya butuh waktu untuk memutuskan hal ini sendiri" daripada "Ibu selalu ikut campur urusan saya!". Sampaikan dengan nada suara yang tenang, tegas, namun tetap penuh kasih.' }
     ]
   },
   {
     id: 'article-3',
-    title: 'Toxic Productivity: Saat Bekerja Keras Menjadi Berbahaya',
-    description: 'Tanda-tanda Anda mungkin terjebak dalam budaya kerja yang merugikan kesehatan mental dan fisik, serta cara memulihkannya.',
+    title: 'Strategi Mengatasi Burnout di Tempat Kerja',
+    description: 'Kenali tanda-tanda kelelahan emosional akibat pekerjaan dan langkah taktis untuk memulihkan energi serta motivasi Anda.',
     category: 'Produktivitas',
-    author: 'Dr. Andi Hakim',
-    authorTitle: 'Psikolog Industri',
-    readTime: '5 Min Baca',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAm5PhJmBgKMzKAEFh1_psYlS2cdPgVN8FLTIJ14HHiNNjUpYlJeYhI2MMM8Un6eMgu9V3Lt4SyGq0PM0jlRQhIK266UivvbZPCs7h6MtxCEMs2wT_4eY8gx5ifikiJ7cv1yYusjkC-5VwrwEKhHlZyPxZ3mXo0jNKXyGCq_ChyY9vP74jq8MuaKDgqbkYj7XfKB_KQBfPndImPIMc3_yR_w3eKNTYRaPl-LFUSaKzHGold1EP6Jy55TcsjE4f_kb1v_ygAv8fKVV0C',
+    author: 'Budi Santoso, M.Psi',
+    authorTitle: 'Psikolog Klinis',
+    readTime: '7 Min Baca',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBC2b3h7E7k74_F9u0DqN8jO436p4eS0F-JzGz8v0a_m1x3q7n9o2w5u8r1k4j6h8f2d5a7',
     hasImage: true,
     content: [
-      { type: 'paragraph', text: 'Bekerja keras adalah nilai positif. Namun, ketika keinginan untuk terus produktif berubah menjadi obsesi tak sehat yang mengabaikan kebutuhan fisik dan emosional, Anda mungkin sedang terjebak dalam fenomena yang disebut toxic productivity.' },
-      { type: 'subheading', text: 'Apa itu Toxic Productivity?' },
-      { type: 'paragraph', text: 'Toxic productivity adalah kondisi di mana seseorang merasa bersalah atau cemas ketika tidak sedang bekerja atau menghasilkan sesuatu. Mereka merasa harga dirinya (self-worth) sepenuhnya bergantung pada daftar tugas yang berhasil diselesaikan, sehingga mengabaikan tidur, pola makan, hubungan sosial, bahkan kesehatan tubuh mereka.' },
-      { type: 'quote', text: '“Istirahat bukanlah hadiah setelah Anda selesai bekerja, melainkan kebutuhan biologis dan mental dasar agar Anda tetap bisa berfungsi dengan sehat.”' },
-      { type: 'subheading', text: 'Tanda-Tanda Utama Anda Terkena Dampaknya' },
-      { type: 'paragraph', text: 'Beberapa gejalanya adalah merasa lelah kronis namun kesulitan untuk tidur, merasa cemas saat libur akhir pekan, mengabaikan hobi yang dulu disukai, dan terus merasa bahwa apa yang dikerjakan "belum cukup". Untuk memulihkannya, mulailah memisahkan identitas diri Anda dari pekerjaan Anda. Sadarilah bahwa Anda berharga apa adanya, bukan hanya karena apa yang Anda hasilkan.' }
-    ]
-  },
-  {
-    id: 'article-4',
-    title: 'Pentingnya Kualitas Tidur bagi Stabilitas Emosional',
-    description: 'Kurang tidur bukan hanya membuat lelah secara fisik, tetapi juga melemahkan kemampuan otak mengatur emosi secara signifikan.',
-    category: 'Perawatan Diri',
-    author: 'Siti Rahma, M.Psi',
-    authorTitle: 'Spesialis Sleep Hygiene',
-    readTime: '4 Min Baca',
-    hasImage: false,
-    content: [
-      { type: 'paragraph', text: 'Pernahkah Anda merasa sangat mudah marah, tersinggung, atau cemas setelah malam yang kurang tidur? Itu bukanlah kebetulan. Kurang tidur secara langsung memengaruhi amigdala, bagian otak yang bertanggung jawab atas pemrosesan emosi.' },
-      { type: 'subheading', text: 'Bagaimana Tidur Mengatur Emosi Kita' },
-      { type: 'paragraph', text: 'Selasa fase tidur REM (Rapid Eye Movement), otak kita memproses memori emosional dan menetralisir pengalaman stres dari hari sebelumnya. Jika waktu tidur Anda terpotong, otak kehilangan kesempatan emas untuk melakukan "pembersihan emosional" ini, membuat Anda rentan terhadap kecemasan dan perubahan suasana hati yang ekstrem.' },
-      { type: 'quote', text: '“Tidur yang nyenyak adalah obat penenang alami terbaik. Investasikan waktu tidur Anda demi kejernihan pikiran dan stabilitas emosi esok hari.”' },
-      { type: 'subheading', text: 'Tips Sederhana Memperbaiki Kualitas Tidur (Sleep Hygiene)' },
-      { type: 'paragraph', text: 'Pertahankan jadwal tidur yang konsisten, bahkan di hari libur. Buat kamar tidur Anda senyap, sejuk, dan gelap. Hindari penggunaan layar gawai minimal 1 jam sebelum tidur karena cahaya biru menghambat produksi melatonin, hormon yang memicu rasa kantuk. Lakukan aktivitas menenangkan seperti membaca buku fisik atau mandi air hangat.' }
+      { type: 'paragraph', text: 'Burnout bukan sekadar rasa lelah biasa setelah lembur semalaman. Ini adalah kondisi kelelahan fisik, emosional, dan mental yang kronis akibat stres berkepanjangan di tempat kerja yang tidak terkelola dengan baik.' },
+      { type: 'subheading', text: 'Tiga Dimensi Utama Burnout' },
+      { type: 'paragraph', text: 'Menurut Organisasi Kesehatan Dunia (WHO), burnout ditandai dengan tiga hal: perasaan energi terkuras atau kelelahan ekstrem, meningkatnya jarak mental dari pekerjaan atau sinisme terhadap tugas kantor, dan penurunan efikasi profesional (merasa tidak mampu lagi menghasilkan karya yang baik).' },
+      { type: 'subheading', text: 'Pemulihan Dimulai dari Ruang Kerja Anda' },
+      { type: 'paragraph', text: 'Jangan ragu untuk berbicara secara jujur dengan atasan mengenai beban kerja Anda. Fokuslah pada penyelesaian satu tugas dalam satu waktu (monotasking). Berhentilah membuka email pekerjaan di akhir pekan. Jika energi Anda tidak kunjung pulih setelah cuti liburan, itu adalah sinyal bahwa Anda membutuhkan bantuan profesional untuk menata kembali prioritas hidup.' }
     ]
   }
 ];
@@ -109,65 +90,63 @@ export default function Artikel() {
   const [activeCategory, setActiveCategory] = useState('Semua Topik');
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  // Filter articles based on selected category
-  const filteredArticles = activeCategory === 'Semua Topik' 
-    ? articles 
-    : articles.filter(art => art.category === activeCategory);
+  const filteredArticles = activeCategory === 'Semua Topik'
+    ? articles
+    : articles.filter((a) => a.category === activeCategory);
 
-  // If reading full article
   if (selectedArticle) {
     return (
-      <div className="pt-28 pb-24 px-8 md:px-16 lg:px-24 w-full flex flex-col items-start">
+      <div className="pt-20 md:pt-[130px] pb-28 md:pb-24 px-4 sm:px-8 md:px-16 lg:px-24 w-full flex flex-col items-start">
         {/* Back Button */}
         <button
           onClick={() => setSelectedArticle(null)}
-          className="inline-flex items-center gap-2 text-label-md text-primary font-semibold hover:text-surface-tint mb-8 transition-colors focus:outline-none"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm text-primary font-semibold hover:text-[#833344] mb-6 sm:mb-8 transition-colors focus:outline-none"
         >
-          <ArrowLeft size={18} /> Kembali ke Daftar Artikel
+          <ArrowLeft size={16} /> <span>Kembali ke Daftar Artikel</span>
         </button>
 
         {/* Article Container */}
-        <div className="max-w-4xl mx-auto flex flex-col gap-6 w-full">
-          <div className="flex items-center gap-3">
-            <span className="px-4 py-1.5 bg-primary-container text-on-primary-container rounded-full text-label-sm font-semibold">
+        <div className="max-w-4xl mx-auto flex flex-col gap-4 sm:gap-6 w-full">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-xs font-semibold">
               {selectedArticle.category}
             </span>
-            <span className="text-label-sm text-on-surface-variant font-medium">
+            <span className="text-xs text-on-surface-variant font-medium">
               {selectedArticle.readTime}
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-on-surface leading-tight tracking-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-on-surface leading-tight tracking-tight">
             {selectedArticle.title}
           </h1>
 
-          <div className="flex items-center gap-3 py-4 border-y border-outline-variant/30 my-2">
-            <div className="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-lg">
+          <div className="flex items-center gap-3 py-3 sm:py-4 border-y border-outline-variant/30 my-1 sm:my-2">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm sm:text-base">
               {selectedArticle.author.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
             </div>
             <div>
-              <p className="text-body-md font-bold text-on-surface">{selectedArticle.author}</p>
-              <p className="text-label-sm text-on-surface-variant">{selectedArticle.authorTitle}</p>
+              <p className="text-xs sm:text-sm font-bold text-on-surface">{selectedArticle.author}</p>
+              <p className="text-[11px] sm:text-xs text-on-surface-variant">{selectedArticle.authorTitle}</p>
             </div>
           </div>
-          
+
           {selectedArticle.hasImage && selectedArticle.image && (
-            <div className="w-full h-[250px] sm:h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-sm my-4">
+            <div className="w-full h-[200px] sm:h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-sm my-2 sm:my-4">
               <img className="w-full h-full object-cover" src={selectedArticle.image} alt={selectedArticle.title} />
             </div>
           )}
 
-          <div className="flex flex-col gap-6 text-body-lg text-on-surface-variant leading-relaxed mt-6">
+          <div className="flex flex-col gap-4 sm:gap-6 text-sm sm:text-base md:text-lg text-on-surface-variant leading-relaxed mt-4 sm:mt-6">
             {selectedArticle.content.map((item, idx) => {
               if (item.type === 'paragraph') {
                 return <p key={idx} className="text-justify">{item.text}</p>;
               }
               if (item.type === 'subheading') {
-                return <h3 key={idx} className="text-xl md:text-2xl font-bold text-on-surface mt-6 mb-2">{item.text}</h3>;
+                return <h3 key={idx} className="text-lg sm:text-2xl font-bold text-on-surface mt-4 sm:mt-6 mb-1 sm:mb-2">{item.text}</h3>;
               }
               if (item.type === 'quote') {
                 return (
-                  <blockquote key={idx} className="border-l-4 border-primary bg-primary-container/10 px-6 py-4 rounded-r-lg my-4 italic text-on-primary-container font-medium">
+                  <blockquote key={idx} className="border-l-4 border-primary bg-primary-container/10 px-4 sm:px-6 py-3 sm:py-4 rounded-r-xl my-3 italic text-on-primary-container font-medium text-xs sm:text-base">
                     {item.text}
                   </blockquote>
                 );
@@ -177,18 +156,20 @@ export default function Artikel() {
           </div>
 
           {/* Call to Action to WhatsApp Counseling */}
-          <div className="mt-16 bg-surface-container-low rounded-2xl p-10 md:p-12 border border-outline-variant/30 text-center flex flex-col items-center gap-6">
-            <h3 className="text-xl md:text-2xl font-bold text-on-surface">Butuh tempat bercerita tentang masalah serupa?</h3>
-            <p className="text-body-md text-on-surface-variant max-w-2xl leading-relaxed">
+          <div className="mt-10 sm:mt-16 bg-surface-container-low rounded-2xl p-6 sm:p-10 md:p-12 border border-outline-variant/30 text-center flex flex-col items-center gap-4 sm:gap-6">
+            <h3 className="text-lg sm:text-2xl font-bold text-on-surface">
+              Butuh tempat bercerita tentang masalah serupa?
+            </h3>
+            <p className="text-xs sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
               Jangan menanggung beban Anda sendiri. Tim psikolog kami di InnerWhisper siap membantu dan mendengarkan keluh kesah Anda secara empatik tanpa menghakimi.
             </p>
             <a
               href="https://wa.me/6281234567890"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary text-on-primary text-body-lg px-8 py-4 rounded-lg shadow-md hover:scale-[1.02] active:scale-95 transition-all font-semibold inline-flex items-center gap-3"
+              className="w-full sm:w-auto bg-primary hover:bg-[#833344] text-on-primary text-xs sm:text-base px-6 sm:px-8 py-3.5 rounded-xl shadow-md transition-all font-semibold inline-flex items-center justify-center gap-2 active:scale-95"
             >
-              Konsultasikan Sekarang via WA
+              <span>Konsultasikan Sekarang via WA</span>
             </a>
           </div>
         </div>
@@ -197,19 +178,21 @@ export default function Artikel() {
   }
 
   return (
-    <div className="pt-28 pb-24 px-8 md:px-16 lg:px-24 w-full">
+    <div className="pt-20 md:pt-[130px] pb-28 md:pb-24 px-4 sm:px-8 md:px-16 lg:px-24 w-full">
       {/* Header */}
-      <div className="mb-12 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div className="mb-6 sm:mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6">Artikel &amp; Edukasi</h1>
-          <p className="text-body-lg md:text-xl text-on-surface-variant max-w-4xl leading-relaxed">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-2 sm:mb-4">
+            Artikel &amp; Edukasi
+          </h1>
+          <p className="text-xs sm:text-base md:text-xl text-on-surface-variant max-w-4xl leading-relaxed">
             Temukan wawasan, tips praktis, dan panduan untuk merawat kesehatan mental Anda setiap hari.
           </p>
         </div>
       </div>
 
-      {/* Category Chips */}
-      <div className="flex flex-wrap gap-3 mb-20">
+      {/* Category Chips with Horizontal Scroll on Mobile */}
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-8 sm:mb-12 -mx-4 px-4 sm:mx-0 sm:px-0">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -217,9 +200,9 @@ export default function Artikel() {
               setActiveCategory(cat);
               setSelectedArticle(null);
             }}
-            className={`px-8 py-3 rounded-full text-body-lg font-semibold transition-colors shadow-sm focus:outline-none ${
+            className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shadow-sm focus:outline-none flex-shrink-0 ${
               activeCategory === cat
-                ? 'bg-primary-container text-on-primary-container'
+                ? 'bg-[#9a4153] text-white shadow-[#9a4153]/20'
                 : 'bg-surface-container text-on-surface border border-outline-variant hover:bg-surface-container-highest'
             }`}
           >
@@ -230,43 +213,48 @@ export default function Artikel() {
 
       {/* Featured Article */}
       {activeCategory === 'Semua Topik' && (
-        <section className="mb-20">
-          <div className="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col md:flex-row border border-outline-variant/30">
-            <div className="md:w-1/2 relative overflow-hidden h-64 md:h-auto">
+        <section className="mb-8 sm:mb-14">
+          <div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col md:flex-row border border-outline-variant/30">
+            <div className="md:w-1/2 relative overflow-hidden h-48 sm:h-64 md:h-auto">
               <img
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Seseorang sedang menulis jurnal di ruangan yang tenang"
                 src={featuredArticle.image}
               />
-              <div className="absolute top-4 left-4 bg-surface/90 backdrop-blur px-3 py-1 rounded-full text-label-sm text-primary font-semibold shadow-sm">
+              <div className="absolute top-3 left-3 bg-surface/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] text-primary font-semibold shadow-sm">
                 Artikel Pilihan
               </div>
             </div>
-            <div className="md:w-1/2 p-12 md:p-16 flex flex-col justify-center">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-label-sm text-secondary font-semibold">{featuredArticle.category}</span>
+            <div className="md:w-1/2 p-5 sm:p-8 md:p-12 flex flex-col justify-center">
+              <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                <span className="text-xs text-secondary font-semibold">{featuredArticle.category}</span>
                 <span className="w-1 h-1 rounded-full bg-outline" />
-                <span className="text-label-sm text-on-surface-variant font-medium">{featuredArticle.readTime}</span>
+                <span className="text-xs text-on-surface-variant font-medium">{featuredArticle.readTime}</span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-on-surface mb-4 group-hover:text-primary transition-colors cursor-pointer" onClick={() => setSelectedArticle(featuredArticle)}>
+              <h2
+                className="text-lg sm:text-2xl font-bold text-on-surface mb-2 sm:mb-3 group-hover:text-primary transition-colors cursor-pointer"
+                onClick={() => setSelectedArticle(featuredArticle)}
+              >
                 {featuredArticle.title}
               </h2>
-              <p className="text-body-lg text-on-surface-variant mb-6 line-clamp-3 leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-base text-on-surface-variant mb-4 sm:mb-6 line-clamp-3 leading-relaxed">
                 {featuredArticle.description}
               </p>
-              <div className="flex items-center justify-between mt-auto pt-6 border-t border-surface-container">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary text-label-md font-bold">AS</div>
+              <div className="flex items-center justify-between mt-auto pt-4 border-t border-surface-container">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-primary text-xs font-bold">
+                    AS
+                  </div>
                   <div>
-                    <p className="text-label-md text-on-surface font-semibold">{featuredArticle.author}</p>
-                    <p className="text-label-sm text-on-surface-variant">{featuredArticle.authorTitle}</p>
+                    <p className="text-xs font-bold text-on-surface">{featuredArticle.author}</p>
+                    <p className="text-[10px] sm:text-xs text-on-surface-variant">{featuredArticle.authorTitle}</p>
                   </div>
                 </div>
                 <button 
                   onClick={() => setSelectedArticle(featuredArticle)}
-                  className="text-label-md text-primary hover:text-surface-tint flex items-center gap-1 group-hover:gap-2 transition-all font-semibold focus:outline-none"
+                  className="text-xs sm:text-sm text-primary hover:text-surface-tint flex items-center gap-1 font-semibold focus:outline-none"
                 >
-                  Baca Selengkapnya <ArrowRight size={14} />
+                  <span>Baca Selengkapnya</span> <ArrowRight size={13} />
                 </button>
               </div>
             </div>
@@ -276,29 +264,46 @@ export default function Artikel() {
 
       {/* Masonry Grid */}
       {filteredArticles.length > 0 ? (
-        <div className="masonry-grid mb-20">
+        <div className="masonry-grid mb-10 sm:mb-16">
           {filteredArticles.map((article, index) => (
-            <article key={article.id} className="masonry-item bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(154,65,83,0.04)] hover:shadow-[0_8px_24px_rgba(154,65,83,0.08)] transition-all group border border-outline-variant/30 flex flex-col">
+            <article
+              key={article.id}
+              className="masonry-item bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(154,65,83,0.04)] hover:shadow-[0_8px_24px_rgba(154,65,83,0.08)] transition-all group border border-outline-variant/30 flex flex-col"
+            >
               {article.hasImage && article.image && (
-                <div className={`relative ${index === 2 ? 'h-64' : 'h-52'} overflow-hidden cursor-pointer`} onClick={() => setSelectedArticle(article)}>
-                  <img className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={article.title} src={article.image} />
+                <div
+                  className={`relative ${index === 2 ? 'h-52 sm:h-64' : 'h-44 sm:h-52'} overflow-hidden cursor-pointer`}
+                  onClick={() => setSelectedArticle(article)}
+                >
+                  <img
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    alt={article.title}
+                    src={article.image}
+                  />
                 </div>
               )}
-              <div className="p-8 flex flex-col flex-grow">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="px-3 py-1 bg-surface-container rounded-md text-label-sm text-secondary font-medium">{article.category}</span>
+              <div className="p-5 sm:p-6 flex flex-col flex-grow">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="px-2.5 py-0.5 bg-surface-container rounded-md text-[11px] text-secondary font-medium">
+                    {article.category}
+                  </span>
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors cursor-pointer" onClick={() => setSelectedArticle(article)}>
+                <h3
+                  className="text-base sm:text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors cursor-pointer"
+                  onClick={() => setSelectedArticle(article)}
+                >
                   {article.title}
                 </h3>
-                <p className="text-body-lg text-on-surface-variant mb-6 line-clamp-3 leading-relaxed">{article.description}</p>
-                <div className="mt-auto pt-4 border-t border-surface-container flex items-center justify-between">
-                  <p className="text-label-sm text-on-surface-variant font-medium">{article.author}</p>
+                <p className="text-xs sm:text-sm text-on-surface-variant mb-4 line-clamp-3 leading-relaxed">
+                  {article.description}
+                </p>
+                <div className="mt-auto pt-3 border-t border-surface-container flex items-center justify-between">
+                  <p className="text-[11px] text-on-surface-variant font-medium">{article.author}</p>
                   <button 
                     onClick={() => setSelectedArticle(article)}
-                    className="text-label-md text-primary flex items-center font-semibold focus:outline-none"
+                    className="text-xs text-primary flex items-center font-semibold focus:outline-none"
                   >
-                    Baca <ChevronRight size={14} className="ml-1" />
+                    <span>Baca</span> <ChevronRight size={13} className="ml-0.5" />
                   </button>
                 </div>
               </div>
@@ -306,34 +311,39 @@ export default function Artikel() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 bg-surface-container-low rounded-xl mb-20">
-          <p className="text-body-lg text-on-surface-variant">Tidak ada artikel di kategori ini untuk saat ini.</p>
+        <div className="text-center py-12 sm:py-16 bg-surface-container-low rounded-2xl mb-10 sm:mb-16">
+          <p className="text-sm text-on-surface-variant">Tidak ada artikel di kategori ini untuk saat ini.</p>
         </div>
       )}
 
-      {/* Newsletter */}
-      <section className="bg-primary-container rounded-xl p-16 md:p-24 flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden">
+      {/* Newsletter Section */}
+      <section className="bg-primary-container rounded-2xl p-6 sm:p-10 md:p-14 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-        <div className="relative z-10 lg:w-1/2">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-on-primary-container mb-4">Dapatkan tips kesehatan mental mingguan.</h2>
-          <p className="text-body-lg md:text-xl text-on-primary-container/80 leading-relaxed">
+        <div className="relative z-10 lg:w-1/2 text-center lg:text-left">
+          <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-on-primary-container mb-2 sm:mb-3">
+            Dapatkan tips kesehatan mental mingguan.
+          </h2>
+          <p className="text-xs sm:text-base text-on-primary-container/80 leading-relaxed">
             Bergabung dengan komunitas kami dan terima artikel pilihan serta panduan merawat diri langsung di kotak masuk Anda.
           </p>
         </div>
         <div className="relative z-10 lg:w-1/2 w-full max-w-md">
-          <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+          <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
             <label className="sr-only" htmlFor="newsletter-email">Alamat Email</label>
             <input
-              className="w-full bg-surface-container-lowest border-none rounded-lg py-4 px-6 text-body-lg text-on-surface focus:ring-2 focus:ring-primary outline-none shadow-sm transition-all"
+              className="w-full bg-white border border-[#f2dede] rounded-xl py-3 px-4 text-xs sm:text-sm text-on-surface focus:ring-2 focus:ring-primary outline-none shadow-sm transition-all"
               id="newsletter-email"
               placeholder="Alamat email Anda"
               type="email"
             />
-            <button className="w-full bg-primary text-on-primary text-body-lg py-4 rounded-lg hover:bg-surface-tint transition-colors shadow-sm font-semibold animate-soft-pulse" type="submit">
+            <button
+              className="w-full bg-primary hover:bg-[#833344] text-on-primary text-xs sm:text-sm py-3 px-6 rounded-xl transition-all shadow-sm font-semibold active:scale-95"
+              type="submit"
+            >
               Berlangganan Sekarang
             </button>
           </form>
-          <p className="text-label-sm text-on-primary-container/70 mt-3 text-center lg:text-left">
+          <p className="text-[11px] text-on-primary-container/70 mt-2 text-center lg:text-left">
             Kami menjaga privasi Anda. Tidak ada spam.
           </p>
         </div>

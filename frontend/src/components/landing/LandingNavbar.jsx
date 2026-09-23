@@ -1,6 +1,5 @@
-import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, LogIn, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export default function LandingNavbar() {
@@ -13,23 +12,26 @@ export default function LandingNavbar() {
   ];
 
   return (
-    <header className="hidden md:flex bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm">
-      <div className="flex justify-between items-center px-8 md:px-16 lg:px-24 py-4 w-full">
-        <Link to="/" className="flex items-center gap-2 text-headline-md font-bold text-primary">
-          <img src="/logo.png" alt="InnerWhisper" className="h-8 w-8 object-contain" />
-          InnerWhisper
+    <header className="bg-white/90 backdrop-blur-md fixed top-0 left-0 right-0 w-full z-50 border-b border-[#f2dede]/70 shadow-sm transition-all">
+      <div className="flex justify-between items-center px-4 sm:px-8 md:px-16 lg:px-24 py-3 md:py-4 w-full">
+        {/* Brand Logo */}
+        <Link to="/" className="flex items-center gap-2.5 text-lg md:text-2xl font-bold text-primary tracking-tight">
+          <img src="/logo.png" alt="InnerWhisper" className="h-7 w-7 md:h-8 md:w-8 object-contain" />
+          <span>InnerWhisper</span>
         </Link>
-        <nav className="flex items-center gap-gutter">
+
+        {/* Desktop Nav Items */}
+        <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === '/'}
               className={({ isActive }) =>
-                `text-label-md transition-colors ${
+                `text-sm transition-colors py-1 ${
                   isActive
-                    ? 'text-primary font-bold border-b-2 border-primary pb-1'
-                    : 'text-on-surface-variant hover:text-primary'
+                    ? 'text-primary font-bold border-b-2 border-primary'
+                    : 'text-on-surface-variant hover:text-primary font-medium'
                 }`
               }
             >
@@ -37,30 +39,36 @@ export default function LandingNavbar() {
             </NavLink>
           ))}
         </nav>
-        <div className="flex items-center gap-4">
+
+        {/* Desktop & Mobile Actions */}
+        <div className="flex items-center gap-2 sm:gap-4">
           {user ? (
             <Link
               to="/dashboard"
-              className="text-label-md text-primary font-semibold hover:text-surface-tint border border-outline-variant/60 hover:bg-surface-container px-4 py-2 rounded-lg transition-all"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-primary font-semibold border border-primary/30 bg-primary/5 hover:bg-primary/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all"
             >
-              Dashboard
+              <LayoutDashboard size={15} />
+              <span>Dashboard</span>
             </Link>
           ) : (
             <Link
               to="/login"
-              className="text-label-md text-primary font-semibold hover:text-surface-tint border border-outline-variant/60 hover:bg-surface-container px-4 py-2 rounded-lg transition-all"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-primary font-semibold border border-primary/30 bg-primary/5 hover:bg-primary/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all"
             >
-              Masuk
+              <LogIn size={15} />
+              <span>Masuk</span>
             </Link>
           )}
+
+          {/* Desktop WhatsApp Action */}
           <a
             href="https://wa.me/6281234567890"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-primary text-on-primary text-label-md px-4 py-2 rounded-lg hover:opacity-90 transition-opacity shadow-sm"
+            className="hidden md:inline-flex items-center gap-2 bg-primary text-on-primary text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity shadow-sm"
           >
             <MessageCircle size={16} />
-            Chat di WhatsApp
+            <span>Chat di WhatsApp</span>
           </a>
         </div>
       </div>

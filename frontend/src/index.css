@@ -61,3 +61,17 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #c4acae;
 }
+
+/* Mobile Safe Area & PWA Utilities */
+.pb-safe {
+  padding-bottom: max(8px, env(safe-area-inset-bottom, 8px));
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
