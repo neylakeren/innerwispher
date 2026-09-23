@@ -152,6 +152,11 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificates configured automatically by Certbot for `innerwhisper.my.id` and `www.innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **September 23, 2026 (Part 3):** Production Deployment to VPS `bleber`.
+  - Re-compiled production React build with PWA assets and Workbox Service Worker.
+  - Uploaded and deployed build to `/var/www/innerwhisper/frontend-dist/` with correct `www-data:www-data` permissions.
+  - Updated Nginx virtual host configuration (`innerwhisper.my.id`) with custom location blocks for `/sw.js` (`no-cache, no-store`), `/manifest.webmanifest` (`application/manifest+json`), and `/index.html`.
+  - Reloaded Nginx and verified live HTTP response headers over HTTPS (200 OK on manifest, sw, and pwa icons).
 - **September 23, 2026 (Part 2):** Progressive Web App (PWA) transformation.
   - Installed and configured `vite-plugin-pwa` with automatic service worker registration and Workbox runtime caching (fonts & static assets).
   - Generated PWA icon suite: `pwa-192x192.png`, `pwa-512x512.png`, `pwa-maskable-512x512.png`, and `apple-touch-icon.png`.
