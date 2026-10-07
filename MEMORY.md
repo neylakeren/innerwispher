@@ -152,6 +152,17 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **October 7, 2026 (Part 4):** Git Commit, Push, & VPS Production Deployment.
+  - **Git Repository & Remote Synchronization:**
+    - Staged all 37 modified and new files (visual overhaul, career modules, auth pages, context state, and design references).
+    - Committed changes locally with message: `feat: redesign visual theme to Inner Whisper lavender palette, add career modules, and overhaul landing & dashboard` (Commit: `188d795`).
+    - Successfully pushed `main` branch to remote repository `https://github.com/neylakeren/innerwispher.git`.
+  - **Production Build & Deployment to VPS bleber:**
+    - Re-compiled production React build locally via `npm run build` with PWA assets and Workbox Service Worker (CSS: `index-DXGAXmMD.css`, JS: `index-DCnQMIVv.js`).
+    - Packaged `dist/` into `frontend-dist.zip`, transferred via SCP to `vps-bleber:/tmp/`, and unzipped directly into `/var/www/innerwhisper/frontend-dist`.
+    - Cleaned up obsolete asset chunks, verified ownership permissions (`www-data:www-data`), and verified Nginx configuration syntax.
+    - Reloaded Nginx (`systemctl reload nginx`) on VPS `bleber`.
+    - Tested live endpoint `https://innerwhisper.my.id/` and production CSS asset `https://innerwhisper.my.id/assets/index-DXGAXmMD.css` returning `HTTP/1.1 200 OK`.
 - **October 7, 2026 (Part 3):** Landing Page Pink Purge & Lavender Palette Alignment.
   - **Identified Root Causes of Pink Appearance:**
     - Hardcoded pink salmon hex values (`#9a4153`, `#833344`, `#f2dede`) remained in landing components ([LandingNavbar.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/LandingNavbar.jsx), [LandingLayout.jsx](file:///D:/Coding/neyla/frontend/src/layouts/LandingLayout.jsx), [BottomNavBar.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/BottomNavBar.jsx), [WhatsAppFAB.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/WhatsAppFAB.jsx), [PWAInstallBanner.jsx](file:///D:/Coding/neyla/frontend/src/components/PWAInstallBanner.jsx), [Beranda.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Beranda.jsx), [Layanan.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Layanan.jsx), [TentangKami.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/TentangKami.jsx), and [Artikel.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Artikel.jsx)).
