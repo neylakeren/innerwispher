@@ -100,7 +100,7 @@ export default function Artikel() {
         {/* Back Button */}
         <button
           onClick={() => setSelectedArticle(null)}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm text-primary font-semibold hover:text-[#833344] mb-6 sm:mb-8 transition-colors focus:outline-none"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm text-[#4b3b86] font-bold hover:text-[#8f78d8] mb-6 sm:mb-8 transition-colors focus:outline-none"
         >
           <ArrowLeft size={16} /> <span>Kembali ke Daftar Artikel</span>
         </button>
@@ -108,45 +108,45 @@ export default function Artikel() {
         {/* Article Container */}
         <div className="max-w-4xl mx-auto flex flex-col gap-4 sm:gap-6 w-full">
           <div className="flex items-center gap-2 sm:gap-3">
-            <span className="px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-xs font-semibold">
+            <span className="px-3 py-1 bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] rounded-full text-xs font-semibold">
               {selectedArticle.category}
             </span>
-            <span className="text-xs text-on-surface-variant font-medium">
+            <span className="text-xs text-[#5d5577] font-medium">
               {selectedArticle.readTime}
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-on-surface leading-tight tracking-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-[#2b2542] leading-tight tracking-tight">
             {selectedArticle.title}
           </h1>
 
-          <div className="flex items-center gap-3 py-3 sm:py-4 border-y border-outline-variant/30 my-1 sm:my-2">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm sm:text-base">
+          <div className="flex items-center gap-3 py-3 sm:py-4 border-y border-[#d9cff5]/60 my-1 sm:my-2">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] flex items-center justify-center font-bold text-sm sm:text-base">
               {selectedArticle.author.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
             </div>
             <div>
-              <p className="text-xs sm:text-sm font-bold text-on-surface">{selectedArticle.author}</p>
-              <p className="text-[11px] sm:text-xs text-on-surface-variant">{selectedArticle.authorTitle}</p>
+              <p className="text-xs sm:text-sm font-bold text-[#2b2542]">{selectedArticle.author}</p>
+              <p className="text-[11px] sm:text-xs text-[#5d5577]">{selectedArticle.authorTitle}</p>
             </div>
           </div>
 
           {selectedArticle.hasImage && selectedArticle.image && (
-            <div className="w-full h-[200px] sm:h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-sm my-2 sm:my-4">
+            <div className="w-full h-[200px] sm:h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-sm my-2 sm:my-4 border border-[#d9cff5]/50">
               <img className="w-full h-full object-cover" src={selectedArticle.image} alt={selectedArticle.title} />
             </div>
           )}
 
-          <div className="flex flex-col gap-4 sm:gap-6 text-sm sm:text-base md:text-lg text-on-surface-variant leading-relaxed mt-4 sm:mt-6">
+          <div className="flex flex-col gap-4 sm:gap-6 text-sm sm:text-base md:text-lg text-[#2b2542] leading-relaxed mt-4 sm:mt-6">
             {selectedArticle.content.map((item, idx) => {
               if (item.type === 'paragraph') {
-                return <p key={idx} className="text-justify">{item.text}</p>;
+                return <p key={idx} className="text-justify leading-relaxed">{item.text}</p>;
               }
               if (item.type === 'subheading') {
-                return <h3 key={idx} className="text-lg sm:text-2xl font-bold text-on-surface mt-4 sm:mt-6 mb-1 sm:mb-2">{item.text}</h3>;
+                return <h3 key={idx} className="text-lg sm:text-2xl font-bold text-[#4b3b86] mt-4 sm:mt-6 mb-1 sm:mb-2">{item.text}</h3>;
               }
               if (item.type === 'quote') {
                 return (
-                  <blockquote key={idx} className="border-l-4 border-primary bg-primary-container/10 px-4 sm:px-6 py-3 sm:py-4 rounded-r-xl my-3 italic text-on-primary-container font-medium text-xs sm:text-base">
+                  <blockquote key={idx} className="border-l-4 border-[#8f78d8] bg-[#efeafb]/70 px-4 sm:px-6 py-3 sm:py-4 rounded-r-xl my-3 italic text-[#4b3b86] font-medium text-xs sm:text-base">
                     {item.text}
                   </blockquote>
                 );
@@ -156,18 +156,18 @@ export default function Artikel() {
           </div>
 
           {/* Call to Action to WhatsApp Counseling */}
-          <div className="mt-10 sm:mt-16 bg-surface-container-low rounded-2xl p-6 sm:p-10 md:p-12 border border-outline-variant/30 text-center flex flex-col items-center gap-4 sm:gap-6">
-            <h3 className="text-lg sm:text-2xl font-bold text-on-surface">
+          <div className="mt-10 sm:mt-16 bg-white/90 rounded-2xl p-6 sm:p-10 md:p-12 border border-[#d9cff5] shadow-card text-center flex flex-col items-center gap-4 sm:gap-6">
+            <h3 className="text-lg sm:text-2xl font-bold text-[#4b3b86]">
               Butuh tempat bercerita tentang masalah serupa?
             </h3>
-            <p className="text-xs sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
-              Jangan menanggung beban Anda sendiri. Tim psikolog kami di InnerWhisper siap membantu dan mendengarkan keluh kesah Anda secara empatik tanpa menghakimi.
+            <p className="text-xs sm:text-base text-[#5d5577] max-w-2xl leading-relaxed">
+              Jangan menanggung beban Anda sendiri. Tim psikolog kami di Inner Whisper siap membantu dan mendengarkan keluh kesah Anda secara empatik tanpa menghakimi.
             </p>
             <a
               href="https://wa.me/6281234567890"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto bg-primary hover:bg-[#833344] text-on-primary text-xs sm:text-base px-6 sm:px-8 py-3.5 rounded-xl shadow-md transition-all font-semibold inline-flex items-center justify-center gap-2 active:scale-95"
+              className="w-full sm:w-auto btn-lv text-xs sm:text-base px-6 sm:px-8 py-3.5 rounded-xl shadow-btn transition-all font-semibold inline-flex items-center justify-center gap-2 active:scale-95 text-white"
             >
               <span>Konsultasikan Sekarang via WA</span>
             </a>
@@ -178,14 +178,14 @@ export default function Artikel() {
   }
 
   return (
-    <div className="pt-20 md:pt-[130px] pb-28 md:pb-24 px-4 sm:px-8 md:px-16 lg:px-24 w-full">
+    <div className="pt-20 md:pt-[130px] pb-28 md:pb-24 px-4 sm:px-8 md:px-16 lg:px-24 w-full font-quicksand">
       {/* Header */}
       <div className="mb-6 sm:mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-2 sm:mb-4">
-            Artikel &amp; Edukasi
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#4b3b86] mb-2 sm:mb-4 tracking-tight">
+            Artikel &amp; <span className="bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] bg-clip-text text-transparent">Edukasi</span>
           </h1>
-          <p className="text-xs sm:text-base md:text-xl text-on-surface-variant max-w-4xl leading-relaxed">
+          <p className="text-xs sm:text-base md:text-xl text-[#5d5577] max-w-4xl leading-relaxed">
             Temukan wawasan, tips praktis, dan panduan untuk merawat kesehatan mental Anda setiap hari.
           </p>
         </div>
@@ -202,8 +202,8 @@ export default function Artikel() {
             }}
             className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shadow-sm focus:outline-none flex-shrink-0 ${
               activeCategory === cat
-                ? 'bg-[#9a4153] text-white shadow-[#9a4153]/20'
-                : 'bg-surface-container text-on-surface border border-outline-variant hover:bg-surface-container-highest'
+                ? 'bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] text-white shadow-btn'
+                : 'bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] hover:bg-[#e4daf7]'
             }`}
           >
             {cat}
@@ -214,47 +214,47 @@ export default function Artikel() {
       {/* Featured Article */}
       {activeCategory === 'Semua Topik' && (
         <section className="mb-8 sm:mb-14">
-          <div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col md:flex-row border border-outline-variant/30">
+          <div className="bg-white/90 backdrop-blur rounded-2xl overflow-hidden shadow-card hover:shadow-lg transition-all group flex flex-col md:flex-row border border-[#d9cff5]">
             <div className="md:w-1/2 relative overflow-hidden h-48 sm:h-64 md:h-auto">
               <img
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Seseorang sedang menulis jurnal di ruangan yang tenang"
                 src={featuredArticle.image}
               />
-              <div className="absolute top-3 left-3 bg-surface/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] text-primary font-semibold shadow-sm">
+              <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-xs text-[#4b3b86] font-bold shadow-sm border border-[#d9cff5]/60">
                 Artikel Pilihan
               </div>
             </div>
             <div className="md:w-1/2 p-5 sm:p-8 md:p-12 flex flex-col justify-center">
               <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                <span className="text-xs text-secondary font-semibold">{featuredArticle.category}</span>
-                <span className="w-1 h-1 rounded-full bg-outline" />
-                <span className="text-xs text-on-surface-variant font-medium">{featuredArticle.readTime}</span>
+                <span className="text-xs text-[#8f78d8] font-bold">{featuredArticle.category}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8f78d8]" />
+                <span className="text-xs text-[#5d5577] font-medium">{featuredArticle.readTime}</span>
               </div>
               <h2
-                className="text-lg sm:text-2xl font-bold text-on-surface mb-2 sm:mb-3 group-hover:text-primary transition-colors cursor-pointer"
+                className="text-lg sm:text-2xl font-bold text-[#2b2542] mb-2 sm:mb-3 group-hover:text-[#4b3b86] transition-colors cursor-pointer"
                 onClick={() => setSelectedArticle(featuredArticle)}
               >
                 {featuredArticle.title}
               </h2>
-              <p className="text-xs sm:text-sm md:text-base text-on-surface-variant mb-4 sm:mb-6 line-clamp-3 leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-base text-[#5d5577] mb-4 sm:mb-6 line-clamp-3 leading-relaxed">
                 {featuredArticle.description}
               </p>
-              <div className="flex items-center justify-between mt-auto pt-4 border-t border-surface-container">
+              <div className="flex items-center justify-between mt-auto pt-4 border-t border-[#d9cff5]/60">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-primary text-xs font-bold">
+                  <div className="w-8 h-8 rounded-full bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] flex items-center justify-center text-xs font-bold">
                     AS
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-on-surface">{featuredArticle.author}</p>
-                    <p className="text-[10px] sm:text-xs text-on-surface-variant">{featuredArticle.authorTitle}</p>
+                    <p className="text-xs font-bold text-[#2b2542]">{featuredArticle.author}</p>
+                    <p className="text-[10px] sm:text-xs text-[#5d5577]">{featuredArticle.authorTitle}</p>
                   </div>
                 </div>
                 <button 
                   onClick={() => setSelectedArticle(featuredArticle)}
-                  className="text-xs sm:text-sm text-primary hover:text-surface-tint flex items-center gap-1 font-semibold focus:outline-none"
+                  className="text-xs sm:text-sm text-[#4b3b86] hover:text-[#8f78d8] flex items-center gap-1.5 font-bold focus:outline-none transition-colors"
                 >
-                  <span>Baca Selengkapnya</span> <ArrowRight size={13} />
+                  <span>Baca Selengkapnya</span> <ArrowRight size={14} />
                 </button>
               </div>
             </div>
@@ -268,7 +268,7 @@ export default function Artikel() {
           {filteredArticles.map((article, index) => (
             <article
               key={article.id}
-              className="masonry-item bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(154,65,83,0.04)] hover:shadow-[0_8px_24px_rgba(154,65,83,0.08)] transition-all group border border-outline-variant/30 flex flex-col"
+              className="masonry-item card-s overflow-hidden hover:-translate-y-1 transition-all group flex flex-col border border-[#d9cff5]"
             >
               {article.hasImage && article.image && (
                 <div
@@ -284,26 +284,26 @@ export default function Artikel() {
               )}
               <div className="p-5 sm:p-6 flex flex-col flex-grow">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="px-2.5 py-0.5 bg-surface-container rounded-md text-[11px] text-secondary font-medium">
+                  <span className="px-2.5 py-0.5 bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5]/60 rounded-md text-[11px] font-semibold">
                     {article.category}
                   </span>
                 </div>
                 <h3
-                  className="text-base sm:text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors cursor-pointer"
+                  className="text-base sm:text-xl font-bold text-[#2b2542] mb-2 group-hover:text-[#4b3b86] transition-colors cursor-pointer"
                   onClick={() => setSelectedArticle(article)}
                 >
                   {article.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-on-surface-variant mb-4 line-clamp-3 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#5d5577] mb-4 line-clamp-3 leading-relaxed">
                   {article.description}
                 </p>
-                <div className="mt-auto pt-3 border-t border-surface-container flex items-center justify-between">
-                  <p className="text-[11px] text-on-surface-variant font-medium">{article.author}</p>
+                <div className="mt-auto pt-3 border-t border-[#d9cff5]/60 flex items-center justify-between">
+                  <p className="text-[11px] text-[#5d5577] font-medium">{article.author}</p>
                   <button 
                     onClick={() => setSelectedArticle(article)}
-                    className="text-xs text-primary flex items-center font-semibold focus:outline-none"
+                    className="text-xs text-[#4b3b86] hover:text-[#8f78d8] flex items-center font-bold focus:outline-none transition-colors"
                   >
-                    <span>Baca</span> <ChevronRight size={13} className="ml-0.5" />
+                    <span>Baca</span> <ChevronRight size={14} className="ml-0.5" />
                   </button>
                 </div>
               </div>
@@ -311,19 +311,19 @@ export default function Artikel() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-12 sm:py-16 bg-surface-container-low rounded-2xl mb-10 sm:mb-16">
-          <p className="text-sm text-on-surface-variant">Tidak ada artikel di kategori ini untuk saat ini.</p>
+        <div className="text-center py-12 sm:py-16 bg-[#efeafb]/50 border border-[#d9cff5] rounded-2xl mb-10 sm:mb-16">
+          <p className="text-sm text-[#5d5577]">Tidak ada artikel di kategori ini untuk saat ini.</p>
         </div>
       )}
 
       {/* Newsletter Section */}
-      <section className="bg-primary-container rounded-2xl p-6 sm:p-10 md:p-14 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+      <section className="card-s bg-gradient-to-r from-white to-[#efeafb]/70 rounded-2xl p-6 sm:p-10 md:p-14 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 relative overflow-hidden border border-[#d9cff5]">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#8f78d8]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
         <div className="relative z-10 lg:w-1/2 text-center lg:text-left">
-          <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-on-primary-container mb-2 sm:mb-3">
+          <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-[#4b3b86] mb-2 sm:mb-3">
             Dapatkan tips kesehatan mental mingguan.
           </h2>
-          <p className="text-xs sm:text-base text-on-primary-container/80 leading-relaxed">
+          <p className="text-xs sm:text-base text-[#5d5577] leading-relaxed">
             Bergabung dengan komunitas kami dan terima artikel pilihan serta panduan merawat diri langsung di kotak masuk Anda.
           </p>
         </div>
@@ -331,19 +331,19 @@ export default function Artikel() {
           <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
             <label className="sr-only" htmlFor="newsletter-email">Alamat Email</label>
             <input
-              className="w-full bg-white border border-[#f2dede] rounded-xl py-3 px-4 text-xs sm:text-sm text-on-surface focus:ring-2 focus:ring-primary outline-none shadow-sm transition-all"
+              className="w-full bg-white border border-[#d9cff5] rounded-xl py-3 px-4 text-xs sm:text-sm text-[#2b2542] focus:ring-2 focus:ring-[#8f78d8]/30 outline-none shadow-sm transition-all"
               id="newsletter-email"
               placeholder="Alamat email Anda"
               type="email"
             />
             <button
-              className="w-full bg-primary hover:bg-[#833344] text-on-primary text-xs sm:text-sm py-3 px-6 rounded-xl transition-all shadow-sm font-semibold active:scale-95"
+              className="w-full btn-lv text-xs sm:text-sm py-3 px-6 rounded-xl transition-all shadow-btn font-semibold active:scale-95 text-white"
               type="submit"
             >
               Berlangganan Sekarang
             </button>
           </form>
-          <p className="text-[11px] text-on-primary-container/70 mt-2 text-center lg:text-left">
+          <p className="text-[11px] text-[#5d5577] mt-2 text-center lg:text-left">
             Kami menjaga privasi Anda. Tidak ada spam.
           </p>
         </div>

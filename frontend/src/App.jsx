@@ -1,10 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { CareerProvider } from './context/CareerContext';
 import DashboardLayout from './layouts/DashboardLayout';
 import LandingLayout from './layouts/LandingLayout';
+
+// Auth Pages
 import Login from './pages/Login';
 import Register from './pages/Register';
+
+// Dashboard Views
 import Dashboard from './pages/Dashboard';
 import PsychologistDashboard from './pages/PsychologistDashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -14,6 +19,17 @@ import AdminPsychologistList from './pages/AdminPsychologistList';
 import AdminPatientList from './pages/AdminPatientList';
 import PsychologistDiscovery from './pages/PsychologistDiscovery';
 import SessionNotes from './pages/SessionNotes';
+
+// Inner Whisper Feature Pages
+import CareerTest from './pages/CareerTest';
+import CareerExplorer from './pages/CareerExplorer';
+import CareerRoadmap from './pages/CareerRoadmap';
+import CareerCvInterview from './pages/CareerCvInterview';
+import CareerPortfolio from './pages/CareerPortfolio';
+import CareerLearning from './pages/CareerLearning';
+import CareerZodiac from './pages/CareerZodiac';
+import CareerArticles from './pages/CareerArticles';
+import UserProfile from './pages/UserProfile';
 
 // Landing Pages
 import Beranda from './pages/landing/Beranda';
@@ -26,8 +42,14 @@ import PWAInstallBanner from './components/PWAInstallBanner';
 
 const ProtectedRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    if (loading) return <div>Loading...</div>;
-    if (!user) return <Navigate to="/login" />;
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-[#f7f4fd] flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-[#8f78d8] animate-ping opacity-75" />
+            </div>
+        );
+    }
+    if (!user) return <Navigate to="/login" replace />;
     return <DashboardLayout>{children}</DashboardLayout>;
 };
 
@@ -60,28 +82,84 @@ function AppRoutes() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
-            {/* Dashboard (Protected) */}
+            {/* Core Dashboard Router (Protected) */}
             <Route path="/dashboard" element={
                 <ProtectedRoute>
                     <HomeRouter />
                 </ProtectedRoute>
             } />
             
+            {/* Inner Whisper Features */}
+            <Route path="/tes" element={
+                <ProtectedRoute>
+                    <CareerTest />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/jelajah" element={
+                <ProtectedRoute>
+                    <CareerExplorer />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/roadmap" element={
+                <ProtectedRoute>
+                    <CareerRoadmap />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/cv-interview" element={
+                <ProtectedRoute>
+                    <CareerCvInterview />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/portofolio" element={
+                <ProtectedRoute>
+                    <CareerPortfolio />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/belajar" element={
+                <ProtectedRoute>
+                    <CareerLearning />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/zodiak" element={
+                <ProtectedRoute>
+                    <CareerZodiac />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/artikel-tips" element={
+                <ProtectedRoute>
+                    <CareerArticles />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/profil" element={
+                <ProtectedRoute>
+                    <UserProfile />
+                </ProtectedRoute>
+            } />
+
+            {/* Counseling & Healthcare Management */}
             <Route path="/bookings" element={
                 <ProtectedRoute>
                     <BookingList />
                 </ProtectedRoute>
             } />
 
-            <Route path="/notes" element={
-                <ProtectedRoute>
-                    <SessionNotes />
-                </ProtectedRoute>
-            } />
-
             <Route path="/psychologists" element={
                 <ProtectedRoute>
                     <PsychologistDiscovery />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/notes" element={
+                <ProtectedRoute>
+                    <SessionNotes />
                 </ProtectedRoute>
             } />
 
@@ -102,6 +180,9 @@ function AppRoutes() {
                     <ChatRoom />
                 </ProtectedRoute>
             } />
+
+            {/* Fallback to Dashboard */}
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
     );
 }
@@ -109,10 +190,12 @@ function AppRoutes() {
 function App() {
     return (
         <AuthProvider>
-            <Router>
-                <AppRoutes />
-                <PWAInstallBanner />
-            </Router>
+            <CareerProvider>
+                <Router>
+                    <AppRoutes />
+                    <PWAInstallBanner />
+                </Router>
+            </CareerProvider>
         </AuthProvider>
     );
 }

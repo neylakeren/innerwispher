@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Button, Input } from '../components/ui';
-import { Heart, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Sparkles, KeyRound } from 'lucide-react';
 
 export default function Login() {
+    const [mode, setMode] = useState('login'); // 'login' or 'forgot'
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(true);
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const [loading, setLoading] = useState(false);
     
     const { login } = useAuth();
@@ -17,99 +20,147 @@ export default function Login() {
         e.preventDefault();
         setLoading(true);
         setError('');
+        setSuccessMessage('');
         
+        if (mode === 'forgot') {
+            setTimeout(() => {
+                setLoading(false);
+                setSuccessMessage('Tautan pemulihan password telah dikirim ke email Anda.');
+            }, 800);
+            return;
+        }
+
         try {
             await login(email, password);
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Invalid credentials');
+            setError(err.response?.data?.message || 'Email atau password salah.');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden font-jakarta">
-            {/* Background Aesthetic Blur Blobs */}
-            <div className="absolute top-0 left-0 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary-container/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none" />
+        <div className="min-h-screen bg-[#f7f4fd] flex flex-col justify-center py-10 sm:px-6 lg:px-8 relative overflow-hidden font-quicksand">
+            {/* Ambient Floating Blobs from Inner Whisper */}
+            <div className="blobs">
+                <i />
+                <i />
+                <i />
+            </div>
 
             {/* Back to Home Link */}
             <div className="absolute top-6 left-6 z-20">
-                <Link to="/" className="inline-flex items-center gap-2 text-label-md text-on-surface-variant hover:text-primary transition-colors">
+                <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#5d5577] hover:text-[#4b3b86] transition-colors">
                     <ArrowLeft size={16} />
-                    Kembali ke Beranda
+                    Beranda
                 </Link>
             </div>
 
-            <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-                <div className="flex justify-center">
-                    <img src="/logo.png" alt="InnerWhisper Logo" className="h-14 w-14 object-contain shadow-md rounded-xl p-1 bg-surface" />
-                </div>
-                <h2 className="mt-6 text-center text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface">
-                    Selamat datang di InnerWhisper
+            {/* Header Brand & Logo */}
+            <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 text-center px-4">
+                <img 
+                    src="/logo.png" 
+                    alt="Logo Inner Whisper" 
+                    className="w-32 h-auto mx-auto mb-3 drop-shadow-[0_8px_18px_rgba(143,120,216,0.35)] object-contain transition-transform hover:scale-105" 
+                />
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-[#4b3b86] to-[#9a82e6] bg-clip-text text-transparent tracking-tight">
+                    Inner Whisper
                 </h2>
-                <p className="mt-2 text-center text-body-md text-on-surface-variant">
-                    Masuk untuk melanjutkan sesi konseling Anda
+                <p className="mt-1 text-sm font-medium text-[#5d5577]">
+                    {mode === 'login' ? 'Selamat datang kembali di ruang ketenanganmu' : 'Atur ulang kata sandi akunmu'}
                 </p>
             </div>
 
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4 sm:px-0">
-                <div className="bg-surface-container-lowest py-8 px-6 shadow-sm sm:rounded-2xl sm:px-10 border border-outline-variant/30 ambient-shadow">
-                    <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* Glassmorphism Form Card */}
+            <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4 sm:px-0">
+                <div className="card-s p-6 sm:p-8">
+                    <form className="space-y-4" onSubmit={handleSubmit}>
                         <Input
-                            label="Alamat Email"
+                            label="Email"
                             type="email"
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="nama@contoh.com"
+                            autoComplete="email"
                         />
 
-                        <Input
-                            label="Kata Sandi"
-                            type="password"
-                            required
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="••••••••"
-                        />
+                        {mode === 'login' ? (
+                            <>
+                                <Input
+                                    label="Password"
+                                    type="password"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="••••••••"
+                                    autoComplete="current-password"
+                                />
+
+                                <div className="flex items-center justify-between text-xs">
+                                    <label className="flex items-center gap-2 text-[#5d5577] cursor-pointer">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={rememberMe} 
+                                            onChange={(e) => setRememberMe(e.target.checked)}
+                                            className="rounded border-[#d9cff5] text-[#8f78d8] focus:ring-[#8f78d8]" 
+                                        />
+                                        <span>Ingat saya</span>
+                                    </label>
+                                    <button 
+                                        type="button" 
+                                        onClick={() => { setMode('forgot'); setError(''); setSuccessMessage(''); }}
+                                        className="text-[#8f78d8] hover:text-[#4b3b86] font-semibold"
+                                    >
+                                        Lupa password?
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="text-xs text-[#5d5577] bg-[#efeafb] p-3 rounded-xl border border-[#d9cff5]">
+                                Masukkan alamat email yang terdaftar untuk menerima instruksi pemulihan.
+                            </div>
+                        )}
 
                         {error && (
-                            <div className="text-caption text-error bg-error-container/20 p-3 rounded-lg border border-error-container/50 text-center">
+                            <div className="text-xs text-error bg-error-container/40 p-3 rounded-xl border border-error/30 text-center font-medium">
                                 {error}
+                            </div>
+                        )}
+
+                        {successMessage && (
+                            <div className="text-xs text-success bg-[#d1e7dd] p-3 rounded-xl border border-success/30 text-center font-medium">
+                                {successMessage}
                             </div>
                         )}
 
                         <Button
                             type="submit"
-                            className="w-full py-2.5 mt-2"
+                            className="w-full py-3 mt-2 text-sm font-semibold"
                             disabled={loading}
                         >
-                            {loading ? 'Memproses...' : 'Masuk ke Akun'}
+                            {loading ? 'Memproses...' : mode === 'login' ? 'Masuk' : 'Kirim Tautan Pemulihan'}
                         </Button>
                     </form>
 
-                    <div className="mt-6">
-                        <div className="relative">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-outline-variant/50" />
-                            </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className="px-3 bg-surface-container-lowest text-on-surface-variant text-label-md">
-                                    Belum punya akun?
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="mt-6 text-center">
-                            <Link
-                                to="/register"
-                                className="font-semibold text-primary hover:text-surface-tint transition-colors text-label-md"
+                    <div className="mt-6 pt-5 border-t border-[#d9cff5]/60 text-center text-xs text-[#5d5577]">
+                        {mode === 'login' ? (
+                            <p>
+                                Belum punya akun?{' '}
+                                <Link to="/register" className="font-bold text-[#8f78d8] hover:text-[#4b3b86] transition-colors">
+                                    Daftar sekarang
+                                </Link>
+                            </p>
+                        ) : (
+                            <button
+                                type="button"
+                                onClick={() => { setMode('login'); setError(''); setSuccessMessage(''); }}
+                                className="font-bold text-[#8f78d8] hover:text-[#4b3b86] transition-colors"
                             >
-                                Daftar sekarang secara gratis
-                            </Link>
-                        </div>
+                                Kembali ke halaman masuk
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

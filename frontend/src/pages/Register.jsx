@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Button, Input } from '../components/ui';
-import { Heart, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import { ZODIACS } from '../data/careerData';
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function Register() {
         phone: '',
         password: '',
         password_confirmation: '',
+        zodiac: 'Aries',
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -29,50 +31,62 @@ export default function Register() {
         
         try {
             await register(formData);
+            // Save zodiac to user career state
+            try {
+                localStorage.setItem('iw_last_zodiac', formData.zodiac);
+            } catch {}
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Registrasi gagal. Silakan coba lagi.');
+            setError(err.response?.data?.message || 'Registrasi gagal. Pastikan data terisi dengan benar.');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden font-jakarta">
-            {/* Background Aesthetic Blur Blobs */}
-            <div className="absolute top-0 left-0 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary-container/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none" />
+        <div className="min-h-screen bg-[#f7f4fd] flex flex-col justify-center py-10 sm:px-6 lg:px-8 relative overflow-hidden font-quicksand">
+            {/* Ambient Floating Blobs */}
+            <div className="blobs">
+                <i />
+                <i />
+                <i />
+            </div>
 
             {/* Back to Home Link */}
             <div className="absolute top-6 left-6 z-20">
-                <Link to="/" className="inline-flex items-center gap-2 text-label-md text-on-surface-variant hover:text-primary transition-colors">
+                <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#5d5577] hover:text-[#4b3b86] transition-colors">
                     <ArrowLeft size={16} />
-                    Kembali ke Beranda
+                    Beranda
                 </Link>
             </div>
 
-            <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-                <div className="flex justify-center">
-                    <img src="/logo.png" alt="InnerWhisper Logo" className="h-14 w-14 object-contain shadow-md rounded-xl p-1 bg-surface" />
-                </div>
-                <h2 className="mt-6 text-center text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface">
-                    Daftar Akun Baru
+            {/* Header Brand & Logo */}
+            <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 text-center px-4">
+                <img 
+                    src="/logo.png" 
+                    alt="Logo Inner Whisper" 
+                    className="w-28 h-auto mx-auto mb-2 drop-shadow-[0_8px_18px_rgba(143,120,216,0.35)] object-contain transition-transform hover:scale-105" 
+                />
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-[#4b3b86] to-[#9a82e6] bg-clip-text text-transparent tracking-tight">
+                    Inner Whisper
                 </h2>
-                <p className="mt-2 text-center text-body-md text-on-surface-variant">
-                    Bergabunglah dengan InnerWhisper untuk mendapatkan layanan konseling terbaik
+                <p className="mt-1 text-sm font-medium text-[#5d5577]">
+                    Buat akunmu untuk memulai pemetaan karier & konseling
                 </p>
             </div>
 
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4 sm:px-0">
-                <div className="bg-surface-container-lowest py-8 px-6 shadow-sm sm:rounded-2xl sm:px-10 border border-outline-variant/30 ambient-shadow">
-                    <form className="space-y-4" onSubmit={handleSubmit}>
+            {/* Glassmorphism Form Card */}
+            <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4 sm:px-0">
+                <div className="card-s p-6 sm:p-8">
+                    <form className="space-y-3.5" onSubmit={handleSubmit}>
                         <Input
                             label="Nama Lengkap"
                             name="name"
                             required
                             value={formData.name}
                             onChange={handleChange}
-                            placeholder="John Doe"
+                            placeholder="Nama panggilan atau lengkap"
+                            autoComplete="name"
                         />
 
                         <Input
@@ -83,6 +97,7 @@ export default function Register() {
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="nama@contoh.com"
+                            autoComplete="email"
                         />
 
                         <Input
@@ -92,16 +107,36 @@ export default function Register() {
                             value={formData.phone}
                             onChange={handleChange}
                             placeholder="081234567890"
+                            autoComplete="tel"
                         />
 
+                        <div className="space-y-1.5 w-full">
+                            <label className="text-sm font-semibold text-[#2b2542] block">
+                                Zodiak
+                            </label>
+                            <select
+                                name="zodiac"
+                                value={formData.zodiac}
+                                onChange={handleChange}
+                                className="flex h-11 w-full rounded-xl border border-[#d9cff5] bg-white/90 px-3.5 py-2 text-sm text-[#2b2542] focus:outline-none focus:border-[#8f78d8] focus:ring-2 focus:ring-[#8f78d8]/25 transition-all shadow-sm"
+                            >
+                                {ZODIACS.map((z) => (
+                                    <option key={z.name} value={z.name}>
+                                        {z.name} ({z.date})
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
                         <Input
-                            label="Kata Sandi"
+                            label="Kata Sandi (min. 8 karakter)"
                             name="password"
                             type="password"
                             required
                             value={formData.password}
                             onChange={handleChange}
                             placeholder="••••••••"
+                            autoComplete="new-password"
                         />
 
                         <Input
@@ -112,31 +147,29 @@ export default function Register() {
                             value={formData.password_confirmation}
                             onChange={handleChange}
                             placeholder="••••••••"
+                            autoComplete="new-password"
                         />
 
                         {error && (
-                            <div className="text-caption text-error bg-error-container/20 p-3 rounded-lg border border-error-container/50 text-center">
+                            <div className="text-xs text-error bg-error-container/40 p-3 rounded-xl border border-error/30 text-center font-medium">
                                 {error}
                             </div>
                         )}
 
                         <Button
                             type="submit"
-                            className="w-full py-2.5 mt-4"
+                            className="w-full py-3 mt-3 text-sm font-semibold"
                             disabled={loading}
                         >
-                            {loading ? 'Memproses...' : 'Buat Akun'}
+                            {loading ? 'Mendaftarkan Akun...' : 'Daftar Sekarang'}
                         </Button>
                     </form>
 
-                    <div className="mt-6 text-center">
-                        <p className="text-label-md text-on-surface-variant">
-                            Sudah punya akun?{' '}
-                            <Link
-                                to="/login"
-                                className="font-semibold text-primary hover:text-surface-tint transition-colors"
-                            >
-                                Masuk di sini
+                    <div className="mt-5 pt-4 border-t border-[#d9cff5]/60 text-center text-xs text-[#5d5577]">
+                        <p>
+                            Sudah memiliki akun?{' '}
+                            <Link to="/login" className="font-bold text-[#8f78d8] hover:text-[#4b3b86] transition-colors">
+                                Masuk ke akun
                             </Link>
                         </p>
                     </div>

@@ -5,7 +5,7 @@ This document serves as the project memory for the frontend landing page and das
 ## Project Context
 - **Workspace Path:** `D:\Coding\neyla`
 - **Frontend Stack:** React, Tailwind CSS, Vite, React Router, Lucide React
-- **Design Style:** Modern, clean, pastel-tinted neutral colors (Pink Salmon scheme using HSL tailored colors) with high accessibility and anti-slop guidelines.
+- **Design Style:** Modern, clean, pastel-tinted neutral colors with authentic Inner Whisper Lavender / Lilac palette (`--lv: #8f78d8`, `--lvd: #4b3b86`, `--lvl: #efeafb`, `--lvm: #d9cff5`, `--ink: #2b2542`), OKLCH harmony, and anti-slop guidelines (no raw emojis, Lucide SVG icons).
 
 ## Development Progress & Milestones
 
@@ -149,9 +149,73 @@ This document serves as the project memory for the frontend landing page and das
 - **WebSockets:** Laravel Reverb running on local port `8082` (managed by Supervisor as `innerwhisper-reverb`) and reverse-proxied under SSL (`wss://innerwhisper.my.id/app`).
 - **Queue Listener:** Managed by Supervisor as `innerwhisper-queue` (`php artisan queue:work` database queue).
 - **Database:** MySQL database `innerwhisper` configured locally on the VPS and seeded with default psychologist data and schedules.
-- **SSL Certificate:** Active Let's Encrypt SSL certificates configured automatically by Certbot for `innerwhisper.my.id` and `www.innerwhisper.my.id`.
+- **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **October 7, 2026 (Part 3):** Landing Page Pink Purge & Lavender Palette Alignment.
+  - **Identified Root Causes of Pink Appearance:**
+    - Hardcoded pink salmon hex values (`#9a4153`, `#833344`, `#f2dede`) remained in landing components ([LandingNavbar.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/LandingNavbar.jsx), [LandingLayout.jsx](file:///D:/Coding/neyla/frontend/src/layouts/LandingLayout.jsx), [BottomNavBar.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/BottomNavBar.jsx), [WhatsAppFAB.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/WhatsAppFAB.jsx), [PWAInstallBanner.jsx](file:///D:/Coding/neyla/frontend/src/components/PWAInstallBanner.jsx), [Beranda.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Beranda.jsx), [Layanan.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Layanan.jsx), [TentangKami.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/TentangKami.jsx), and [Artikel.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Artikel.jsx)).
+    - Ambient background floating blob (`.blobs i:nth-child(2)`) in [index.css](file:///D:/Coding/neyla/frontend/src/index.css) was defined as `#f3c9e8` (soft blush pink), which floated across the landing page background.
+    - PWA configuration in [vite.config.js](file:///D:/Coding/neyla/frontend/vite.config.js) and `<meta name="theme-color">` in [index.html](file:///D:/Coding/neyla/frontend/index.html) had `#9a4153`.
+  - **Resolution & Cleanup:**
+    - Converted all landing page components, headings, chips, and buttons to use the lavender theme (`#8f78d8`, `#4b3b86`, `#efeafb`, `#d9cff5`, `#2b2542`).
+    - Changed the second ambient floating blob background in [index.css](file:///D:/Coding/neyla/frontend/src/index.css) from `#f3c9e8` to soft lavender `#ddd4fc`.
+    - Updated `theme-color` in [index.html](file:///D:/Coding/neyla/frontend/index.html) and [vite.config.js](file:///D:/Coding/neyla/frontend/vite.config.js) to `#8f78d8`.
+    - Added `surface-container-low: #f3eeff` in [tailwind.config.js](file:///D:/Coding/neyla/frontend/tailwind.config.js).
+    - Overhauled [LandingFooter.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/LandingFooter.jsx): Replaced legacy `text-primary` classes on "InnerWhisper", "Tautan", "Bantuan", and link hover states with explicit royal deep purple `#4b3b86` and muted ink `#5d5577`, with matching gradient brand title and lavender borders `#d9cff5`.
+    - Overhauled [Artikel.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Artikel.jsx): Eliminated all legacy `text-primary`, `bg-primary-container`, and `text-on-primary-container` classes across both the article list/card masonry grid and the full-article reading mode. Headings, tags, author avatars, and "Baca Selengkapnya" buttons now use explicit high-contrast `#4b3b86`, `#2b2542`, and `#8f78d8`.
+    - Verified 0 remaining `text-primary`, pink, or salmon occurrences across all landing page components and views.
+    - Verified production build (`npm run build`) passed cleanly in 1.65s with 0 errors.
+- **October 7, 2026 (Part 2):** Inner Whisper Visual & Architectural Redesign (`Inner Whisper.html.html`).
+  - **Logo & Color Palette Overhaul:**
+    - Extracted authentic logo from `Inner Whisper.html.html` to `frontend/public/logo.png`, `frontend/src/assets/logo.png`, and `frontend/public/favicon.png`.
+    - Migrated Tailwind CSS and global styles to the lavender lilac scheme:
+      - Primary (`--lv`): `#8f78d8`
+      - Deep Dark Purple (`--lvd`): `#4b3b86`
+      - Light Tint (`--lvl`): `#efeafb`
+      - Border / Outline (`--lvm`): `#d9cff5`
+      - Ink / Body Text (`--ink`): `#2b2542`
+    - Implemented glowing background ambient blobs (`.blobs i`), shiny gradient buttons (`.btn-lv`), and night sky visual (`.sky`).
+  - **Login & Register Flow:**
+    - Re-styled [Login.jsx](file:///D:/Coding/neyla/frontend/src/pages/Login.jsx) & [Register.jsx](file:///D:/Coding/neyla/frontend/src/pages/Register.jsx) with centered drop-shadow logo, gradient brand title, glassmorphism container, and dynamic zodiac dropdown selector during registration.
+  - **Sidebar Architecture & Unified Menus:**
+    - Retained desktop sidebar + mobile drawer architecture in [DashboardLayout.jsx](file:///D:/Coding/neyla/frontend/src/layouts/DashboardLayout.jsx).
+    - Aligned sidebar navigation items directly with `Inner Whisper.html.html`:
+      - 🏠 **Beranda:** [Dashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/Dashboard.jsx) with gradient hero banner, dynamic greeting, career chip, conic progress ring, "Langkah Berikutnya" action card, and 8 feature tiles.
+      - 📝 **Tes Karier:** [CareerTest.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerTest.jsx) with 25 psychometric questions, progress bar, category scores (Tech, Creative, Business, Social), and career recommendation action.
+      - 🧭 **Jelajah Karier:** [CareerExplorer.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerExplorer.jsx) with real-time keyword search, category filter chips, and skill sets.
+      - 🗺️ **Roadmap:** [CareerRoadmap.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerRoadmap.jsx) with milestone checklists, dynamic progress bar, and tips.
+      - 📄 **CV & Interview:** [CareerCvInterview.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerCvInterview.jsx) with 8-criteria ATS text auditor and interactive interview question simulator.
+      - 💼 **Portofolio:** [CareerPortfolio.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerPortfolio.jsx) with career-specific advice and 5-step curation checklist.
+      - 🎓 **Belajar:** [CareerLearning.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerLearning.jsx) with 6 micro-learning modules and completion toggles.
+      - ✨ **Zodiak Karier:** [CareerZodiac.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerZodiac.jsx) with night sky card, workplace strengths/challenges, and daily career motivation generator.
+      - 👥 **Konsultasi Pakar:** Linked to verified psychologists discovery and booking calendar.
+      - 💳 **Sesi & Pembayaran:** Booking records, payment methods, and receipt verification.
+      - 📖 **Artikel & Tips:** [CareerArticles.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerArticles.jsx) with interactive accordion guides.
+      - 👤 **Profil Saya:** [UserProfile.jsx](file:///D:/Coding/neyla/frontend/src/pages/UserProfile.jsx) with avatar initials, bio, major, university, and zodiac editor.
+  - **State Persistence:**
+    - Created [CareerContext.jsx](file:///D:/Coding/neyla/frontend/src/context/CareerContext.jsx) with local storage sync for tests, roadmap checklists, learning status, and target career.
+  - **Verification:**
+    - Verified production compilation (`npm run build`) passing cleanly with 0 errors.
+    - Verified live dev server (`http://localhost:5173/`) running with HMR.
+- **October 7, 2026 (Part 1):** Local Environment Execution & Verification.
+  - Initialized and verified local services on Windows:
+    - **Frontend (Vite):** Running at `http://localhost:5173/` (Vite v8.0.16, React 19, Tailwind CSS).
+    - **Backend (Laravel 12):** Running at `http://127.0.0.1:8000/` with health route `/up` returning 200 OK.
+    - **WebSocket (Laravel Reverb):** Running at `http://127.0.0.1:8080/` for real-time chat broadcasts.
+    - **Queue Worker:** Running `php artisan queue:listen --tries=1` to handle simulated psychologist bot replies (`SendBotReplyJob`).
+  - Verified local MySQL database `neyla` connectivity on port `3306`.
+  - Executed database seeder (`php artisan db:seed`) to populate default demo accounts:
+    - Admin: `admin@neyla.id` / `password`
+    - Psychologist: `dian@neyla.id`, `rian@neyla.id`, `siti@neyla.id` / `password`
+    - Patient: `pasien@neyla.id` / `password`
+  - Validated API auth login (`POST /api/login`) and authenticated psychologist discovery (`GET /api/psychologists`).
+- **September 30, 2026:** SSL Certificate Expiration Diagnosis & Renewal Fix (`image.png` alert).
+  - Identified root cause of the "Not secure" / red strikethrough HTTPS browser warning: Let's Encrypt certificate had expired on September 26, 2026.
+  - Diagnosed why auto-renewal was blocked: Certbot configuration previously bundled both `innerwhisper.my.id` and `www.innerwhisper.my.id`. The outer gateway OpenResty (`202.10.45.61`) was returning a 404 for the ACME challenge on `www.innerwhisper.my.id`, failing the entire renewal batch.
+  - Re-requested and successfully renewed certificate for `innerwhisper.my.id` on VPS `bleber` (`certbot certonly --nginx -d innerwhisper.my.id --cert-name innerwhisper.my.id`).
+  - Reloaded Nginx and verified live HTTPS response (`200 OK`, valid until December 29, 2026).
+  - Verified `certbot renew --dry-run` now passes with 100% success for background cron renewals.
 - **September 23, 2026 (Part 4):** Comprehensive Mobile UX/UI Polish & PWA Alignment.
   - Re-architected mobile bottom navigation (`BottomNavBar.jsx`) with native tab styling, active indicator pills, safe-area padding (`pb-safe`), and fixed z-index/overlap issues.
   - Added dedicated mobile sticky top app bar in `LandingNavbar.jsx` with logo and quick "Masuk" action.
@@ -204,9 +268,12 @@ This document serves as the project memory for the frontend landing page and das
   - Composer: 2.9.5
   - Supervisor: 4.2.1
   - PM2: 6.0.14
-- **Local Dev Stack:**
-  - Vite dev server: `http://localhost:5173/`
-  - Laravel backend: `http://localhost:8000/`
+- **Local Dev Stack (Windows):**
+  - Frontend (React / Vite): `http://localhost:5173/`
+  - Backend API (Laravel 12): `http://127.0.0.1:8000/` (Health check: `/up`)
+  - WebSockets (Laravel Reverb): `http://127.0.0.1:8080/`
+  - Asynchronous Queue Worker: `php artisan queue:listen --tries=1`
+  - Database: MySQL `neyla` on `127.0.0.1:3306`
 
 ## 🚧 Active/Pending Tasks
 - Monitor Supervisor logs for Reverb and Queue workers (`/var/www/innerwhisper/backend/storage/logs/`).
