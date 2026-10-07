@@ -179,10 +179,15 @@ This document serves as the project memory for the frontend landing page and das
     - Implemented automatic statistics re-fetching upon payment verification or rejection.
   - **Admin Patient Management ([AdminPatientList.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminPatientList.jsx)):**
     - Connected to `GET /api/admin/patients` to display real registered patients with search filtering and dynamic counter.
-  - **Verification:**
+  - **Verification & VPS Production Deployment:**
     - Seeded local MySQL database with 3 verified psychologists, 1 admin, 1 patient, and sample bookings.
     - Ran automated test script verifying add, update, delete, and real-time stat calculation (initial: 3 -> add: 4 -> delete: 3).
     - Verified production build (`npm run build`) passing cleanly in 1.37s with 0 errors.
+    - Committed changes locally and pushed to GitHub main (`b2cb735`).
+    - Deployed backend updates (`AdminController.php`, `api.php`) to VPS `bleber` (`/var/www/innerwhisper/backend/`), verified route registration, and cleared caches.
+    - Packaged and unpacked production frontend build (`index-B-50Hk4b.css`, `index-DbVljWmj.js`) to VPS `/var/www/innerwhisper/frontend-dist/`, cleaned obsolete assets, and reloaded Nginx.
+    - Restarted Supervisor queue worker (`innerwhisper-queue`).
+    - Tested live endpoint `https://innerwhisper.my.id/` and `https://innerwhisper.my.id/up` returning `HTTP 200 OK`.
 - **October 7, 2026 (Part 6):** Custom Logout Confirmation Modal Implementation.
   - **Component Creation ([LogoutModal.jsx](file:///D:/Coding/neyla/frontend/src/components/LogoutModal.jsx)):**
     - Developed an accessible, high-finish modal matching Inner Whisper's aesthetic (`card-s`, soft backdrop blur `bg-[#2b2542]/50`, rose badge ring for logout icon).
