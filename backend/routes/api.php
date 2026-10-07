@@ -29,6 +29,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::middleware('role:admin')->group(function () {
         Route::post('/admin/payments/{id}/verify', [PaymentController::class, 'verify']);
+        Route::get('/admin/stats', [\App\Http\Controllers\Api\AdminController::class, 'getStats']);
+        Route::get('/admin/psychologists', [\App\Http\Controllers\Api\AdminController::class, 'getPsychologists']);
+        Route::post('/admin/psychologists', [\App\Http\Controllers\Api\AdminController::class, 'storePsychologist']);
+        Route::put('/admin/psychologists/{id}', [\App\Http\Controllers\Api\AdminController::class, 'updatePsychologist']);
+        Route::delete('/admin/psychologists/{id}', [\App\Http\Controllers\Api\AdminController::class, 'deletePsychologist']);
+        Route::get('/admin/patients', [\App\Http\Controllers\Api\AdminController::class, 'getPatients']);
     });
 
     // Sessions

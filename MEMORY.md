@@ -152,6 +152,37 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **October 7, 2026 (Part 7):** Admin Psychologist Management & Dynamic Real-Time Statistics Fix.
+  - **Issue Resolved:**
+    - Fixed issue where the psychologist count and listing on the admin page remained static/hardcoded (`Dr. Stevano, M.Psi`), and the admin dashboard lacked live psychologist and patient metrics.
+  - **Backend Controller & Admin API Implementation ([AdminController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/AdminController.php) & [api.php](file:///D:/Coding/neyla/backend/routes/api.php)):**
+    - Created dedicated admin endpoints protected by `middleware('role:admin')`:
+      - `GET /api/admin/stats`: Aggregate counts of total psychologists, total registered patients, pending payment verifications, and total bookings.
+      - `GET /api/admin/psychologists`: Lists all psychologists with detailed profile attributes (specialization, bio, price per session, license number, verification flag).
+      - `POST /api/admin/psychologists`: Creates new psychologist user and corresponding `PsychologistProfile`.
+      - `PUT /api/admin/psychologists/{id}`: Updates psychologist user and profile information.
+      - `DELETE /api/admin/psychologists/{id}`: Safely removes psychologist account (cascading profile).
+      - `GET /api/admin/patients`: Lists all registered patients.
+  - **Frontend Psychologist Management Overhaul ([AdminPsychologistList.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminPsychologistList.jsx)):**
+    - Replaced hardcoded dummy data with dynamic API calls to `/api/admin/psychologists`.
+    - Added dynamic badge indicator showing exact count of registered psychologists.
+    - Integrated multi-field real-time search filter (name, specialization, email, phone).
+    - Built accessible Add Psychologist modal with full validation (name, email, password, phone, specialization, price per session, SIP, bio, verification toggle).
+    - Built Edit Psychologist modal pre-populating existing data with optional password update.
+    - Built anti-slop custom Delete Confirmation modal with danger state and loading indicator.
+  - **Admin Dashboard Dynamic Counters & Queues ([AdminDashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminDashboard.jsx)):**
+    - Added 4 interactive stat cards:
+      1. Total Psikolog & Konselor (dynamic count, linking to `/admin/psychologists`)
+      2. Total Pasien Terdaftar (dynamic count, linking to `/admin/patients`)
+      3. Pending Verifikasi Pembayaran (dynamic count, linking to `#antrean-verifikasi`)
+      4. Total Booking Konseling (dynamic count)
+    - Implemented automatic statistics re-fetching upon payment verification or rejection.
+  - **Admin Patient Management ([AdminPatientList.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminPatientList.jsx)):**
+    - Connected to `GET /api/admin/patients` to display real registered patients with search filtering and dynamic counter.
+  - **Verification:**
+    - Seeded local MySQL database with 3 verified psychologists, 1 admin, 1 patient, and sample bookings.
+    - Ran automated test script verifying add, update, delete, and real-time stat calculation (initial: 3 -> add: 4 -> delete: 3).
+    - Verified production build (`npm run build`) passing cleanly in 1.37s with 0 errors.
 - **October 7, 2026 (Part 6):** Custom Logout Confirmation Modal Implementation.
   - **Component Creation ([LogoutModal.jsx](file:///D:/Coding/neyla/frontend/src/components/LogoutModal.jsx)):**
     - Developed an accessible, high-finish modal matching Inner Whisper's aesthetic (`card-s`, soft backdrop blur `bg-[#2b2542]/50`, rose badge ring for logout icon).
