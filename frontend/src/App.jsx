@@ -19,6 +19,8 @@ import AdminPsychologistList from './pages/AdminPsychologistList';
 import AdminPatientList from './pages/AdminPatientList';
 import PsychologistDiscovery from './pages/PsychologistDiscovery';
 import SessionNotes from './pages/SessionNotes';
+import CounselorHonorList from './pages/CounselorHonorList';
+import AdminHonorList from './pages/AdminHonorList';
 
 // Inner Whisper Feature Pages
 import CareerTest from './pages/CareerTest';
@@ -172,6 +174,18 @@ function AppRoutes() {
             <Route path="/admin/patients" element={
                 <ProtectedRoute>
                     <AdminPatientList />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/honor-konselor" element={
+                <ProtectedRoute>
+                    <CounselorHonorList />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/admin/honor" element={
+                <ProtectedRoute>
+                    <AdminHonorList />
                 </ProtectedRoute>
             } />
             

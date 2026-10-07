@@ -152,6 +152,22 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **October 7, 2026 (Part 9):** Dedicated "Honor Konselor" Sidebar Menus & Dedicated Honor Management Pages.
+  - **Requirement:**
+    - Added dedicated "Honor Konselor" menu in sidebar for both Counselor (Psychologist) and Admin roles.
+  - **Components Created:**
+    - [`CounselorHonorList.jsx`](file:///D:/Coding/neyla/frontend/src/pages/CounselorHonorList.jsx): Dedicated counselor honor management page accessible at `/honor-konselor`.
+      - Displays stats: Total Honor Diterima, Honor Menunggu Konfirmasi, Antrean Transfer Admin.
+      - Prominent confirmation cards for pending payouts from admin with invoice image preview and "Diterima" button.
+      - Full historical payout table with invoice previews and verification statuses.
+    - [`AdminHonorList.jsx`](file:///D:/Coding/neyla/frontend/src/pages/AdminHonorList.jsx): Dedicated admin honor payout page accessible at `/admin/honor`.
+      - Displays stats: Total Honor Ditransfer, Perlu Ditransfer Admin, Menunggu Diterima Konselor.
+      - Complete verified sessions list with search filtering, invoice upload modal, and re-upload capabilities.
+  - **Sidebar & Router Integration:**
+    - [`DashboardLayout.jsx`](file:///D:/Coding/neyla/frontend/src/layouts/DashboardLayout.jsx): Added `{ name: 'Honor Konselor', href: '/admin/honor', icon: Wallet }` for Admin and `{ name: 'Honor Konselor', href: '/honor-konselor', icon: Wallet }` for Counselor.
+    - [`App.jsx`](file:///D:/Coding/neyla/frontend/src/App.jsx): Registered protected routes `/honor-konselor` and `/admin/honor`.
+  - **Verification:**
+    - Verified production build (`npm run build`) passing cleanly in 1.99s with 0 errors.
 - **October 7, 2026 (Part 8):** Complete Two-Tier Financial & Consultation Approval Workflow.
   - **Requirement & Flow Implemented:**
     1. Patient books a consultation and uploads invoice/transfer proof to admin with clear official bank details.

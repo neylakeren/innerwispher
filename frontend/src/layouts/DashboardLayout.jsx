@@ -19,7 +19,8 @@ import {
     X,
     ClipboardList,
     CreditCard,
-    UserCheck
+    UserCheck,
+    Wallet
 } from 'lucide-react';
 import { Button, cn } from '../components/ui';
 import LogoutModal from '../components/LogoutModal';
@@ -61,6 +62,7 @@ export default function DashboardLayout({ children }) {
             return [
                 { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
                 { name: 'Verifikasi Pembayaran', href: '/bookings', icon: CreditCard },
+                { name: 'Honor Konselor', href: '/admin/honor', icon: Wallet },
                 { name: 'Daftar Psikolog', href: '/admin/psychologists', icon: Users },
                 { name: 'Data Pasien', href: '/admin/patients', icon: UserCheck },
                 { name: 'Profil Saya', href: '/profil', icon: User },
@@ -71,6 +73,7 @@ export default function DashboardLayout({ children }) {
             return [
                 { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
                 { name: 'Jadwal Konseling', href: '/bookings', icon: Calendar },
+                { name: 'Honor Konselor', href: '/honor-konselor', icon: Wallet },
                 { name: 'Catatan Sesi', href: '/notes', icon: ClipboardList },
                 { name: 'Profil Saya', href: '/profil', icon: User },
             ];
