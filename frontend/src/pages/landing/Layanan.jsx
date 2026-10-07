@@ -1,33 +1,29 @@
-import { User, Heart, Briefcase, ShieldCheck, Clock, CalendarCheck, MessageCircle, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Briefcase, FileText, UserCheck, ShieldCheck, Clock, CalendarCheck, MessageCircle } from 'lucide-react';
 
 export default function Layanan() {
   const services = [
     {
-      icon: User,
-      title: 'Individual Counseling',
-      description: 'Ruang aman untuk pertumbuhan pribadi, mengatasi beban pikiran, kecemasan, dan eksplorasi diri bersama psikolog klinis berlisensi.',
-      colSpan: '',
-    },
-    {
-      icon: Heart,
-      title: 'Couple Therapy',
-      description: 'Membangun komunikasi yang sehat, menyelesaikan konflik, dan memulihkan keintiman dalam hubungan bersama pasangan.',
-      colSpan: '',
-    },
-    {
       icon: Briefcase,
       title: 'Career Stress & Planning',
       description: 'Mengelola burnout kerja, kecemasan performa, dan merancang roadmap langkah karier yang presisi dan berkesinambungan.',
-      colSpan: 'lg:col-span-1 md:col-span-2',
+    },
+    {
+      icon: FileText,
+      title: 'Review CV & Portofolio',
+      description: 'Audit kesesuaian format ATS resume dan bimbingan kurasi portofolio profesional untuk meningkatkan daya saing rekrutmen.',
+    },
+    {
+      icon: UserCheck,
+      title: 'Simulasi Wawancara Kerja',
+      description: 'Latihan wawancara kerja terarah dengan feedback mendalam agar Anda tampil percaya diri menghadapi rekruter.',
     },
   ];
 
   const features = [
     {
       icon: ShieldCheck,
-      title: 'Psikolog Tersertifikasi',
-      description: 'Ditangani oleh tenaga profesional klinis yang berizin resmi (SIPPK) dan berpengalaman.',
+      title: 'Konselor Berpengalaman',
+      description: 'Ditangani oleh konselor profesional dan mentor karier yang berdedikasi tinggi.',
     },
     {
       icon: Clock,
@@ -46,10 +42,10 @@ export default function Layanan() {
       {/* Hero */}
       <section className="text-center max-w-4xl mx-auto py-4 sm:py-8 md:py-12 mb-6 sm:mb-10">
         <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-[#4b3b86] mb-3 sm:mb-6 tracking-tight">
-          Layanan Konseling & <span className="bg-gradient-to-r from-[#8f78d8] to-[#b9a6f0] bg-clip-text text-transparent">Karier Kami</span>
+          Layanan Konseling &amp; <span className="bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] bg-clip-text text-transparent">Karier Kami</span>
         </h1>
         <p className="text-xs sm:text-base md:text-lg text-[#5d5577] max-w-3xl mx-auto leading-relaxed font-medium">
-          Temukan ruang aman untuk berbicara, bertumbuh, dan menyembuhkan. Kami menyediakan berbagai layanan psikologi profesional yang disesuaikan dengan kebutuhan Anda.
+          Temukan ruang aman untuk berbicara, bertumbuh, dan merancang masa depan. Kami menyediakan berbagai layanan konseling karier terarah yang disesuaikan dengan kebutuhan Anda.
         </p>
       </section>
 
@@ -59,7 +55,7 @@ export default function Layanan() {
           {services.map((service, index) => (
             <div
               key={index}
-              className={`card-s p-6 sm:p-8 flex flex-col justify-between hover:-translate-y-1.5 transition-transform duration-200 ${service.colSpan}`}
+              className="card-s p-6 sm:p-8 flex flex-col justify-between hover:-translate-y-1.5 transition-transform duration-200"
             >
               <div>
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#efeafb] text-[#8f78d8] flex items-center justify-center mb-4 sm:mb-5 shadow-sm">
@@ -77,7 +73,7 @@ export default function Layanan() {
                 href="https://wa.me/6281234567890"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-sm sm:text-base btn-lv py-3 sm:py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 font-semibold active:scale-95 shadow-btn"
+                className="w-full text-sm sm:text-base btn-lv py-3 sm:py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 font-semibold active:scale-95 shadow-btn text-white"
               >
                 <MessageCircle size={18} />
                 <span>Konsultasi Sekarang</span>

@@ -161,7 +161,7 @@ export default function Artikel() {
               Butuh tempat bercerita tentang masalah serupa?
             </h3>
             <p className="text-xs sm:text-base text-[#5d5577] max-w-2xl leading-relaxed">
-              Jangan menanggung beban Anda sendiri. Tim psikolog kami di Inner Whisper siap membantu dan mendengarkan keluh kesah Anda secara empatik tanpa menghakimi.
+              Jangan menanggung beban Anda sendiri. Tim konselor kami di Inner Whisper siap membantu dan mendengarkan keluh kesah Anda secara empatik tanpa menghakimi.
             </p>
             <a
               href="https://wa.me/6281234567890"

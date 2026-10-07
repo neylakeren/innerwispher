@@ -12,12 +12,12 @@ export default function Beranda() {
     {
       icon: Brain,
       title: 'Langkah 2: Skrining & Tes Minat',
-      description: 'Memahami kondisi psikologis dan memetakan potensi kariermu secara terarah.',
+      description: 'Memetakan potensi kariermu secara terarah.',
     },
     {
       icon: CalendarDays,
-      title: 'Langkah 3: Konsultasi Psikolog',
-      description: 'Terhubung langsung dengan psikolog klinis berlisensi untuk bimbingan profesional.',
+      title: 'Langkah 3: Konsultasi Konselor',
+      description: 'Terhubung langsung dengan konselor profesional untuk bimbingan terarah.',
     },
   ];
 
@@ -36,7 +36,7 @@ export default function Beranda() {
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg text-[#5d5577] max-w-2xl mx-auto md:mx-0 leading-relaxed font-medium">
-            Layanan psikologi dan eksplorasi karier terpercaya dengan akses bantuan 24/7. Ruang aman yang privat untuk memulihkan energi serta merancang masa depan.
+            Layanan konseling dan eksplorasi karier terpercaya dengan akses bantuan 24/7. Ruang aman yang privat untuk memulihkan energi serta merancang masa depan.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 items-center justify-center md:justify-start pt-1">
@@ -70,7 +70,7 @@ export default function Beranda() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#2b2542]/60 via-transparent to-transparent flex items-end p-6">
               <div className="text-white">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#d9cff5]">Inner Whisper</span>
-                <p className="text-sm sm:text-base font-bold">Kerahasiaan terjamin bersama psikolog klinis profesional.</p>
+                <p className="text-sm sm:text-base font-bold">Kerahasiaan terjamin bersama konselor profesional.</p>
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function Beranda() {
           <ShieldCheck size={28} />
         </div>
         <p className="text-sm sm:text-lg md:text-xl font-bold text-[#2b2542] max-w-3xl leading-relaxed">
-          Privasi dan kerahasiaan sesi konseling Anda adalah prioritas nol kami. Terlindungi dengan etika profesi psikolog.
+          Privasi dan kerahasiaan sesi konseling Anda adalah prioritas nol kami. Terlindungi dengan standar privasi profesional.
         </p>
       </section>
     </div>

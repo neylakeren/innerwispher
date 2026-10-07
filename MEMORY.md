@@ -152,6 +152,23 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **October 7, 2026 (Part 5):** Repositioning to Career & Counseling Platform (Removal of Clinical Psychologists).
+  - **Beranda ([Beranda.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Beranda.jsx)):**
+    - Updated Step 2: Removed "Memahami kondisi psikologis dan", leaving "Memetakan potensi kariermu secara terarah."
+    - Updated Step 3: Changed "Langkah 3: Konsultasi Psikolog" to "Langkah 3: Konsultasi Konselor" with updated description focusing on professional counseling.
+    - Updated trust and hero statements from "psikolog klinis" to "konselor profesional".
+  - **Tentang Kami ([TentangKami.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/TentangKami.jsx)):**
+    - Removed entire "Kenali Para Psikolog Klinis Kami" section and the 3 clinical psychologist cards (Dr. Rina Saraswati, M.Psi, Budi Santoso, M.Psi, Siti Aisyah, M.Psi).
+    - Removed the "Aman, Rahasia, & Tepercaya" clinical licensing (SIPPK) card.
+    - Replaced with 3 strategic pillars of Inner Whisper: Pemetaan Potensi Terarah, Bimbingan Konselor Berpengalaman, dan Kesiapan Karier Nyata.
+  - **Layanan ([Layanan.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Layanan.jsx)):**
+    - Removed clinical therapy cards: "Individual Counseling" and "Couple Therapy".
+    - Positioned core career-oriented services: "Career Stress & Planning", "Review CV & Portofolio", and "Simulasi Wawancara Kerja".
+    - Updated feature badges from "Psikolog Tersertifikasi" to "Konselor Berpengalaman".
+  - **Artikel ([Artikel.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Artikel.jsx)):**
+    - Aligned CTA wording from "Tim psikolog kami" to "Tim konselor kami".
+  - **Verification:**
+    - Verified production build (`npm run build`) passing cleanly in 1.40s with 0 errors.
 - **October 7, 2026 (Part 4):** Git Commit, Push, & VPS Production Deployment.
   - **Git Repository & Remote Synchronization:**
     - Staged all 37 modified and new files (visual overhaul, career modules, auth pages, context state, and design references).
