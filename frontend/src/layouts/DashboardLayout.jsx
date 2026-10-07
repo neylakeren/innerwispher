@@ -22,16 +22,27 @@ import {
     UserCheck
 } from 'lucide-react';
 import { Button, cn } from '../components/ui';
+import LogoutModal from '../components/LogoutModal';
 
 export default function DashboardLayout({ children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleLogout = async () => {
-        await logout();
-        navigate('/login');
+    const handleConfirmLogout = async () => {
+        try {
+            setIsLoggingOut(true);
+            await logout();
+            navigate('/login');
+        } catch (err) {
+            console.error('Logout error:', err);
+        } finally {
+            setIsLoggingOut(false);
+            setIsLogoutModalOpen(false);
+        }
     };
 
     const getInitials = (name) => {
@@ -163,8 +174,8 @@ export default function DashboardLayout({ children }) {
 
                         <button
                             type="button"
-                            onClick={handleLogout}
-                            className="w-full flex items-center justify-center gap-2 py-2 px-3 text-xs font-semibold text-[#dc3545] hover:bg-[#fce8e9] rounded-xl transition-colors"
+                            onClick={() => setIsLogoutModalOpen(true)}
+                            className="w-full flex items-center justify-center gap-2 py-2 px-3 text-xs font-semibold text-[#dc3545] hover:bg-[#fce8e9] rounded-xl transition-colors cursor-pointer"
                         >
                             <LogOut size={14} />
                             Keluar dari Akun
@@ -204,6 +215,15 @@ export default function DashboardLayout({ children }) {
                     {children}
                 </main>
             </div>
+
+            {/* Custom Logout Confirmation Modal */}
+            <LogoutModal
+                isOpen={isLogoutModalOpen}
+                onClose={() => !isLoggingOut && setIsLogoutModalOpen(false)}
+                onConfirm={handleConfirmLogout}
+                loading={isLoggingOut}
+                userName={user?.name}
+            />
         </div>
     );
 }

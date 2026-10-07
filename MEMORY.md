@@ -152,6 +152,16 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **October 7, 2026 (Part 6):** Custom Logout Confirmation Modal Implementation.
+  - **Component Creation ([LogoutModal.jsx](file:///D:/Coding/neyla/frontend/src/components/LogoutModal.jsx)):**
+    - Developed an accessible, high-finish modal matching Inner Whisper's aesthetic (`card-s`, soft backdrop blur `bg-[#2b2542]/50`, rose badge ring for logout icon).
+    - Integrated Escape key listener (`keydown`) and background scroll lock (`overflow: hidden`).
+    - Handled async logout loading state (`isLoggingOut`) with `Loader2` spinner.
+  - **Layout & Profile Integration:**
+    - Connected desktop sidebar and mobile drawer logout trigger in [DashboardLayout.jsx](file:///D:/Coding/neyla/frontend/src/layouts/DashboardLayout.jsx).
+    - Connected user settings logout button in [UserProfile.jsx](file:///D:/Coding/neyla/frontend/src/pages/UserProfile.jsx).
+  - **Verification:**
+    - Verified production build (`npm run build`) passing cleanly in 1.42s with 0 errors.
 - **October 7, 2026 (Part 5):** Repositioning to Career & Counseling Platform (Removal of Clinical Psychologists).
   - **Beranda ([Beranda.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Beranda.jsx)):**
     - Updated Step 2: Removed "Memahami kondisi psikologis dan", leaving "Memetakan potensi kariermu secara terarah."

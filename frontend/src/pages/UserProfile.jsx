@@ -1,13 +1,31 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCareer } from '../context/CareerContext';
 import { ZODIACS } from '../data/careerData';
 import { Button, Input } from '../components/ui';
 import { User, LogOut, CheckCircle2, Sparkles, GraduationCap } from 'lucide-react';
+import LogoutModal from '../components/LogoutModal';
 
 export default function UserProfile() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const { careerState, updateCareerState, activeCareer, totalProgress } = useCareer();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleConfirmLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      await logout();
+      navigate('/login');
+    } catch (err) {
+      console.error('Logout error:', err);
+    } finally {
+      setIsLoggingOut(false);
+      setIsLogoutModalOpen(false);
+    }
+  };
 
   const [formData, setFormData] = useState({
     name: user?.name || '',
@@ -181,14 +199,23 @@ export default function UserProfile() {
             type="button"
             variant="outline"
             size="md"
-            onClick={logout}
-            className="w-full text-error hover:bg-error-container/30 border-error/40 flex items-center justify-center gap-2"
+            onClick={() => setIsLogoutModalOpen(true)}
+            className="w-full text-error hover:bg-error-container/30 border-error/40 flex items-center justify-center gap-2 cursor-pointer"
           >
             <LogOut size={16} />
             Keluar dari Akun
           </Button>
         </div>
       </div>
+
+      {/* Custom Logout Confirmation Modal */}
+      <LogoutModal
+        isOpen={isLogoutModalOpen}
+        onClose={() => !isLoggingOut && setIsLogoutModalOpen(false)}
+        onConfirm={handleConfirmLogout}
+        loading={isLoggingOut}
+        userName={user?.name}
+      />
     </div>
   );
 }
