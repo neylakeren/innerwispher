@@ -18,12 +18,14 @@ class AdminController extends Controller
         $totalPsychologists = User::where('role', 'psychologist')->count();
         $totalPatients = User::where('role', 'patient')->count();
         $pendingPayments = Payment::where('status', 'pending')->count();
+        $pendingPayouts = Payment::where('status', 'verified')->where('counselor_payout_status', 'unpaid')->count();
         $totalBookings = Booking::count();
 
         return response()->json([
             'total_psychologists' => $totalPsychologists,
             'total_patients' => $totalPatients,
             'pending_payments' => $pendingPayments,
+            'pending_payouts' => $pendingPayouts,
             'total_bookings' => $totalBookings,
         ]);
     }

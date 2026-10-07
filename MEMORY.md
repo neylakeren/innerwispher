@@ -152,6 +152,31 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **October 7, 2026 (Part 8):** Complete Two-Tier Financial & Consultation Approval Workflow.
+  - **Requirement & Flow Implemented:**
+    1. Patient books a consultation and uploads invoice/transfer proof to admin with clear official bank details.
+    2. Admin verifies and approves the invoice -> Booking becomes `paid` and counseling session opens/unlocks chat consultation for both patient and counselor.
+    3. Admin transfers honor to the counselor and uploads the payout invoice/receipt to the counselor.
+    4. Counselor views the invoice and clicks the "Diterima" button to confirm receipt of their honor.
+  - **Database Migration ([`2026_10_07_100416_add_counselor_payout_to_payments_table.php`](file:///D:/Coding/neyla/backend/database/migrations/2026_10_07_100416_add_counselor_payout_to_payments_table.php)):**
+    - Added `counselor_payout_amount` (decimal), `counselor_payout_proof` (string), `counselor_payout_status` (enum: 'unpaid', 'pending', 'received'), `counselor_payout_at` (timestamp), and `counselor_received_at` (timestamp) to `payments` table.
+  - **Backend Implementation ([`PaymentController.php`](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/PaymentController.php), [`AdminController.php`](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/AdminController.php), [`api.php`](file:///D:/Coding/neyla/backend/routes/api.php)):**
+    - `POST /api/payments/upload`: Patient uploads invoice; marks payment `pending`, locks chat until approval.
+    - `POST /api/admin/payments/{id}/verify`: Admin approves payment; transitions booking to `paid`, creates active counseling session, and unlocks chat room.
+    - `POST /api/admin/payments/{id}/payout`: Admin uploads transfer proof/invoice to counselor; sets payout status to `pending`.
+    - `POST /api/psychologist/payouts/{id}/confirm`: Assigned counselor confirms receipt ("Diterima"); sets payout status to `received` with timestamp.
+    - Updated `AdminController::getStats` to track `pending_payouts`.
+  - **Frontend Implementation:**
+    - [`client.js`](file:///D:/Coding/neyla/frontend/src/api/client.js): Added `getStorageUrl` helper resolving absolute asset paths across local development and production.
+    - [`BookingList.jsx`](file:///D:/Coding/neyla/frontend/src/pages/BookingList.jsx): Added bank transfer guidance for patients, invoice file upload modal with image preview, locked vs unlocked chat state with clear tooltips, and counselor honor tracking with "Diterima" button.
+    - [`AdminDashboard.jsx`](file:///D:/Coding/neyla/frontend/src/pages/AdminDashboard.jsx): Re-architected into 2 dedicated workflow queues:
+      1. Antrean Verifikasi Invoice Pasien (Approve to unlock chat / Reject).
+      2. Pembayaran Honor ke Konselor (Upload honor invoice to counselor).
+      - Added universal invoice preview modal.
+    - [`PsychologistDashboard.jsx`](file:///D:/Coding/neyla/frontend/src/pages/PsychologistDashboard.jsx): Added prominent "Transfer Honor Baru dari Admin" banner with invoice preview and "Diterima" confirmation button.
+  - **Verification:**
+    - Executed automated workflow verification script testing all 5 stages from booking to counselor receipt.
+    - Verified production build (`npm run build`) passing cleanly in 2.24s with 0 errors.
 - **October 7, 2026 (Part 7):** Admin Psychologist Management & Dynamic Real-Time Statistics Fix.
   - **Issue Resolved:**
     - Fixed issue where the psychologist count and listing on the admin page remained static/hardcoded (`Dr. Stevano, M.Psi`), and the admin dashboard lacked live psychologist and patient metrics.

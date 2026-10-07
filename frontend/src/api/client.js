@@ -16,4 +16,12 @@ client.interceptors.request.use((config) => {
     return config;
 });
 
+export const getStorageUrl = (path) => {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+    const baseUrl = apiUrl.replace(/\/api\/?$/, '');
+    return `${baseUrl}/storage/${path.replace(/^\//, '')}`;
+};
+
 export default client;

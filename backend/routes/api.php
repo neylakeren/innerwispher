@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::middleware('role:admin')->group(function () {
         Route::post('/admin/payments/{id}/verify', [PaymentController::class, 'verify']);
+        Route::post('/admin/payments/{id}/payout', [PaymentController::class, 'payoutCounselor']);
         Route::get('/admin/stats', [\App\Http\Controllers\Api\AdminController::class, 'getStats']);
         Route::get('/admin/psychologists', [\App\Http\Controllers\Api\AdminController::class, 'getPsychologists']);
         Route::post('/admin/psychologists', [\App\Http\Controllers\Api\AdminController::class, 'storePsychologist']);
@@ -44,5 +45,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:psychologist')->group(function () {
         Route::post('/sessions/{id}/end', [CounselingSessionController::class, 'endSession']);
         Route::post('/sessions/{id}/notes', [CounselingSessionController::class, 'submitNotes']);
+        Route::post('/psychologist/payouts/{id}/confirm', [PaymentController::class, 'confirmPayoutReceived']);
     });
 });

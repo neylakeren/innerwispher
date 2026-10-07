@@ -14,11 +14,11 @@ class PaymentController extends Controller
     {
         $request->validate([
             'booking_id' => 'required|exists:bookings,id',
-            'proof_image' => 'required|image|max:2048', // 2MB max
+            'proof_image' => 'required|image|max:5120', // 5MB max
             'amount' => 'required|numeric|min:0',
         ]);
 
-        $booking = Booking::findOrFail($request->booking_id);
+        $booking = Booking::with('psychologist.psychologistProfile')->findOrFail($request->booking_id);
 
         if ($request->hasFile('proof_image')) {
             $path = $request->file('proof_image')->store('payment_proofs', 'public');
@@ -33,12 +33,12 @@ class PaymentController extends Controller
             );
 
             return response()->json([
-                'message' => 'Proof of payment uploaded successfully.',
-                'payment' => $payment,
+                'message' => 'Foto invoice / bukti pembayaran berhasil dikirim. Menunggu verifikasi admin.',
+                'payment' => $payment->load('booking'),
             ]);
         }
 
-        return response()->json(['message' => 'Upload failed.'], 400);
+        return response()->json(['message' => 'Gagal mengunggah foto invoice.'], 400);
     }
 
     public function verify(Request $request, $id)
@@ -60,7 +60,7 @@ class PaymentController extends Controller
                 'status' => 'paid',
             ]);
 
-            // Automatically create a counseling session if it doesn't exist
+            // Automatically create active counseling session so chat opens
             if (!$booking->counselingSession) {
                 $booking->counselingSession()->create([
                     'status' => 'active',
@@ -74,8 +74,81 @@ class PaymentController extends Controller
         }
 
         return response()->json([
-            'message' => 'Payment verification processed successfully.',
+            'message' => $request->status === 'verified' 
+                ? 'Pembayaran berhasil diverifikasi. Sesi chat konsultasi telah dibuka.' 
+                : 'Pembayaran ditolak. Pasien diminta mengunggah ulang bukti pembayaran.',
             'payment' => $payment->load('booking.counselingSession'),
+        ]);
+    }
+
+    /**
+     * Admin pays the counselor and uploads payout proof/invoice.
+     */
+    public function payoutCounselor(Request $request, $id)
+    {
+        $request->validate([
+            'proof_image' => 'required|image|max:5120', // 5MB max
+            'amount' => 'nullable|numeric|min:0',
+        ]);
+
+        $payment = Payment::with('booking.psychologist.psychologistProfile')->findOrFail($id);
+
+        if ($payment->status !== 'verified') {
+            return response()->json([
+                'message' => 'Pembayaran pasien belum diverifikasi. Verifikasi pembayaran pasien terlebih dahulu.',
+            ], 422);
+        }
+
+        if ($request->hasFile('proof_image')) {
+            $path = $request->file('proof_image')->store('counselor_payout_proofs', 'public');
+
+            $payoutAmount = $request->filled('amount') 
+                ? (float) $request->amount 
+                : (float) ($payment->booking->psychologist?->psychologistProfile?->price_per_session ?? $payment->amount);
+
+            $payment->update([
+                'counselor_payout_proof' => $path,
+                'counselor_payout_amount' => $payoutAmount,
+                'counselor_payout_status' => 'pending', // Pending confirmation by counselor
+                'counselor_payout_at' => now(),
+            ]);
+
+            return response()->json([
+                'message' => 'Bukti pembayaran honor berhasil dikirim ke konselor. Menunggu konfirmasi penerimaan dari konselor.',
+                'payment' => $payment->load('booking.psychologist'),
+            ]);
+        }
+
+        return response()->json(['message' => 'Gagal mengunggah bukti invoice honor.'], 400);
+    }
+
+    /**
+     * Counselor confirms receipt of honor ("Diterima").
+     */
+    public function confirmPayoutReceived(Request $request, $id)
+    {
+        $payment = Payment::with('booking')->findOrFail($id);
+        $user = $request->user();
+
+        // Check if user is the assigned psychologist
+        if ($payment->booking->psychologist_id !== $user->id) {
+            return response()->json(['message' => 'Unauthorized.'], 403);
+        }
+
+        if ($payment->counselor_payout_status !== 'pending') {
+            return response()->json([
+                'message' => 'Status pembayaran honor tidak dalam antrean konfirmasi penerimaan.',
+            ], 422);
+        }
+
+        $payment->update([
+            'counselor_payout_status' => 'received',
+            'counselor_received_at' => now(),
+        ]);
+
+        return response()->json([
+            'message' => 'Honor konsultasi berhasil dikonfirmasi diterima.',
+            'payment' => $payment->load('booking'),
         ]);
     }
 }
