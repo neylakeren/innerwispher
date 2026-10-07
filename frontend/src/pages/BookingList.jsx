@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import client, { getStorageUrl } from '../api/client';
+import client, { getStorageUrl, FALLBACK_INVOICE_PLACEHOLDER } from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { Button, Input } from '../components/ui';
 import { 
@@ -586,6 +586,7 @@ export default function BookingList() {
                             <img 
                                 src={viewingImage.url} 
                                 alt={viewingImage.title} 
+                                onError={(e) => { e.currentTarget.src = FALLBACK_INVOICE_PLACEHOLDER; }}
                                 className="max-h-80 max-w-full object-contain rounded-lg"
                             />
                         </div>

@@ -22,29 +22,43 @@ export default function PWAInstallBanner() {
     }
 
     const handleBeforeInstallPrompt = (e) => {
-      // Prevent default mini-infobar from appearing on mobile
+      // Prevent default mini-infobar from appearing automatically
       e.preventDefault();
       setDeferredPrompt(e);
       setIsVisible(true);
     };
 
+    const handleAppInstalled = () => {
+      setIsVisible(false);
+      setDeferredPrompt(null);
+      sessionStorage.setItem('innerwhisper_pwa_dismissed', 'true');
+    };
+
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
     };
   }, []);
 
   const handleInstallClick = async () => {
     if (!deferredPrompt) return;
 
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-
-    if (outcome === 'accepted') {
+    try {
+      await deferredPrompt.prompt();
+      const choiceResult = await deferredPrompt.userChoice;
+      if (choiceResult && choiceResult.outcome === 'accepted') {
+        setIsVisible(false);
+        sessionStorage.setItem('innerwhisper_pwa_dismissed', 'true');
+      }
+    } catch (err) {
+      // Ignored or handled gracefully
+    } finally {
+      setDeferredPrompt(null);
       setIsVisible(false);
     }
-    setDeferredPrompt(null);
   };
 
   const handleDismiss = () => {

@@ -152,6 +152,36 @@ This document serves as the project memory for the frontend landing page and das
 - **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **October 7, 2026 (Part 10):** Fix `dummy.jpg` 404 Error, VPS Nginx Storage Routing, and PWA Install Prompt Hardening.
+  - **Identified Issues:**
+    1. Browser console error: `dummy.jpg:1 Failed to load resource: the server responded with a status of 404 (Not Found)`.
+       - *Root Cause 1:* `DatabaseSeeder.php` seeded records with `'proof_image_path' => 'payment_proofs/dummy.jpg'`, but no `dummy.jpg` file ever existed in the filesystem.
+       - *Root Cause 2:* On the production VPS Nginx server, the regex block `location ~* \.(jpg|png|...)` took precedence over non-regex prefix matching and served all image requests from `frontend-dist/` (which did not contain backend storage assets).
+    2. Browser console notice: `Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.`
+       - *Explanation:* Informational DevTools note indicating standard suppression of native browser mini-infobar when web apps register a custom PWA install prompt.
+  - **Resolution & Implementation:**
+    - **Asset Creation & Persistence:**
+      - Generated an authentic, branded sample invoice (`dummy.jpg`, 800x1000px, 65KB) in `backend/storage/app/public/payment_proofs/dummy.jpg` and saved a master copy in `backend/database/seeders/dummy.jpg`.
+      - Uploaded and installed `dummy.jpg` to the production VPS at `/var/www/innerwhisper/backend/storage/app/public/payment_proofs/dummy.jpg`.
+      - Updated [`DatabaseSeeder.php`](file:///D:/Coding/neyla/backend/database/seeders/DatabaseSeeder.php) to automatically verify and ensure `payment_proofs/dummy.jpg` is present in public storage on any fresh database seeding.
+    - **VPS Nginx Storage Routing:**
+      - Added high-priority prefix modifier block `location ^~ /storage/ { alias /var/www/innerwhisper/backend/storage/app/public/; expires 30d; add_header Cache-Control "public, no-transform"; access_log off; }` to `/etc/nginx/sites-available/innerwhisper.my.id`. The `^~` stops regular expression matching when matched.
+      - Tested syntax (`nginx -t`) and reloaded Nginx. Verified live endpoint `https://innerwhisper.my.id/storage/payment_proofs/dummy.jpg` returns `HTTP/1.1 200 OK`.
+    - **PWA Prompt Hardening ([`PWAInstallBanner.jsx`](file:///D:/Coding/neyla/frontend/src/components/PWAInstallBanner.jsx)):**
+      - Added listener for `appinstalled` event to cleanly hide banner and persist dismissed state.
+      - Enclosed `deferredPrompt.prompt()` in robust try-catch-finally block to handle user cancel/dismiss gracefully.
+    - **Frontend Image Error Fallback ([`client.js`](file:///D:/Coding/neyla/frontend/src/api/client.js)):**
+      - Created `FALLBACK_INVOICE_PLACEHOLDER` data URI with Inner Whisper lavender branding and invoice icon.
+      - Added `onError={(e) => { e.currentTarget.src = FALLBACK_INVOICE_PLACEHOLDER; }}` fallback handling to all invoice preview modals:
+        - [`BookingList.jsx`](file:///D:/Coding/neyla/frontend/src/pages/BookingList.jsx)
+        - [`AdminDashboard.jsx`](file:///D:/Coding/neyla/frontend/src/pages/AdminDashboard.jsx)
+        - [`AdminHonorList.jsx`](file:///D:/Coding/neyla/frontend/src/pages/AdminHonorList.jsx)
+        - [`CounselorHonorList.jsx`](file:///D:/Coding/neyla/frontend/src/pages/CounselorHonorList.jsx)
+        - [`PsychologistDashboard.jsx`](file:///D:/Coding/neyla/frontend/src/pages/PsychologistDashboard.jsx)
+  - **Verification & Deployment:**
+    - Verified production build (`npm run build`) passing cleanly in 1.54s with 0 errors.
+    - Packaged, uploaded, extracted to VPS `/var/www/innerwhisper/frontend-dist/`, set permissions, and reloaded Nginx.
+    - Verified live HTTP response on `https://innerwhisper.my.id` (`HTTP/1.1 200 OK`) and `https://innerwhisper.my.id/storage/payment_proofs/dummy.jpg` (`HTTP/1.1 200 OK`).
 - **October 7, 2026 (Part 9):** Dedicated "Honor Konselor" Sidebar Menus & Dedicated Honor Management Pages.
   - **Requirement:**
     - Added dedicated "Honor Konselor" menu in sidebar for both Counselor (Psychologist) and Admin roles.

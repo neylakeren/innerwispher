@@ -10,6 +10,7 @@ use App\Models\Payment;
 use App\Models\CounselingSession;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Ensure dummy payment proof asset exists in public storage
+        if (!Storage::disk('public')->exists('payment_proofs/dummy.jpg')) {
+            Storage::disk('public')->makeDirectory('payment_proofs');
+            $seedDummy = database_path('seeders/dummy.jpg');
+            if (file_exists($seedDummy)) {
+                Storage::disk('public')->put('payment_proofs/dummy.jpg', file_get_contents($seedDummy));
+            }
+        }
         // 1. Create Admin
         User::create([
             'name' => 'Super Admin Neyla',
