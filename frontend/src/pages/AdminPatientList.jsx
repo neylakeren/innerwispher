@@ -75,7 +75,7 @@ export default function AdminPatientList() {
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center">
                                             <div className="h-9 w-9 rounded-full bg-[#efeafb] text-[#4b3b86] flex items-center justify-center font-bold text-xs">
-                                                {patient.name?.charAt(0) || 'P'}
+                                                {patient.name?.charAt(0) || 'U'}
                                             </div>
                                             <div className="ml-3">
                                                 <p className="text-sm font-semibold text-[#2b2542]">{patient.name}</p>

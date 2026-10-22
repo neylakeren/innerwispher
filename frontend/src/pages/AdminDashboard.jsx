@@ -315,7 +315,7 @@ export default function AdminDashboard() {
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center">
                                             <div className="h-9 w-9 rounded-full bg-[#efeafb] text-[#4b3b86] flex items-center justify-center mr-3 font-bold text-xs">
-                                                {booking.patient?.name?.charAt(0) || 'P'}
+                                                {booking.patient?.name?.charAt(0) || 'U'}
                                             </div>
                                             <div className="text-sm">
                                                 <p className="font-semibold text-[#2b2542]">{booking.patient?.name || 'User'}</p>

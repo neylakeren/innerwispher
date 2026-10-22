@@ -170,7 +170,7 @@ export default function DashboardLayout({ children }) {
                                     {user?.name || 'Pengguna'}
                                 </p>
                                 <p className="text-[11px] font-semibold text-[#8f78d8] capitalize truncate">
-                                    {user?.role || 'Member'}
+                                    {user?.role === 'patient' ? 'User' : (user?.role || 'Member')}
                                 </p>
                             </div>
                         </div>

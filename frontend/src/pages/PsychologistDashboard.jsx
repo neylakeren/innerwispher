@@ -181,7 +181,7 @@ export default function PsychologistDashboard() {
                                     <div key={booking.id} className="p-6 flex items-center justify-between hover:bg-slate-50/60 transition-colors flex-wrap gap-4">
                                         <div className="flex items-center space-x-4">
                                             <div className="h-11 w-11 rounded-2xl bg-[#efeafb] text-[#4b3b86] flex items-center justify-center font-bold text-sm">
-                                                {booking.patient?.name?.charAt(0) || 'P'}
+                                                {booking.patient?.name?.charAt(0) || 'U'}
                                             </div>
                                             <div>
                                                 <p className="font-bold text-[#2b2542]">{booking.patient?.name}</p>

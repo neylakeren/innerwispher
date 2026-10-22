@@ -403,6 +403,19 @@ This document serves as the project memory for the frontend landing page and das
 - **June 27, 2026:** Payment verification, booking flows, bot reply queue, chat optimistic UI features, database seeders, and pitch deck guides.
 - **June 23, 2026:** Style updates, router redirection fixes, custom input theme colors, and article layout fixes.
 
+- **October 22, 2026 (Part 4):** Database & Sidebar Role/Name Alignment ("Budi Pasien" -> "Budi User", "patient" -> "User").
+  - Menemukan bahwa teks "Budi Pasien" dan role "patient" berasal dari data baris tabel database `users` ID 5 serta rendering teks peran di sidebar footer layout:
+    - [DashboardLayout.jsx](file:///D:/Coding/neyla/frontend/src/layouts/DashboardLayout.jsx): Menyesuaikan teks peran pengguna dari `{user?.role || 'Member'}` menjadi `{user?.role === 'patient' ? 'User' : (user?.role || 'Member')}` sehingga role teknis `patient` tidak lagi tampil mentah ke pengguna.
+    - Menyesuaikan inisial avatar fallback pengguna dari `'P'` menjadi `'U'` di [AdminDashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminDashboard.jsx), [AdminPatientList.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminPatientList.jsx), [CounselorHonorList.jsx](file:///D:/Coding/neyla/frontend/src/pages/CounselorHonorList.jsx), dan [PsychologistDashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/PsychologistDashboard.jsx).
+    - [AuthController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/AuthController.php): Menambahkan dukungan multi-login alias sehingga akun demo dapat diakses baik menggunakan `user@neyla.id` maupun `pasien@neyla.id`.
+  - Database Live VPS & Lokal:
+    - Menjalankan kueri SQL di database live VPS `innerwhisper`: `UPDATE users SET name = 'Budi User', email = 'user@neyla.id' WHERE id = 5;`.
+    - Menjalankan re-seeding lokal `php artisan db:seed` yang menyelaraskan user ke `Budi User` (`user@neyla.id`).
+  - Re-build & Live Deployment:
+    - Mengompilasi ulang frontend bundle ke `index-BNbPo6yK.js` dan menyebarkan ke VPS `/var/www/innerwhisper/frontend-dist/`.
+    - Menghapus asset bundle lama, membersihkan cache Laravel, dan me-reload Nginx serta Supervisor queue worker.
+    - Memverifikasi HTTP 200 OK pada seluruh asset dan endpoint.
+
 - **October 22, 2026 (Part 3):** Commit, Push to GitHub & VPS Production Deployment (`vps-bleber`).
   - Staged all modified files including terminology refactoring, codebase memory persistence, and .gitignore.
   - Committed changes locally and pushed to GitHub `origin main` (`https://github.com/neylakeren/innerwispher.git`).
