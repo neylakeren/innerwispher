@@ -15,7 +15,7 @@ Memberikan kesan pertama yang profesional, mengenalkan nama brand, dan memberika
 ---
 
 ## 🗣️ Poin Penjelasan (Narasi Presentasi)
-> *"Selamat pagi/siang bapak dan ibu sekalian. Terima kasih atas waktu dan kesempatan yang diberikan. Hari ini, saya ingin memperkenalkan **InnerWhisper**—sebuah platform kesehatan mental terpadu yang dirancang untuk menjembatani pasien dengan bantuan psikolog secara instan, aman, dan terpercaya."*
+> *"Selamat pagi/siang bapak dan ibu sekalian. Terima kasih atas waktu dan kesempatan yang diberikan. Hari ini, saya ingin memperkenalkan **InnerWhisper**—sebuah platform kesehatan mental terpadu yang dirancang untuk menjembatani user dengan bantuan psikolog secara instan, aman, dan terpercaya."*
 
 ---
 

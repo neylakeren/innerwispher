@@ -128,7 +128,7 @@ export default function PsychologistDashboard() {
                                             variant="secondary"
                                             className="text-xs flex-1 flex items-center justify-center gap-1.5"
                                             onClick={() => setViewingInvoice({
-                                                title: `Bukti Invoice Honor Sesi Pasien ${booking.patient?.name}`,
+                                                title: `Bukti Invoice Honor Sesi User ${booking.patient?.name}`,
                                                 url: getStorageUrl(booking.payment.counselor_payout_proof),
                                                 amount: booking.payment.counselor_payout_amount,
                                                 date: booking.date
@@ -224,7 +224,7 @@ export default function PsychologistDashboard() {
                                 <div className="p-12 text-center text-[#5d5577]">
                                     <ClipboardList className="h-10 w-10 mx-auto mb-3 text-[#8a82a2]" />
                                     <p className="font-bold text-[#2b2542]">Tidak ada sesi aktif saat ini.</p>
-                                    <p className="text-xs text-[#5d5577] mt-1">Sesi baru akan muncul setelah pasien melakukan booking.</p>
+                                    <p className="text-xs text-[#5d5577] mt-1">Sesi baru akan muncul setelah user melakukan booking.</p>
                                 </div>
                             )}
                         </div>
@@ -283,10 +283,10 @@ export default function PsychologistDashboard() {
 
                         <div className="text-xs text-[#5d5577] space-y-2.5 leading-relaxed">
                             <p className="font-medium text-[#2b2542]">
-                                1. Pasien mentransfer biaya sesi ke rekening admin.
+                                1. User mentransfer biaya sesi ke rekening admin.
                             </p>
                             <p className="font-medium text-[#2b2542]">
-                                2. Admin memverifikasi pembayaran pasien dan membuka ruang chat konsultasi.
+                                2. Admin memverifikasi pembayaran user dan membuka ruang chat konsultasi.
                             </p>
                             <p className="font-medium text-[#2b2542]">
                                 3. Admin mentransfer honor ke rekening Anda dan mengunggah foto invoice.

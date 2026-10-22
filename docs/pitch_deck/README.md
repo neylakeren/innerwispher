@@ -15,7 +15,7 @@ Setiap sub-bab/slide dilengkapi dengan **Tujuan Slide**, **Konten Utama**, **Poi
 2. 📂 **[Slide 2: Vision (Visi & Misi)](file:///D:/Coding/neyla/docs/pitch_deck/02_vision.md)**
    * Misi demokratisasi akses kesehatan mental instan melalui platform InnerWhisper.
 3. 📂 **[Slide 3: Problem (Pernyataan Masalah)](file:///D:/Coding/neyla/docs/pitch_deck/03_problem.md)**
-   * Menjelaskan keluhan pasien saat mencari bantuan psikologis dan birokrasi konfirmasi pembayaran yang lambat.
+   * Menjelaskan keluhan user saat mencari bantuan psikologis dan birokrasi konfirmasi pembayaran yang lambat.
 4. 📂 **[Slide 4: Solution (Solusi)](file:///D:/Coding/neyla/docs/pitch_deck/04_solution.md)**
    * Menawarkan portal Cari Psikolog terintegrasi, verifikasi pembayaran instan, dan chat aman berbasis WebSocket.
 5. 📂 **[Slide 5: Team & Advisors (Tim & Psikolog)](file:///D:/Coding/neyla/docs/pitch_deck/05_team_advisors.md)**

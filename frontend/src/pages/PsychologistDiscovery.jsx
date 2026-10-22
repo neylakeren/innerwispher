@@ -111,7 +111,7 @@ export default function PsychologistDiscovery() {
                                 </div>
                                 <div className="text-right">
                                     <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Review</p>
-                                    <p className="text-sm font-bold text-slate-700">{psy.reviews} Pasien</p>
+                                    <p className="text-sm font-bold text-slate-700">{psy.reviews} User</p>
                                 </div>
                             </div>
                         </div>

@@ -76,7 +76,7 @@ class PaymentController extends Controller
         return response()->json([
             'message' => $request->status === 'verified' 
                 ? 'Pembayaran berhasil diverifikasi. Sesi chat konsultasi telah dibuka.' 
-                : 'Pembayaran ditolak. Pasien diminta mengunggah ulang bukti pembayaran.',
+                : 'Pembayaran ditolak. User diminta mengunggah ulang bukti pembayaran.',
             'payment' => $payment->load('booking.counselingSession'),
         ]);
     }
@@ -95,7 +95,7 @@ class PaymentController extends Controller
 
         if ($payment->status !== 'verified') {
             return response()->json([
-                'message' => 'Pembayaran pasien belum diverifikasi. Verifikasi pembayaran pasien terlebih dahulu.',
+                'message' => 'Pembayaran user belum diverifikasi. Verifikasi pembayaran user terlebih dahulu.',
             ], 422);
         }
 

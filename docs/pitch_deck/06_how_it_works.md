@@ -6,15 +6,15 @@
 Memberikan deskripsi teknis tingkat tinggi namun mendalam mengenai alur operasional dan teknologi yang menggerakkan platform Anda.
 
 ## 📝 Konten Utama (InnerWhisper)
-* **3 Langkah Sederhana Perjalanan Pasien:**
-  1. **Pilih & Jadwalkan:** Pasien mencari psikolog di portal Cari Psikolog, memilih tanggal, dan mengonfirmasi booking.
-  2. **Pembayaran Instan:** Pasien mentransfer biaya dan mengunggah foto bukti pembayaran. Admin memverifikasi bukti secara instan lewat dashboard verifikasi.
+* **3 Langkah Sederhana Perjalanan User:**
+  1. **Pilih & Jadwalkan:** User mencari psikolog di portal Cari Psikolog, memilih tanggal, dan mengonfirmasi booking.
+  2. **Pembayaran Instan:** User mentransfer biaya dan mengunggah foto bukti pembayaran. Admin memverifikasi bukti secara instan lewat dashboard verifikasi.
   3. **Mulai Konseling:** Setelah terverifikasi, status booking berubah menjadi *Paid* dan portal chat aman berbasis WebSockets (Reverb) otomatis terbuka untuk chatting langsung.
 
 ---
 
 ## 🗣️ Poin Penjelasan (Narasi Presentasi)
-> *"Bagaimana alur ini berjalan? Sangat sederhana. Pasien memilih psikolog, memilih tanggal, lalu mengunggah bukti pembayaran di tempat. Kurang dari 5 menit, Admin memverifikasi transaksi tersebut. Hasilnya, status berubah menjadi 'Sudah Bayar', dan sistem kami secara dinamis mengaktifkan portal chat konseling. Pasien langsung dapat berkonsultasi secara aman dengan psikolog mereka."*
+> *"Bagaimana alur ini berjalan? Sangat sederhana. User memilih psikolog, memilih tanggal, lalu mengunggah bukti pembayaran di tempat. Kurang dari 5 menit, Admin memverifikasi transaksi tersebut. Hasilnya, status berubah menjadi 'Sudah Bayar', dan sistem kami secara dinamis mengaktifkan portal chat konseling. User langsung dapat berkonsultasi secara aman dengan psikolog mereka."*
 
 ---
 

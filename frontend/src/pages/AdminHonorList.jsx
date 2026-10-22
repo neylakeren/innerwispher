@@ -144,7 +144,7 @@ export default function AdminHonorList() {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8a82a2]" />
                     <Input 
                         className="pl-10" 
-                        placeholder="Cari konselor / pasien..." 
+                        placeholder="Cari konselor / user..." 
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -189,7 +189,7 @@ export default function AdminHonorList() {
                         <p className="text-2xl font-extrabold text-amber-900 mt-3">
                             {unpaidCount} Sesi
                         </p>
-                        <p className="text-xs text-amber-700 mt-1 font-medium">Pembayaran pasien sudah diverifikasi</p>
+                        <p className="text-xs text-amber-700 mt-1 font-medium">Pembayaran user sudah diverifikasi</p>
                     </div>
                 </div>
 
@@ -215,7 +215,7 @@ export default function AdminHonorList() {
                 <div className="p-6 border-b border-slate-100 flex items-center justify-between">
                     <div>
                         <h2 className="font-bold text-lg text-[#2b2542]">Daftar Pembayaran Honor Sesi</h2>
-                        <p className="text-xs text-[#5d5577] mt-0.5">Sesi konsultasi yang pembayarannya telah terverifikasi oleh pasien.</p>
+                        <p className="text-xs text-[#5d5577] mt-0.5">Sesi konsultasi yang pembayarannya telah terverifikasi oleh user.</p>
                     </div>
                     <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5]">
                         {filtered.length} Sesi Terverifikasi
@@ -227,7 +227,7 @@ export default function AdminHonorList() {
                         <thead className="bg-[#efeafb]/40">
                             <tr>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Konselor</th>
-                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Pasien & Tanggal</th>
+                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">User & Tanggal</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Nominal Honor</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Status Honor</th>
                                 <th className="px-6 py-3.5 text-right text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Aksi Transfer</th>
@@ -283,7 +283,7 @@ export default function AdminHonorList() {
                                                                     title: `Bukti Transfer Honor ke ${booking.psychologist?.name}`,
                                                                     url: getStorageUrl(booking.payment.counselor_payout_proof),
                                                                     amount: payoutAmountDisplay,
-                                                                    subtitle: `Sesi Pasien: ${booking.patient?.name} | Tanggal: ${booking.date}`
+                                                                    subtitle: `Sesi User: ${booking.patient?.name} | Tanggal: ${booking.date}`
                                                                 })}
                                                                 className="text-xs font-semibold text-[#8f78d8] hover:text-[#4b3b86] underline flex items-center"
                                                             >
@@ -373,7 +373,7 @@ export default function AdminHonorList() {
                             <p className="font-bold text-[#4b3b86]">Detail Konselor Penerima:</p>
                             <p className="text-[#2b2542] font-semibold">{payoutBooking.psychologist?.name}</p>
                             <p className="text-[#5d5577]">No. Kontak: {payoutBooking.psychologist?.phone || payoutBooking.psychologist?.email}</p>
-                            <p className="text-[#5d5577]">Sesi Pasien: {payoutBooking.patient?.name} ({payoutBooking.date})</p>
+                            <p className="text-[#5d5577]">Sesi User: {payoutBooking.patient?.name} ({payoutBooking.date})</p>
                         </div>
 
                         <form onSubmit={handleSendPayout} className="space-y-4">

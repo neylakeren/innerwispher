@@ -8,7 +8,7 @@ Menyajikan garis waktu rencana pengembangan produk, peluncuran fitur utama, dan 
 ## 📝 Konten Utama (InnerWhisper)
 * **Garis Waktu Pengembangan (Roadmap 18 Bulan):**
   * **Bulan 1-6 (Done/Fase 1):** Integrasi sistem otentikasi multi-peran, pencarian psikolog dinamis, alur unggah & verifikasi bukti transfer manual, dan portal chat real-time.
-  * **Bulan 7-12 (Fase 2):** Pengembangan asisten AI (Smart Chatbot) untuk triage keluhan awal pasien, implementasi gateway pembayaran otomatis, dan verifikasi profil psikolog tingkat lanjut.
+  * **Bulan 7-12 (Fase 2):** Pengembangan asisten AI (Smart Chatbot) untuk triage keluhan awal user, implementasi gateway pembayaran otomatis, dan verifikasi profil psikolog tingkat lanjut.
   * **Bulan 13-18 (Fase 3):** Peluncuran aplikasi mobile (Android/iOS) berbasis Flutter untuk memperluas jangkauan aksesibilitas konseling di mana saja.
 
 ---

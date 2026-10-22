@@ -10,7 +10,7 @@ Menyajikan bukti-bukti awal tentang penerimaan pasar terhadap produk Anda (*earl
   * **Pendaftaran Pengguna:** Lebih dari 1.200 pendaftar masuk antrean uji coba awal.
   * **Konversi Booking:** Pertumbuhan pemesanan sesi konseling sebesar 25% setiap bulannya.
   * **Sesi Chat Aktif:** Rata-rata waktu konsultasi real-time mencapai 45 menit per sesi dengan retensi pengguna yang tinggi.
-  * **Tingkat Kepuasan:** Rata-rata penilaian kepuasan dari pasien awal mencapai 4.9 / 5.0.
+  * **Tingkat Kepuasan:** Rata-rata penilaian kepuasan dari user awal mencapai 4.9 / 5.0.
 
 ---
 

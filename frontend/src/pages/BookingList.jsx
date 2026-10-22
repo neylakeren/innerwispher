@@ -239,7 +239,7 @@ export default function BookingList() {
                             <tr>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Jadwal Sesi</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">
-                                    {user.role === 'patient' ? 'Konselor' : 'Pasien'}
+                                    {user.role === 'patient' ? 'Konselor' : 'User'}
                                 </th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Status Pembayaran</th>
                                 {user.role === 'psychologist' && (
@@ -276,7 +276,7 @@ export default function BookingList() {
                                             <div className="text-xs text-[#8f78d8] font-medium">
                                                 {user.role === 'patient' 
                                                     ? (booking.psychologist?.psychologist_profile?.specialization || 'Konselor Berlisensi')
-                                                    : (booking.patient?.phone || booking.patient?.email || 'Pasien')}
+                                                    : (booking.patient?.phone || booking.patient?.email || 'User')}
                                             </div>
                                         </td>
 
@@ -345,7 +345,7 @@ export default function BookingList() {
                                                     </span>
                                                 ) : (
                                                     <span className="text-xs text-slate-400 italic">
-                                                        Pasien belum bayar
+                                                        User belum bayar
                                                     </span>
                                                 )}
                                             </td>
@@ -373,7 +373,7 @@ export default function BookingList() {
                                                         size="sm" 
                                                         variant="secondary"
                                                         onClick={() => setViewingImage({
-                                                            title: 'Bukti Pembayaran Invoice Pasien',
+                                                            title: 'Bukti Pembayaran Invoice User',
                                                             url: getStorageUrl(booking.payment.proof_image_path),
                                                             amount: booking.payment.amount,
                                                             status: booking.payment.status === 'verified' ? 'Terverifikasi' : booking.payment.status === 'pending' ? 'Menunggu Approval Admin' : 'Ditolak'
@@ -381,7 +381,7 @@ export default function BookingList() {
                                                         className="text-xs flex items-center gap-1.5"
                                                     >
                                                         <FileText className="h-3.5 w-3.5" />
-                                                        Invoice Pasien
+                                                        Invoice User
                                                     </Button>
                                                 )}
 

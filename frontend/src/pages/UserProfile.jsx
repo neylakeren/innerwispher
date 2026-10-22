@@ -101,7 +101,7 @@ export default function UserProfile() {
             Progres Karier {totalProgress}%
           </span>
           <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#d1e7dd] text-[#198754] capitalize">
-            Peran: {user?.role || 'Pasien'}
+            Peran: {user?.role === 'patient' ? 'User' : (user?.role || 'User')}
           </span>
         </div>
       </div>

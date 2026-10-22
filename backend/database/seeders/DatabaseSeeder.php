@@ -106,10 +106,10 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // 3. Create Patient
+        // 3. Create Patient / User
         $patient = User::create([
-            'name' => 'Budi Pasien',
-            'email' => 'pasien@neyla.id',
+            'name' => 'Budi User',
+            'email' => 'user@neyla.id',
             'phone' => '08333333333',
             'password' => Hash::make('password'),
             'role' => 'patient',

@@ -14,7 +14,7 @@ Menjelaskan bagaimana strategi Anda untuk mendapatkan pengguna baru, biaya akuis
 ---
 
 ## 🗣️ Poin Penjelasan (Narasi Presentasi)
-> *"Bagaimana kami menjangkau pengguna? Pertama, kami memanfaatkan portal artikel edukatif premium dengan CTA konseling terarah. Kedua, kami meluncurkan program kesejahteraan karyawan (EAP) langsung ke korporasi. Ini memberikan aliran pasien yang stabil bagi para psikolog yang bermitra di platform kami."*
+> *"Bagaimana kami menjangkau pengguna? Pertama, kami memanfaatkan portal artikel edukatif premium dengan CTA konseling terarah. Kedua, kami meluncurkan program kesejahteraan karyawan (EAP) langsung ke korporasi. Ini memberikan aliran user yang stabil bagi para psikolog yang bermitra di platform kami."*
 
 ---
 

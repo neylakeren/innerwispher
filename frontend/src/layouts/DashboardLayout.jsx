@@ -64,7 +64,7 @@ export default function DashboardLayout({ children }) {
                 { name: 'Verifikasi Pembayaran', href: '/bookings', icon: CreditCard },
                 { name: 'Honor Konselor', href: '/admin/honor', icon: Wallet },
                 { name: 'Daftar Psikolog', href: '/admin/psychologists', icon: Users },
-                { name: 'Data Pasien', href: '/admin/patients', icon: UserCheck },
+                { name: 'Data User', href: '/admin/patients', icon: UserCheck },
                 { name: 'Profil Saya', href: '/profil', icon: User },
             ];
         }

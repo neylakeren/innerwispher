@@ -454,7 +454,7 @@ export default function AdminPsychologistList() {
                                     className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
                                 />
                                 <label htmlFor="is_verified" className="text-xs font-semibold text-[#2b2542] cursor-pointer">
-                                    Tandai Sebagai Psikolog Terverifikasi (Dapat Melayani Pasien)
+                                    Tandai Sebagai Psikolog Terverifikasi (Dapat Melayani User)
                                 </label>
                             </div>
 

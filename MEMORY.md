@@ -403,6 +403,44 @@ This document serves as the project memory for the frontend landing page and das
 - **June 27, 2026:** Payment verification, booking flows, bot reply queue, chat optimistic UI features, database seeders, and pitch deck guides.
 - **June 23, 2026:** Style updates, router redirection fixes, custom input theme colors, and article layout fixes.
 
+- **October 22, 2026 (Part 3):** Commit, Push to GitHub & VPS Production Deployment (`vps-bleber`).
+  - Staged all modified files including terminology refactoring, codebase memory persistence, and .gitignore.
+  - Committed changes locally and pushed to GitHub `origin main` (`https://github.com/neylakeren/innerwispher.git`).
+  - Built production frontend via `npm run build` (CSS: `index-DYOdjuHY.css`, JS: `index-l5jqYMye.js`).
+  - Transferred and deployed `frontend-dist.zip` to `/var/www/innerwhisper/frontend-dist` on VPS `bleber`.
+  - Transferred updated backend files (`PaymentController.php`, `DatabaseSeeder.php`) to `/var/www/innerwhisper/backend/`.
+  - Cleared caches on VPS (`php artisan optimize:clear && php artisan config:cache && php artisan route:cache`).
+  - Set ownership permissions to `www-data:www-data` and reloaded Nginx.
+  - Restarted Supervisor queue worker (`innerwhisper-queue`).
+  - Verified live production status on `https://innerwhisper.my.id/` and `https://innerwhisper.my.id/up` yielding HTTP 200 OK.
+
+- **October 22, 2026 (Part 2):** Terminological Alignment: Penggantian istilah "Pasien" menjadi "User".
+  - Dilakukan penyesuaian seluruh teks UI/UX, label navigasi, tabel admin, status card, dan modal di frontend React:
+    - [DashboardLayout.jsx](file:///D:/Coding/neyla/frontend/src/layouts/DashboardLayout.jsx): Label menu `Data Pasien` diganti menjadi `Data User`.
+    - [AdminDashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminDashboard.jsx): Label dan heading diselaraskan (`Invoice User`, `Total User Terdaftar`, `Antrean Verifikasi Invoice User`, tabel kolom `User & Tanggal`, modal subtitle, dan toast notification).
+    - [AdminPatientList.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminPatientList.jsx): Header `Manajemen User`, filter placeholder `Cari user / telepon...`, dan state kosong `Tidak ada data user`.
+    - [AdminHonorList.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminHonorList.jsx): Placeholder pencarian, kolom tabel `User & Tanggal`, dan subtitle modal honor.
+    - [AdminPsychologistList.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminPsychologistList.jsx): Label verifikasi `Dapat Melayani User`.
+    - [BookingList.jsx](file:///D:/Coding/neyla/frontend/src/pages/BookingList.jsx): Header kolom lawan bicara konselor/user, badge fallback, dan invoice modal title.
+    - [CounselorHonorList.jsx](file:///D:/Coding/neyla/frontend/src/pages/CounselorHonorList.jsx) & [PsychologistDashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/PsychologistDashboard.jsx): Penyesuaian antrean sesi honor dan panduan alur pencairan honor.
+    - [PsychologistDiscovery.jsx](file:///D:/Coding/neyla/frontend/src/pages/PsychologistDiscovery.jsx): Counter review `{psy.reviews} User`.
+    - [UserProfile.jsx](file:///D:/Coding/neyla/frontend/src/pages/UserProfile.jsx): Badge peran menampilkan `User` untuk client.
+  - Backend API & Seeders:
+    - [PaymentController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/PaymentController.php): Pesan respon verifikasi & penolakan pembayaran diperbarui ke istilah user.
+    - [DatabaseSeeder.php](file:///D:/Coding/neyla/backend/database/seeders/DatabaseSeeder.php): User demo default disesuaikan ke `Budi User` (`user@neyla.id`).
+    - [phpunit.xml](file:///D:/Coding/neyla/backend/phpunit.xml): Menambahkan environment `BROADCAST_CONNECTION=log` agar unit test lokal berjalan tanpa ketergantungan server Reverb port 8080.
+  - Panduan Dokumentasi Pitch Deck:
+    - [Pitch_Deck_Guidance.md](file:///D:/Coding/neyla/docs/Pitch_Deck_Guidance.md) dan seluruh slide di [docs/pitch_deck/](file:///D:/Coding/neyla/docs/pitch_deck/) diselaraskan ke terminologi `User`.
+  - Verifikasi:
+    - Frontend build (`npm run build`) berhasil 100% tanpa error.
+    - Backend test suite (`php artisan test`) berhasil 9 passed (23 assertions).
+
+- **October 22, 2026 (Part 1):** Codebase Memory Knowledge Graph integration.
+  - Successfully initialized and indexed the repository (`D-Coding-neyla`) into `codebase-memory-mcp`.
+  - Generated knowledge graph schema with 1,669 nodes and 3,562 edges covering PHP backend and React frontend symbols, routes, AST definitions, and dependencies.
+  - Saved persistent graph snapshot to `.codebase-memory/graph.db.zst` and created `.gitattributes`.
+  - Codebase memory MCP graph queries (`search_graph`, `trace_path`, `get_code_snippet`, `get_architecture`) are fully active with file watch / git scan strategy.
+
 ## 🛠️ Local Environment Notes
 - **VPS Environment (vps-bleber):**
   - OS: Ubuntu 22.04.5 LTS

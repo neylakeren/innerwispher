@@ -21,7 +21,7 @@ Sebelum mempresentasikan pitch deck, pastikan dokumen-dokumen pendukung berikut 
   * **15 Slide** untuk presentasi penuh (*full pitch*).
   * **15 Slide** lampiran (*appendix*) untuk data teknis/keuangan tambahan.
 * **Daftar Pertanyaan:** Siapkan riset mengenai investor yang ditemui dan siapkan pertanyaan strategis untuk mereka.
-* **Referensi:** 5 referensi personal per anggota tim utama dan beberapa referensi testimoni dari pengguna/pasien awal.
+* **Referensi:** 5 referensi personal per anggota tim utama dan beberapa referensi testimoni dari pengguna/user awal.
 
 ---
 
@@ -42,7 +42,7 @@ Berikut adalah panduan isi masing-masing slide yang diselaraskan dengan proyek *
 * **Masalah Lapangan:**
   * Sulitnya mencari psikolog klinis berlisensi yang sesuai dengan kecocokan pribadi.
   * Lamanya proses verifikasi administrasi dan pembayaran manual secara tradisional.
-  * Kurangnya portal komunikasi chat yang andal, aman, dan instan antara pasien-psikolog.
+  * Kurangnya portal komunikasi chat yang andal, aman, dan instan antara user-psikolog.
 
 ### 4. Solution (Solusi)
 * **Konten:** Solusi yang kita tawarkan dan mengapa solusi ini lebih cepat, lebih baik, lebih murah, dan lebih efektif.
@@ -63,7 +63,7 @@ Berikut adalah panduan isi masing-masing slide yang diselaraskan dengan proyek *
 * **Alur InnerWhisper:**
   ```mermaid
   graph LR
-      A[Pasien Pilih Psikolog] --> B[Jadwalkan & Bayar]
+      A[User Pilih Psikolog] --> B[Jadwalkan & Bayar]
       B --> C[Admin Verifikasi Bukti]
       C --> D[Portal Chat Aktif Otomatis]
       D --> E[Sesi Konseling Berjalan]
@@ -84,7 +84,7 @@ Berikut adalah panduan isi masing-masing slide yang diselaraskan dengan proyek *
 ### 9. KPIs & Traction (Metrik & Traksi Awal)
 * **Konten:** Bukti traksi awal untuk meyakinkan investor tahap awal (*seed-stage*).
 * **Metrik Utama:**
-  * Jumlah pendaftaran pasien baru (*list signups*).
+  * Jumlah pendaftaran user baru (*list signups*).
   * Tingkat penyelesaian sesi konseling (*active session completion rate*).
   * Kecepatan waktu verifikasi pembayaran admin rata-rata di bawah 5 menit.
 

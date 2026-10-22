@@ -9,7 +9,7 @@ Mendeskripsikan penderitaan mendalam (*searing pain*) yang dialami oleh calon pe
 * **Masalah Pengguna (Rasa Sakit Utama):**
   1. **Kesulitan Menemukan Psikolog:** Sulit mencari tenaga profesional berlisensi yang sesuai dengan kecocokan masalah pribadi (depresi, karir, keluarga).
   2. **Biaya & Administrasi Rumit:** Proses verifikasi bukti pembayaran manual tradisional lambat dan tidak transparan.
-  3. **Hambatan Komunikasi Instan:** Portal chat real-time yang aman dan andal jarang terintegrasi secara langsung, membuat pasien enggan memulai terapi.
+  3. **Hambatan Komunikasi Instan:** Portal chat real-time yang aman dan andal jarang terintegrasi secara langsung, membuat user enggan memulai terapi.
 * **Seberapa Besar Masalah Ini?** Lebih dari 20 juta orang di Indonesia mengalami stress, kecemasan, dan depresi, namun kurang dari 10% memiliki akses ke layanan konseling yang layak.
 
 ---

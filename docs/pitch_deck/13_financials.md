@@ -44,13 +44,13 @@ Menunjukkan pemahaman mendalam Anda mengenai arus kas keuangan perusahaan, biaya
 | | e. Lainnya (Audit keamanan) | Audit keamanan API & port oleh Security Auditor | Rp 10.000.000 |
 | | *Total Biaya Pengembangan* | | **Rp 70.000.000** |
 | **4** | **Customer Acquisition Cost (CAC)** | | |
-| | a. Iklan | Kampanye akuisisi pasien baru via Ads | Rp 15.000 / user |
+| | a. Iklan | Kampanye akuisisi user baru via Ads | Rp 15.000 / user |
 | | b. Influencer/endorsement | Promosi psikolog klinis melalui influencer lokal | Rp 10.000 / user |
 | | c. Promo & diskon | Potongan harga untuk konsultasi perdana | Rp 5.000 / user |
-| | d. Referral program | Insentif saldo rujukan untuk pasien | Rp 5.000 / user |
+| | d. Referral program | Insentif saldo rujukan untuk user | Rp 5.000 / user |
 | | *Total CAC per Pengguna* | | **Rp 35.000 / user** |
 | **5** | **Biaya Operasional Lainnya** | | |
-| | a. Customer support | Gaji admin operasional & CS penanganan pasien | Rp 12.000.000 |
+| | a. Customer support | Gaji admin operasional & CS penanganan user | Rp 12.000.000 |
 | | b. Administrasi & legal | Pengurusan izin SIP & lisensi badan usaha klinis | Rp 15.000.000 |
 | | c. Keamanan data & backup | Cloud backup periodik & enkripsi database | Rp 6.000.000 |
 | | d. Lainnya | Pengeluaran tak terduga operasional | Rp 5.000.000 |

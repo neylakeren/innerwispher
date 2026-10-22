@@ -100,8 +100,8 @@ export default function AdminDashboard() {
             setActionLoading(paymentId);
             const res = await client.post(`/admin/payments/${paymentId}/verify`, { status });
             showToast(status === 'verified' 
-                ? 'Pembayaran pasien berhasil disetujui! Sesi chat konsultasi telah dibuka.' 
-                : 'Pembayaran pasien ditolak.');
+                ? 'Pembayaran user berhasil disetujui! Sesi chat konsultasi telah dibuka.' 
+                : 'Pembayaran user ditolak.');
             await Promise.all([fetchStats(), fetchBookingsData()]);
         } catch (err) {
             alert('Gagal memproses verifikasi: ' + (err.response?.data?.message || err.message));
@@ -176,7 +176,7 @@ export default function AdminDashboard() {
         <div className="space-y-8">
             <header>
                 <h1 className="text-2xl font-bold text-[#2b2542]">Panel Administrasi & Keuangan</h1>
-                <p className="text-[#5d5577] text-sm mt-1">Verifikasi invoice pembayaran pasien, buka sesi chat, dan kelola pembayaran honor ke konselor.</p>
+                <p className="text-[#5d5577] text-sm mt-1">Verifikasi invoice pembayaran user, buka sesi chat, dan kelola pembayaran honor ke konselor.</p>
             </header>
 
             {/* Toast Notification */}
@@ -189,11 +189,11 @@ export default function AdminDashboard() {
 
             {/* Stat Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {/* 1. Pending Verifikasi Pasien */}
+                {/* 1. Pending Verifikasi User */}
                 <div className="bg-white p-6 rounded-2xl border border-amber-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
                     <div>
                         <div className="flex items-center justify-between">
-                            <span className="text-xs font-semibold text-amber-700">Invoice Pasien</span>
+                            <span className="text-xs font-semibold text-amber-700">Invoice User</span>
                             <div className="h-9 w-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
                                 <Clock className="h-5 w-5" />
                             </div>
@@ -204,7 +204,7 @@ export default function AdminDashboard() {
                         <p className="text-xs text-amber-700 mt-1 font-medium">Menunggu Verifikasi & Buka Chat</p>
                     </div>
                     <a 
-                        href="#antrean-verifikasi-pasien" 
+                        href="#antrean-verifikasi-user" 
                         className="mt-4 pt-3 border-t border-amber-100 flex items-center justify-between text-xs font-bold text-amber-800 hover:text-amber-950 transition-colors"
                     >
                         <span>Tinjau Invoice</span>
@@ -258,7 +258,7 @@ export default function AdminDashboard() {
                     </Link>
                 </div>
 
-                {/* 4. Total Pasien */}
+                {/* 4. Total User */}
                 <div className="bg-white p-6 rounded-2xl border border-[#d9cff5]/80 shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
                     <div>
                         <div className="flex items-center justify-between">
@@ -270,30 +270,30 @@ export default function AdminDashboard() {
                         <p className="text-3xl font-extrabold text-[#2b2542] mt-3">
                             {stats.total_patients}
                         </p>
-                        <p className="text-xs text-[#5d5577] mt-1 font-medium">Pasien Terdaftar</p>
+                        <p className="text-xs text-[#5d5577] mt-1 font-medium">User Terdaftar</p>
                     </div>
                     <Link 
                         to="/admin/patients" 
                         className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#8f78d8] hover:text-[#4b3b86] transition-colors"
                     >
-                        <span>Lihat Pasien</span>
+                        <span>Lihat User</span>
                         <ArrowUpRight className="h-3.5 w-3.5" />
                     </Link>
                 </div>
             </div>
 
-            {/* SECTION 1: Antrean Verifikasi Pembayaran Invoice Pasien */}
-            <section id="antrean-verifikasi-pasien" className="bg-white rounded-2xl border border-[#d9cff5]/80 shadow-sm overflow-hidden">
+            {/* SECTION 1: Antrean Verifikasi Pembayaran Invoice User */}
+            <section id="antrean-verifikasi-user" className="bg-white rounded-2xl border border-[#d9cff5]/80 shadow-sm overflow-hidden">
                 <div className="p-6 border-b border-slate-100 flex items-center justify-between flex-wrap gap-2">
                     <div>
                         <div className="flex items-center gap-2">
-                            <h2 className="font-bold text-lg text-[#2b2542]">1. Antrean Verifikasi Invoice Pasien</h2>
+                            <h2 className="font-bold text-lg text-[#2b2542]">1. Antrean Verifikasi Invoice User</h2>
                             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
                                 {pendingPayments.length} Menunggu
                             </span>
                         </div>
                         <p className="text-xs text-[#5d5577] mt-1">
-                            Setujui invoice pasien agar sesi konsultasi & chat langsung terbuka untuk pasien dan konselor.
+                            Setujui invoice user agar sesi konsultasi & chat langsung terbuka untuk user dan konselor.
                         </p>
                     </div>
                 </div>
@@ -302,10 +302,10 @@ export default function AdminDashboard() {
                     <table className="min-w-full divide-y divide-slate-100">
                         <thead className="bg-[#efeafb]/40">
                             <tr>
-                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Pasien</th>
+                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">User</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Konselor Dituju</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Jumlah Tagihan</th>
-                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Foto Invoice Pasien</th>
+                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Foto Invoice User</th>
                                 <th className="px-6 py-3.5 text-right text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Aksi Verifikasi</th>
                             </tr>
                         </thead>
@@ -318,7 +318,7 @@ export default function AdminDashboard() {
                                                 {booking.patient?.name?.charAt(0) || 'P'}
                                             </div>
                                             <div className="text-sm">
-                                                <p className="font-semibold text-[#2b2542]">{booking.patient?.name || 'Pasien'}</p>
+                                                <p className="font-semibold text-[#2b2542]">{booking.patient?.name || 'User'}</p>
                                                 <p className="text-[#5d5577] text-xs">{booking.patient?.phone || booking.patient?.email || '-'}</p>
                                             </div>
                                         </div>
@@ -349,7 +349,7 @@ export default function AdminDashboard() {
                                                 className="inline-flex items-center text-[#8f78d8] hover:text-[#4b3b86] text-xs font-semibold bg-[#efeafb] px-3 py-1.5 rounded-xl border border-[#d9cff5] transition-colors"
                                             >
                                                 <Eye className="h-3.5 w-3.5 mr-1.5" />
-                                                Lihat Invoice Pasien
+                                                Lihat Invoice User
                                             </button>
                                         ) : (
                                             <span className="text-xs text-[#8a82a2] italic">Tidak ada file</span>
@@ -389,8 +389,8 @@ export default function AdminDashboard() {
                                             <div className="h-10 w-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2">
                                                 <CheckCircle className="h-5 w-5" />
                                             </div>
-                                            <p className="font-semibold text-[#2b2542] text-sm">Tidak ada antrean invoice pasien</p>
-                                            <p className="text-xs text-[#5d5577] mt-0.5">Semua invoice pasien telah disetujui dan chat terbuka.</p>
+                                            <p className="font-semibold text-[#2b2542] text-sm">Tidak ada antrean invoice user</p>
+                                            <p className="text-xs text-[#5d5577] mt-0.5">Semua invoice user telah disetujui dan chat terbuka.</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -421,7 +421,7 @@ export default function AdminDashboard() {
                         <thead className="bg-[#efeafb]/40">
                             <tr>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Konselor</th>
-                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Pasien & Tanggal</th>
+                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">User & Tanggal</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Nominal Honor</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Status Honor</th>
                                 <th className="px-6 py-3.5 text-right text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Aksi Transfer Honor</th>
@@ -484,7 +484,7 @@ export default function AdminDashboard() {
                                                                     title: `Bukti Transfer Honor ke ${booking.psychologist?.name}`,
                                                                     url: getStorageUrl(booking.payment.counselor_payout_proof),
                                                                     amount: payoutAmountDisplay,
-                                                                    subtitle: `Sesi Pasien: ${booking.patient?.name} | Jadwal: ${booking.date}`
+                                                                    subtitle: `Sesi User: ${booking.patient?.name} | Jadwal: ${booking.date}`
                                                                 })}
                                                                 className="text-xs font-semibold text-[#8f78d8] hover:text-[#4b3b86] underline flex items-center"
                                                             >
@@ -532,7 +532,7 @@ export default function AdminDashboard() {
                                 <tr>
                                     <td colSpan="5" className="px-6 py-10 text-center text-[#5d5577]">
                                         <p className="font-semibold text-[#2b2542] text-sm">Belum ada sesi konsultasi yang telah disetujui pembayarannya.</p>
-                                        <p className="text-xs text-[#5d5577] mt-0.5">Sesi akan otomatis muncul di sini setelah invoice pasien diverifikasi.</p>
+                                        <p className="text-xs text-[#5d5577] mt-0.5">Sesi akan otomatis muncul di sini setelah invoice user diverifikasi.</p>
                                     </td>
                                 </tr>
                             )}
@@ -577,7 +577,7 @@ export default function AdminDashboard() {
                             <p className="font-bold text-[#4b3b86]">Detail Konselor Penerima:</p>
                             <p className="text-[#2b2542] font-semibold">{payoutBooking.psychologist?.name}</p>
                             <p className="text-[#5d5577]">No. Kontak: {payoutBooking.psychologist?.phone || payoutBooking.psychologist?.email}</p>
-                            <p className="text-[#5d5577]">Sesi Pasien: {payoutBooking.patient?.name} ({payoutBooking.date})</p>
+                            <p className="text-[#5d5577]">Sesi User: {payoutBooking.patient?.name} ({payoutBooking.date})</p>
                         </div>
 
                         <form onSubmit={handleSendPayout} className="space-y-4">

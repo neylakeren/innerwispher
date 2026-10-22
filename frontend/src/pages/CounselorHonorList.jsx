@@ -148,7 +148,7 @@ export default function CounselorHonorList() {
                         <p className="text-2xl font-extrabold text-[#2b2542] mt-3">
                             {unpaidList.length} Sesi
                         </p>
-                        <p className="text-xs text-[#5d5577] mt-1 font-medium">Pasien lunas, menunggu transfer admin</p>
+                        <p className="text-xs text-[#5d5577] mt-1 font-medium">User lunas, menunggu transfer admin</p>
                     </div>
                 </div>
             </div>
@@ -239,7 +239,7 @@ export default function CounselorHonorList() {
                     <table className="min-w-full divide-y divide-slate-100">
                         <thead className="bg-[#efeafb]/40">
                             <tr>
-                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Pasien</th>
+                                <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">User</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Jadwal Sesi</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Nominal Honor</th>
                                 <th className="px-6 py-3.5 text-left text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Bukti Invoice</th>
