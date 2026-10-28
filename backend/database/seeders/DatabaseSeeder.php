@@ -172,5 +172,8 @@ class DatabaseSeeder extends Seeder
             'sender_id' => $patient->id,
             'content' => 'Halo Dokter, saya merasa sangat cemas belakangan ini karena pekerjaan.',
         ]);
+
+        // 5. Seed PRO and Free Subscription Demo Users
+        $this->call(UserSubscriptionSeeder::class);
     }
 }

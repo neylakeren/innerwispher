@@ -481,7 +481,13 @@ This document serves as the project memory for the frontend landing page and das
       3. `/portofolio` ([CareerPortfolio.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerPortfolio.jsx)): Standar kurasi 4 & 5 serta Modul Template Portofolio (Figma & Notion) terkunci dengan Paywall PRO. Poin 1–3 gratis.
       4. `/modul` ([CareerLearning.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerLearning.jsx)): Modul 1 & 2 gratis. Modul lanjutan 3–6 (Metode STAR, Personal Branding LinkedIn, Burnout & Mental Health, Analisis Data) terkunci dengan Paywall PRO.
       5. `/dashboard` ([Dashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/Dashboard.jsx)): Menampilkan kartu upgrade Single Bundle 35K dengan ajakan aktivasi PRO jika belum bayar.
-    - [Login.jsx](file:///D:/Coding/neyla/frontend/src/pages/Login.jsx): Menambahkan 1-click credential chips untuk pengujian cepat (`user@neyla.id` dan `admin@neyla.id`).
+    - [Login.jsx](file:///D:/Coding/neyla/frontend/src/pages/Login.jsx): Menambahkan 1-click credential chips terorganisir untuk pengujian cepat 4 kategori pengguna:
+      1. Belum Berlangganan (Free Tier): `user@neyla.id` (Budi) dan `rara@neyla.id` (Rara) - fitur PRO terkunci.
+      2. Menunggu Verifikasi Admin (Pending): `dimas@neyla.id` (Dimas) - ada struk transfer BCA pending untuk diverifikasi admin.
+      3. Sudah Berlangganan (PRO Aktif): `sarah@neyla.id` (Sarah - Mandiri) dan `kevin@neyla.id` (Kevin - BCA) - semua fitur terbuka.
+      4. Admin: `admin@neyla.id` (Super Admin) - panel approval struk transfer.
+      (Password untuk seluruh akun demo: `password`).
+    - [UserSubscriptionSeeder.php](file:///D:/Coding/neyla/backend/database/seeders/UserSubscriptionSeeder.php): Seeder akun demo untuk Free Tier, Pending, dan PRO Member Aktif dengan dummy bukti transfer di public storage.
     - [echo.js](file:///D:/Coding/neyla/frontend/src/api/echo.js): Lazy Proxy wrapper untuk mencegah crash WebSocket Reverb pada startup lokal.
   - **Pitch Deck & Dokumentasi:**
     - Memperbarui slide pitch deck: [08_business_model.md](file:///D:/Coding/neyla/docs/pitch_deck/08_business_model.md), [04_solution.md](file:///D:/Coding/neyla/docs/pitch_deck/04_solution.md), [06_how_it_works.md](file:///D:/Coding/neyla/docs/pitch_deck/06_how_it_works.md).
