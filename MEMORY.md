@@ -553,6 +553,16 @@ This document serves as the project memory for the frontend landing page and das
       - Service Nginx dan Supervisor queue worker di-reload sukses.
       - Live health check `https://innerwhisper.my.id/` dan `https://innerwhisper.my.id/up` menghasilkan HTTP 200 OK.
 
+- **October 28, 2026 (Part 4):** Pembersihan Seluruh Transaksi & Booking Dummy di Database Produksi & Lokal.
+  - Menghapus seluruh riwayat transaksi dummy dari tabel `payments`, `bookings`, `counseling_sessions`, dan `messages` baik di server live VPS (`innerwhisper.my.id`) maupun lingkungan lokal.
+  - Menghapus seluruh file foto struk/invoice dummy pengujian di direktori storage server (`storage/app/public/payment_proofs/`).
+  - Memperbarui [DatabaseSeeder.php](file:///D:/Coding/neyla/backend/database/seeders/DatabaseSeeder.php) dan [UserSubscriptionSeeder.php](file:///D:/Coding/neyla/backend/database/seeders/UserSubscriptionSeeder.php) agar hanya men-seed akun user demo tanpa menyuntikkan data transaksi dummy ke tabel `payments`.
+  - Akun demo tetap siap digunakan:
+    - Belum Berlangganan (Free Tier): Budi (`user@neyla.id`), Rara (`rara@neyla.id`), Dimas (`dimas@neyla.id`).
+    - Sudah Berlangganan (PRO Aktif): Sarah (`sarah@neyla.id`), Kevin (`kevin@neyla.id`).
+    - Admin: Super Admin (`admin@neyla.id`).
+  - Verifikasi: Endpoint `GET /api/admin/pro-payments` dan `GET /api/bookings` kini bersih menghasilkan array kosong `[]`, siap untuk menerima transaksi nyata dari pengguna.
+
 - **October 28, 2026 (Part 3):** Perbaikan & Optimalisasi Upload Bukti Pembayaran / Foto Struk di Server Live VPS.
   - **Identifikasi Masalah (Root Cause):**
     - Konfigurasi virtual host Nginx `/etc/nginx/sites-available/innerwhisper.my.id` belum mendefinisikan `client_max_body_size`, sehingga Nginx menerapkan batas default **1 MB**.

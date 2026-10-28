@@ -107,76 +107,21 @@ class DatabaseSeeder extends Seeder
         }
 
         // 3. Create Patient / User
-        $patient = User::create([
-            'name' => 'Budi User',
-            'email' => 'user@neyla.id',
-            'phone' => '08333333333',
-            'password' => Hash::make('password'),
-            'role' => 'patient',
-        ]);
+        $patient = User::updateOrCreate(
+            ['email' => 'user@neyla.id'],
+            [
+                'name' => 'Budi User',
+                'phone' => '08333333333',
+                'password' => Hash::make('password'),
+                'role' => 'patient',
+                'is_pro' => false,
+            ]
+        );
 
-        // 4. Create Sample Bookings (Link to Dian Sastro as the primary active psychologist)
-        
-        // Booking 1: Pending Payment (Patient needs to upload proof)
-        Booking::create([
-            'patient_id' => $patient->id,
-            'psychologist_id' => $psy1->id,
-            'date' => now()->addDays(2),
-            'status' => 'confirmed', // Confirmed by WA, waiting payment
-        ]);
-
-        // Booking 2: Pending Verification (Admin needs to verify)
-        $booking2 = Booking::create([
-            'patient_id' => $patient->id,
-            'psychologist_id' => $psy1->id,
-            'date' => now()->addDays(1),
-            'status' => 'confirmed',
-        ]);
-
-        Payment::create([
-            'booking_id' => $booking2->id,
-            'amount' => 160000,
-            'proof_image_path' => 'payment_proofs/dummy.jpg', // Placeholder
-            'status' => 'pending',
-        ]);
-
-        // Booking 3: Paid & Active Session (Ready for Chat)
-        $booking3 = Booking::create([
-            'patient_id' => $patient->id,
-            'psychologist_id' => $psy1->id,
-            'date' => now(),
-            'status' => 'paid',
-        ]);
-
-        Payment::create([
-            'booking_id' => $booking3->id,
-            'amount' => 160000,
-            'proof_image_path' => 'payment_proofs/dummy.jpg',
-            'status' => 'verified',
-            'verified_at' => now(),
-        ]);
-
-        $session = CounselingSession::create([
-            'booking_id' => $booking3->id,
-            'status' => 'active',
-            'started_at' => now(),
-        ]);
-
-        // Add dummy messages
-        $session->messages()->create([
-            'sender_id' => $psy1->id,
-            'content' => 'Halo Budi, selamat datang di sesi konseling hari ini. Apa yang ingin Anda ceritakan?',
-        ]);
-
-        $session->messages()->create([
-            'sender_id' => $patient->id,
-            'content' => 'Halo Dokter, saya merasa sangat cemas belakangan ini karena pekerjaan.',
-        ]);
-
-        // 5. Seed PRO and Free Subscription Demo Users
+        // 4. Seed PRO and Free Subscription Demo Users (Clean without dummy transactions)
         $this->call(UserSubscriptionSeeder::class);
 
-        // 6. Seed Customer Reviews / Testimonials
+        // 5. Seed Customer Reviews / Testimonials
         $this->call(ReviewSeeder::class);
     }
 }
