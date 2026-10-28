@@ -72,18 +72,22 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
     const file = e.target.files[0];
     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
-      setErrorMessage('Ukuran file foto struk maksimal 5 MB.');
+    if (file.size > 10 * 1024 * 1024) {
+      setErrorMessage('Ukuran file bukti transfer maksimal 10 MB.');
       return;
     }
 
     setErrorMessage('');
     setProofFile(file);
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProofPreview(reader.result);
-    };
-    reader.readAsDataURL(file);
+    if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+      setProofPreview('pdf');
+    } else {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProofPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmitProof = async (e) => {
@@ -413,9 +417,16 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
                   <div className="mt-1 flex justify-center px-4 pt-3 pb-3 border-2 border-[#d9cff5] border-dashed rounded-2xl hover:border-[#8f78d8] transition-colors bg-[#efeafb]/20 relative">
                     {proofPreview ? (
                       <div className="space-y-2 text-center w-full">
-                        <div className="max-h-40 overflow-hidden rounded-xl border border-[#d9cff5] inline-block shadow-sm">
-                          <img src={proofPreview} alt="Preview Struk Transfer" className="h-36 w-auto object-contain mx-auto" />
-                        </div>
+                        {proofPreview === 'pdf' ? (
+                          <div className="p-4 rounded-xl border border-[#d9cff5] bg-white inline-flex flex-col items-center gap-1.5 shadow-sm">
+                            <FileText size={32} className="text-[#8f78d8]" />
+                            <span className="text-xs font-bold text-[#4b3b86]">Dokumen PDF Terpilih</span>
+                          </div>
+                        ) : (
+                          <div className="max-h-40 overflow-hidden rounded-xl border border-[#d9cff5] inline-block shadow-sm">
+                            <img src={proofPreview} alt="Preview Struk Transfer" className="h-36 w-auto object-contain mx-auto" />
+                          </div>
+                        )}
                         <p className="text-xs font-semibold text-[#4b3b86]">{proofFile?.name}</p>
                         <button
                           type="button"
@@ -440,14 +451,14 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
                               id="proof-upload"
                               name="proof-upload"
                               type="file"
-                              accept="image/*"
+                              accept="image/*,.pdf,.heic,.heif"
                               className="sr-only"
                               onChange={handleFileChange}
                             />
                           </label>
                           <p className="pl-1">atau seret ke sini</p>
                         </div>
-                        <p className="text-[10px] text-[#5d5577]">Format JPG, PNG, atau WEBP hingga 5MB</p>
+                        <p className="text-[10px] text-[#5d5577]">Format JPG, PNG, WEBP, atau PDF hingga 10MB</p>
                       </div>
                     )}
                   </div>

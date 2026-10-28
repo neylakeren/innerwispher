@@ -14,7 +14,7 @@ class PaymentController extends Controller
     {
         $request->validate([
             'booking_id' => 'required|exists:bookings,id',
-            'proof_image' => 'required|image|max:5120', // 5MB max
+            'proof_image' => 'required|file|mimes:jpeg,png,jpg,webp,heic,svg,pdf|max:10240',
             'amount' => 'required|numeric|min:0',
         ]);
 
@@ -158,7 +158,7 @@ class PaymentController extends Controller
     public function uploadProProof(Request $request)
     {
         $request->validate([
-            'proof_image' => 'required|image|max:5120', // 5MB max
+            'proof_image' => 'required|file|mimes:jpeg,png,jpg,webp,heic,svg,pdf|max:10240',
             'bank_destination' => 'required|string|max:50',
             'sender_name' => 'required|string|max:255',
             'amount' => 'nullable|numeric|min:0',

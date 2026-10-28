@@ -466,17 +466,23 @@ export default function BookingList() {
                             <div className="flex justify-between items-center text-xs">
                                 <span className="font-semibold text-[#2b2542]">Bank BCA:</span>
                                 <span className="font-mono font-bold text-[#4b3b86] bg-white px-2 py-0.5 rounded border border-[#d9cff5]">
-                                    8830-1928-33
+                                    1530581281
                                 </span>
                             </div>
                             <div className="flex justify-between items-center text-xs">
-                                <span className="font-semibold text-[#2b2542]">Bank Mandiri:</span>
+                                <span className="font-semibold text-[#2b2542]">SeaBank:</span>
                                 <span className="font-mono font-bold text-[#4b3b86] bg-white px-2 py-0.5 rounded border border-[#d9cff5]">
-                                    137-00-1928330-1
+                                    901928200829
+                                </span>
+                            </div>
+                            <div className="flex justify-between items-center text-xs">
+                                <span className="font-semibold text-[#2b2542]">GoPay / ShopeePay:</span>
+                                <span className="font-mono font-bold text-[#4b3b86] bg-white px-2 py-0.5 rounded border border-[#d9cff5]">
+                                    081238536128
                                 </span>
                             </div>
                             <div className="text-[11px] text-[#5d5577] pt-1 border-t border-[#d9cff5]/60">
-                                Atas Nama: <strong className="text-[#2b2542]">Inner Whisper Indonesia</strong>
+                                Atas Nama: <strong className="text-[#2b2542]">Neyla Vala Kiara Andi</strong>
                             </div>
                         </div>
 

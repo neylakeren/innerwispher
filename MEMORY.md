@@ -553,6 +553,23 @@ This document serves as the project memory for the frontend landing page and das
       - Service Nginx dan Supervisor queue worker di-reload sukses.
       - Live health check `https://innerwhisper.my.id/` dan `https://innerwhisper.my.id/up` menghasilkan HTTP 200 OK.
 
+- **October 28, 2026 (Part 3):** Perbaikan & Optimalisasi Upload Bukti Pembayaran / Foto Struk di Server Live VPS.
+  - **Identifikasi Masalah (Root Cause):**
+    - Konfigurasi virtual host Nginx `/etc/nginx/sites-available/innerwhisper.my.id` belum mendefinisikan `client_max_body_size`, sehingga Nginx menerapkan batas default **1 MB**.
+    - Foto struk dari kamera smartphone dan tangkapan layar umumnya berukuran 1.2 MB – 4 MB, yang menyebabkan Nginx langsung menolak upload dengan error `413 Request Entity Too Large` (`client intended to send too large body`).
+    - Aturan validasi Laravel `required|image|max:5120` menolak bukti transfer jika pengguna mengunggah file struk berformat PDF atau foto kamera iPhone berkekstensi HEIC / huruf kapital.
+  - **Tindakan Perbaikan:**
+    - **Nginx VPS:** Menambahkan konfigurasi `client_max_body_size 50M;` pada blok server `innerwhisper.my.id` dan me-reload Nginx tanpa downtime.
+    - **PHP-FPM:** Memastikan `upload_max_filesize = 200M` dan `post_max_size = 200M` aktif, serta me-restart service `php8.4-fpm`.
+    - **Izin Direktori:** Menyetel izin rekursif `chmod -R 775` dan kepemilikan `www-data:www-data` pada direktori `/var/www/innerwhisper/backend/storage`.
+    - **Backend Validation ([PaymentController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/PaymentController.php)):**
+      - Memperbarui validasi `uploadProProof` dan `uploadProof` menjadi `required|file|mimes:jpeg,png,jpg,webp,heic,svg,pdf|max:10240` (mendukung hingga 10 MB dan format gambar + PDF mobile banking).
+    - **Frontend UI ([PricingModal.jsx](file:///D:/Coding/neyla/frontend/src/components/PricingModal.jsx) & [BookingList.jsx](file:///D:/Coding/neyla/frontend/src/pages/BookingList.jsx)):**
+      - Mengizinkan upload hingga 10 MB, menambahkan icon preview PDF, dan memperbarui rekening resmi transfer.
+  - **Verifikasi Live Berhasil:**
+    - Uji coba upload file bukti transfer berhasil via endpoint live `https://innerwhisper.my.id/api/pro/upload-proof` menghasilkan respons `HTTP 201 Created` (`payment_proofs/c48B1OcopkiKJZZlWmpJFZfNpwsTIhRSmn8ZWfWx.jpg`).
+    - Uji coba pengambilan file foto struk melalui URL Nginx publik `https://innerwhisper.my.id/storage/...` menghasilkan `HTTP 200 OK` dengan image header valid.
+
 - **October 28, 2026 (Part 2):** Integrasi Opsi Pembayaran Lengkap (QRIS Barcode, GoPay, ShopeePay, BCA, SeaBank) & Sistem Manajemen Review Pelanggan (Admin Panel + Dynamic Landing Page + Halaman Publik).
   - **Opsi Pembayaran Tambahan (QRIS, GoPay, ShopeePay):**
     - QRIS Barcode: Menambahkan gambar barcode QRIS (`qris.jpeg`) dari transfer WhatsApp ke `frontend/public/qris.jpeg`. Mendukung scan langsung dari seluruh Mobile Banking & E-Wallet (BCA Mobile, Livin Mandiri, BRImo, BNI, GoPay, OVO, Dana, ShopeePay, LinkAja).
