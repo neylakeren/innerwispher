@@ -488,6 +488,16 @@ This document serves as the project memory for the frontend landing page and das
   - **Verifikasi & Validasi:**
     - End-to-end integration test otomatis (`test_pro_workflow.py`): Berhasil 100% (User unggah struk -> status pending -> Admin verifikasi approve -> User `is_pro: true` & fitur langsung terbuka).
     - Frontend build (`npm run build`) selesai sukses dengan kode 0 (1,848 modul ter-compile bersih).
+  - **Git Commit, Push & VPS Deployment:**
+    - Commit: `0317112` (`feat: pivot to all-in-one digital career pro bundle 35k with manual transfer verification and strict paywalls`).
+    - Push: Sukses terdorong ke GitHub `origin main` (`https://github.com/neylakeren/innerwispher.git`).
+    - Deployment VPS `vps-bleber`:
+      - Frontend dist (`index-CozKy9JU.js` & `index-CwyCuPr7.css`) dideploy ke `/var/www/innerwhisper/frontend-dist/`.
+      - Backend files (`migrations`, `Models`, `Controllers`, `routes/api.php`) disinkronkan ke `/var/www/innerwhisper/backend/`.
+      - Migrasi database live: `2026_10_28_043429_add_pro_fields_to_users_and_payments_table` sukses dijalankan di server live VPS.
+      - Cache Laravel dibersihkan & dioptimasi (`config:cache`, `route:cache`, `view:cache`).
+      - Service Nginx dan Supervisor queue worker di-reload sukses.
+      - Live health check `https://innerwhisper.my.id/` dan `https://innerwhisper.my.id/up` menghasilkan HTTP 200 OK.
 
 - **October 22, 2026 (Part 3):** Commit, Push to GitHub & VPS Production Deployment (`vps-bleber`).
   - Staged all modified files including terminology refactoring, codebase memory persistence, and .gitignore.
