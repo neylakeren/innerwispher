@@ -553,6 +553,18 @@ This document serves as the project memory for the frontend landing page and das
       - Service Nginx dan Supervisor queue worker di-reload sukses.
       - Live health check `https://innerwhisper.my.id/` dan `https://innerwhisper.my.id/up` menghasilkan HTTP 200 OK.
 
+- **October 28, 2026 (Part 7):** Pembersihan Akun Dummy & Pengujian dari Database Server Produksi.
+  - Menghapus 6 akun user dummy dan akun uji coba dari database server produksi (`innerwhisper` VPS `vps-bleber`):
+    - ID #5: `Budi Santoso` (`user@neyla.id`)
+    - ID #6: `neyla vala` (`neyla@gmail.com`)
+    - ID #7: `Rara Mahasiswa` (`rara@neyla.id`)
+    - ID #8: `Dimas Jobseeker` (`dimas@neyla.id`)
+    - ID #9: `Sarah Professional` (`sarah@neyla.id`)
+    - ID #10: `Kevin Pratama` (`kevin@neyla.id`)
+  - Menghapus seluruh token sesi aktif terkait (`personal_access_tokens`) dari akun-akun tersebut.
+  - Verifikasi integritas: Seluruh akun user riil (ID #11 s.d. #18, termasuk `Neyla Vala Kiara Andi` #14, `Gabriela`, `Veronika`, dll.) dan akun manajemen staf/psikolog (ID #1 s.d. #4) tetap aman dan utuh 100%.
+  - Cache Laravel di server produksi berhasil dibersihkan (`php artisan cache:clear`).
+
 - **October 28, 2026 (Part 6):** Penyelarasan & Standardisasi Identitas Author di Seluruh Riwayat Git & GitHub.
   - Seluruh riwayat commit dari awal pembuatan repositori telah distandarisasi menggunakan `git filter-branch`.
   - Memastikan seluruh author dan committer tercatat konsisten atas nama `neylakeren` (`neyla.andi04@gmail.com`).

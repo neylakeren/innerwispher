@@ -1,11 +1,12 @@
 {
     "schema_version": 2,
-    "commit": "7eb61f32ad463471590cd71e0a051d5b3ca4716f",
-    "indexed_at": "2026-10-28T09:12:45Z",
+    "commit": "4ddfbf42af369cfbc226a20dd6ab95cba907cc63",
+    "indexed_at": "2026-10-28T09:13:12Z",
     "project": "D-Coding-neyla",
     "nodes": 1759,
-    "edges": 3768,
-    "original_size": 8388608,
-    "compressed_size": 1448011,
-    "compression_level": 3
+    "edges": 3785,
+    "original_size": 8323072,
+    "compressed_size": 1443628,
+    "compression_level": 3,
+    "reconcile_basis": "git-clean-head"
 }
