@@ -175,5 +175,8 @@ class DatabaseSeeder extends Seeder
 
         // 5. Seed PRO and Free Subscription Demo Users
         $this->call(UserSubscriptionSeeder::class);
+
+        // 6. Seed Customer Reviews / Testimonials
+        $this->call(ReviewSeeder::class);
     }
 }

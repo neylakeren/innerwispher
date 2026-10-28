@@ -553,6 +553,37 @@ This document serves as the project memory for the frontend landing page and das
       - Service Nginx dan Supervisor queue worker di-reload sukses.
       - Live health check `https://innerwhisper.my.id/` dan `https://innerwhisper.my.id/up` menghasilkan HTTP 200 OK.
 
+- **October 28, 2026 (Part 2):** Integrasi Opsi Pembayaran Lengkap (QRIS Barcode, GoPay, ShopeePay, BCA, SeaBank) & Sistem Manajemen Review Pelanggan (Admin Panel + Dynamic Landing Page + Halaman Publik).
+  - **Opsi Pembayaran Tambahan (QRIS, GoPay, ShopeePay):**
+    - QRIS Barcode: Menambahkan gambar barcode QRIS (`qris.jpeg`) dari transfer WhatsApp ke `frontend/public/qris.jpeg`. Mendukung scan langsung dari seluruh Mobile Banking & E-Wallet (BCA Mobile, Livin Mandiri, BRImo, BNI, GoPay, OVO, Dana, ShopeePay, LinkAja).
+    - Rekening E-Wallet:
+      - GoPay: `081238536128` a/n Neyla Vala Kiara Andi (dengan tombol 1-klik Salin Nomor).
+      - ShopeePay: `081238536128` a/n Neyla Vala Kiara Andi (dengan tombol 1-klik Salin Nomor).
+      - BCA: `1530581281` a/n Neyla Vala Kiara Andi.
+      - SeaBank: `901928200829` a/n Neyla Vala Kiara Andi.
+    - [PricingModal.jsx](file:///D:/Coding/neyla/frontend/src/components/PricingModal.jsx): Tab interaktif (QRIS Instan dengan modal perbesar & unduh barcode, Transfer Bank BCA/SeaBank, dan E-Wallet GoPay/ShopeePay) dengan sinkronisasi otomatis ke form unggah bukti bayar.
+    - [CareerPricing.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerPricing.jsx): Menampilkan card QRIS highlight beserta grid 4 channel rekening/e-wallet dengan tombol salin nomor.
+    - [AdminDashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminDashboard.jsx): Menyesuaikan teks panduan dan badge channel pembayaran (QRIS, BCA, SeaBank, GoPay, ShopeePay) pada tabel verifikasi struk.
+    - [PaymentController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/PaymentController.php): Memperbarui validasi dan normalisasi `bank_destination` untuk mendukung `QRIS`, `GoPay`, `ShopeePay`, `BCA`, dan `SeaBank`.
+  - **Sistem Review & Testimoni Pelanggan:**
+    - Database & Backend:
+      - Migrasi: `2026_10_28_074301_create_reviews_table.php` (`id`, `name`, `role`, `outcome`, `rating`, `review`, `avatar_path`, `is_active`, `order_index`).
+      - Model: [Review.php](file:///D:/Coding/neyla/backend/app/Models/Review.php) dengan accessor `avatar_url` dan `initials`.
+      - Controller: [ReviewController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/ReviewController.php) (CRUD review lengkap, upload foto avatar pelanggan, toggle status visibilitas web).
+      - Seeder: [ReviewSeeder.php](file:///D:/Coding/neyla/backend/database/seeders/ReviewSeeder.php) menginisialisasi 6 ulasan autentik pelanggan.
+      - Routes: `GET /api/reviews` (publik), `GET/POST/DELETE/PATCH /api/admin/reviews` (khusus role admin).
+    - Frontend Admin & Publik:
+      - Admin Page [AdminReviewList.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminReviewList.jsx): Halaman kelola review (`/admin/reviews`) dengan kartu statistik, pencarian/filter, tombol tambah review pelanggan (nama, role, outcome, rating bintang interaktif, upload avatar, dan toggle tampil/sembunyi langsung).
+      - Sidebar Admin [DashboardLayout.jsx](file:///D:/Coding/neyla/frontend/src/layouts/DashboardLayout.jsx): Menambahkan menu "Kelola Review" dengan ikon `MessageSquareQuote`.
+      - Landing Page [Beranda.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Beranda.jsx): Terkoneksi secara dinamis ke `GET /api/reviews` dan menampilkan link ke halaman review.
+      - Halaman Publik [ReviewPage.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/ReviewPage.jsx): Halaman eksplorasi seluruh testimoni pelanggan (`/review` dan `/testimoni`) dengan filter, metrik rating 4.9/5, dan badge verifikasi.
+      - Navigasi & Footer: [LandingNavbar.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/LandingNavbar.jsx) dan [LandingFooter.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/LandingFooter.jsx) menambahkan tautan ke Review Pelanggan.
+  - **Verifikasi & Deployment Live VPS:**
+    - Migrasi dan seeder live dijalankan di server VPS `202.10.45.61:10622`.
+    - Cache Laravel (`config:cache`, `route:cache`) diperbarui.
+    - Frontend production bundle (`dist/`) berhasil di-build dan di-deploy ke `/var/www/innerwhisper/frontend-dist`.
+    - Live health check `https://innerwhisper.my.id/api/reviews` dan `https://innerwhisper.my.id/qris.jpeg` menghasilkan HTTP 200 OK.
+
 - **October 28, 2026:** Penyelarasan Terminologi Menyeluruh: Penggantian Istilah "Psikologi" / "Psikologis" menjadi "Konsultasi Karier" & Live Deployment Production.
   - Sesuai arahan, seluruh istilah "psikologi" dan "psikologis" diubah menjadi "konsultasi karier" / "karier" agar positioning platform 100% konsisten sebagai Career Copilot & Konsultasi Karier Terpercaya.
   - File yang diperbarui:

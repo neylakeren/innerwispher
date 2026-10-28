@@ -159,7 +159,7 @@ class PaymentController extends Controller
     {
         $request->validate([
             'proof_image' => 'required|image|max:5120', // 5MB max
-            'bank_destination' => 'required|string|in:BCA,SeaBank,seabank,SEABANK,bca',
+            'bank_destination' => 'required|string|max:50',
             'sender_name' => 'required|string|max:255',
             'amount' => 'nullable|numeric|min:0',
         ]);
@@ -168,7 +168,16 @@ class PaymentController extends Controller
 
         if ($request->hasFile('proof_image')) {
             $path = $request->file('proof_image')->store('payment_proofs', 'public');
-            $normalizedBank = (strtoupper($request->bank_destination) === 'SEABANK') ? 'SeaBank' : 'BCA';
+            
+            $bankMap = [
+                'BCA' => 'BCA',
+                'SEABANK' => 'SeaBank',
+                'QRIS' => 'QRIS',
+                'GOPAY' => 'GoPay',
+                'SHOPEEPAY' => 'ShopeePay',
+            ];
+            $upper = strtoupper(trim($request->bank_destination));
+            $normalizedBank = $bankMap[$upper] ?? $request->bank_destination;
 
             $payment = Payment::create([
                 'user_id' => $user->id,

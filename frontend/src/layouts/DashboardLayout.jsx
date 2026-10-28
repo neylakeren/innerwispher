@@ -20,7 +20,8 @@ import {
     ClipboardList,
     CreditCard,
     UserCheck,
-    Wallet
+    Wallet,
+    MessageSquareQuote
 } from 'lucide-react';
 import { Button, cn } from '../components/ui';
 import LogoutModal from '../components/LogoutModal';
@@ -61,6 +62,7 @@ export default function DashboardLayout({ children }) {
         if (user?.role === 'admin') {
             return [
                 { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+                { name: 'Kelola Review', href: '/admin/reviews', icon: MessageSquareQuote },
                 { name: 'Paket Layanan', href: '/paket', icon: CreditCard },
                 { name: 'Data User', href: '/admin/patients', icon: UserCheck },
                 { name: 'Profil Saya', href: '/profil', icon: User },

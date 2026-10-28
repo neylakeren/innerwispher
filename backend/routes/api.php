@@ -11,6 +11,7 @@ Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/reviews', [\App\Http\Controllers\Api\ReviewController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
@@ -40,6 +41,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/admin/psychologists/{id}', [\App\Http\Controllers\Api\AdminController::class, 'updatePsychologist']);
         Route::delete('/admin/psychologists/{id}', [\App\Http\Controllers\Api\AdminController::class, 'deletePsychologist']);
         Route::get('/admin/patients', [\App\Http\Controllers\Api\AdminController::class, 'getPatients']);
+
+        // Reviews Management
+        Route::get('/admin/reviews', [\App\Http\Controllers\Api\ReviewController::class, 'adminIndex']);
+        Route::post('/admin/reviews', [\App\Http\Controllers\Api\ReviewController::class, 'store']);
+        Route::post('/admin/reviews/{id}', [\App\Http\Controllers\Api\ReviewController::class, 'update']);
+        Route::patch('/admin/reviews/{id}/toggle', [\App\Http\Controllers\Api\ReviewController::class, 'toggle']);
+        Route::delete('/admin/reviews/{id}', [\App\Http\Controllers\Api\ReviewController::class, 'destroy']);
     });
 
     // Sessions

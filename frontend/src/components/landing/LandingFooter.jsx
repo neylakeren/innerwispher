@@ -21,6 +21,7 @@ export default function LandingFooter() {
         </div>
         <div className="col-span-1 flex flex-col gap-3">
           <h4 className="text-[#4b3b86] font-bold text-sm tracking-wide">Tautan</h4>
+          <Link to="/review" className="text-sm text-[#5d5577] hover:text-[#4b3b86] transition-colors">Review Pelanggan</Link>
           <a href="#" className="text-sm text-[#5d5577] hover:text-[#4b3b86] transition-colors">Kebijakan Privasi</a>
           <a href="#" className="text-sm text-[#5d5577] hover:text-[#4b3b86] transition-colors">Syarat &amp; Ketentuan</a>
         </div>

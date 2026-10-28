@@ -236,7 +236,7 @@ export default function AdminDashboard() {
                             </span>
                         </div>
                         <p className="text-xs text-[#5d5577] mt-1 max-w-2xl">
-                            Pengguna mentransfer <strong>Rp 35.000</strong> ke rekening resmi <strong>BCA 1530581281</strong> atau <strong>SeaBank 901928200829</strong> a/n Neyla Vala Kiara Andi. Setujui untuk mengaktifkan akses PRO selama 30 hari.
+                            Pengguna mentransfer <strong>Rp 35.000</strong> ke channel resmi <strong>QRIS, BCA 1530581281, SeaBank 901928200829, GoPay / ShopeePay 081238536128</strong> a/n Neyla Vala Kiara Andi. Setujui untuk mengaktifkan akses PRO selama 30 hari.
                         </p>
                     </div>
 
@@ -335,9 +335,17 @@ export default function AdminDashboard() {
                                                 <span className={`inline-block px-2.5 py-0.5 rounded-md text-[11px] font-bold tracking-wider ${
                                                     p.bank_destination?.toUpperCase() === 'BCA'
                                                         ? 'bg-blue-100 text-blue-800' 
-                                                        : 'bg-amber-100 text-amber-800'
+                                                        : p.bank_destination?.toUpperCase() === 'SEABANK'
+                                                        ? 'bg-amber-100 text-amber-800'
+                                                        : p.bank_destination?.toUpperCase() === 'QRIS'
+                                                        ? 'bg-purple-100 text-[#4b3b86] border border-purple-200'
+                                                        : p.bank_destination?.toUpperCase() === 'GOPAY'
+                                                        ? 'bg-cyan-100 text-cyan-800'
+                                                        : p.bank_destination?.toUpperCase() === 'SHOPEEPAY'
+                                                        ? 'bg-orange-100 text-orange-800'
+                                                        : 'bg-[#efeafb] text-[#4b3b86]'
                                                 }`}>
-                                                    Bank {p.bank_destination || 'BCA'}
+                                                    {p.bank_destination || 'BCA'}
                                                 </span>
                                                 <p className="text-xs text-[#2b2542] font-medium">
                                                     a/n: <strong className="text-[#4b3b86]">{p.sender_name || '-'}</strong>

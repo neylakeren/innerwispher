@@ -13,7 +13,9 @@ import {
   AlertCircle,
   Building2,
   Copy,
-  Calendar
+  Calendar,
+  QrCode,
+  Smartphone
 } from 'lucide-react';
 import { useCareer } from '../context/CareerContext';
 import PricingModal from '../components/PricingModal';
@@ -287,51 +289,116 @@ export default function CareerPricing() {
         </div>
       </div>
 
-      {/* Official Bank Accounts Box */}
-      <div className="card-s p-6 sm:p-8 bg-white border border-[#d9cff5]">
-        <div className="flex items-center gap-2.5 mb-4">
-          <div className="w-9 h-9 rounded-xl bg-[#efeafb] text-[#4b3b86] flex items-center justify-center">
-            <Building2 size={18} />
+      {/* Official Payment Accounts Box */}
+      <div className="card-s p-6 sm:p-8 bg-white border border-[#d9cff5] space-y-6">
+        <div className="flex items-center gap-2.5">
+          <div className="w-10 h-10 rounded-xl bg-[#efeafb] text-[#4b3b86] flex items-center justify-center">
+            <CreditCard size={20} />
           </div>
           <div>
-            <h3 className="text-base font-bold text-[#2b2542]">Rekening Resmi Transfer Manual</h3>
-            <p className="text-xs text-[#5d5577]">Silakan transfer sesuai nominal <strong>Rp 35.000</strong> ke salah satu rekening berikut:</p>
+            <h3 className="text-base sm:text-lg font-bold text-[#2b2542]">Pilihan Pembayaran Resmi Inner Whisper</h3>
+            <p className="text-xs text-[#5d5577]">Silakan transfer sesuai nominal <strong>Rp 35.000</strong> ke salah satu channel resmi di bawah ini:</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* QRIS Highlight Card */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#efeafb]/70 via-white to-[#efeafb]/30 border-2 border-[#8f78d8] flex flex-col sm:flex-row items-center gap-5 shadow-sm">
+          <div className="w-36 h-36 rounded-2xl bg-white p-2 border border-[#d9cff5] shadow-sm shrink-0 flex items-center justify-center">
+            <img src="/qris.jpeg" alt="QRIS Inner Whisper" className="w-full h-full object-contain" />
+          </div>
+          <div className="text-center sm:text-left space-y-1.5 flex-1">
+            <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#8f78d8] text-white text-[11px] font-extrabold uppercase tracking-wider">
+              <QrCode size={12} />
+              <span>QRIS Instan (Scan Langsung)</span>
+            </div>
+            <h4 className="text-base font-bold text-[#2b2542]">Mendukung Semua Mobile Banking &amp; E-Wallet</h4>
+            <p className="text-xs text-[#5d5577] leading-relaxed">
+              BCA Mobile, Livin' Mandiri, BRImo, BNI Mobile, GoPay, ShopeePay, OVO, Dana, LinkAja, dan bank lainnya.
+            </p>
+            <p className="text-xs font-semibold text-[#4b3b86]">
+              Atas Nama: <strong>Neyla Vala Kiara Andi</strong>
+            </p>
+            <div className="pt-1">
+              <button
+                type="button"
+                onClick={() => setModalOpen(true)}
+                className="btn-lv text-xs px-4 py-2 rounded-xl text-white font-bold inline-flex items-center gap-1.5 shadow-sm"
+              >
+                <span>Unggah Bukti Struk Sekarang</span>
+                <ArrowRight size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bank & E-Wallet Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
           {/* BCA */}
-          <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-50/50 to-white border border-blue-200 space-y-2">
+          <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50/50 to-white border border-blue-200 space-y-1.5">
             <div className="flex items-center justify-between">
               <span className="text-xs font-extrabold text-blue-900">Bank BCA</span>
               <button
                 type="button"
                 onClick={() => handleCopyAccount('1530581281', 'BCA')}
-                className="text-xs font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1 bg-blue-100/70 hover:bg-blue-100 px-2.5 py-1 rounded-lg transition-colors"
+                className="text-[11px] font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1 bg-blue-100/70 hover:bg-blue-100 px-2 py-0.5 rounded-lg transition-colors"
               >
-                {copiedBank === 'BCA' ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
-                <span>{copiedBank === 'BCA' ? 'Tersalin' : 'Salin Nomor'}</span>
+                {copiedBank === 'BCA' ? <Check size={11} className="text-emerald-600" /> : <Copy size={11} />}
+                <span>{copiedBank === 'BCA' ? 'Tersalin' : 'Salin'}</span>
               </button>
             </div>
-            <p className="text-lg font-mono font-bold text-blue-950 tracking-wider">1530581281</p>
-            <p className="text-xs text-blue-800">a/n <strong>Neyla Vala Kiara Andi</strong></p>
+            <p className="text-base font-mono font-bold text-blue-950 tracking-wider">1530581281</p>
+            <p className="text-[11px] text-blue-800">a/n <strong>Neyla Vala Kiara Andi</strong></p>
           </div>
 
           {/* SeaBank */}
-          <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-50/50 to-white border border-amber-200 space-y-2">
+          <div className="p-4 rounded-xl bg-gradient-to-br from-amber-50/50 to-white border border-amber-200 space-y-1.5">
             <div className="flex items-center justify-between">
               <span className="text-xs font-extrabold text-amber-900">SeaBank</span>
               <button
                 type="button"
                 onClick={() => handleCopyAccount('901928200829', 'SeaBank')}
-                className="text-xs font-bold text-amber-800 hover:text-amber-950 flex items-center gap-1 bg-amber-100/70 hover:bg-amber-100 px-2.5 py-1 rounded-lg transition-colors"
+                className="text-[11px] font-bold text-amber-800 hover:text-amber-950 flex items-center gap-1 bg-amber-100/70 hover:bg-amber-100 px-2 py-0.5 rounded-lg transition-colors"
               >
-                {copiedBank === 'SeaBank' ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
-                <span>{copiedBank === 'SeaBank' ? 'Tersalin' : 'Salin Nomor'}</span>
+                {copiedBank === 'SeaBank' ? <Check size={11} className="text-emerald-600" /> : <Copy size={11} />}
+                <span>{copiedBank === 'SeaBank' ? 'Tersalin' : 'Salin'}</span>
               </button>
             </div>
-            <p className="text-lg font-mono font-bold text-amber-950 tracking-wider">901928200829</p>
-            <p className="text-xs text-amber-800">a/n <strong>Neyla Vala Kiara Andi</strong></p>
+            <p className="text-base font-mono font-bold text-amber-950 tracking-wider">901928200829</p>
+            <p className="text-[11px] text-amber-800">a/n <strong>Neyla Vala Kiara Andi</strong></p>
+          </div>
+
+          {/* GoPay */}
+          <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-50/50 to-white border border-cyan-200 space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-extrabold text-[#00aed6]">GoPay</span>
+              <button
+                type="button"
+                onClick={() => handleCopyAccount('081238536128', 'GoPay')}
+                className="text-[11px] font-bold text-cyan-800 hover:text-cyan-950 flex items-center gap-1 bg-cyan-100/70 hover:bg-cyan-100 px-2 py-0.5 rounded-lg transition-colors"
+              >
+                {copiedBank === 'GoPay' ? <Check size={11} className="text-emerald-600" /> : <Copy size={11} />}
+                <span>{copiedBank === 'GoPay' ? 'Tersalin' : 'Salin'}</span>
+              </button>
+            </div>
+            <p className="text-base font-mono font-bold text-cyan-950 tracking-wider">081238536128</p>
+            <p className="text-[11px] text-cyan-800">a/n <strong>Neyla Vala Kiara Andi</strong></p>
+          </div>
+
+          {/* ShopeePay */}
+          <div className="p-4 rounded-xl bg-gradient-to-br from-orange-50/50 to-white border border-orange-200 space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-extrabold text-[#ee4d2d]">ShopeePay</span>
+              <button
+                type="button"
+                onClick={() => handleCopyAccount('081238536128', 'ShopeePay')}
+                className="text-[11px] font-bold text-orange-800 hover:text-orange-950 flex items-center gap-1 bg-orange-100/70 hover:bg-orange-100 px-2 py-0.5 rounded-lg transition-colors"
+              >
+                {copiedBank === 'ShopeePay' ? <Check size={11} className="text-emerald-600" /> : <Copy size={11} />}
+                <span>{copiedBank === 'ShopeePay' ? 'Tersalin' : 'Salin'}</span>
+              </button>
+            </div>
+            <p className="text-base font-mono font-bold text-orange-950 tracking-wider">081238536128</p>
+            <p className="text-[11px] text-orange-800">a/n <strong>Neyla Vala Kiara Andi</strong></p>
           </div>
         </div>
       </div>
@@ -347,9 +414,9 @@ export default function CareerPricing() {
               <Building2 size={20} />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-[#2b2542]">Transfer Bank Manual (BCA &amp; SeaBank)</h4>
+              <h4 className="text-sm font-bold text-[#2b2542]">Multi-Channel (QRIS, Bank &amp; E-Wallet)</h4>
               <p className="text-xs text-[#5d5577] mt-0.5 leading-relaxed">
-                Tersedia rekening resmi BCA &amp; SeaBank a/n Neyla Vala Kiara Andi. Unggah foto struk, admin akan memverifikasi cepat.
+                Tersedia QRIS instan, rekening BCA, SeaBank, serta GoPay dan ShopeePay a/n Neyla Vala Kiara Andi. Verifikasi cepat oleh admin.
               </p>
             </div>
           </div>

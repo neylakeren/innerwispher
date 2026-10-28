@@ -17,6 +17,7 @@ import BookingList from './pages/BookingList';
 import ChatRoom from './pages/ChatRoom';
 import AdminPsychologistList from './pages/AdminPsychologistList';
 import AdminPatientList from './pages/AdminPatientList';
+import AdminReviewList from './pages/AdminReviewList';
 import PsychologistDiscovery from './pages/PsychologistDiscovery';
 import SessionNotes from './pages/SessionNotes';
 import CounselorHonorList from './pages/CounselorHonorList';
@@ -39,6 +40,7 @@ import Beranda from './pages/landing/Beranda';
 import Layanan from './pages/landing/Layanan';
 import TentangKami from './pages/landing/TentangKami';
 import Artikel from './pages/landing/Artikel';
+import ReviewPage from './pages/landing/ReviewPage';
 
 // Components
 import PWAInstallBanner from './components/PWAInstallBanner';
@@ -79,6 +81,12 @@ function AppRoutes() {
             } />
             <Route path="/artikel" element={
                 <LandingLayout><Artikel /></LandingLayout>
+            } />
+            <Route path="/review" element={
+                <LandingLayout><ReviewPage /></LandingLayout>
+            } />
+            <Route path="/testimoni" element={
+                <LandingLayout><ReviewPage /></LandingLayout>
             } />
 
             {/* Auth Pages */}
@@ -181,6 +189,12 @@ function AppRoutes() {
             <Route path="/admin/patients" element={
                 <ProtectedRoute>
                     <AdminPatientList />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/admin/reviews" element={
+                <ProtectedRoute>
+                    <AdminReviewList />
                 </ProtectedRoute>
             } />
 

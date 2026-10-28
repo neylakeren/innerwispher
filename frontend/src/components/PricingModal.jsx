@@ -6,29 +6,35 @@ import {
   ShieldCheck, 
   CreditCard, 
   ArrowRight, 
-  Upload,
-  Loader2,
-  Copy,
-  Check,
-  Clock,
-  AlertCircle,
-  FileText
+  Upload, 
+  Loader2, 
+  Copy, 
+  Check, 
+  Clock, 
+  AlertCircle, 
+  FileText,
+  QrCode,
+  Smartphone,
+  Building2,
+  ExternalLink
 } from 'lucide-react';
 import { useCareer } from '../context/CareerContext';
 import { useAuth } from '../context/AuthContext';
 
 export default function PricingModal({ isOpen, onClose, onSuccess }) {
   const { user } = useAuth();
-  const { submitProPaymentProof, proPaymentStatus, refreshProStatus } = useCareer();
+  const { submitProPaymentProof, refreshProStatus } = useCareer();
 
-  const [bankDestination, setBankDestination] = useState('BCA');
+  const [paymentChannel, setPaymentChannel] = useState('QRIS'); // 'QRIS' | 'BANK' | 'EWALLET'
+  const [bankDestination, setBankDestination] = useState('QRIS');
   const [senderName, setSenderName] = useState(user?.name || '');
   const [proofFile, setProofFile] = useState(null);
   const [proofPreview, setProofPreview] = useState(null);
-  const [copiedBank, setCopiedBank] = useState(null);
+  const [copiedAccount, setCopiedAccount] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [showQrisPreview, setShowQrisPreview] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -37,6 +43,8 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
       setErrorMessage('');
       setProofFile(null);
       setProofPreview(null);
+      setPaymentChannel('QRIS');
+      setBankDestination('QRIS');
       if (user?.name) setSenderName(user.name);
     }
   }, [isOpen, user?.name]);
@@ -54,10 +62,10 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
 
   if (!isOpen) return null;
 
-  const handleCopyAccount = (number, bank) => {
+  const handleCopyAccount = (number, key) => {
     navigator.clipboard.writeText(number);
-    setCopiedBank(bank);
-    setTimeout(() => setCopiedBank(null), 2500);
+    setCopiedAccount(key);
+    setTimeout(() => setCopiedAccount(null), 2500);
   };
 
   const handleFileChange = (e) => {
@@ -85,7 +93,7 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
       return;
     }
     if (!senderName.trim()) {
-      setErrorMessage('Silakan isi nama pengirim rekening Anda.');
+      setErrorMessage('Silakan isi nama pengirim / pemilik akun pembayaran.');
       return;
     }
 
@@ -113,21 +121,21 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2b2542]/60 backdrop-blur-sm animate-fade-in font-quicksand">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#2b2542]/60 backdrop-blur-sm animate-fade-in font-quicksand">
       <div 
         className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-[#d9cff5] overflow-hidden max-h-[92vh] flex flex-col"
         role="dialog"
         aria-modal="true"
       >
         {/* Header */}
-        <div className="px-6 py-4 bg-gradient-to-r from-[#efeafb] via-white to-[#efeafb] border-b border-[#d9cff5]/70 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="px-5 py-4 bg-gradient-to-r from-[#efeafb] via-white to-[#efeafb] border-b border-[#d9cff5]/70 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-[#8f78d8] text-white flex items-center justify-center shadow-sm">
               <Sparkles size={16} />
             </div>
             <div>
               <h3 className="text-base font-bold text-[#2b2542]">Aktivasi Manual Inner Whisper PRO</h3>
-              <p className="text-[11px] text-[#5d5577]">Transfer ke rekening &amp; kirim foto struk pembayaran</p>
+              <p className="text-[11px] text-[#5d5577]">Bayar via QRIS, Bank, atau E-Wallet &amp; kirim bukti struk</p>
             </div>
           </div>
           <button
@@ -140,11 +148,11 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto space-y-5">
+        <div className="p-5 sm:p-6 overflow-y-auto space-y-4">
           {!isSuccess ? (
-            <form onSubmit={handleSubmitProof} className="space-y-5">
+            <form onSubmit={handleSubmitProof} className="space-y-4">
               {/* Summary Card */}
-              <div className="p-4 rounded-2xl bg-gradient-to-br from-[#efeafb]/70 via-white to-[#efeafb]/40 border-2 border-[#8f78d8] shadow-sm flex items-center justify-between">
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-[#efeafb]/70 via-white to-[#efeafb]/40 border-2 border-[#8f78d8] shadow-sm flex items-center justify-between">
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#8f78d8] text-white inline-block">
                     Paket Langganan Bulanan
@@ -153,84 +161,244 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
                   <p className="text-[11px] text-[#5d5577]">Laporan PDF + CV ATS + 10 Soal STAR + Portofolio</p>
                 </div>
                 <div className="text-right">
-                  <span className="text-2xl font-extrabold text-[#4b3b86]">Rp 35.000</span>
+                  <span className="text-xl sm:text-2xl font-extrabold text-[#4b3b86]">Rp 35.000</span>
                   <span className="text-[10px] text-[#5d5577] block font-medium">/bulan (30 hari)</span>
                 </div>
               </div>
 
-              {/* Bank Accounts Info Box */}
+              {/* Payment Method Tabs */}
               <div className="space-y-2">
-                <label className="text-xs font-bold text-[#4b3b86] uppercase tracking-wider block">
-                  1. Rekening Resmi Tujuan Transfer:
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {/* BCA */}
-                  <div className="p-3.5 rounded-xl border border-[#d9cff5] bg-white space-y-1.5 shadow-sm">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-extrabold text-[#4b3b86]">Bank BCA</span>
-                      <button
-                        type="button"
-                        onClick={() => handleCopyAccount('1530581281', 'BCA')}
-                        className="text-[11px] font-bold text-[#8f78d8] hover:text-[#4b3b86] flex items-center gap-1"
-                      >
-                        {copiedBank === 'BCA' ? <Check size={12} className="text-[#198754]" /> : <Copy size={12} />}
-                        <span>{copiedBank === 'BCA' ? 'Tersalin' : 'Salin'}</span>
-                      </button>
-                    </div>
-                    <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider">1530581281</p>
-                    <p className="text-[10px] text-[#5d5577]">a/n Neyla Vala Kiara Andi</p>
-                  </div>
-
-                  {/* SeaBank */}
-                  <div className="p-3.5 rounded-xl border border-[#d9cff5] bg-white space-y-1.5 shadow-sm">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-extrabold text-[#4b3b86]">SeaBank</span>
-                      <button
-                        type="button"
-                        onClick={() => handleCopyAccount('901928200829', 'SeaBank')}
-                        className="text-[11px] font-bold text-[#8f78d8] hover:text-[#4b3b86] flex items-center gap-1"
-                      >
-                        {copiedBank === 'SeaBank' ? <Check size={12} className="text-[#198754]" /> : <Copy size={12} />}
-                        <span>{copiedBank === 'SeaBank' ? 'Tersalin' : 'Salin'}</span>
-                      </button>
-                    </div>
-                    <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider">901928200829</p>
-                    <p className="text-[10px] text-[#5d5577]">a/n Neyla Vala Kiara Andi</p>
-                  </div>
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-[#4b3b86] uppercase tracking-wider block">
+                    1. Pilih Metode Pembayaran Resmi:
+                  </label>
                 </div>
+
+                <div className="grid grid-cols-3 gap-1.5 p-1 rounded-xl bg-[#efeafb]/60 border border-[#d9cff5]">
+                  <button
+                    type="button"
+                    onClick={() => { setPaymentChannel('QRIS'); setBankDestination('QRIS'); }}
+                    className={`py-1.5 px-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
+                      paymentChannel === 'QRIS'
+                        ? 'bg-[#8f78d8] text-white shadow-sm'
+                        : 'text-[#4b3b86] hover:bg-white/70'
+                    }`}
+                  >
+                    <QrCode size={14} />
+                    <span>QRIS Instan</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => { setPaymentChannel('BANK'); setBankDestination('BCA'); }}
+                    className={`py-1.5 px-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
+                      paymentChannel === 'BANK'
+                        ? 'bg-[#8f78d8] text-white shadow-sm'
+                        : 'text-[#4b3b86] hover:bg-white/70'
+                    }`}
+                  >
+                    <Building2 size={14} />
+                    <span>Transfer Bank</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => { setPaymentChannel('EWALLET'); setBankDestination('GoPay'); }}
+                    className={`py-1.5 px-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
+                      paymentChannel === 'EWALLET'
+                        ? 'bg-[#8f78d8] text-white shadow-sm'
+                        : 'text-[#4b3b86] hover:bg-white/70'
+                    }`}
+                  >
+                    <Smartphone size={14} />
+                    <span>E-Wallet</span>
+                  </button>
+                </div>
+
+                {/* Tab Content 1: QRIS */}
+                {paymentChannel === 'QRIS' && (
+                  <div className="p-3.5 rounded-2xl border border-[#d9cff5] bg-gradient-to-br from-[#efeafb]/40 via-white to-[#efeafb]/20 space-y-3">
+                    <div className="flex flex-col sm:flex-row items-center gap-3">
+                      <div 
+                        onClick={() => setShowQrisPreview(true)}
+                        className="w-32 h-32 sm:w-36 sm:h-36 rounded-xl border-2 border-[#8f78d8] bg-white p-1.5 shadow-sm overflow-hidden cursor-pointer hover:scale-105 transition-transform shrink-0 flex items-center justify-center group relative"
+                        title="Klik untuk memperbesar QRIS"
+                      >
+                        <img 
+                          src="/qris.jpeg" 
+                          alt="QRIS Inner Whisper" 
+                          className="w-full h-full object-contain"
+                        />
+                        <div className="absolute inset-0 bg-[#4b3b86]/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-[10px] font-bold transition-opacity rounded-lg">
+                          Perbesar
+                        </div>
+                      </div>
+
+                      <div className="text-center sm:text-left space-y-1">
+                        <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#8f78d8] text-white text-[10px] font-extrabold uppercase tracking-wider">
+                          QRIS Standar Nasional
+                        </div>
+                        <h5 className="text-sm font-bold text-[#2b2542]">Scan Langsung dari Handphone</h5>
+                        <p className="text-[11px] text-[#5d5577] leading-relaxed">
+                          Mendukung <strong>BCA Mobile, Mandiri Livin, BRImo, BNI, GoPay, OVO, Dana, ShopeePay, LinkAja</strong>.
+                        </p>
+                        <p className="text-[11px] font-medium text-[#4b3b86]">
+                          a/n <strong>Neyla Vala Kiara Andi</strong>
+                        </p>
+                        <a
+                          href="/qris.jpeg"
+                          download="QRIS_InnerWhisper_Rp35000.jpeg"
+                          className="inline-flex items-center gap-1 text-[11px] text-[#8f78d8] font-bold hover:underline pt-1"
+                        >
+                          <ExternalLink size={12} />
+                          <span>Unduh Gambar Barcode QRIS</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Tab Content 2: Bank Transfer */}
+                {paymentChannel === 'BANK' && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {/* BCA */}
+                    <div 
+                      onClick={() => setBankDestination('BCA')}
+                      className={`p-3 rounded-xl border cursor-pointer transition-all ${
+                        bankDestination === 'BCA'
+                          ? 'border-[#8f78d8] bg-[#efeafb]/50 shadow-sm ring-1 ring-[#8f78d8]'
+                          : 'border-[#d9cff5] bg-white hover:border-[#8f78d8]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-extrabold text-[#4b3b86]">Bank BCA</span>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); handleCopyAccount('1530581281', 'BCA'); }}
+                          className="text-[11px] font-bold text-[#8f78d8] hover:text-[#4b3b86] flex items-center gap-1"
+                        >
+                          {copiedAccount === 'BCA' ? <Check size={12} className="text-[#198754]" /> : <Copy size={12} />}
+                          <span>{copiedAccount === 'BCA' ? 'Tersalin' : 'Salin'}</span>
+                        </button>
+                      </div>
+                      <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider mt-1">1530581281</p>
+                      <p className="text-[10px] text-[#5d5577]">a/n Neyla Vala Kiara Andi</p>
+                    </div>
+
+                    {/* SeaBank */}
+                    <div 
+                      onClick={() => setBankDestination('SeaBank')}
+                      className={`p-3 rounded-xl border cursor-pointer transition-all ${
+                        bankDestination === 'SeaBank'
+                          ? 'border-[#8f78d8] bg-[#efeafb]/50 shadow-sm ring-1 ring-[#8f78d8]'
+                          : 'border-[#d9cff5] bg-white hover:border-[#8f78d8]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-extrabold text-[#4b3b86]">SeaBank</span>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); handleCopyAccount('901928200829', 'SeaBank'); }}
+                          className="text-[11px] font-bold text-[#8f78d8] hover:text-[#4b3b86] flex items-center gap-1"
+                        >
+                          {copiedAccount === 'SeaBank' ? <Check size={12} className="text-[#198754]" /> : <Copy size={12} />}
+                          <span>{copiedAccount === 'SeaBank' ? 'Tersalin' : 'Salin'}</span>
+                        </button>
+                      </div>
+                      <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider mt-1">901928200829</p>
+                      <p className="text-[10px] text-[#5d5577]">a/n Neyla Vala Kiara Andi</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Tab Content 3: E-Wallet */}
+                {paymentChannel === 'EWALLET' && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {/* GoPay */}
+                    <div 
+                      onClick={() => setBankDestination('GoPay')}
+                      className={`p-3 rounded-xl border cursor-pointer transition-all ${
+                        bankDestination === 'GoPay'
+                          ? 'border-[#8f78d8] bg-[#efeafb]/50 shadow-sm ring-1 ring-[#8f78d8]'
+                          : 'border-[#d9cff5] bg-white hover:border-[#8f78d8]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-extrabold text-[#00aed6]">GoPay</span>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); handleCopyAccount('081238536128', 'GoPay'); }}
+                          className="text-[11px] font-bold text-[#8f78d8] hover:text-[#4b3b86] flex items-center gap-1"
+                        >
+                          {copiedAccount === 'GoPay' ? <Check size={12} className="text-[#198754]" /> : <Copy size={12} />}
+                          <span>{copiedAccount === 'GoPay' ? 'Tersalin' : 'Salin'}</span>
+                        </button>
+                      </div>
+                      <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider mt-1">081238536128</p>
+                      <p className="text-[10px] text-[#5d5577]">a/n Neyla Vala Kiara Andi</p>
+                    </div>
+
+                    {/* ShopeePay */}
+                    <div 
+                      onClick={() => setBankDestination('ShopeePay')}
+                      className={`p-3 rounded-xl border cursor-pointer transition-all ${
+                        bankDestination === 'ShopeePay'
+                          ? 'border-[#ee4d2d] bg-orange-50/50 shadow-sm ring-1 ring-[#ee4d2d]'
+                          : 'border-[#d9cff5] bg-white hover:border-[#ee4d2d]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-extrabold text-[#ee4d2d]">ShopeePay</span>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); handleCopyAccount('081238536128', 'ShopeePay'); }}
+                          className="text-[11px] font-bold text-[#ee4d2d] hover:text-[#b03016] flex items-center gap-1"
+                        >
+                          {copiedAccount === 'ShopeePay' ? <Check size={12} className="text-[#198754]" /> : <Copy size={12} />}
+                          <span>{copiedAccount === 'ShopeePay' ? 'Tersalin' : 'Salin'}</span>
+                        </button>
+                      </div>
+                      <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider mt-1">081238536128</p>
+                      <p className="text-[10px] text-[#5d5577]">a/n Neyla Vala Kiara Andi</p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Form Input: Bank & Nama Pengirim */}
               <div className="space-y-3 pt-1 border-t border-[#d9cff5]/60">
                 <label className="text-xs font-bold text-[#4b3b86] uppercase tracking-wider block">
-                  2. Konfirmasi Pengiriman Transfer:
+                  2. Konfirmasi Pembayaran Anda:
                 </label>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="text-xs font-semibold text-[#5d5577] block mb-1">
-                      Bank Tujuan Transfer
+                      Metode yang Digunakan
                     </label>
                     <select
                       value={bankDestination}
                       onChange={(e) => setBankDestination(e.target.value)}
                       className="w-full bg-white border border-[#d9cff5] rounded-xl py-2 px-3 text-xs text-[#2b2542] outline-none focus:ring-2 focus:ring-[#8f78d8]/30 font-semibold"
                     >
+                      <option value="QRIS">QRIS (Scan Barcode Nasional)</option>
                       <option value="BCA">Bank BCA (1530581281)</option>
                       <option value="SeaBank">SeaBank (901928200829)</option>
+                      <option value="GoPay">GoPay (081238536128)</option>
+                      <option value="ShopeePay">ShopeePay (081238536128)</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="text-xs font-semibold text-[#5d5577] block mb-1">
-                      Nama Pengirim di Rekening
+                      Nama Pengirim / Pemilik Akun
                     </label>
                     <input
                       type="text"
                       required
                       value={senderName}
                       onChange={(e) => setSenderName(e.target.value)}
-                      placeholder="Nama pemilik rekening transfer"
+                      placeholder="Nama di akun bank / e-wallet"
                       className="w-full bg-white border border-[#d9cff5] rounded-xl py-2 px-3 text-xs text-[#2b2542] outline-none focus:ring-2 focus:ring-[#8f78d8]/30"
                     />
                   </div>
@@ -242,11 +410,11 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
                     Unggah Foto Struk / Bukti Transfer (Maks. 5 MB)
                   </label>
                   
-                  <div className="mt-1 flex justify-center px-4 pt-4 pb-4 border-2 border-[#d9cff5] border-dashed rounded-2xl hover:border-[#8f78d8] transition-colors bg-[#efeafb]/20 relative">
+                  <div className="mt-1 flex justify-center px-4 pt-3 pb-3 border-2 border-[#d9cff5] border-dashed rounded-2xl hover:border-[#8f78d8] transition-colors bg-[#efeafb]/20 relative">
                     {proofPreview ? (
                       <div className="space-y-2 text-center w-full">
-                        <div className="max-h-48 overflow-hidden rounded-xl border border-[#d9cff5] inline-block shadow-sm">
-                          <img src={proofPreview} alt="Preview Struk Transfer" className="h-40 w-auto object-contain mx-auto" />
+                        <div className="max-h-40 overflow-hidden rounded-xl border border-[#d9cff5] inline-block shadow-sm">
+                          <img src={proofPreview} alt="Preview Struk Transfer" className="h-36 w-auto object-contain mx-auto" />
                         </div>
                         <p className="text-xs font-semibold text-[#4b3b86]">{proofFile?.name}</p>
                         <button
@@ -259,8 +427,8 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
                       </div>
                     ) : (
                       <div className="space-y-1.5 text-center">
-                        <div className="w-10 h-10 rounded-full bg-[#efeafb] text-[#8f78d8] flex items-center justify-center mx-auto shadow-sm">
-                          <Upload size={18} />
+                        <div className="w-9 h-9 rounded-full bg-[#efeafb] text-[#8f78d8] flex items-center justify-center mx-auto shadow-sm">
+                          <Upload size={16} />
                         </div>
                         <div className="flex text-xs text-[#5d5577] justify-center">
                           <label
@@ -294,7 +462,7 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
               </div>
 
               {/* Submit Button */}
-              <div className="pt-2">
+              <div className="pt-1">
                 <button
                   type="submit"
                   disabled={isSubmitting || !proofFile}
@@ -323,14 +491,14 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
               <div>
                 <h4 className="text-xl font-bold text-[#2b2542]">Struk Berhasil Terkirim!</h4>
                 <p className="text-xs text-[#5d5577] mt-1.5 max-w-sm mx-auto leading-relaxed">
-                  Foto bukti transfer Anda sebesar <strong>Rp 35.000</strong> ke <strong>Bank {bankDestination}</strong> telah masuk ke antrean verifikasi Admin.
+                  Foto bukti transfer Anda sebesar <strong>Rp 35.000</strong> via <strong>{bankDestination}</strong> telah masuk ke antrean verifikasi Admin.
                 </p>
               </div>
 
               <div className="p-4 rounded-xl bg-[#efeafb]/70 border border-[#d9cff5] text-xs text-[#4b3b86] space-y-1">
                 <p className="font-bold">Proses Verifikasi Cepat:</p>
                 <p className="text-[11px] text-[#5d5577]">
-                  Admin akan memverifikasi dalam waktu 1x24 jam (biasanya 5–15 menit pada jam kerja). Akun PRO Anda akan aktif otomatis begitu disetujui.
+                  Admin akan memverifikasi dalam waktu singkat. Akun PRO Anda akan aktif otomatis begitu disetujui.
                 </p>
               </div>
 
@@ -345,6 +513,35 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
           )}
         </div>
       </div>
+
+      {/* QRIS Full Preview Lightbox */}
+      {showQrisPreview && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in"
+          onClick={() => setShowQrisPreview(false)}
+        >
+          <div 
+            className="relative max-w-sm w-full bg-white rounded-3xl p-5 shadow-2xl space-y-3"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b pb-2">
+              <h4 className="font-bold text-sm text-[#2b2542]">Barcode QRIS Resmi</h4>
+              <button 
+                onClick={() => setShowQrisPreview(false)}
+                className="w-7 h-7 rounded-full bg-[#efeafb] text-[#4b3b86] flex items-center justify-center font-bold"
+              >
+                <X size={16} />
+              </button>
+            </div>
+            <div className="p-2 bg-white rounded-xl border flex items-center justify-center">
+              <img src="/qris.jpeg" alt="QRIS Full Barcode" className="max-h-80 w-auto object-contain" />
+            </div>
+            <p className="text-center text-xs text-[#5d5577]">
+              Scan menggunakan aplikasi Mobile Banking atau E-Wallet apa saja.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

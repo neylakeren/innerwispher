@@ -1,21 +1,24 @@
+import React, { useState, useEffect } from 'react';
 import { 
   Brain, 
   FileText, 
   ArrowRight, 
-  Sparkles,
-  ClipboardCheck,
-  CheckCircle2,
-  Award,
-  ShieldCheck,
-  Star,
-  Quote,
-  Building2,
-  Users,
-  Check
+  Sparkles, 
+  ClipboardCheck, 
+  CheckCircle2, 
+  Award, 
+  ShieldCheck, 
+  Star, 
+  Quote, 
+  Building2, 
+  Users, 
+  Check 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import api from '../../api/client';
 
 export default function Beranda() {
+  const [liveReviews, setLiveReviews] = useState([]);
   const steps = [
     {
       icon: Brain,
@@ -90,6 +93,22 @@ export default function Beranda() {
       review: 'Sebagai lulusan non-IT yang ingin banting setir ke data analyst, tes minat bakatnya memberi kepastian bahwa logika analitis saya kuat. Roadmap dan modul portofolionya terstruktur serta mudah dieksekusi secara mandiri.',
     },
   ];
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await api.get('/reviews');
+        if (res.data?.success && res.data.reviews?.length > 0) {
+          setLiveReviews(res.data.reviews);
+        }
+      } catch (err) {
+        console.warn('Could not fetch dynamic reviews, fallback to defaults:', err);
+      }
+    };
+    fetchReviews();
+  }, []);
+
+  const displayedReviews = liveReviews.length > 0 ? liveReviews : userReviews;
 
   return (
     <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24 pt-20 md:pt-[130px] pb-28 md:pb-24 flex flex-col gap-12 sm:gap-16 md:gap-24 font-quicksand">
@@ -245,16 +264,16 @@ export default function Beranda() {
 
         {/* Reviews Grid (3 columns on desktop, 1 on mobile) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {userReviews.map((rev, idx) => (
+          {displayedReviews.map((rev, idx) => (
             <div 
-              key={idx} 
+              key={rev.id || idx} 
               className="card-s p-6 sm:p-7 flex flex-col justify-between bg-white border border-[#d9cff5]/80 hover:border-[#8f78d8] hover:shadow-card transition-all duration-200 group"
             >
               <div className="space-y-4">
                 {/* Rating & Quote Header */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
-                    {[...Array(rev.rating)].map((_, i) => (
+                    {[...Array(rev.rating || 5)].map((_, i) => (
                       <Star key={i} size={15} className="fill-amber-400 text-amber-400" />
                     ))}
                   </div>
@@ -264,10 +283,12 @@ export default function Beranda() {
                 </div>
 
                 {/* Outcome Badge */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#f8fdf9] border border-[#d1e7dd] text-[11px] font-bold text-[#198754]">
-                  <CheckCircle2 size={13} className="shrink-0" />
-                  <span>{rev.outcome}</span>
-                </div>
+                {rev.outcome && (
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#f8fdf9] border border-[#d1e7dd] text-[11px] font-bold text-[#198754]">
+                    <CheckCircle2 size={13} className="shrink-0" />
+                    <span>{rev.outcome}</span>
+                  </div>
+                )}
 
                 {/* Review Text */}
                 <p className="text-xs sm:text-sm text-[#2b2542] leading-relaxed italic">
@@ -277,8 +298,12 @@ export default function Beranda() {
 
               {/* Reviewer Profile */}
               <div className="pt-4 mt-4 border-t border-[#d9cff5]/50 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#efeafb] text-[#4b3b86] font-extrabold text-xs flex items-center justify-center border border-[#d9cff5] shrink-0">
-                  {rev.initials}
+                <div className="w-10 h-10 rounded-full bg-[#efeafb] text-[#4b3b86] font-extrabold text-xs flex items-center justify-center border border-[#d9cff5] shrink-0 overflow-hidden">
+                  {rev.avatar_url ? (
+                    <img src={rev.avatar_url} alt={rev.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span>{rev.initials || rev.name?.charAt(0) || 'U'}</span>
+                  )}
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1">
@@ -287,11 +312,22 @@ export default function Beranda() {
                       <Check size={9} strokeWidth={3} />
                     </span>
                   </div>
-                  <p className="text-[11px] text-[#5d5577] truncate">{rev.origin}</p>
+                  <p className="text-[11px] text-[#5d5577] truncate">{rev.role || rev.origin || 'Pelanggan Inner Whisper'}</p>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View All Reviews Button */}
+        <div className="text-center pt-2">
+          <Link
+            to="/review"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[#d9cff5] bg-white text-[#4b3b86] hover:bg-[#efeafb] text-xs sm:text-sm font-bold transition-all shadow-sm hover:border-[#8f78d8]"
+          >
+            <span>Lihat Semua Review &amp; Cerita Sukses</span>
+            <ArrowRight size={15} />
+          </Link>
         </div>
 
         {/* Bottom CTA Banner */}
