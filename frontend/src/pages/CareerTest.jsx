@@ -198,7 +198,7 @@ export default function CareerTest() {
                   Ingin Analisis Psikometri Mendalam &amp; Unduh Laporan PDF?
                 </h3>
                 <p className="text-xs sm:text-sm text-[#5d5577] max-w-xl leading-relaxed">
-                  Buka akses Inner Whisper PRO: 1x bayar untuk membuka Laporan PDF resmi, pemetaan 10+ industri, analisis SWOT, audit CV ATS, dan seluruh 10 soal simulasi wawancara STAR.
+                  Buka akses Inner Whisper PRO: Rp 35.000 / bulan untuk membuka Laporan PDF resmi, pemetaan 10+ industri, analisis SWOT, audit CV ATS, dan seluruh 10 soal simulasi wawancara STAR.
                 </p>
                 <div className="flex flex-wrap items-center gap-4 pt-1 text-xs text-[#4b3b86] font-semibold">
                   <span className="flex items-center gap-1"><CheckCircle2 size={14} className="text-[#8f78d8]" /> Downloadable PDF</span>
@@ -209,7 +209,7 @@ export default function CareerTest() {
 
               <div className="shrink-0 flex flex-col items-start md:items-end gap-2 w-full md:w-auto">
                 <div className="text-left md:text-right">
-                  <span className="text-xs text-[#5d5577] block font-medium">1x bayar semua fitur:</span>
+                  <span className="text-xs text-[#5d5577] block font-medium">Langganan bulanan:</span>
                   <span className="text-2xl font-extrabold text-[#4b3b86]">Rp 35.000</span>
                 </div>
                 <Button

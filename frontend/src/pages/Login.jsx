@@ -217,7 +217,7 @@ export default function Login() {
                                             className="px-2.5 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-[11px] font-semibold text-emerald-900 hover:bg-emerald-600 hover:text-white transition-all text-left shadow-sm flex items-center justify-between"
                                         >
                                             <span className="truncate">Sarah (PRO)</span>
-                                            <span className="text-[9px] font-bold px-1 rounded bg-emerald-200 text-emerald-900 shrink-0">Mandiri</span>
+                                            <span className="text-[9px] font-bold px-1 rounded bg-emerald-200 text-emerald-900 shrink-0">SeaBank</span>
                                         </button>
                                         <button
                                             type="button"

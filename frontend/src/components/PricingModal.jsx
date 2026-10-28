@@ -147,14 +147,14 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
               <div className="p-4 rounded-2xl bg-gradient-to-br from-[#efeafb]/70 via-white to-[#efeafb]/40 border-2 border-[#8f78d8] shadow-sm flex items-center justify-between">
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#8f78d8] text-white inline-block">
-                    Single Bundle PRO
+                    Paket Langganan Bulanan
                   </span>
-                  <h4 className="text-sm font-bold text-[#2b2542] mt-1">Akses Penuh Selamanya</h4>
-                  <p className="text-[11px] text-[#5d5577]">Laporan PDF + CV ATS + 10 Soal Wawancara</p>
+                  <h4 className="text-sm font-bold text-[#2b2542] mt-1">Akses PRO 30 Hari Penuh</h4>
+                  <p className="text-[11px] text-[#5d5577]">Laporan PDF + CV ATS + 10 Soal STAR + Portofolio</p>
                 </div>
                 <div className="text-right">
                   <span className="text-2xl font-extrabold text-[#4b3b86]">Rp 35.000</span>
-                  <span className="text-[10px] text-[#5d5577] block font-medium">/sekali bayar</span>
+                  <span className="text-[10px] text-[#5d5577] block font-medium">/bulan (30 hari)</span>
                 </div>
               </div>
 
@@ -170,32 +170,32 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
                       <span className="text-xs font-extrabold text-[#4b3b86]">Bank BCA</span>
                       <button
                         type="button"
-                        onClick={() => handleCopyAccount('8720998812', 'BCA')}
+                        onClick={() => handleCopyAccount('1530581281', 'BCA')}
                         className="text-[11px] font-bold text-[#8f78d8] hover:text-[#4b3b86] flex items-center gap-1"
                       >
                         {copiedBank === 'BCA' ? <Check size={12} className="text-[#198754]" /> : <Copy size={12} />}
                         <span>{copiedBank === 'BCA' ? 'Tersalin' : 'Salin'}</span>
                       </button>
                     </div>
-                    <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider">8720-9988-12</p>
-                    <p className="text-[10px] text-[#5d5577]">a/n PT Inner Whisper Indonesia</p>
+                    <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider">1530581281</p>
+                    <p className="text-[10px] text-[#5d5577]">a/n Neyla Vala Kiara Andi</p>
                   </div>
 
-                  {/* Mandiri */}
+                  {/* SeaBank */}
                   <div className="p-3.5 rounded-xl border border-[#d9cff5] bg-white space-y-1.5 shadow-sm">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-extrabold text-[#4b3b86]">Bank Mandiri</span>
+                      <span className="text-xs font-extrabold text-[#4b3b86]">SeaBank</span>
                       <button
                         type="button"
-                        onClick={() => handleCopyAccount('1370019283741', 'Mandiri')}
+                        onClick={() => handleCopyAccount('901928200829', 'SeaBank')}
                         className="text-[11px] font-bold text-[#8f78d8] hover:text-[#4b3b86] flex items-center gap-1"
                       >
-                        {copiedBank === 'Mandiri' ? <Check size={12} className="text-[#198754]" /> : <Copy size={12} />}
-                        <span>{copiedBank === 'Mandiri' ? 'Tersalin' : 'Salin'}</span>
+                        {copiedBank === 'SeaBank' ? <Check size={12} className="text-[#198754]" /> : <Copy size={12} />}
+                        <span>{copiedBank === 'SeaBank' ? 'Tersalin' : 'Salin'}</span>
                       </button>
                     </div>
-                    <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider">137-00-1928374-1</p>
-                    <p className="text-[10px] text-[#5d5577]">a/n PT Inner Whisper Indonesia</p>
+                    <p className="text-sm font-mono font-bold text-[#2b2542] tracking-wider">901928200829</p>
+                    <p className="text-[10px] text-[#5d5577]">a/n Neyla Vala Kiara Andi</p>
                   </div>
                 </div>
               </div>
@@ -216,8 +216,8 @@ export default function PricingModal({ isOpen, onClose, onSuccess }) {
                       onChange={(e) => setBankDestination(e.target.value)}
                       className="w-full bg-white border border-[#d9cff5] rounded-xl py-2 px-3 text-xs text-[#2b2542] outline-none focus:ring-2 focus:ring-[#8f78d8]/30 font-semibold"
                     >
-                      <option value="BCA">Bank BCA (8720-9988-12)</option>
-                      <option value="Mandiri">Bank Mandiri (137-00-1928374-1)</option>
+                      <option value="BCA">Bank BCA (1530581281)</option>
+                      <option value="SeaBank">SeaBank (901928200829)</option>
                     </select>
                   </div>
 

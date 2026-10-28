@@ -200,19 +200,19 @@ export default function Dashboard() {
               <span className={`text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full ${
                 isProUnlocked ? 'bg-[#d1e7dd] text-[#198754]' : 'bg-[#8f78d8] text-white'
               }`}>
-                {isProUnlocked ? 'PRO Member Aktif' : 'Single Bundle 35K'}
+                {isProUnlocked ? 'PRO Member Aktif' : 'Paket Langganan PRO'}
               </span>
               <span className="text-xs text-[#5d5577] font-semibold">
-                {isProUnlocked ? 'Akses Seumur Hidup' : 'Sekali Bayar Selamanya'}
+                {isProUnlocked ? 'Langganan Aktif' : 'Rp 35.000 / Bulan'}
               </span>
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-[#2b2542]">
-              {isProUnlocked ? 'Seluruh Fitur Inner Whisper PRO Telah Terbuka' : 'Buka Semua Fitur Digital Hanya Rp 35.000'}
+              {isProUnlocked ? 'Seluruh Fitur Inner Whisper PRO Telah Terbuka' : 'Buka Semua Fitur Digital Hanya Rp 35.000 / Bulan'}
             </h2>
             <p className="text-xs sm:text-sm text-[#5d5577] max-w-xl leading-relaxed">
               {isProUnlocked 
-                ? 'Laporan psikometri lengkap, unduhan PDF resmi, audit mendalam CV ATS, dan 10 simulasi wawancara STAR siap kamu gunakan kapan saja.'
-                : 'Dapatkan akses penuh Laporan Diagnostik Karier, CV ATS Deep Diagnostic, dan 10 Soal Simulasi Interview STAR tanpa biaya langganan bulanan.'}
+                ? 'Laporan psikometri lengkap, unduhan PDF resmi, audit mendalam CV ATS, dan 10 simulasi wawancara STAR siap kamu gunakan.'
+                : 'Dapatkan akses penuh Laporan Diagnostik Karier, CV ATS Deep Diagnostic, dan 10 Soal Simulasi Interview STAR selama 30 hari tanpa perpanjangan otomatis diam-diam.'}
             </p>
           </div>
 

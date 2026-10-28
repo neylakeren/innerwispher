@@ -4,7 +4,8 @@ import {
   Sparkles,
   Zap,
   ShieldCheck,
-  Award
+  Award,
+  Building2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -25,14 +26,14 @@ export default function Layanan() {
     'Analisis Kata Kerja Aktif & Rekomendasi Baris-per-Baris',
     'Akses Penuh 10 Soal Simulasi Wawancara Kerja (Metode STAR)',
     'Modul Template Portofolio Karier Eksklusif',
-    'Aktivasi Instan Otomatis (Tanpa Tunggu Admin)',
+    'Akses Langganan 30 Hari Penuh',
   ];
 
   const valueProps = [
     {
-      icon: Zap,
-      title: 'Aktivasi Instan 24/7',
-      description: 'Cukup bayar via QRIS atau Virtual Account, sistem langsung membuka semua akses fitur detik itu juga.',
+      icon: Building2,
+      title: 'Transfer Manual BCA & SeaBank',
+      description: 'Transfer mudah ke BCA 1530581281 atau SeaBank 901928200829 a/n Neyla Vala Kiara Andi. Admin memverifikasi dengan cepat.',
     },
     {
       icon: ShieldCheck,
@@ -41,8 +42,8 @@ export default function Layanan() {
     },
     {
       icon: Award,
-      title: '1x Bayar Tanpa Langganan',
-      description: 'Hanya Rp 35.000 sekali bayar. Tidak ada jebakan tagihan bulanan atau perpanjangan otomatis.',
+      title: 'Rp 35.000 / Bulan Bebas Jebakan',
+      description: 'Bebas dari auto-debit diam-diam. Cukup bayar Rp 35.000 untuk 30 hari akses saat kamu sedang aktif melamar kerja.',
     },
   ];
 
@@ -58,7 +59,7 @@ export default function Layanan() {
           Paket Layanan &amp; <span className="bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] bg-clip-text text-transparent">Investasi Kariermu</span>
         </h1>
         <p className="text-xs sm:text-base md:text-lg text-[#5d5577] max-w-3xl mx-auto leading-relaxed font-medium">
-          Mulai secara gratis untuk mengenal potensi diri, lalu buka seluruh laporan diagnostik, audit CV ATS, dan simulator interview dengan <strong>satu kali pembayaran terjangkau</strong>.
+          Mulai secara gratis untuk mengenal potensi diri, lalu buka seluruh laporan diagnostik, audit CV ATS, dan simulator interview dengan <strong>langganan terjangkau Rp 35.000 / bulan</strong>.
         </p>
       </section>
 
@@ -109,12 +110,12 @@ export default function Layanan() {
             </Link>
           </div>
 
-          {/* Pro Tier (Single Bundling) */}
+          {/* Pro Tier (Monthly Subscription) */}
           <div className="rounded-3xl p-6 sm:p-9 bg-gradient-to-b from-[#efeafb] via-white to-white border-2 border-[#8f78d8] shadow-xl flex flex-col justify-between relative md:-translate-y-2">
             <div>
               <div className="flex items-center justify-between gap-2 mb-3">
                 <span className="text-[11px] font-extrabold px-3 py-1 rounded-full bg-[#8f78d8] text-white shadow-sm flex items-center gap-1">
-                  <Award size={13} /> All-in-One Lifetime
+                  <Award size={13} /> All-in-One Monthly
                 </span>
                 <span className="text-[11px] font-extrabold text-[#8f78d8] flex items-center gap-1">
                   <Sparkles size={13} /> Paling Hemat
@@ -129,10 +130,10 @@ export default function Layanan() {
               <div className="mb-6 pb-4 border-b border-[#d9cff5]/70">
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl sm:text-4xl font-extrabold text-[#4b3b86]">Rp 35.000</span>
-                  <span className="text-xs text-[#5d5577] font-medium">/sekali bayar selamanya</span>
+                  <span className="text-xs text-[#5d5577] font-medium">/bulan (30 hari akses)</span>
                 </div>
                 <p className="text-[11px] text-[#8f78d8] font-bold mt-1">
-                  Tanpa perpanjangan otomatis. Tanpa biaya per fitur terpisah.
+                  Transfer manual ke BCA / SeaBank. Bebas jebakan auto-debit.
                 </p>
               </div>
 
@@ -153,21 +154,21 @@ export default function Layanan() {
               to="/login"
               className="w-full text-xs sm:text-sm py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 font-semibold shadow-btn active:scale-95 btn-lv text-white"
             >
-              <span>Aktifkan PRO Sekarang (Rp 35.000)</span>
+              <span>Langganan Sekarang (Rp 35.000 / Bulan)</span>
               <ArrowRight size={14} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Single Bundle */}
+      {/* Why Choose Monthly */}
       <section className="card-s bg-gradient-to-r from-white to-[#efeafb]/50 p-6 sm:p-10 md:p-14 border border-[#d9cff5] max-w-5xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-[#4b3b86]">
-            Mengapa Satu Harga Rp 35.000?
+            Mengapa Langganan Rp 35.000 / Bulan?
           </h2>
           <p className="text-xs sm:text-sm text-[#5d5577] mt-2">
-            Kami percaya persiapan karier profesional harus terjangkau, transparan, dan tidak membingungkan.
+            Kami percaya persiapan karier profesional harus terjangkau, transparan, dan tidak membebani mahasiswa atau fresh graduate.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">

@@ -153,13 +153,13 @@ class PaymentController extends Controller
     }
 
     /**
-     * User uploads bank transfer proof for PRO subscription (Rp 35.000).
+     * User uploads bank transfer proof for PRO subscription (Rp 35.000 / bulan).
      */
     public function uploadProProof(Request $request)
     {
         $request->validate([
             'proof_image' => 'required|image|max:5120', // 5MB max
-            'bank_destination' => 'required|string|in:BCA,Mandiri,bca,mandiri',
+            'bank_destination' => 'required|string|in:BCA,SeaBank,seabank,SEABANK,bca',
             'sender_name' => 'required|string|max:255',
             'amount' => 'nullable|numeric|min:0',
         ]);
@@ -168,13 +168,14 @@ class PaymentController extends Controller
 
         if ($request->hasFile('proof_image')) {
             $path = $request->file('proof_image')->store('payment_proofs', 'public');
+            $normalizedBank = (strtoupper($request->bank_destination) === 'SEABANK') ? 'SeaBank' : 'BCA';
 
             $payment = Payment::create([
                 'user_id' => $user->id,
                 'booking_id' => null,
                 'amount' => $request->amount ?? 35000.00,
                 'payment_type' => 'pro_bundle',
-                'bank_destination' => strtoupper($request->bank_destination),
+                'bank_destination' => $normalizedBank,
                 'sender_name' => $request->sender_name,
                 'proof_image_path' => $path,
                 'status' => 'pending',
@@ -190,7 +191,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * Check PRO subscription status for current user.
+     * Check PRO subscription status for current user (Monthly 30 Days).
      */
     public function getProStatus(Request $request)
     {
@@ -200,8 +201,19 @@ class PaymentController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
+        $isProActive = $user->isProActive();
+
+        // Jika langganan bulanan telah lewat masa berlakunya, perbarui is_pro ke false
+        if ($user->is_pro && !$isProActive) {
+            $user->update(['is_pro' => false]);
+        }
+
         return response()->json([
-            'is_pro' => (bool) $user->is_pro,
+            'is_pro' => $isProActive,
+            'pro_expires_at' => $user->pro_expires_at ? $user->pro_expires_at->format('Y-m-d H:i:s') : null,
+            'days_left' => ($user->pro_expires_at && $user->pro_expires_at->isFuture()) 
+                ? max(1, (int) now()->diffInDays($user->pro_expires_at, false) + 1) 
+                : 0,
             'latest_payment' => $latestPayment,
         ]);
     }
@@ -212,7 +224,7 @@ class PaymentController extends Controller
     public function getAdminProPayments(Request $request)
     {
         $payments = Payment::where('payment_type', 'pro_bundle')
-            ->with('user:id,name,email,phone,is_pro')
+            ->with('user:id,name,email,phone,is_pro,pro_expires_at')
             ->orderBy('id', 'desc')
             ->get();
 
@@ -220,7 +232,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * Admin: Verify / approve or reject PRO bundle transfer proof.
+     * Admin: Verify / approve or reject PRO bundle transfer proof (30 Days Active).
      */
     public function verifyProPayment(Request $request, $id)
     {
@@ -236,7 +248,15 @@ class PaymentController extends Controller
         ]);
 
         if ($request->status === 'verified') {
-            $payment->user->update(['is_pro' => true]);
+            $currentExpiry = $payment->user->pro_expires_at;
+            $newExpiry = ($currentExpiry && $currentExpiry->isFuture()) 
+                ? $currentExpiry->copy()->addDays(30) 
+                : now()->addDays(30);
+
+            $payment->user->update([
+                'is_pro' => true,
+                'pro_expires_at' => $newExpiry,
+            ]);
         } else {
             $hasOtherVerified = Payment::where('user_id', $payment->user_id)
                 ->where('payment_type', 'pro_bundle')
@@ -245,13 +265,16 @@ class PaymentController extends Controller
                 ->exists();
 
             if (!$hasOtherVerified) {
-                $payment->user->update(['is_pro' => false]);
+                $payment->user->update([
+                    'is_pro' => false,
+                    'pro_expires_at' => null,
+                ]);
             }
         }
 
         return response()->json([
             'message' => $request->status === 'verified' 
-                ? 'Pembayaran berhasil disetujui. Akun user sekarang menjadi PRO.' 
+                ? 'Pembayaran berhasil disetujui. Akun user sekarang aktif PRO (30 Hari).' 
                 : 'Pembayaran telah ditolak. User dapat mengunggah ulang bukti transfer.',
             'payment' => $payment->load('user'),
         ]);

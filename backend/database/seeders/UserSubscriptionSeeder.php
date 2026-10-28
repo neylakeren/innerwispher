@@ -81,7 +81,7 @@ class UserSubscriptionSeeder extends Seeder
         ]);
 
         // ==========================================
-        // 3. USER SUDAH BERLANGGANAN (PRO MEMBER AKTIF)
+        // 3. USER SUDAH BERLANGGANAN (PRO MEMBER AKTIF BULANAN)
         // ==========================================
         
         // User 4: Sarah Professional (sarah@neyla.id)
@@ -93,6 +93,7 @@ class UserSubscriptionSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role' => 'patient',
                 'is_pro' => true,
+                'pro_expires_at' => now()->addDays(27),
             ]
         );
         Payment::where('user_id', $user4->id)->where('payment_type', 'pro_bundle')->delete();
@@ -101,7 +102,7 @@ class UserSubscriptionSeeder extends Seeder
             'booking_id' => null,
             'amount' => 35000,
             'payment_type' => 'pro_bundle',
-            'bank_destination' => 'Mandiri',
+            'bank_destination' => 'SeaBank',
             'sender_name' => 'Sarah Aulia',
             'proof_image_path' => 'payment_proofs/dummy.jpg',
             'status' => 'verified',
@@ -118,6 +119,7 @@ class UserSubscriptionSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role' => 'patient',
                 'is_pro' => true,
+                'pro_expires_at' => now()->addDays(29),
             ]
         );
         Payment::where('user_id', $user5->id)->where('payment_type', 'pro_bundle')->delete();

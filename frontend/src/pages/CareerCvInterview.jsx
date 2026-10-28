@@ -253,13 +253,13 @@ export default function CareerCvInterview() {
                     Ingin Audit Kata Kunci Industri &amp; Rekomendasi Baris-per-Baris?
                   </h4>
                   <p className="text-xs text-[#5d5577] max-w-lg leading-relaxed">
-                    Buka akses Inner Whisper PRO: 1x bayar untuk membuka Audit CV ATS, Laporan Psikometri PDF, dan seluruh 10 soal wawancara STAR.
+                    Buka akses Inner Whisper PRO: Rp 35.000 / bulan untuk membuka Audit CV ATS, Laporan Psikometri PDF, dan seluruh 10 soal wawancara STAR.
                   </p>
                 </div>
 
                 <div className="shrink-0 flex flex-col items-start sm:items-end gap-1.5 w-full sm:w-auto">
                   <div className="text-left sm:text-right">
-                    <span className="text-xs text-[#5d5577] block font-medium">1x bayar semua fitur:</span>
+                    <span className="text-xs text-[#5d5577] block font-medium">Langganan bulanan:</span>
                     <span className="text-xl font-extrabold text-[#4b3b86]">Rp 35.000</span>
                   </div>
                   <Button

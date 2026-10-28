@@ -34,6 +34,7 @@ export function CareerProvider({ children }) {
   });
 
   const [proPayment, setProPayment] = useState(null);
+  const [proMeta, setProMeta] = useState({ proExpiresAt: null, daysLeft: 0 });
   const [proLoading, setProLoading] = useState(false);
 
   const refreshProStatus = async () => {
@@ -42,6 +43,10 @@ export function CareerProvider({ children }) {
       setProLoading(true);
       const res = await client.get('/pro/status');
       setProPayment(res.data.latest_payment || null);
+      setProMeta({
+        proExpiresAt: res.data.pro_expires_at || null,
+        daysLeft: res.data.days_left ?? 0
+      });
       if (res.data.is_pro || res.data.latest_payment?.status === 'verified') {
         unlockPro();
       } else {
@@ -205,6 +210,8 @@ export function CareerProvider({ children }) {
       proPayment,
       proPaymentStatus,
       proLoading,
+      proExpiresAt: proMeta.proExpiresAt || user?.pro_expires_at || null,
+      daysLeft: proMeta.daysLeft,
       submitProPaymentProof,
       refreshProStatus,
     }}>

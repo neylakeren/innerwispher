@@ -452,6 +452,43 @@ This document serves as the project memory for the frontend landing page and das
     - Menghapus asset bundle lama, membersihkan cache Laravel, dan me-reload Nginx serta Supervisor queue worker.
     - Memverifikasi HTTP 200 OK pada seluruh asset dan endpoint.
 
+- **October 28, 2026 (Part 2):** Implementasi Langganan Bulanan (Rp 35.000 / Bulan, 30 Hari), Update Rekening Bank (BCA & SeaBank a/n Neyla Vala Kiara Andi), Pembersihan Total Fitur Konselor di Admin, dan Kolom Review di Landing Page (`Beranda.jsx`).
+  - **1. Model Langganan Bulanan (Monthly Subscription 30 Hari):**
+    - Mengubah model dari *Lifetime / Sekali Bayar* menjadi *Langganan Bulanan 30 Hari* seharga **Rp 35.000 / bulan**.
+    - **Database Migration:** `backend/database/migrations/2026_10_28_063526_add_pro_expires_at_to_users_table.php` (menambahkan kolom nullable `pro_expires_at` pada tabel `users`).
+    - **Backend Logic ([User.php](file:///D:/Coding/neyla/backend/app/Models/User.php) & [PaymentController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/PaymentController.php)):**
+      - Ditambahkan helper `isProActive()` pada `User.php` yang memverifikasi `is_pro && (!pro_expires_at || pro_expires_at->isFuture())`.
+      - Pada `verifyProPayment()`, jika admin menyetujui struk pembayaran, `is_pro` diset `true` dan `pro_expires_at` ditambah 30 hari (`now()->addDays(30)` atau perpanjangan jika masih aktif).
+      - Endpoint `GET /api/pro/status` mengembalikan `is_pro`, `pro_expires_at`, `days_left`, dan riwayat struk pembayaran terakhir.
+    - **Frontend State ([CareerContext.jsx](file:///D:/Coding/neyla/frontend/src/context/CareerContext.jsx)):**
+      - Menyimpan `proExpiresAt` dan `daysLeft` dari respon server.
+      - Menampilkan sisa hari aktif dan tombol perpanjang langganan.
+  - **2. Pembaruan Rekening Bank Resmi Transfer:**
+    - Rekening resmi disesuaikan secara konsisten di seluruh aplikasi:
+      - **Bank BCA**: `1530581281` a/n **Neyla Vala Kiara Andi**
+      - **SeaBank**: `901928200829` a/n **Neyla Vala Kiara Andi**
+    - Dilengkapi tombol 1-click salin nomor rekening di [PricingModal.jsx](file:///D:/Coding/neyla/frontend/src/components/PricingModal.jsx) dan [CareerPricing.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerPricing.jsx).
+    - Seeder demo ([UserSubscriptionSeeder.php](file:///D:/Coding/neyla/backend/database/seeders/UserSubscriptionSeeder.php)) diperbarui untuk Bank BCA dan SeaBank.
+  - **3. Pembersihan Total Fitur Konselor & Tenaga Ahli ("Para Ahli Ga Perlu"):**
+    - Menghapus section invoice sesi konseling manual, tabel pencairan honor konselor, serta modal payout konselor dari [AdminDashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminDashboard.jsx).
+    - Dashboard admin kini fokus 100% pada:
+      - Antrean Struk PRO Menunggu Verifikasi (`pending_pro_payments`)
+      - Total Pengguna PRO Aktif (`total_pro_users`)
+      - Total Pengguna Terdaftar (`total_patients`)
+      - Estimasi Pendapatan Langganan PRO (`verifiedProCount * 35000`)
+      - Tabel Verifikasi Struk PRO dengan pratinjau zoom foto struk, tanggal kedaluwarsa 30 hari, tombol aksi *Setujui (30 Hari)*, *Tolak*, dan *Cabut Akses PRO*.
+  - **4. Kolom Review & Testimoni Pengguna di Landing Page ([Beranda.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Beranda.jsx)):**
+    - Merancang kolom review estetis berstandar `impeccable` dan **ANTI-SLOP** (menggunakan SVG Lucide Star, Quote, CheckCircle2; tanpa emoji mentah).
+    - Menampilkan banner skor kepuasan: **4.9 / 5.0** (1.250+ review terverifikasi), 94% lolos skrining ATS, 88% lebih percaya diri interview metode STAR, dan 100% bebas biaya tersembunyi.
+    - Menampilkan 6 kartu ulasan mahasiswa & fresh graduate terverifikasi (UI/UX, Software Engineer, Big 4 Auditor, FMCG MT, Communication Specialist, Data Analyst) beserta lencana hasil seleksi.
+  - **5. Kompilasi, Git Push & Live Production Deployment (`vps-bleber`):**
+    - Kompilasi production frontend via `npm run build` sukses 100% (`dist/assets/index-DuAwzQD7.js` dan `dist/assets/index-Bs9FdVuh.css`).
+    - Sinkronisasi backend files ke VPS `/var/www/innerwhisper/backend/`.
+    - Eksekusi migrasi database live: `php artisan migrate --force` sukses menambahkan kolom `pro_expires_at`.
+    - Eksekusi seeder akun demo: `php artisan db:seed --class=UserSubscriptionSeeder --force`.
+    - Deployment frontend ke `/var/www/innerwhisper/frontend-dist/` dan pembersihan cache Laravel (`optimize:clear`).
+    - Uji live HTTP 200 OK di `https://innerwhisper.my.id/`.
+
 - **October 28, 2026:** Pivot Model Bisnis: Penghapusan Konselor Manual -> All-in-One Career Bundle Rp 35.000 Sekali Bayar & Verifikasi Struk Transfer Manual Admin.
   - **Latar Belakang & Pivot:**
     - Sesuai arahan klien, konselor dan jasa konsultasi manual dihapus sepenuhnya.

@@ -11,15 +11,24 @@ import {
   Lock,
   Clock,
   AlertCircle,
-  Building2
+  Building2,
+  Copy,
+  Calendar
 } from 'lucide-react';
 import { useCareer } from '../context/CareerContext';
 import PricingModal from '../components/PricingModal';
 import { Button } from '../components/ui';
 
 export default function CareerPricing() {
-  const { isProUnlocked, proPaymentStatus, proPayment } = useCareer();
+  const { isProUnlocked, proPaymentStatus, proPayment, proExpiresAt, daysLeft } = useCareer();
   const [modalOpen, setModalOpen] = useState(false);
+  const [copiedBank, setCopiedBank] = useState(null);
+
+  const handleCopyAccount = (number, bank) => {
+    navigator.clipboard.writeText(number);
+    setCopiedBank(bank);
+    setTimeout(() => setCopiedBank(null), 2500);
+  };
 
   const freeFeatures = [
     'Tes Minat & Bakat dasar (2 kategori dominan)',
@@ -37,7 +46,7 @@ export default function CareerPricing() {
     'Analisis Kata Kerja Aktif & Saran Revisi Baris per Baris',
     'Akses Penuh 10 Soal Simulasi Wawancara Kerja (Metode STAR)',
     'Modul Template Portofolio Karier Eksklusif',
-    'Akses Lifetime Selamanya (1x Bayar)',
+    'Akses Langganan 30 Hari Penuh',
   ];
 
   return (
@@ -47,13 +56,13 @@ export default function CareerPricing() {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#efeafb] text-[#4b3b86] text-xs font-semibold mb-2">
             <CreditCard size={14} />
-            Paket Akses &amp; Upgrade
+            Paket Langganan Bulanan
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-[#2b2542] tracking-tight">
-            Satu Harga untuk Semua Fitur
+            Langganan Fleksibel &amp; Transparan
           </h1>
           <p className="text-sm text-[#5d5577] mt-1 max-w-xl">
-            Tidak perlu bayar per fitur. Cukup subscribe <strong>1x seharga Rp 35.000</strong> untuk membuka seluruh laporan diagnostik, audit CV ATS, dan latihan wawancara.
+            Tidak ada auto-debit tersembunyi. Cukup <strong>Rp 35.000 / bulan (30 hari)</strong> via transfer manual ke BCA / SeaBank untuk membuka seluruh ekosistem fitur karier digital.
           </p>
         </div>
 
@@ -66,7 +75,7 @@ export default function CareerPricing() {
             <p className="text-[10px] uppercase font-bold text-[#5d5577] tracking-wider">Status Akun</p>
             <p className="text-xs font-extrabold text-[#4b3b86]">
               {isProUnlocked 
-                ? 'Member PRO (Aktif)' 
+                ? `Member PRO (${daysLeft > 0 ? `${daysLeft} Hari Lagi` : 'Aktif'})` 
                 : proPaymentStatus === 'pending'
                   ? 'Verifikasi Struk (Pending)'
                   : 'Akses Dasar (Gratis)'}
@@ -77,16 +86,34 @@ export default function CareerPricing() {
 
       {/* Persistent Status Banners */}
       {isProUnlocked && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-3 shadow-sm animate-fade-in">
-          <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-            <CheckCircle2 size={20} />
+        <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm animate-fade-in">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+              <CheckCircle2 size={20} />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold flex items-center gap-2">
+                <span>Inner Whisper PRO Aktif!</span>
+                {daysLeft > 0 && (
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-200 text-emerald-900">
+                    Sisa {daysLeft} Hari
+                  </span>
+                )}
+              </h4>
+              <p className="text-xs text-emerald-800 mt-0.5 leading-relaxed">
+                Akun Anda memiliki akses penuh ke unduhan PDF laporan psikometri karier, audit CV ATS mendalam, dan simulasi interview STAR
+                {proExpiresAt && ` hingga ${new Date(proExpiresAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}`}.
+              </p>
+            </div>
           </div>
-          <div>
-            <h4 className="text-sm font-bold">Inner Whisper PRO Aktif Seumur Hidup!</h4>
-            <p className="text-xs text-emerald-800 mt-0.5 leading-relaxed">
-              Selamat! Akun Anda memiliki akses penuh tanpa batas ke download PDF laporan diagnostik karier, audit kata kunci CV ATS mendalam, dan simulasi interview STAR.
-            </p>
-          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setModalOpen(true)}
+            className="text-xs border-emerald-300 text-emerald-900 bg-white hover:bg-emerald-100/50 shrink-0 font-bold"
+          >
+            Perpanjang 30 Hari
+          </Button>
         </div>
       )}
 
@@ -99,7 +126,7 @@ export default function CareerPricing() {
             <div>
               <h4 className="text-sm font-bold">Foto Struk Transfer Sedang Diverifikasi Admin</h4>
               <p className="text-xs text-amber-800 mt-0.5 leading-relaxed">
-                Bukti transfer Anda sebesar <strong>Rp 35.000</strong> ke <strong>Bank {proPayment?.bank_destination || 'BCA/Mandiri'}</strong> atas nama <strong>{proPayment?.sender_name || 'Anda'}</strong> sedang ditinjau. Seluruh fitur PRO otomatis aktif seketika setelah disetujui admin.
+                Bukti transfer Anda sebesar <strong>Rp 35.000</strong> ke <strong>Bank {proPayment?.bank_destination || 'BCA/SeaBank'}</strong> atas nama <strong>{proPayment?.sender_name || 'Anda'}</strong> sedang ditinjau. Seluruh fitur PRO otomatis aktif selama 30 hari seketika setelah disetujui admin.
               </p>
             </div>
           </div>
@@ -118,7 +145,7 @@ export default function CareerPricing() {
             <div>
               <h4 className="text-sm font-bold">Bukti Transfer Belum Berhasil Diverifikasi</h4>
               <p className="text-xs text-rose-800 mt-0.5 leading-relaxed">
-                Struk transfer sebelumnya tidak terbaca atau ditolak admin. Silakan unggah ulang foto struk transfer yang jelas ke rekening BCA atau Mandiri resmi kami.
+                Struk transfer sebelumnya tidak terbaca atau ditolak admin. Silakan unggah ulang foto struk transfer yang jelas ke rekening BCA atau SeaBank resmi kami.
               </p>
             </div>
           </div>
@@ -178,12 +205,12 @@ export default function CareerPricing() {
           </Button>
         </div>
 
-        {/* PRO Tier Card (Single Bundling) */}
+        {/* PRO Tier Card (Monthly Subscription) */}
         <div className="rounded-3xl p-6 sm:p-8 bg-gradient-to-b from-[#efeafb] via-white to-white border-2 border-[#8f78d8] shadow-xl flex flex-col justify-between relative -translate-y-1">
           <div>
             <div className="flex items-center justify-between gap-2 mb-3">
               <span className="text-[11px] font-extrabold px-3 py-1 rounded-full bg-[#8f78d8] text-white shadow-sm flex items-center gap-1">
-                <Award size={12} /> All-in-One Bundle
+                <Award size={12} /> All-in-One Monthly
               </span>
               {isProUnlocked && (
                 <span className="text-[11px] font-bold text-[#198754] bg-[#d1e7dd] px-2.5 py-1 rounded-full flex items-center gap-1">
@@ -203,10 +230,10 @@ export default function CareerPricing() {
             <div className="mb-5 pb-4 border-b border-[#d9cff5]/70">
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl sm:text-4xl font-extrabold text-[#4b3b86]">Rp 35.000</span>
-                <span className="text-xs text-[#5d5577] font-medium">/sekali bayar selamanya</span>
+                <span className="text-xs text-[#5d5577] font-medium">/bulan (30 hari akses)</span>
               </div>
               <p className="text-[11px] text-[#8f78d8] font-bold mt-1">
-                Transfer rekening manual. Tanpa biaya langganan bulanan.
+                Transfer manual ke BCA / SeaBank. Bebas jebakan auto-debit.
               </p>
             </div>
 
@@ -228,11 +255,11 @@ export default function CareerPricing() {
               <Button
                 variant="outline"
                 size="md"
-                disabled
-                className="w-full text-xs bg-[#d1e7dd] text-[#198754] border-[#d1e7dd] font-bold flex items-center justify-center gap-1.5"
+                onClick={() => setModalOpen(true)}
+                className="w-full text-xs bg-[#d1e7dd] text-[#198754] border-[#d1e7dd] font-bold flex items-center justify-center gap-1.5 hover:bg-[#c3e0d2] transition-colors"
               >
                 <Check size={14} />
-                <span>Akses PRO Anda Telah Aktif</span>
+                <span>Akses PRO Aktif ({daysLeft > 0 ? `Sisa ${daysLeft} Hari` : 'Aktif'}) - Perpanjang</span>
               </Button>
             ) : proPaymentStatus === 'pending' ? (
               <Button
@@ -252,10 +279,59 @@ export default function CareerPricing() {
                 className="w-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-btn py-3"
               >
                 <Sparkles size={16} />
-                <span>Aktifkan PRO Sekarang (Rp 35.000)</span>
+                <span>Langganan Sekarang (Rp 35.000 / Bulan)</span>
                 <ArrowRight size={14} />
               </Button>
             )}
+          </div>
+        </div>
+      </div>
+
+      {/* Official Bank Accounts Box */}
+      <div className="card-s p-6 sm:p-8 bg-white border border-[#d9cff5]">
+        <div className="flex items-center gap-2.5 mb-4">
+          <div className="w-9 h-9 rounded-xl bg-[#efeafb] text-[#4b3b86] flex items-center justify-center">
+            <Building2 size={18} />
+          </div>
+          <div>
+            <h3 className="text-base font-bold text-[#2b2542]">Rekening Resmi Transfer Manual</h3>
+            <p className="text-xs text-[#5d5577]">Silakan transfer sesuai nominal <strong>Rp 35.000</strong> ke salah satu rekening berikut:</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* BCA */}
+          <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-50/50 to-white border border-blue-200 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-extrabold text-blue-900">Bank BCA</span>
+              <button
+                type="button"
+                onClick={() => handleCopyAccount('1530581281', 'BCA')}
+                className="text-xs font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1 bg-blue-100/70 hover:bg-blue-100 px-2.5 py-1 rounded-lg transition-colors"
+              >
+                {copiedBank === 'BCA' ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
+                <span>{copiedBank === 'BCA' ? 'Tersalin' : 'Salin Nomor'}</span>
+              </button>
+            </div>
+            <p className="text-lg font-mono font-bold text-blue-950 tracking-wider">1530581281</p>
+            <p className="text-xs text-blue-800">a/n <strong>Neyla Vala Kiara Andi</strong></p>
+          </div>
+
+          {/* SeaBank */}
+          <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-50/50 to-white border border-amber-200 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-extrabold text-amber-900">SeaBank</span>
+              <button
+                type="button"
+                onClick={() => handleCopyAccount('901928200829', 'SeaBank')}
+                className="text-xs font-bold text-amber-800 hover:text-amber-950 flex items-center gap-1 bg-amber-100/70 hover:bg-amber-100 px-2.5 py-1 rounded-lg transition-colors"
+              >
+                {copiedBank === 'SeaBank' ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
+                <span>{copiedBank === 'SeaBank' ? 'Tersalin' : 'Salin Nomor'}</span>
+              </button>
+            </div>
+            <p className="text-lg font-mono font-bold text-amber-950 tracking-wider">901928200829</p>
+            <p className="text-xs text-amber-800">a/n <strong>Neyla Vala Kiara Andi</strong></p>
           </div>
         </div>
       </div>
@@ -271,9 +347,9 @@ export default function CareerPricing() {
               <Building2 size={20} />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-[#2b2542]">Transfer Bank Manual (BCA &amp; Mandiri)</h4>
+              <h4 className="text-sm font-bold text-[#2b2542]">Transfer Bank Manual (BCA &amp; SeaBank)</h4>
               <p className="text-xs text-[#5d5577] mt-0.5 leading-relaxed">
-                Tersedia rekening resmi BCA &amp; Mandiri. Cukup unggah foto struk transfer, admin akan memverifikasi cepat.
+                Tersedia rekening resmi BCA &amp; SeaBank a/n Neyla Vala Kiara Andi. Unggah foto struk, admin akan memverifikasi cepat.
               </p>
             </div>
           </div>
@@ -283,9 +359,9 @@ export default function CareerPricing() {
               <Award size={20} />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-[#2b2542]">1x Bayar Selamanya</h4>
+              <h4 className="text-sm font-bold text-[#2b2542]">Langganan Terjangkau Rp 35k</h4>
               <p className="text-xs text-[#5d5577] mt-0.5 leading-relaxed">
-                Bebas dari auto-debit bulanan. Cukup bayar Rp 35.000 sekali saat kamu sedang mempersiapkan lamaran kerja.
+                Bebas dari auto-debit diam-diam. Cukup bayar Rp 35.000 untuk 30 hari penuh saat kamu sedang aktif melamar kerja.
               </p>
             </div>
           </div>

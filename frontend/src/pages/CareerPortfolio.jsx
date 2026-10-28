@@ -186,7 +186,7 @@ export default function CareerPortfolio() {
               </div>
               <div>
                 <h4 className="text-sm font-bold text-[#2b2542]">Template Portofolio PRO (Siap Pakai)</h4>
-                <span className="text-[10px] font-bold text-[#8f78d8]">Akses Seumur Hidup Aktif</span>
+                <span className="text-[10px] font-bold text-[#8f78d8]">Akses Member PRO Aktif</span>
               </div>
             </div>
             <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#d1e7dd] text-[#198754]">

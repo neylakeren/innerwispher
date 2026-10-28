@@ -25,6 +25,7 @@ class User extends Authenticatable
         'phone',
         'role',
         'is_pro',
+        'pro_expires_at',
     ];
 
     public function psychologistProfile()
@@ -67,6 +68,17 @@ class User extends Authenticatable
         return $this->role === 'patient';
     }
 
+    public function isProActive(): bool
+    {
+        if (!$this->is_pro) {
+            return false;
+        }
+        if ($this->pro_expires_at && $this->pro_expires_at->isPast()) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -88,6 +100,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_pro' => 'boolean',
+            'pro_expires_at' => 'datetime',
         ];
     }
 }
