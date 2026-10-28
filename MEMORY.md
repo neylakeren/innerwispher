@@ -481,7 +481,10 @@ This document serves as the project memory for the frontend landing page and das
     - Merancang kolom review estetis berstandar `impeccable` dan **ANTI-SLOP** (menggunakan SVG Lucide Star, Quote, CheckCircle2; tanpa emoji mentah).
     - Menampilkan banner skor kepuasan: **4.9 / 5.0** (1.250+ review terverifikasi), 94% lolos skrining ATS, 88% lebih percaya diri interview metode STAR, dan 100% bebas biaya tersembunyi.
     - Menampilkan 6 kartu ulasan mahasiswa & fresh graduate terverifikasi (UI/UX, Software Engineer, Big 4 Auditor, FMCG MT, Communication Specialist, Data Analyst) beserta lencana hasil seleksi.
-  - **5. Kompilasi, Git Push & Live Production Deployment (`vps-bleber`):**
+  - **5. Penghapusan UI Demo Account Helper di Login:**
+    - Menghapus box "Pilih Akun Demo Cepat" dari [Login.jsx](file:///D:/Coding/neyla/frontend/src/pages/Login.jsx) agar form otentikasi bersih dan siap produksi.
+    - Kredensial akun demo (Free tier, Pending transfer, PRO member, dan Admin) didokumentasikan untuk pengujian internal.
+  - **6. Kompilasi, Git Push & Live Production Deployment (`vps-bleber`):**
     - Kompilasi production frontend via `npm run build` sukses 100% (`dist/assets/index-DuAwzQD7.js` dan `dist/assets/index-Bs9FdVuh.css`).
     - Sinkronisasi backend files ke VPS `/var/www/innerwhisper/backend/`.
     - Eksekusi migrasi database live: `php artisan migrate --force` sukses menambahkan kolom `pro_expires_at`.
