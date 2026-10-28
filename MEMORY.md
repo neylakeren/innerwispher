@@ -575,9 +575,7 @@ This document serves as the project memory for the frontend landing page and das
     - Frontend Admin & Publik:
       - Admin Page [AdminReviewList.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminReviewList.jsx): Halaman kelola review (`/admin/reviews`) dengan kartu statistik, pencarian/filter, tombol tambah review pelanggan (nama, role, outcome, rating bintang interaktif, upload avatar, dan toggle tampil/sembunyi langsung).
       - Sidebar Admin [DashboardLayout.jsx](file:///D:/Coding/neyla/frontend/src/layouts/DashboardLayout.jsx): Menambahkan menu "Kelola Review" dengan ikon `MessageSquareQuote`.
-      - Landing Page [Beranda.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Beranda.jsx): Terkoneksi secara dinamis ke `GET /api/reviews` dan menampilkan link ke halaman review.
-      - Halaman Publik [ReviewPage.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/ReviewPage.jsx): Halaman eksplorasi seluruh testimoni pelanggan (`/review` dan `/testimoni`) dengan filter, metrik rating 4.9/5, dan badge verifikasi.
-      - Navigasi & Footer: [LandingNavbar.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/LandingNavbar.jsx) dan [LandingFooter.jsx](file:///D:/Coding/neyla/frontend/src/components/landing/LandingFooter.jsx) menambahkan tautan ke Review Pelanggan.
+      - Landing Page [Beranda.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Beranda.jsx): Terkoneksi secara dinamis ke `GET /api/reviews`. Seluruh testimoni yang diunggah/diperbarui admin langsung tampil di bagian review bawah Beranda (tanpa menambah halaman review terpisah pada navbar/footer).
   - **Verifikasi & Deployment Live VPS:**
     - Migrasi dan seeder live dijalankan di server VPS `202.10.45.61:10622`.
     - Cache Laravel (`config:cache`, `route:cache`) diperbarui.

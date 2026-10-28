@@ -40,7 +40,6 @@ import Beranda from './pages/landing/Beranda';
 import Layanan from './pages/landing/Layanan';
 import TentangKami from './pages/landing/TentangKami';
 import Artikel from './pages/landing/Artikel';
-import ReviewPage from './pages/landing/ReviewPage';
 
 // Components
 import PWAInstallBanner from './components/PWAInstallBanner';
@@ -81,12 +80,6 @@ function AppRoutes() {
             } />
             <Route path="/artikel" element={
                 <LandingLayout><Artikel /></LandingLayout>
-            } />
-            <Route path="/review" element={
-                <LandingLayout><ReviewPage /></LandingLayout>
-            } />
-            <Route path="/testimoni" element={
-                <LandingLayout><ReviewPage /></LandingLayout>
             } />
 
             {/* Auth Pages */}

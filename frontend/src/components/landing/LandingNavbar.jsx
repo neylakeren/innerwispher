@@ -7,7 +7,6 @@ export default function LandingNavbar() {
   const navItems = [
     { to: '/', label: 'Beranda' },
     { to: '/layanan', label: 'Paket Layanan' },
-    { to: '/review', label: 'Review Pelanggan' },
     { to: '/tentang-kami', label: 'Tentang Kami' },
     { to: '/artikel', label: 'Artikel & Panduan' },
   ];

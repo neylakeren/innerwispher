@@ -319,17 +319,6 @@ export default function Beranda() {
           ))}
         </div>
 
-        {/* View All Reviews Button */}
-        <div className="text-center pt-2">
-          <Link
-            to="/review"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[#d9cff5] bg-white text-[#4b3b86] hover:bg-[#efeafb] text-xs sm:text-sm font-bold transition-all shadow-sm hover:border-[#8f78d8]"
-          >
-            <span>Lihat Semua Review &amp; Cerita Sukses</span>
-            <ArrowRight size={15} />
-          </Link>
-        </div>
-
         {/* Bottom CTA Banner */}
         <div className="rounded-3xl p-6 sm:p-10 bg-gradient-to-r from-[#4b3b86] via-[#6551b3] to-[#8f78d8] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="space-y-2 text-center md:text-left">
