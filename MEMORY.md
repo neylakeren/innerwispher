@@ -553,6 +553,14 @@ This document serves as the project memory for the frontend landing page and das
       - Service Nginx dan Supervisor queue worker di-reload sukses.
       - Live health check `https://innerwhisper.my.id/` dan `https://innerwhisper.my.id/up` menghasilkan HTTP 200 OK.
 
+- **October 28, 2026 (Part 5):** Pembersihan Transaksi User Demo Budi Santoso & Verifikasi Transaksi Riil Neyla Vala Kiara Andi.
+  - Menghapus seluruh riwayat transaksi pembayaran atas nama user demo Budi Santoso (`user@neyla.id`), dan mereset status akun Budi kembali ke Free Tier (`is_pro = false`, `pro_expires_at = null`).
+  - Memverifikasi transaksi riil dari pengguna asli **Neyla Vala Kiara Andi** (`neyla.andi04@gmail.com`):
+    - Nominal: Rp 35.000 (Paket PRO Bulanan 30 Hari).
+    - Metode: SeaBank a/n Neyla Vala Kiara Andi.
+    - Status: `pending` (siap diverifikasi oleh Super Admin di halaman `/dashboard`).
+    - File Bukti Transfer: `payment_proofs/4CrmVradrsCnitKLaTTFhlVYbCOexmfESSAmgIsW.jpg` tersimpan sempurna dan dapat dibuka via storage server (HTTP 200 OK).
+
 - **October 28, 2026 (Part 4):** Pembersihan Seluruh Transaksi & Booking Dummy di Database Produksi & Lokal.
   - Menghapus seluruh riwayat transaksi dummy dari tabel `payments`, `bookings`, `counseling_sessions`, dan `messages` baik di server live VPS (`innerwhisper.my.id`) maupun lingkungan lokal.
   - Menghapus seluruh file foto struk/invoice dummy pengujian di direktori storage server (`storage/app/public/payment_proofs/`).
