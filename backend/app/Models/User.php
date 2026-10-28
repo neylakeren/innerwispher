@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'role',
+        'is_pro',
     ];
 
     public function psychologistProfile()
@@ -44,6 +45,11 @@ class User extends Authenticatable
     public function psychologistBookings()
     {
         return $this->hasMany(Booking::class, 'psychologist_id');
+    }
+
+    public function proPayments()
+    {
+        return $this->hasMany(Payment::class);
     }
 
     public function isAdmin()
@@ -81,6 +87,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_pro' => 'boolean',
         ];
     }
 }

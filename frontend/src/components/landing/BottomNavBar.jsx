@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Stethoscope, Info, BookOpen } from 'lucide-react';
+import { Home, Briefcase, Info, BookOpen } from 'lucide-react';
 
 export default function BottomNavBar() {
   const navItems = [
     { to: '/', label: 'Beranda', icon: Home },
-    { to: '/layanan', label: 'Layanan', icon: Stethoscope },
+    { to: '/layanan', label: 'Paket', icon: Briefcase },
     { to: '/tentang-kami', label: 'Tentang', icon: Info },
     { to: '/artikel', label: 'Artikel', icon: BookOpen },
   ];

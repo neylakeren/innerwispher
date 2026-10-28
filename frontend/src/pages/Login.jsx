@@ -144,6 +144,37 @@ export default function Login() {
                         </Button>
                     </form>
 
+                    {/* Quick Fill Test Accounts */}
+                    {mode === 'login' && (
+                        <div className="mt-4 p-3 rounded-xl bg-[#efeafb]/70 border border-[#d9cff5] space-y-1.5">
+                            <p className="text-[11px] font-bold text-[#4b3b86] uppercase tracking-wider text-center">
+                                Akun Uji Coba Cepat (Klik untuk Isi):
+                            </p>
+                            <div className="flex gap-2 justify-center">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setEmail('user@neyla.id');
+                                        setPassword('password');
+                                    }}
+                                    className="px-2.5 py-1 rounded-lg bg-white border border-[#d9cff5] text-[11px] font-semibold text-[#4b3b86] hover:bg-[#8f78d8] hover:text-white transition-all shadow-sm"
+                                >
+                                    User (user@neyla.id)
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setEmail('admin@neyla.id');
+                                        setPassword('password');
+                                    }}
+                                    className="px-2.5 py-1 rounded-lg bg-white border border-[#d9cff5] text-[11px] font-semibold text-[#4b3b86] hover:bg-[#8f78d8] hover:text-white transition-all shadow-sm"
+                                >
+                                    Admin (admin@neyla.id)
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
                     <div className="mt-6 pt-5 border-t border-[#d9cff5]/60 text-center text-xs text-[#5d5577]">
                         {mode === 'login' ? (
                             <p>

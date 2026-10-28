@@ -1,14 +1,14 @@
 import { NavLink, Link } from 'react-router-dom';
-import { MessageCircle, LogIn, LayoutDashboard } from 'lucide-react';
+import { LogIn, LayoutDashboard, Sparkles, MessageCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export default function LandingNavbar() {
   const { user } = useAuth();
   const navItems = [
     { to: '/', label: 'Beranda' },
-    { to: '/layanan', label: 'Layanan' },
+    { to: '/layanan', label: 'Paket Layanan' },
     { to: '/tentang-kami', label: 'Tentang Kami' },
-    { to: '/artikel', label: 'Artikel' },
+    { to: '/artikel', label: 'Artikel & Panduan' },
   ];
 
   return (
@@ -62,16 +62,14 @@ export default function LandingNavbar() {
             </Link>
           )}
 
-          {/* Desktop WhatsApp Action */}
-          <a
-            href="https://wa.me/6281234567890"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-2 btn-lv text-sm font-semibold px-4 py-2 rounded-xl shadow-btn transition-all active:scale-95"
+          {/* Primary CTA Button */}
+          <Link
+            to={user ? "/tes" : "/login"}
+            className="hidden sm:inline-flex items-center gap-1.5 btn-lv text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl shadow-btn transition-all active:scale-95 text-white"
           >
-            <MessageCircle size={16} />
-            <span>Chat di WhatsApp</span>
-          </a>
+            <Sparkles size={15} />
+            <span>Coba Tes Gratis</span>
+          </Link>
         </div>
       </div>
     </header>

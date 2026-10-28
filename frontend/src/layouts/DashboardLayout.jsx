@@ -61,9 +61,7 @@ export default function DashboardLayout({ children }) {
         if (user?.role === 'admin') {
             return [
                 { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-                { name: 'Verifikasi Pembayaran', href: '/bookings', icon: CreditCard },
-                { name: 'Honor Konselor', href: '/admin/honor', icon: Wallet },
-                { name: 'Daftar Psikolog', href: '/admin/psychologists', icon: Users },
+                { name: 'Paket Layanan', href: '/paket', icon: CreditCard },
                 { name: 'Data User', href: '/admin/patients', icon: UserCheck },
                 { name: 'Profil Saya', href: '/profil', icon: User },
             ];
@@ -72,14 +70,12 @@ export default function DashboardLayout({ children }) {
         if (user?.role === 'psychologist') {
             return [
                 { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-                { name: 'Jadwal Konseling', href: '/bookings', icon: Calendar },
-                { name: 'Honor Konselor', href: '/honor-konselor', icon: Wallet },
-                { name: 'Catatan Sesi', href: '/notes', icon: ClipboardList },
+                { name: 'Paket Layanan', href: '/paket', icon: CreditCard },
                 { name: 'Profil Saya', href: '/profil', icon: User },
             ];
         }
 
-        // Patient / Member - Exact menus from Inner Whisper.html.html
+        // Patient / Member
         return [
             { name: 'Beranda', href: '/dashboard', icon: LayoutDashboard },
             { name: 'Tes Karier', href: '/tes', icon: ClipboardCheck },
@@ -89,8 +85,7 @@ export default function DashboardLayout({ children }) {
             { name: 'Portofolio', href: '/portofolio', icon: Briefcase },
             { name: 'Belajar', href: '/belajar', icon: GraduationCap },
             { name: 'Zodiak Karier', href: '/zodiak', icon: Sparkles },
-            { name: 'Konsultasi Pakar', href: '/psychologists', icon: Users },
-            { name: 'Sesi & Pembayaran', href: '/bookings', icon: Calendar },
+            { name: 'Paket Layanan', href: '/paket', icon: CreditCard },
             { name: 'Artikel & Tips', href: '/artikel-tips', icon: BookOpen },
             { name: 'Profil Saya', href: '/profil', icon: User },
         ];

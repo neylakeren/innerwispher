@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $fillable = [
+        'user_id',
         'booking_id',
         'amount',
+        'payment_type',
+        'bank_destination',
+        'sender_name',
         'proof_image_path',
         'status',
         'verified_at',
@@ -26,6 +30,11 @@ class Payment extends Model
         'counselor_payout_amount' => 'float',
         'amount' => 'float',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function booking()
     {

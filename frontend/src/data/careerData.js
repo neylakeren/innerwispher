@@ -351,8 +351,13 @@ export const INTERVIEW_QUESTIONS = [
   'Ceritakan tentang dirimu dan apa yang membedakanmu dengan kandidat lain.',
   'Apa kelebihan terbesarmu, dan bagaimana caramu mengelola kelemahanmu?',
   'Ceritakan pengalamanmu saat menghadapi konflik kerja kelompok dan bagaimana solusinya.',
-  'Mengapa kamu tertarik pada posisi ini dan apa kontribusi nyata yang ingin kamu berikan?',
-  'Ceritakan saat kamu pernah mengalami kegagalan dan apa pelajaran berharga yang kamu petik.'
+  'Ceritakan situasi di mana kamu harus menyelesaikan target dengan deadline yang sangat ketat (Metode STAR).',
+  'Bagaimana caramu menangani situasi saat ada anggota tim yang tidak menyelesaikan tanggung jawabnya?',
+  'Ceritakan keputusan paling sulit yang pernah kamu ambil dan bagaimana kamu mengevaluasi risikonya.',
+  'Mengapa kamu tertarik pada posisi ini dan apa kontribusi nyata 90 hari pertamamu?',
+  'Ceritakan saat kamu pernah mengalami kegagalan fatal dan bagaimana langkah pemulihanmu.',
+  'Bagaimana strategi negosiasi persuasifmu saat ide yang kamu usulkan ditolak oleh rekan atau atasan?',
+  'Ceritakan pencapaian terbesarmu yang memberikan dampak kuantitatif terukur bagi organisasi.'
 ];
 
 export const ZODIACS = [

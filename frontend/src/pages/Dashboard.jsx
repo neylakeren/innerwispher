@@ -23,11 +23,8 @@ import { Button } from '../components/ui';
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const { activeCareer, totalProgress, nextStep } = useCareer();
+  const { activeCareer, totalProgress, nextStep, isProUnlocked, isReportUnlocked, isCvAtsUnlocked, isBundleUnlocked } = useCareer();
   const navigate = useNavigate();
-
-  const [bookings, setBookings] = useState([]);
-  const [loadingBookings, setLoadingBookings] = useState(true);
 
   // Time-based greeting
   const getGreeting = () => {
@@ -39,17 +36,6 @@ export default function Dashboard() {
   };
 
   const firstName = user?.name ? user.name.split(' ')[0] : 'Sobat';
-
-  useEffect(() => {
-    client.get('/bookings')
-      .then(res => {
-        setBookings(res.data || []);
-      })
-      .catch(err => {
-        console.error('Error fetching bookings', err);
-      })
-      .finally(() => setLoadingBookings(false));
-  }, []);
 
   const featureTiles = [
     {
@@ -89,10 +75,10 @@ export default function Dashboard() {
       icon: Sparkles,
     },
     {
-      title: 'Konsultasi Pakar',
-      desc: 'Jadwalkan konseling profesional',
-      path: '/psychologists',
-      icon: Users,
+      title: 'Paket Layanan',
+      desc: 'Buka laporan diagnostik & audit ATS',
+      path: '/paket',
+      icon: CreditCard,
     },
     {
       title: 'Artikel & Tips',
@@ -206,76 +192,43 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Recent Counseling Sessions Section */}
-      <div className="card-s p-6 space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Calendar size={18} className="text-[#8f78d8]" />
-            <h2 className="text-base sm:text-lg font-bold text-[#2b2542]">
-              Jadwal Sesi Konselingmu
+      {/* Status Paket PRO (All-in-One 35k) */}
+      <div className={`card-s p-6 ${isProUnlocked ? 'border-2 border-[#198754]/40 bg-gradient-to-r from-white to-[#f8fdf9]' : 'border-2 border-[#8f78d8] bg-gradient-to-r from-white via-[#efeafb]/50 to-[#efeafb]/80'} shadow-md`}>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <span className={`text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full ${
+                isProUnlocked ? 'bg-[#d1e7dd] text-[#198754]' : 'bg-[#8f78d8] text-white'
+              }`}>
+                {isProUnlocked ? 'PRO Member Aktif' : 'Single Bundle 35K'}
+              </span>
+              <span className="text-xs text-[#5d5577] font-semibold">
+                {isProUnlocked ? 'Akses Seumur Hidup' : 'Sekali Bayar Selamanya'}
+              </span>
+            </div>
+            <h2 className="text-lg sm:text-xl font-bold text-[#2b2542]">
+              {isProUnlocked ? 'Seluruh Fitur Inner Whisper PRO Telah Terbuka' : 'Buka Semua Fitur Digital Hanya Rp 35.000'}
             </h2>
+            <p className="text-xs sm:text-sm text-[#5d5577] max-w-xl leading-relaxed">
+              {isProUnlocked 
+                ? 'Laporan psikometri lengkap, unduhan PDF resmi, audit mendalam CV ATS, dan 10 simulasi wawancara STAR siap kamu gunakan kapan saja.'
+                : 'Dapatkan akses penuh Laporan Diagnostik Karier, CV ATS Deep Diagnostic, dan 10 Soal Simulasi Interview STAR tanpa biaya langganan bulanan.'}
+            </p>
           </div>
-          <Link to="/bookings" className="text-xs font-bold text-[#8f78d8] hover:text-[#4b3b86]">
-            Lihat Semua Jadwal
-          </Link>
-        </div>
 
-        {loadingBookings ? (
-          <div className="py-4 text-center text-xs text-[#5d5577]">Memuat jadwal...</div>
-        ) : bookings.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {bookings.slice(0, 2).map((b) => (
-              <div 
-                key={b.id} 
-                className="p-4 rounded-xl border border-[#d9cff5] bg-white space-y-2 flex flex-col justify-between"
+          <div className="shrink-0 flex items-center">
+            <Link to="/paket">
+              <Button 
+                variant={isProUnlocked ? 'outline' : 'primary'} 
+                size="md" 
+                className="text-xs sm:text-sm shadow-btn flex items-center gap-1.5"
               >
-                <div>
-                  <div className="flex justify-between items-start">
-                    <span className="text-xs font-bold text-[#4b3b86]">
-                      {b.psychologist?.user?.name || 'Psikolog Klinis'}
-                    </span>
-                    <span className={`text-[11px] px-2 py-0.5 rounded-full font-semibold ${
-                      b.status === 'confirmed' ? 'bg-[#d1e7dd] text-[#198754]' : 'bg-[#fff3cd] text-[#664d03]'
-                    }`}>
-                      {b.status === 'confirmed' ? 'Terkonfirmasi' : 'Menunggu'}
-                    </span>
-                  </div>
-                  <p className="text-xs text-[#5d5577] mt-1">
-                    {b.schedule_date} • {b.schedule_time || '10:00 WIB'}
-                  </p>
-                </div>
-
-                <div className="pt-2 border-t border-[#d9cff5]/50 flex justify-between items-center">
-                  <span className="text-xs font-semibold text-[#8f78d8]">
-                    Rp {(b.amount || 160000).toLocaleString('id-ID')}
-                  </span>
-                  {b.session_id ? (
-                    <Link to={`/sessions/${b.session_id}`}>
-                      <Button size="sm" variant="primary" className="text-xs py-1 px-3 flex items-center gap-1">
-                        <MessageSquare size={12} /> Buka Chat
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Link to="/bookings">
-                      <Button size="sm" variant="outline" className="text-xs py-1 px-3">
-                        Detail
-                      </Button>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="py-6 text-center text-[#5d5577] space-y-2">
-            <p className="text-sm font-medium">Belum ada jadwal sesi konseling aktif.</p>
-            <Link to="/psychologists">
-              <Button size="sm" variant="primary" className="text-xs mt-1">
-                Pilih Psikolog & Jadwalkan Sesi
+                <Sparkles size={15} />
+                <span>{isProUnlocked ? 'Kelola Akun PRO' : 'Aktifkan PRO (Rp 35.000)'}</span>
               </Button>
             </Link>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

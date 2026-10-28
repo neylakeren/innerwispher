@@ -151,4 +151,109 @@ class PaymentController extends Controller
             'payment' => $payment->load('booking'),
         ]);
     }
+
+    /**
+     * User uploads bank transfer proof for PRO subscription (Rp 35.000).
+     */
+    public function uploadProProof(Request $request)
+    {
+        $request->validate([
+            'proof_image' => 'required|image|max:5120', // 5MB max
+            'bank_destination' => 'required|string|in:BCA,Mandiri,bca,mandiri',
+            'sender_name' => 'required|string|max:255',
+            'amount' => 'nullable|numeric|min:0',
+        ]);
+
+        $user = $request->user();
+
+        if ($request->hasFile('proof_image')) {
+            $path = $request->file('proof_image')->store('payment_proofs', 'public');
+
+            $payment = Payment::create([
+                'user_id' => $user->id,
+                'booking_id' => null,
+                'amount' => $request->amount ?? 35000.00,
+                'payment_type' => 'pro_bundle',
+                'bank_destination' => strtoupper($request->bank_destination),
+                'sender_name' => $request->sender_name,
+                'proof_image_path' => $path,
+                'status' => 'pending',
+            ]);
+
+            return response()->json([
+                'message' => 'Foto struk transfer berhasil dikirim. Menunggu verifikasi admin.',
+                'payment' => $payment,
+            ], 201);
+        }
+
+        return response()->json(['message' => 'Gagal mengunggah foto struk transfer.'], 400);
+    }
+
+    /**
+     * Check PRO subscription status for current user.
+     */
+    public function getProStatus(Request $request)
+    {
+        $user = $request->user();
+        $latestPayment = Payment::where('user_id', $user->id)
+            ->where('payment_type', 'pro_bundle')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        return response()->json([
+            'is_pro' => (bool) $user->is_pro,
+            'latest_payment' => $latestPayment,
+        ]);
+    }
+
+    /**
+     * Admin: List all PRO bundle transfer payments.
+     */
+    public function getAdminProPayments(Request $request)
+    {
+        $payments = Payment::where('payment_type', 'pro_bundle')
+            ->with('user:id,name,email,phone,is_pro')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return response()->json($payments);
+    }
+
+    /**
+     * Admin: Verify / approve or reject PRO bundle transfer proof.
+     */
+    public function verifyProPayment(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:verified,rejected',
+        ]);
+
+        $payment = Payment::with('user')->findOrFail($id);
+
+        $payment->update([
+            'status' => $request->status,
+            'verified_at' => $request->status === 'verified' ? now() : null,
+        ]);
+
+        if ($request->status === 'verified') {
+            $payment->user->update(['is_pro' => true]);
+        } else {
+            $hasOtherVerified = Payment::where('user_id', $payment->user_id)
+                ->where('payment_type', 'pro_bundle')
+                ->where('status', 'verified')
+                ->where('id', '!=', $payment->id)
+                ->exists();
+
+            if (!$hasOtherVerified) {
+                $payment->user->update(['is_pro' => false]);
+            }
+        }
+
+        return response()->json([
+            'message' => $request->status === 'verified' 
+                ? 'Pembayaran berhasil disetujui. Akun user sekarang menjadi PRO.' 
+                : 'Pembayaran telah ditolak. User dapat mengunggah ulang bukti transfer.',
+            'payment' => $payment->load('user'),
+        ]);
+    }
 }

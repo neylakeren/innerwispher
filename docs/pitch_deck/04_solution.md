@@ -5,16 +5,17 @@
 ## 🎯 Tujuan Slide
 Menjelaskan solusi yang ditawarkan perusahaan Anda, mengapa solusi ini lebih baik, lebih cepat, lebih murah, dan bagaimana solusi tersebut menyelesaikan masalah secara konkret.
 
-## 📝 Konten Utama (InnerWhisper)
-* **Solusi Kami (Platform Marketplace & Portal Chat Terintegrasi):**
-  * **Cari Psikolog Dinamis:** User dapat dengan mudah mencari psikolog klinis berlisensi berdasarkan keahlian khusus dan langsung menjadwalkan konseling.
-  * **Otomatisasi Verifikasi Pembayaran:** Alur pengunggahan bukti pembayaran yang diverifikasi secara real-time oleh panel Admin untuk memberikan kepastian instan kepada user.
-  * **Portal Chat Real-Time & Chatbot Asisten:** Konseling chat langsung di dalam dashboard web yang responsif, didukung oleh asisten bot (typing simulator) untuk panduan awal konseling.
+## 📝 Konten Utama (InnerWhisper: Automated Career-Tech Platform)
+* **Solusi Kami (Ekosistem Akselerasi Karier Mandiri Berbasis Data & AI):**
+  * **Tes Minat & Potensi Psikometri Instan:** Pemetaan minat karier 4 kuadran (Teknologi, Kreatif, Bisnis, Sosial) dalam hitungan menit tanpa antre jadwal konselor.
+  * **Automated CV ATS Checker & Optimizer:** Audit kelayakan resume langsung di web browser dengan standar industri rekrutmen modern.
+  * **Simulasi Wawancara Kerja Interaktif:** Latihan respons pertanyaan interview kerja terarah dengan umpan balik struktur kalimat dan metode STAR.
+  * **Akses Mikrotransaksi Terjangkau:** Fitur lanjutan dapat dibuka secara instan (*pay-per-feature*) mulai Rp 19.000 via QRIS, menghadirkan persiapan kerja profesional untuk semua kalangan.
 
 ---
 
 ## 🗣️ Poin Penjelasan (Narasi Presentasi)
-> *"InnerWhisper hadir sebagai jawaban. Kami mengintegrasikan seluruh perjalanan konseling dalam satu dashboard sederhana. User cukup memilih psikolog yang sesuai, menjadwalkan sesi, mengunggah bukti bayar secara instan, dan begitu admin memverifikasinya, portal chat real-time langsung terbuka. Kami memangkas birokrasi berhari-hari menjadi hitungan menit saja."*
+> *"InnerWhisper menghadirkan terobosan persiapan karier digital. Kami menggantikan birokrasi bimbingan karier manual yang mahal dan lambat menjadi satu ekosistem terintegrasi yang serba instan. Mulai dari tes minat psikometri, audit ATS resume otomatis, hingga simulasi wawancara interaktif. Mahasiswa dan pencari kerja dapat mengukur kesiapan mereka secara mandiri, akurat, dan terjangkau dalam satu dashboard yang mudah digunakan."*
 
 ---
 

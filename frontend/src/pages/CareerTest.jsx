@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCareer } from '../context/CareerContext';
 import { QUESTIONS, CAT, CAREERS } from '../data/careerData';
 import { Button } from '../components/ui';
+import PricingModal from '../components/PricingModal';
 import { 
   ClipboardCheck, 
   RotateCcw, 
@@ -10,16 +11,31 @@ import {
   Sparkles, 
   CheckCircle2, 
   Compass,
-  Briefcase
+  Briefcase,
+  Lock,
+  Download,
+  FileText,
+  ShieldCheck,
+  Check
 } from 'lucide-react';
 
 export default function CareerTest() {
-  const { careerState, updateCareerState } = useCareer();
+  const { careerState, updateCareerState, isReportUnlocked } = useCareer();
   const navigate = useNavigate();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [showResult, setShowResult] = useState(Boolean(careerState.testResult));
+  const [modalOpen, setModalOpen] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownloadReport = () => {
+    setIsDownloading(true);
+    setTimeout(() => {
+      setIsDownloading(false);
+      window.print();
+    }, 800);
+  };
 
   const handlePickOption = (cat) => {
     const nextAnswers = [...answers, cat];
@@ -170,6 +186,104 @@ export default function CareerTest() {
             </div>
           </div>
 
+          {/* Paywall or Unlocked Laporan Analisis Karier Lengkap */}
+          {!isReportUnlocked ? (
+            <div className="card-s p-6 sm:p-8 bg-gradient-to-r from-white via-[#efeafb]/60 to-[#efeafb] border-2 border-[#8f78d8]/50 shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#8f78d8] text-white text-[11px] font-bold">
+                  <Sparkles size={13} />
+                  Inner Whisper PRO Bundle
+                </div>
+                <h3 className="text-xl font-bold text-[#2b2542]">
+                  Ingin Analisis Psikometri Mendalam &amp; Unduh Laporan PDF?
+                </h3>
+                <p className="text-xs sm:text-sm text-[#5d5577] max-w-xl leading-relaxed">
+                  Buka akses Inner Whisper PRO: 1x bayar untuk membuka Laporan PDF resmi, pemetaan 10+ industri, analisis SWOT, audit CV ATS, dan seluruh 10 soal simulasi wawancara STAR.
+                </p>
+                <div className="flex flex-wrap items-center gap-4 pt-1 text-xs text-[#4b3b86] font-semibold">
+                  <span className="flex items-center gap-1"><CheckCircle2 size={14} className="text-[#8f78d8]" /> Downloadable PDF</span>
+                  <span className="flex items-center gap-1"><CheckCircle2 size={14} className="text-[#8f78d8]" /> 10+ Industri Cocok</span>
+                  <span className="flex items-center gap-1"><CheckCircle2 size={14} className="text-[#8f78d8]" /> Analisis SWOT</span>
+                </div>
+              </div>
+
+              <div className="shrink-0 flex flex-col items-start md:items-end gap-2 w-full md:w-auto">
+                <div className="text-left md:text-right">
+                  <span className="text-xs text-[#5d5577] block font-medium">1x bayar semua fitur:</span>
+                  <span className="text-2xl font-extrabold text-[#4b3b86]">Rp 35.000</span>
+                </div>
+                <Button
+                  variant="primary"
+                  size="md"
+                  onClick={() => setModalOpen(true)}
+                  className="w-full md:w-auto text-xs sm:text-sm flex items-center justify-center gap-2 shadow-btn"
+                >
+                  <Lock size={14} />
+                  <span>Aktifkan PRO (Rp 35.000)</span>
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className="card-s p-6 sm:p-8 bg-white border border-[#8f78d8] space-y-6 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-[#d9cff5]/60">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#d1e7dd] text-[#198754] flex items-center justify-center">
+                    <CheckCircle2 size={20} />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-bold text-[#2b2542]">Laporan Diagnostik Karier Lengkap</h3>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#8f78d8] text-white">PRO Aktif</span>
+                    </div>
+                    <p className="text-xs text-[#5d5577]">Hasil asesmen psikometri resmi Inner Whisper</p>
+                  </div>
+                </div>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleDownloadReport}
+                  disabled={isDownloading}
+                  className="text-xs flex items-center gap-1.5 self-start sm:self-auto"
+                >
+                  <Download size={14} />
+                  <span>{isDownloading ? 'Menyiapkan Dokumen...' : 'Unduh Laporan (PDF)'}</span>
+                </Button>
+              </div>
+
+              {/* SWOT Matrix */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-[#f8fdf9] border border-[#d1e7dd] space-y-1.5">
+                  <p className="text-xs font-bold text-[#198754] uppercase tracking-wider">Kekuatan Inti (Strengths)</p>
+                  <p className="text-xs text-[#2b2542] leading-relaxed">
+                    Kemampuan analitis tinggi, eksekusi terstruktur, dan daya konsentrasi yang mendalam dalam memecahkan masalah kompleks.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-[#f7f4fd] border border-[#d9cff5] space-y-1.5">
+                  <p className="text-xs font-bold text-[#4b3b86] uppercase tracking-wider">Peluang Industri (Opportunities)</p>
+                  <p className="text-xs text-[#2b2542] leading-relaxed">
+                    Sangat cocok untuk industri Tech SaaS, Digital Finance, Manajemen Konsultansi, dan Ekosistem Produk Digital.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-[#fffcfc] border border-[#fce8e9] space-y-1.5">
+                  <p className="text-xs font-bold text-[#9b1c28] uppercase tracking-wider">Area Pengembangan (Growth Areas)</p>
+                  <p className="text-xs text-[#2b2542] leading-relaxed">
+                    Perlu melatih negosiasi persuasif dalam rapat umum dan mengurangi kecenderungan menyelesaikan semua beban sendirian.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-[#fffef6] border border-[#fdeecb] space-y-1.5">
+                  <p className="text-xs font-bold text-[#b58105] uppercase tracking-wider">Rekomendasi Langkah Aksi</p>
+                  <p className="text-xs text-[#2b2542] leading-relaxed">
+                    Fokus membangun 2 proyek portofolio berstandar industri dan ikuti audit CV ATS untuk menonjolkan pencapaian terukur.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Recommended Careers */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -231,6 +345,13 @@ export default function CareerTest() {
           </div>
         </div>
       )}
+
+      {/* Pricing Checkout Modal */}
+      <PricingModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        defaultPackageId="report"
+      />
     </div>
   );
 }

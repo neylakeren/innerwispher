@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCareer } from '../context/CareerContext';
 import { LEARNING_MODULES } from '../data/careerData';
 import { Button } from '../components/ui';
-import { GraduationCap, Clock, CheckCircle2, BookOpen } from 'lucide-react';
+import PricingModal from '../components/PricingModal';
+import { GraduationCap, Clock, CheckCircle2, BookOpen, Lock, Sparkles } from 'lucide-react';
 
 export default function CareerLearning() {
-  const { careerState, updateCareerState } = useCareer();
+  const { careerState, updateCareerState, isProUnlocked } = useCareer();
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleToggleModule = (modId) => {
+    // Modules with ID > 2 are PRO exclusive
+    if (!isProUnlocked && modId > 2) {
+      setModalOpen(true);
+      return;
+    }
+
     updateCareerState(prev => {
       const exists = prev.completedLearning.includes(modId);
       const nextList = exists
@@ -26,13 +34,13 @@ export default function CareerLearning() {
       <div className="card-s p-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#efeafb] text-[#4b3b86] text-xs font-semibold mb-2">
           <GraduationCap size={14} />
-          Modul Belajar Singkat
+          Career Learning Hub
         </div>
         <h1 className="text-2xl sm:text-3xl font-bold text-[#2b2542] tracking-tight">
-          Career Learning Hub
+          Pusat Pembelajaran Karier
         </h1>
         <p className="text-sm text-[#5d5577] mt-1">
-          Kumpulan materi ringkas berstandar industri untuk mengasah soft skill, strategi rekrutmen, dan kesehatan mental di tempat kerja.
+          Kumpulan materi ringkas berstandar industri untuk mengasah soft skill, strategi wawancara STAR, dan kepemimpinan profesional.
         </p>
       </div>
 
@@ -54,11 +62,17 @@ export default function CareerLearning() {
       <div className="grid grid-cols-1 gap-4">
         {LEARNING_MODULES.map((mod) => {
           const isCompleted = careerState.completedLearning.includes(mod.id);
+          const isModLocked = !isProUnlocked && mod.id > 2;
+
           return (
             <div
               key={mod.id}
               className={`card-s p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-200 ${
-                isCompleted ? 'bg-[#efeafb]/40 border-[#8f78d8]/50' : 'bg-white'
+                isModLocked
+                  ? 'bg-slate-50/70 border-slate-200'
+                  : isCompleted 
+                    ? 'bg-[#efeafb]/40 border-[#8f78d8]/50' 
+                    : 'bg-white'
               }`}
             >
               <div className="space-y-1.5 flex-1">
@@ -66,9 +80,17 @@ export default function CareerLearning() {
                   <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#8f78d8]">
                     <Clock size={12} /> {mod.duration}
                   </span>
-                  {isCompleted && (
+                  {isModLocked ? (
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#9b1c28] bg-[#fce8e9] px-2 py-0.2 rounded-full">
+                      <Lock size={10} /> Khusus PRO
+                    </span>
+                  ) : isCompleted ? (
                     <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#198754] bg-[#d1e7dd] px-2 py-0.2 rounded-full">
                       <CheckCircle2 size={11} /> Selesai
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#198754] bg-[#d1e7dd]/60 px-2 py-0.2 rounded-full">
+                      Akses Gratis
                     </span>
                   )}
                 </div>
@@ -82,27 +104,45 @@ export default function CareerLearning() {
               </div>
 
               <div className="shrink-0 self-start sm:self-center">
-                <Button
-                  variant={isCompleted ? 'secondary' : 'primary'}
-                  size="sm"
-                  onClick={() => handleToggleModule(mod.id)}
-                  className="text-xs flex items-center gap-1.5"
-                >
-                  {isCompleted ? (
-                    <>
-                      <CheckCircle2 size={14} /> Selesai Dipelajari
-                    </>
-                  ) : (
-                    <>
-                      <BookOpen size={14} /> Tandai Selesai
-                    </>
-                  )}
-                </Button>
+                {isModLocked ? (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setModalOpen(true)}
+                    className="text-xs flex items-center gap-1.5 border-[#8f78d8] text-[#8f78d8] hover:bg-[#efeafb]"
+                  >
+                    <Lock size={13} />
+                    <span>Buka dengan PRO</span>
+                  </Button>
+                ) : (
+                  <Button
+                    variant={isCompleted ? 'secondary' : 'primary'}
+                    size="sm"
+                    onClick={() => handleToggleModule(mod.id)}
+                    className="text-xs flex items-center gap-1.5"
+                  >
+                    {isCompleted ? (
+                      <>
+                        <CheckCircle2 size={14} /> Selesai Dipelajari
+                      </>
+                    ) : (
+                      <>
+                        <BookOpen size={14} /> Tandai Selesai
+                      </>
+                    )}
+                  </Button>
+                )}
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* Pricing Modal */}
+      <PricingModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+      />
     </div>
   );
 }

@@ -144,14 +144,50 @@ This document serves as the project memory for the frontend landing page and das
   - Uploaded the file directly to `/var/www/innerwhisper/frontend-dist/` on VPS `bleber` and verified `200 OK` response.
 
 ## 📍 Last Known State
-- **Frontend:** Built and deployed to VPS `bleber` (served by Nginx at `https://innerwhisper.my.id`).
-- **Backend:** Deployed to VPS `bleber` (served via PHP 8.4-FPM on Unix Socket under Nginx at `https://innerwhisper.my.id/api`).
-- **WebSockets:** Laravel Reverb running on local port `8082` (managed by Supervisor as `innerwhisper-reverb`) and reverse-proxied under SSL (`wss://innerwhisper.my.id/app`).
-- **Queue Listener:** Managed by Supervisor as `innerwhisper-queue` (`php artisan queue:work` database queue).
-- **Database:** MySQL database `innerwhisper` configured locally on the VPS and seeded with default psychologist data and schedules.
-- **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
+- **Local Development Servers (Active):**
+  - **Frontend:** Running on `http://localhost:5173` (Vite v8.0, React 19).
+  - **Backend API:** Running on `http://localhost:8000` (Laravel 11, PHP 8.4.19).
+  - **Local Database:** MySQL listening on `127.0.0.1:3306` (database `neyla`).
+- **Production Server:**
+  - **Frontend:** Built and deployed to VPS `bleber` (served by Nginx at `https://innerwhisper.my.id`).
+  - **Backend:** Deployed to VPS `bleber` (served via PHP 8.4-FPM on Unix Socket under Nginx at `https://innerwhisper.my.id/api`).
+  - **WebSockets:** Laravel Reverb running on local port `8082` (managed by Supervisor as `innerwhisper-reverb`) and reverse-proxied under SSL (`wss://innerwhisper.my.id/app`).
+  - **Queue Listener:** Managed by Supervisor as `innerwhisper-queue` (`php artisan queue:work` database queue).
+  - **Database:** MySQL database `innerwhisper` configured locally on the VPS and seeded with default psychologist data and schedules.
+  - **SSL Certificate:** Active Let's Encrypt SSL certificate renewed on September 30, 2026 (valid until December 29, 2026) for `innerwhisper.my.id`.
 
 ## 📋 Task History & Context
+- **October 28, 2026 (Part 11):** Strategic Pivot to Single Bundling 1x Subscription (Rp 35.000 All-in-One Access).
+  - **Requirement & Strategy:**
+    - Eliminated human counselor booking & manual consultation bottleneck (`ituu konselornya di hapus, jadi ga ada jasa konsultasi`).
+    - Implemented client requirement: **"semua jadiin bundling 1 harga aja gausah per fitur, tinggal subscribe 1x seharga 35k"**.
+    - Eliminated multiple microtransaction options in favor of a clear, high-conversion single price point.
+  - **Pricing & Tier Structure:**
+    1. **Free Tier (Lead Magnet - Rp 0):** Tes Minat Karier dasar (2 kategori dominan), CV ATS Quick Scanner (8 parameter kelayakan), 3 pertanyaan simulasi wawancara dasar, dan seluruh artikel karier.
+    2. **Inner Whisper PRO (Single Bundle Lifetime - Rp 35.000 sekali bayar):**
+       - Full Laporan Analisis Karier Lengkap (Official Downloadable PDF Report).
+       - Grafik Radar 4 Dimensi Minat & Rekomendasi 10+ Bidang Industri Cocok.
+       - Analisis SWOT Karier (Kekuatan, Peluang, & Blind Spot).
+       - CV ATS Deep Diagnostic & Pencocokan Kata Kunci HRD.
+       - Analisis Kata Kerja Aktif (Action Verbs) & Rekomendasi Baris-per-Baris.
+       - Akses Penuh 10 Soal Simulasi Wawancara Kerja (Metode STAR).
+       - Modul Template Portofolio Karier Eksklusif.
+       - Aktivasi Instan via QRIS / Virtual Account tanpa antre dan tanpa auto-debit bulanan.
+  - **Components Overhauled:**
+    - [`PricingModal.jsx`](file:///D:/Coding/neyla/frontend/src/components/PricingModal.jsx): Streamlined to a single all-in-one bundle modal (Rp 35.000) with QRIS/VA methods and 1-second instant unlocking.
+    - [`CareerPricing.jsx`](file:///D:/Coding/neyla/frontend/src/pages/CareerPricing.jsx): Redesigned to 2-column comparison: Akses Dasar (Gratis) vs Inner Whisper PRO (Rp 35.000 sekali bayar selamanya).
+    - [`CareerContext.jsx`](file:///D:/Coding/neyla/frontend/src/context/CareerContext.jsx): Added `unlockPro()`, `isProUnlocked`, and mapped all feature permissions directly to PRO status.
+    - [`Layanan.jsx`](file:///D:/Coding/neyla/frontend/src/pages/landing/Layanan.jsx): Updated to a clean 2-tier presentation (Gratis vs PRO Rp 35.000).
+    - [`CareerTest.jsx`](file:///D:/Coding/neyla/frontend/src/pages/CareerTest.jsx) & [`CareerCvInterview.jsx`](file:///D:/Coding/neyla/frontend/src/pages/CareerCvInterview.jsx): Updated paywall cards to trigger the single Rp 35.000 bundle.
+    - [`Login.jsx`](file:///D:/Coding/neyla/frontend/src/pages/Login.jsx): Added 1-click test account autofill chips for User (`user@neyla.id`) and Admin (`admin@neyla.id`).
+    - [`Dashboard.jsx`](file:///D:/Coding/neyla/frontend/src/pages/Dashboard.jsx): Replaced multi-card status with a single unified PRO Member Status card.
+    - [`Dashboard.jsx`](file:///D:/Coding/neyla/frontend/src/pages/Dashboard.jsx): Fixed `ReferenceError: isProUnlocked is not defined` and removed legacy `client.get('/bookings')` call that caused `setBookings is not defined`.
+    - [`CareerContext.jsx`](file:///D:/Coding/neyla/frontend/src/context/CareerContext.jsx): Guarded `calculateTotalProgress()` and `getNextStepRecommendation()` with fallback `(careerState?.completedRoadmap || []).length` to prevent crash on undefined user state, and merged `defaultState` on load.
+    - [`echo.js`](file:///D:/Coding/neyla/frontend/src/api/echo.js): Hardened lazy proxy to ignore `$$typeof`, `then`, `toJSON`, and symbol inspections, completely preventing spurious WebSocket connection attempts on initial page load.
+    - [`08_business_model.md`](file:///D:/Coding/neyla/docs/pitch_deck/08_business_model.md): Updated pitch deck financial model to Single All-in-One Lifetime Access with ~94% gross margins.
+  - **Verification:**
+    - Production build (`npm run build`) compiled cleanly in 2.50s with 0 errors.
+
 - **October 7, 2026 (Part 10):** Fix `dummy.jpg` 404 Error, VPS Nginx Storage Routing, and PWA Install Prompt Hardening.
   - **Identified Issues:**
     1. Browser console error: `dummy.jpg:1 Failed to load resource: the server responded with a status of 404 (Not Found)`.
@@ -415,6 +451,43 @@ This document serves as the project memory for the frontend landing page and das
     - Mengompilasi ulang frontend bundle ke `index-BNbPo6yK.js` dan menyebarkan ke VPS `/var/www/innerwhisper/frontend-dist/`.
     - Menghapus asset bundle lama, membersihkan cache Laravel, dan me-reload Nginx serta Supervisor queue worker.
     - Memverifikasi HTTP 200 OK pada seluruh asset dan endpoint.
+
+- **October 28, 2026:** Pivot Model Bisnis: Penghapusan Konselor Manual -> All-in-One Career Bundle Rp 35.000 Sekali Bayar & Verifikasi Struk Transfer Manual Admin.
+  - **Latar Belakang & Pivot:**
+    - Sesuai arahan klien, konselor dan jasa konsultasi manual dihapus sepenuhnya.
+    - Model bisnis beralih ke *Digital Freemium + Single All-in-One Paywall* seharga **Rp 35.000 sekali bayar seumur hidup (Lifetime)** tanpa biaya langganan bulanan.
+    - Alur pembayaran menggunakan **Transfer Bank Manual** (BCA `8720-9988-12` & Mandiri `137-00-1928374-1` a/n PT Inner Whisper Indonesia) dengan unggah foto struk/bukti transfer yang diverifikasi admin.
+  - **Backend & Database:**
+    - Migrasi database: `2026_10_28_043429_add_pro_fields_to_users_and_payments_table.php` (menambahkan `is_pro` pada tabel `users`, membuat `booking_id` nullable, menambahkan `user_id`, `payment_type`, `bank_destination`, dan `sender_name` pada tabel `payments`).
+    - Model `Payment.php` & `User.php` disinkronkan dengan relasi `user()`, `proPayments()`, dan cast boolean `is_pro`.
+    - Endpoints baru di [PaymentController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/PaymentController.php):
+      - `POST /api/pro/upload-proof`: User mengunggah bukti transfer, nama pengirim, dan bank tujuan.
+      - `GET /api/pro/status`: Mengembalikan status subscription PRO dan transaksi terakhir user.
+      - `GET /api/admin/pro-payments`: Admin melihat seluruh riwayat dan antrean struk transfer PRO.
+      - `POST /api/admin/pro-payments/{id}/verify`: Admin menyetujui (otomatis mengaktifkan `user.is_pro = true`) atau menolak struk transfer.
+    - Update statistik admin di [AdminController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/AdminController.php) (`pending_pro_payments`, `total_pro_users`).
+  - **Frontend UI & Components:**
+    - [PricingModal.jsx](file:///D:/Coding/neyla/frontend/src/components/PricingModal.jsx): Overhaul alur modal ke Transfer Bank Manual (BCA & Mandiri) dengan tombol salin rekening, input pemilik rekening, drag-and-drop / file picker foto struk dengan pratinjau instan.
+    - [CareerPricing.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerPricing.jsx): 2-tier card (Akses Dasar Rp 0 vs Inner Whisper PRO Rp 35.000 sekali bayar), dilengkapi banner status persisten (Pending, Ditolak, atau Terverifikasi Aktif).
+    - [AdminDashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/AdminDashboard.jsx):
+      - Stat card utama: *Antrean Struk PRO (Rp 35.000)* dan *Member PRO Aktif*.
+      - Section 1 Utama: *Antrean Verifikasi Struk Transfer PRO (Rp 35.000)* dengan filter tab (Semua, Pending, Disetujui, Ditolak), avatar user, bank tujuan, nominal, waktu, tombol modal preview zoom struk transfer, dan aksi *Setujui & Aktifkan PRO* / *Tolak*.
+    - [CareerContext.jsx](file:///D:/Coding/neyla/frontend/src/context/CareerContext.jsx): 
+      - Otorisasi ketat PRO: `isProUnlocked` hanya bernilai `true` jika `user.is_pro === true` dari backend atau transaksi diverifikasi admin. Mencegah bypass `localStorage`.
+      - Pembersihan otomatis flag `isPro` / `unlockedPackages` lokal jika server menyatakan user belum PRO.
+    - **Penguncian Fitur Sebelum Bayar / Sebelum ACC Admin:**
+      1. `/tes` ([CareerTest.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerTest.jsx)): Laporan Diagnostik SWOT Lengkap, Analisis 10+ Industri Cocok, dan tombol Unduh PDF resmi terkunci dengan Paywall PRO.
+      2. `/cv-interview` ([CareerCvInterview.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerCvInterview.jsx)): CV ATS Deep Diagnostic (pencocokan kata kunci sistem HRD) dan Soal Wawancara 4–10 (Metode STAR) terkunci dengan Paywall PRO. Soal 1–3 gratis.
+      3. `/portofolio` ([CareerPortfolio.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerPortfolio.jsx)): Standar kurasi 4 & 5 serta Modul Template Portofolio (Figma & Notion) terkunci dengan Paywall PRO. Poin 1–3 gratis.
+      4. `/modul` ([CareerLearning.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerLearning.jsx)): Modul 1 & 2 gratis. Modul lanjutan 3–6 (Metode STAR, Personal Branding LinkedIn, Burnout & Mental Health, Analisis Data) terkunci dengan Paywall PRO.
+      5. `/dashboard` ([Dashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/Dashboard.jsx)): Menampilkan kartu upgrade Single Bundle 35K dengan ajakan aktivasi PRO jika belum bayar.
+    - [Login.jsx](file:///D:/Coding/neyla/frontend/src/pages/Login.jsx): Menambahkan 1-click credential chips untuk pengujian cepat (`user@neyla.id` dan `admin@neyla.id`).
+    - [echo.js](file:///D:/Coding/neyla/frontend/src/api/echo.js): Lazy Proxy wrapper untuk mencegah crash WebSocket Reverb pada startup lokal.
+  - **Pitch Deck & Dokumentasi:**
+    - Memperbarui slide pitch deck: [08_business_model.md](file:///D:/Coding/neyla/docs/pitch_deck/08_business_model.md), [04_solution.md](file:///D:/Coding/neyla/docs/pitch_deck/04_solution.md), [06_how_it_works.md](file:///D:/Coding/neyla/docs/pitch_deck/06_how_it_works.md).
+  - **Verifikasi & Validasi:**
+    - End-to-end integration test otomatis (`test_pro_workflow.py`): Berhasil 100% (User unggah struk -> status pending -> Admin verifikasi approve -> User `is_pro: true` & fitur langsung terbuka).
+    - Frontend build (`npm run build`) selesai sukses dengan kode 0 (1,848 modul ter-compile bersih).
 
 - **October 22, 2026 (Part 3):** Commit, Push to GitHub & VPS Production Deployment (`vps-bleber`).
   - Staged all modified files including terminology refactoring, codebase memory persistence, and .gitignore.

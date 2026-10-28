@@ -31,6 +31,7 @@ import CareerPortfolio from './pages/CareerPortfolio';
 import CareerLearning from './pages/CareerLearning';
 import CareerZodiac from './pages/CareerZodiac';
 import CareerArticles from './pages/CareerArticles';
+import CareerPricing from './pages/CareerPricing';
 import UserProfile from './pages/UserProfile';
 
 // Landing Pages
@@ -137,6 +138,12 @@ function AppRoutes() {
             <Route path="/artikel-tips" element={
                 <ProtectedRoute>
                     <CareerArticles />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/paket" element={
+                <ProtectedRoute>
+                    <CareerPricing />
                 </ProtectedRoute>
             } />
 

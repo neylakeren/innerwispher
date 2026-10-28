@@ -26,8 +26,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Payment
     Route::post('/payments/upload', [PaymentController::class, 'uploadProof']);
+    Route::post('/pro/upload-proof', [PaymentController::class, 'uploadProProof']);
+    Route::get('/pro/status', [PaymentController::class, 'getProStatus']);
 
     Route::middleware('role:admin')->group(function () {
+        Route::get('/admin/pro-payments', [PaymentController::class, 'getAdminProPayments']);
+        Route::post('/admin/pro-payments/{id}/verify', [PaymentController::class, 'verifyProPayment']);
         Route::post('/admin/payments/{id}/verify', [PaymentController::class, 'verify']);
         Route::post('/admin/payments/{id}/payout', [PaymentController::class, 'payoutCounselor']);
         Route::get('/admin/stats', [\App\Http\Controllers\Api\AdminController::class, 'getStats']);

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
+import client from '../api/client';
 import { CAREERS, LEARNING_MODULES, PORTFOLIO_CHECKLIST, ROADMAPS } from '../data/careerData';
 
 const CareerContext = createContext();
@@ -20,6 +21,7 @@ export function CareerProvider({ children }) {
     major: '',
     university: '',
     bio: '',
+    unlockedPackages: [], // 'report', 'cv_ats', 'bundle'
   };
 
   const [careerState, setCareerState] = useState(() => {
@@ -31,18 +33,69 @@ export function CareerProvider({ children }) {
     }
   });
 
+  const [proPayment, setProPayment] = useState(null);
+  const [proLoading, setProLoading] = useState(false);
+
+  const refreshProStatus = async () => {
+    if (!user) return;
+    try {
+      setProLoading(true);
+      const res = await client.get('/pro/status');
+      setProPayment(res.data.latest_payment || null);
+      if (res.data.is_pro || res.data.latest_payment?.status === 'verified') {
+        unlockPro();
+      } else {
+        // Pastikan tidak ada flag stale di localStorage jika belum diverifikasi admin
+        setCareerState(prev => ({
+          ...prev,
+          isPro: false,
+          unlockedPackages: []
+        }));
+      }
+    } catch (err) {
+      console.warn('Failed to fetch pro status:', err);
+    } finally {
+      setProLoading(false);
+    }
+  };
+
   useEffect(() => {
     try {
       const saved = localStorage.getItem(storageKey);
       if (saved) {
-        setCareerState(prev => ({ ...prev, ...JSON.parse(saved) }));
+        const parsed = JSON.parse(saved);
+        if (!user?.is_pro) {
+          parsed.isPro = false;
+          parsed.unlockedPackages = [];
+        }
+        setCareerState(prev => ({ ...defaultState, ...prev, ...parsed }));
       } else {
         setCareerState(defaultState);
       }
     } catch {
       setCareerState(defaultState);
     }
-  }, [user?.id]);
+
+    if (user?.id) {
+      refreshProStatus();
+    }
+  }, [user?.id, user?.is_pro]);
+
+  const submitProPaymentProof = async (formData) => {
+    const res = await client.post('/pro/upload-proof', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    setProPayment(res.data.payment);
+    return res.data;
+  };
+
+  const proPaymentStatus = user?.is_pro || proPayment?.status === 'verified'
+    ? 'verified'
+    : proPayment?.status === 'pending'
+      ? 'pending'
+      : proPayment?.status === 'rejected'
+        ? 'rejected'
+        : 'none';
 
   const updateCareerState = (updates) => {
     setCareerState(prev => {
@@ -56,6 +109,29 @@ export function CareerProvider({ children }) {
     });
   };
 
+  // PRO / Bundling unlocking (hanya aktif jika user.is_pro === true atau verifikasi admin)
+  const unlockPro = () => {
+    updateCareerState(prev => {
+      const current = prev.unlockedPackages || [];
+      const set = new Set([...current, 'pro', 'bundle', 'report', 'cv_ats']);
+      return { isPro: true, unlockedPackages: Array.from(set) };
+    });
+  };
+
+  const unlockPackage = (packageId = 'pro') => {
+    unlockPro();
+  };
+
+  // Otorisasi Ketat PRO: Wajib akun terverifikasi is_pro di backend atau status pembayaran 'verified'
+  // Sebelum bayar / sebelum di-acc admin -> SEMUA FITUR PRO TERKUNCI (isProUnlocked = false)
+  const isProUnlocked = Boolean(
+    user?.is_pro || proPaymentStatus === 'verified'
+  );
+
+  const isReportUnlocked = isProUnlocked;
+  const isCvAtsUnlocked = isProUnlocked;
+  const isBundleUnlocked = isProUnlocked;
+
   // Helper functions
   const activeCareer = CAREERS.find(c => c.id === careerState.targetCareerId) || null;
 
@@ -64,17 +140,17 @@ export function CareerProvider({ children }) {
     let completedPoints = 0;
     const totalPoints = 5 + LEARNING_MODULES.length + 1 + 1 + PORTFOLIO_CHECKLIST.length; // Roadmap (5) + Learn (6) + Test (1) + CV (1) + Portfolio (5) = 18
 
-    if (careerState.testResult) completedPoints += 1;
-    if (careerState.cvPassed) completedPoints += 1;
-    completedPoints += careerState.completedRoadmap.length;
-    completedPoints += careerState.completedLearning.length;
-    completedPoints += careerState.completedPortfolio.length;
+    if (careerState?.testResult) completedPoints += 1;
+    if (careerState?.cvPassed) completedPoints += 1;
+    completedPoints += (careerState?.completedRoadmap || []).length;
+    completedPoints += (careerState?.completedLearning || []).length;
+    completedPoints += (careerState?.completedPortfolio || []).length;
 
     return Math.min(100, Math.round((completedPoints / totalPoints) * 100));
   };
 
   const getNextStepRecommendation = () => {
-    if (!careerState.testResult) {
+    if (!careerState?.testResult) {
       return {
         title: 'Ikuti Tes Karier',
         desc: 'Jawab 25 pertanyaan untuk memetakan potensi & minat psikologis terbesarmu.',
@@ -93,7 +169,8 @@ export function CareerProvider({ children }) {
     }
 
     const currentRoadmap = ROADMAPS[activeCareer.c] || [];
-    const nextRoadStepIndex = currentRoadmap.findIndex((_, idx) => !careerState.completedRoadmap.includes(idx));
+    const completedRoadmap = careerState?.completedRoadmap || [];
+    const nextRoadStepIndex = currentRoadmap.findIndex((_, idx) => !completedRoadmap.includes(idx));
 
     if (nextRoadStepIndex !== -1) {
       return {
@@ -105,10 +182,10 @@ export function CareerProvider({ children }) {
     }
 
     return {
-      title: 'Konsultasi Bersama Pakar',
-      desc: 'Rencana kariermu sudah solid! Jadwalkan sesi konseling untuk validasi langkahmu.',
-      path: '/psychologists',
-      actionLabel: 'Pilih Psikolog'
+      title: 'Buka Laporan & Audit Lengkap',
+      desc: 'Rencana kariermu sudah solid! Buka laporan diagnostik lengkap atau audit CV ATS untuk persiapan maksimal.',
+      path: '/paket',
+      actionLabel: 'Lihat Paket'
     };
   };
 
@@ -119,6 +196,17 @@ export function CareerProvider({ children }) {
       activeCareer,
       totalProgress: calculateTotalProgress(),
       nextStep: getNextStepRecommendation(),
+      unlockPackage,
+      unlockPro,
+      isProUnlocked,
+      isReportUnlocked,
+      isCvAtsUnlocked,
+      isBundleUnlocked,
+      proPayment,
+      proPaymentStatus,
+      proLoading,
+      submitProPaymentProof,
+      refreshProStatus,
     }}>
       {children}
     </CareerContext.Provider>
