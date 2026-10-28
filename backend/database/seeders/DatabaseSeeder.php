@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        // 2. Create Psychologists (Multiple Doctors, No Dr. Stevano)
+        // 2. Create Psychologists (Multiple Doctors)
         
         // Psychologist 1: Dian Sastro, M.Psi
         $psy1 = User::create([

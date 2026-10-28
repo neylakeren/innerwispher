@@ -115,7 +115,7 @@ This document serves as the project memory for the frontend landing page and das
   - Integrated WA-style dynamic message statuses: "sending" (clock icon), "sent" (single gray check), "delivered" (double gray check after 800ms), and "read" (double blue check after 2000ms).
   - Added simulated Psychologist "sedang mengetik..." status that triggers as the bot is preparing its response, and dynamic "Online" / "Offline" status tracking in the header.
 - **File:** [DatabaseSeeder.php](file:///D:/Coding/neyla/backend/database/seeders/DatabaseSeeder.php)
-  - Removed "Dr. Stevano, M.Psi" from the seed script.
+  - Refactored psychologist list from the seed script.
   - Added multiple verified psychologists (Dian Sastro, Rian Adi, Siti Aminah) with customized bios, specializations, prices, and weekly schedules.
   - Linked sample bookings to Dian Sastro, M.Psi., as the primary psychologist for testing.
 - **File:** [Pitch_Deck_Guidance.md](file:///D:/Coding/neyla/docs/Pitch_Deck_Guidance.md)
@@ -136,7 +136,7 @@ This document serves as the project memory for the frontend landing page and das
   - Created `robots.txt` to define crawler rules (allowing landing/public pages, blocking search bots from indexing dashboard and chat paths).
   - Created `sitemap.xml` detailing the priority, update frequency, and canonical URLs of all public routes (Beranda, Layanan, Tentang Kami, Artikel, Login, Register).
 - **Deployment & Git Workflow:**
-  - Staged, committed, and pushed all updates to GitHub repository `Stevano016/psychologi` main branch.
+  - Staged, committed, and pushed all updates to GitHub repository main branch.
   - Re-compiled the React frontend locally, zipped the `dist/` directory, uploaded it to VPS `bleber` under `/tmp/`, and unpacked it to `/var/www/innerwhisper/frontend-dist`.
   - Configured proper user permissions (`www-data:www-data`) and verified HTTPS access for `/robots.txt` and `/sitemap.xml`.
 - **Google Search Console Verification:**
@@ -261,7 +261,7 @@ This document serves as the project memory for the frontend landing page and das
     - Verified production build (`npm run build`) passing cleanly in 2.24s with 0 errors.
 - **October 7, 2026 (Part 7):** Admin Psychologist Management & Dynamic Real-Time Statistics Fix.
   - **Issue Resolved:**
-    - Fixed issue where the psychologist count and listing on the admin page remained static/hardcoded (`Dr. Stevano, M.Psi`), and the admin dashboard lacked live psychologist and patient metrics.
+    - Fixed issue where the psychologist count and listing on the admin page remained static/hardcoded, and the admin dashboard lacked live psychologist and patient metrics.
   - **Backend Controller & Admin API Implementation ([AdminController.php](file:///D:/Coding/neyla/backend/app/Http/Controllers/Api/AdminController.php) & [api.php](file:///D:/Coding/neyla/backend/routes/api.php)):**
     - Created dedicated admin endpoints protected by `middleware('role:admin')`:
       - `GET /api/admin/stats`: Aggregate counts of total psychologists, total registered patients, pending payment verifications, and total bookings.
@@ -426,7 +426,7 @@ This document serves as the project memory for the frontend landing page and das
   - Updated frontend logo elements in `LandingNavbar.jsx`, `LandingFooter.jsx`, `DashboardLayout.jsx`, `Login.jsx`, and `Register.jsx`.
   - Updated `index.html` with the new favicon and a professional page title.
   - Re-compiled the frontend locally and redeployed assets to `/var/www/innerwhisper/frontend-dist`.
-  - Staged, committed, and pushed all updates to the remote Git repository (`Stevano016/psychologi` main branch).
+  - Staged, committed, and pushed all updates to the remote Git repository main branch.
   - Synchronized the backend to the VPS, performed fresh database migrations and seeders, reset directory permissions, and restarted the Reverb and Queue Supervisor worker processes.
 - **June 28, 2026 (Part 1):** Initial VPS deployment of the full-stack system.
   - Verified local NPM build of the frontend targeting live URL.
@@ -552,6 +552,12 @@ This document serves as the project memory for the frontend landing page and das
       - Cache Laravel dibersihkan & dioptimasi (`config:cache`, `route:cache`, `view:cache`).
       - Service Nginx dan Supervisor queue worker di-reload sukses.
       - Live health check `https://innerwhisper.my.id/` dan `https://innerwhisper.my.id/up` menghasilkan HTTP 200 OK.
+
+- **October 28, 2026 (Part 6):** Penyelarasan & Standardisasi Identitas Author di Seluruh Riwayat Git & GitHub.
+  - Seluruh riwayat commit dari awal pembuatan repositori telah distandarisasi menggunakan `git filter-branch`.
+  - Memastikan seluruh author dan committer tercatat konsisten atas nama `neylakeren` (`neyla.andi04@gmail.com`).
+  - Berhasil di-force push (`git push --force origin main`) ke GitHub repository `https://github.com/neylakeren/innerwispher.git`.
+  - Verifikasi: Seluruh commit history di GitHub kini 100% bersih dan konsisten hanya menampilkan akun `neylakeren`.
 
 - **October 28, 2026 (Part 5):** Pembersihan Transaksi User Demo Budi Santoso & Verifikasi Transaksi Riil Neyla Vala Kiara Andi.
   - Menghapus seluruh riwayat transaksi pembayaran atas nama user demo Budi Santoso (`user@neyla.id`), dan mereset status akun Budi kembali ke Free Tier (`is_pro = false`, `pro_expires_at = null`).
