@@ -487,7 +487,12 @@ This document serves as the project memory for the frontend landing page and das
   - **6. Fitur Toggle Visibilitas Password (Tanda Mata):**
     - Mengintegrasikan tombol toggle ikon mata (`Eye` dan `EyeOff` dari Lucide React) langsung di dalam komponen reusable [`Input`](file:///D:/Coding/neyla/frontend/src/components/ui.jsx).
     - Berfungsi secara otomatis pada seluruh kolom ber-tipe `password` (Login, Registrasi, Konfirmasi Password, dsb.) dengan padding protektif (`pr-11`) dan aksesibilitas `aria-label`.
-  - **7. Kompilasi, Git Push & Live Production Deployment (`vps-bleber`):**
+  - **7. Perapihan Total Tampilan Halaman Artikel ([Artikel.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Artikel.jsx)):**
+    - **Pembersihan Residual Konselor:** Menghapus referensi psikolog klinis dan CTA WhatsApp konsultasi dokter lama; mengalihkan 100% fokus konten ke ekosistem akselerasi karier (CV ATS, Simulasi Wawancara STAR, Strategi Karier & Mental Kesiapan Kerja).
+    - **Perbaikan Layout & Bug Masonry:** Menghilangkan styling CSS column masonry yang tidak rata dan menggantinya dengan CSS Grid 3-kolom modern, proporsional, dan adaptif mobile.
+    - **Pembaruan Aset Visual:** Mengganti URL gambar Google lh3 yang rusak dengan fotografi resolusi tinggi dari Unsplash bertema profesional dan persiapan kerja.
+    - **Fitur Baru:** Menambahkan input pencarian real-time (Search Bar), chip kategori interaktif, tombol bagikan link dengan feedback toast, preview artikel terkait, dan in-article CTA ke Inner Whisper PRO.
+  - **8. Kompilasi, Git Push & Live Production Deployment (`vps-bleber`):**
     - Kompilasi production frontend via `npm run build` sukses 100% (`dist/assets/index-DuAwzQD7.js` dan `dist/assets/index-Bs9FdVuh.css`).
     - Sinkronisasi backend files ke VPS `/var/www/innerwhisper/backend/`.
     - Eksekusi migrasi database live: `php artisan migrate --force` sukses menambahkan kolom `pro_expires_at`.

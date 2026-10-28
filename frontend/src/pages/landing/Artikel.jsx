@@ -1,152 +1,450 @@
-import { useState } from 'react';
-import { ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { 
+  ChevronRight, 
+  ArrowRight, 
+  ArrowLeft, 
+  Search, 
+  BookOpen, 
+  Clock, 
+  Sparkles, 
+  CheckCircle2, 
+  Share2, 
+  Tag,
+  Check,
+  Building2,
+  FileText,
+  Brain
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const categories = ['Semua Topik', 'Kecemasan', 'Hubungan', 'Perawatan Diri', 'Produktivitas'];
+const categories = [
+  'Semua Topik',
+  'Resume & CV ATS',
+  'Simulasi Interview',
+  'Strategi Karier',
+  'Mental Kesiapan Kerja'
+];
 
 const featuredArticle = {
-  id: 'featured-1',
-  title: 'Menemukan Ketenangan di Tengah Kesibukan Sehari-hari',
-  description: 'Langkah-langkah sederhana namun efektif untuk membangun rutinitas perawatan diri yang berkelanjutan, bahkan ketika jadwal Anda terasa sangat padat.',
-  category: 'Perawatan Diri',
-  author: 'Dr. Amanda Setiawan',
-  authorTitle: 'Psikolog Klinis',
-  readTime: '5 Min Baca',
-  image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAsYtlGey4dJ_QUSA84iQmTtngjJcJQE3IuYWJt-625ApQbxaDJycO976Z-X32i0Yfon5AjU91fUpEcqW8Ic3ouLI2We0vwJh1js28OTt4hYAan7itkKmuGATDA3TXsfq0UiE540roIO2SO8vH5r0rlGFuZ-G3jFsRXUOMscNwBg6WtqGEi0SvwJbDuQzk3ANwRvleiNT90HiBCm8P6tHy_KJ-A8l53y-8EoP_akiE2XQnAFand0p30JSieEDk7ycz5DV-uHRaA7IdF',
-  hasImage: true,
+  id: 'featured-ats-1',
+  title: 'Tiga Kriteria Kunci yang Dicari HRD dalam Resume Berformat ATS',
+  description: 'Pelajari bagaimana Applicant Tracking System (ATS) memindai kata kerja aktif, format tata letak yang ramah mesin, dan parameter kuantitatif yang meloloskan berkasmu ke meja user interview.',
+  category: 'Resume & CV ATS',
+  author: 'Tim Riset Karier',
+  authorTitle: 'Inner Whisper Career Lab',
+  readTime: '6 Min Baca',
+  date: '28 Oktober 2026',
+  image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1200&q=80',
   content: [
-    { type: 'paragraph', text: 'Di dunia modern yang bergerak serba cepat, kesibukan sering kali dianggap sebagai lambang kesuksesan. Namun, tanpa kita sadari, tekanan pekerjaan yang tiada habisnya, tenggat waktu yang ketat, dan tuntutan sosial dapat menguras energi mental kita secara perlahan. Merawat kesehatan mental bukan lagi sebuah kemewahan, melainkan kebutuhan dasar agar kita tetap berfungsi dengan baik.' },
-    { type: 'subheading', text: '1. Mulai dengan Kesadaran Diri (Mindfulness)' },
-    { type: 'paragraph', text: 'Mindfulness atau kesadaran penuh adalah latihan memusatkan perhatian pada momen saat ini tanpa menghakimi. Anda tidak perlu meluangkan waktu berjam-jam untuk bermeditasi. Lakukan saja jeda mikro selama 2-3 menit di sela-sela aktivitas kerja. Tarik napas dalam-dalam melalui hidung, tahan selama empat hitungan, lalu hembuskan perlahan melalui mulut. Latihan sederhana ini membantu menurunkan kadar hormon stres (kortisol) secara instan.' },
-    { type: 'subheading', text: '2. Jadwalkan Jeda secara Sengaja' },
-    { type: 'paragraph', text: 'Jika Anda bisa menjadwalkan rapat dengan klien, mengapa Anda tidak bisa menjadwalkan waktu untuk diri sendiri? Buatlah komitmen tertulis di kalender Anda, misalnya "Jeda Kopi 10 Menit tanpa Ponsel". Gunakan waktu ini untuk meregangkan otot, berjalan ke luar ruangan, atau sekadar memandangi tanaman hijau. Menjauh dari layar komputer atau gawai akan memberikan ruang bagi otak untuk beristirahat dan memulihkan fokus.' },
-    { type: 'quote', text: '“Kesehatan mental Anda jauh lebih penting daripada produktivitas atau tenggat pekerjaan apa pun. Tanpa ketenangan jiwa, kesuksesan finansial tidak akan terasa utuh.”' },
-    { type: 'subheading', text: '3. Terapkan Detoks Digital Berkala' },
-    { type: 'paragraph', text: 'Pemberitahuan ponsel pintar yang terus-menerus berbunyi memicu otak kita untuk selalu berada dalam mode siaga (fight-or-flight). Batasi penggunaan media sosial, terutama di pagi hari setelah bangun tidur dan malam hari sebelum tidur. Coba ganti aktivitas menggulir layar (scrolling) dengan membaca buku fisik, menulis jurnal perasaan, atau mengobrol langsung dengan keluarga terdekat.' },
-    { type: 'paragraph', text: 'Menemukan ketenangan tidak berarti kita harus meninggalkan semua kesibukan kita. Ini tentang bagaimana kita menciptakan batas-batas yang sehat antara dunia luar dan dunia dalam diri kita sendiri. Mulailah dari langkah kecil hari ini.' }
+    { 
+      type: 'paragraph', 
+      text: 'Di era rekrutmen digital saat ini, lebih dari 90% perusahaan multinasional dan tech startup terkemuka menggunakan Applicant Tracking System (ATS) untuk menyaring ribuan resume yang masuk sebelum dibaca oleh manusia. Banyak pencari kerja bertalenta gugur di tahap awal bukan karena kurang berkualifikasi, melainkan karena format dokumen mereka tidak dapat dipindai oleh parser algoritma.' 
+    },
+    { 
+      type: 'subheading', 
+      text: '1. Relevansi Kata Kunci Industri yang Spesifik' 
+    },
+    { 
+      type: 'paragraph', 
+      text: 'Mesin ATS bekerja dengan memetakan teks resume terhadap deskripsi pekerjaan (Job Description). Jika posisi yang kamu tuju menuntut keahlian "Data Cleansing", "Python", atau "Stakeholder Management", pastikan terminologi persis tersebut tertulis pada bagian keterampilan maupun ringkasan pengalamanmu. Hindari singkatan yang tidak umum yang bisa membingungkan sistem pencocokan.' 
+    },
+    { 
+      type: 'subheading', 
+      text: '2. Pencapaian yang Terukur dengan Angka (Action + Metric)' 
+    },
+    { 
+      type: 'paragraph', 
+      text: 'Sistem ATS dan rekruter modern menyukai poin pencapaian yang terukur. Jangan hanya menulis "Bertanggung jawab atas pengelolaan media sosial". Gantilah dengan formulasi berbobot: "Meningkatkan engagement rate Instagram sebesar 42% dalam 3 bulan melalui eksperimen format video edukatif mingguan". Angka memberikan bukti konkret atas dampak nyata kontribusimu.' 
+    },
+    { 
+      type: 'quote', 
+      text: '“Resume yang kuat bukan sekadar daftar riwayat hidup, melainkan dokumen proposal nilai yang membuktikan solusi apa yang bisa kamu hadirkan untuk tim perekrut.”' 
+    },
+    { 
+      type: 'subheading', 
+      text: '3. Tata Letak Hirarki Bersih (Single Column Layout)' 
+    },
+    { 
+      type: 'paragraph', 
+      text: 'Gunakan layout satu kolom yang bersih. Format dua kolom, kotak teks (text boxes), grafik rating keahlian 5 bintang, dan tabel sering kali dibaca acak oleh parser ATS sehingga teks menjadi terpotong atau tercampur antar baris. Gunakan font standar seperti Inter, Roboto, atau Arial dengan ukuran 10-12pt.' 
+    },
+    { 
+      type: 'paragraph', 
+      text: 'Pastikan juga kamu melakukan scan otomatis menggunakan alat audit CV ATS sebelum mengirimkan lamaran kerja impianmu agar tidak ada poin teknis krusial yang terlewat.' 
+    }
   ]
 };
 
 const articles = [
   {
-    id: 'article-1',
-    title: 'Mengenali Gejala Serangan Panik vs Kecemasan Biasa',
-    description: 'Memahami perbedaan krusial antara serangan panik akut dan kecemasan umum untuk penanganan yang lebih tepat sasaran.',
-    category: 'Kecemasan',
-    author: 'Budi Santoso, M.Psi',
-    authorTitle: 'Psikolog Klinis',
-    readTime: '6 Min Baca',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD6y_eWvq9iJWASljh0SrjJnziuu0inXHgVsh-cVe4zJelUq-f8TucOtrByd0VZhBuJjNfITXkn2WfPOtNutMeRnMJGFi_U8fliOleWJZUV6dW7hYs-LVTfPMLzpy6PF6_HM1Wa29_EEuMRvUfS_R4H6PGMe2UbbP-Ui2XZ8PHyN078clLD6c_fmrjalQ_KDfPBWj7Wkf2PdSt3jp1VQH_jee5M4ELqDvXzfdHW8QNx1q282OWLHfWPhDmApm1kLPnQAPvw9Bg70r2R',
-    hasImage: true,
+    id: 'article-interview-1',
+    title: 'Formulasi Terbaik Menjawab "Ceritakan Tentang Dirimu" Saat Wawancara',
+    description: 'Kuasai kerangka Present - Past - Future untuk membuka sesi wawancara kerja pertama dengan percaya diri, terstruktur, dan memikat perhatian rekruter.',
+    category: 'Simulasi Interview',
+    author: 'Tim Kurasi Karier',
+    authorTitle: 'Spesialis Rekrutmen',
+    readTime: '5 Min Baca',
+    date: '26 Oktober 2026',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
     content: [
-      { type: 'paragraph', text: 'Banyak orang sering menyamakan antara serangan panik (panic attack) dengan kecemasan (anxiety) biasa. Meskipun keduanya melibatkan perasaan takut dan respons fisik yang mirip, memahami perbedaan antara keduanya sangatlah penting untuk mendapatkan penanganan yang tepat.' },
-      { type: 'subheading', text: 'Serangan Panik: Tiba-tiba dan Intens' },
-      { type: 'paragraph', text: 'Serangan panik biasanya datang secara mendadak tanpa pemicu yang jelas. Gejalanya sangat intens dan mencapai puncaknya dalam waktu 10 menit. Gejala fisik yang sering dirasakan meliputi jantung berdebar kencang, sesak napas berat, pusing, gemetar, hingga perasaan takut kehilangan kendali atau takut mati.' },
-      { type: 'subheading', text: 'Kecemasan Biasa: Bertahap dan Terpemicu' },
-      { type: 'paragraph', text: 'Di sisi lain, kecemasan biasanya berkembang secara bertahap dan berhubungan dengan pemicu tertentu, seperti masalah keuangan, ujian, atau konflik interpersonal. Intensitasnya cenderung lebih rendah daripada serangan panik, tetapi dapat berlangsung dalam jangka waktu yang lebih lama (berhari-hari hingga berminggu-minggu).' },
-      { type: 'quote', text: '“Serangan panik terasa seperti badai tiba-tiba di laut tenang, sedangkan kecemasan terasa seperti mendung tebal yang tidak kunjung menurunkan hujan.”' },
-      { type: 'subheading', text: 'Cara Mengatasinya secara Mandiri' },
-      { type: 'paragraph', text: 'Saat Anda merasakan serangan panik, gunakan metode grounding 5-4-3-2-1 untuk memusatkan kembali pikiran Anda pada kenyataan sekitar. Temukan 5 benda yang bisa dilihat, 4 benda yang bisa disentuh, 3 suara yang bisa didengar, 2 bau yang bisa dicium, dan 1 rasa yang bisa dicicipi. Jika gejala kecemasan mengganggu aktivitas harian Anda, jangan ragu untuk berkonsultasi dengan psikolog profesional.' }
+      { 
+        type: 'paragraph', 
+        text: 'Pertanyaan "Bisa ceritakan tentang diri Anda?" hampir selalu menjadi pembuka dalam setiap wawancara kerja. Meskipun terkesan santai, pertanyaan ini adalah ujian penentu apakah kamu mampu mengomunikasikan nilai dirimu secara ringkas dan terarah.' 
+      },
+      { 
+        type: 'subheading', 
+        text: 'Kerangka Present - Past - Future' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '1. Present (Saat Ini): Jelaskan siapa kamu saat ini, fokus keahlian utamamu, dan apa peran atau proyek terbarumu yang paling membanggakan.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '2. Past (Masa Lalu): Ceritakan 1 atau 2 pengalaman krusial (proyek kuliah, magang, atau organisasi) yang membentuk keterampilan tersebut dan membuktikan kinerjamu.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '3. Future (Masa Depan): Sambungkan mengapa kamu tertarik dengan posisi ini dan bagaimana kamu dapat berkontribusi langsung terhadap tujuan tim mereka.' 
+      },
+      { 
+        type: 'quote', 
+        text: '“Rekruter tidak sedang meminta ringkasan seluruh riwayat hidupmu dari masa sekolah, mereka ingin tahu mengapa kehadiranmu relevan untuk memecahkan masalah mereka saat ini.”' 
+      },
+      { 
+        type: 'subheading', 
+        text: 'Durasi Ideal Jawaban' 
+      },
+      { 
+        type: 'paragraph', 
+        text: 'Jaga agar respons pembuka ini berdurasi antara 90 hingga 120 detik. Latihlah intonasi dan artikulasi agar terdengar alami, bukan seperti menghafal teks naskah.' 
+      }
     ]
   },
   {
-    id: 'article-2',
-    title: 'Membangun Batasan Sehat dalam Hubungan Keluarga',
-    description: 'Batasan bukanlah tembok pemisah, melainkan aturan main yang menjaga rasa hormat dan cinta dalam keluarga. Pelajari cara mengomunikasikannya.',
-    category: 'Hubungan',
-    author: 'Siti Aisyah, M.Psi',
-    authorTitle: 'Konselor Keluarga',
-    readTime: '4 Min Baca',
-    hasImage: false,
-    content: [
-      { type: 'paragraph', text: 'Keluarga adalah tempat pertama kita belajar tentang cinta dan penerimaan. Namun, sering kali hubungan keluarga menjadi sumber stres emosional terbesar ketika batasan pribadi (boundaries) tidak dihormati atau bahkan tidak pernah ditetapkan.' },
-      { type: 'subheading', text: 'Mengapa Batasan Itu Penting?' },
-      { type: 'paragraph', text: 'Banyak orang merasa bersalah ketika ingin menolak permintaan keluarga. Kita takut dicap durhaka atau egois. Padahal, menetapkan batasan yang jelas justru bertujuan untuk menjaga hubungan tetap sehat dalam jangka panjang. Tanpa batasan, rasa kesal dan dendam terpendam akan perlahan mengikis kasih sayang yang tulus.' },
-      { type: 'quote', text: '“Batasan yang sehat adalah cara kita mencintai diri sendiri tanpa berhenti menghargai dan menyayangi orang lain.”' },
-      { type: 'subheading', text: 'Langkah Awal Mengomunikasikan Batasan' },
-      { type: 'paragraph', text: 'Gunakan kalimat "Saya" (I-statement) daripada kalimat yang menyalahkan. Misalnya: "Saya sangat menghargai saran Ibu, tetapi saat ini saya butuh waktu untuk memutuskan hal ini sendiri" daripada "Ibu selalu ikut campur urusan saya!". Sampaikan dengan nada suara yang tenang, tegas, namun tetap penuh kasih.' }
-    ]
-  },
-  {
-    id: 'article-3',
-    title: 'Strategi Mengatasi Burnout di Tempat Kerja',
-    description: 'Kenali tanda-tanda kelelahan emosional akibat pekerjaan dan langkah taktis untuk memulihkan energi serta motivasi Anda.',
-    category: 'Produktivitas',
-    author: 'Budi Santoso, M.Psi',
-    authorTitle: 'Psikolog Klinis',
+    id: 'article-mental-1',
+    title: 'Menjaga Kesehatan Mental dan Mengatasi Job-Hunting Fatigue',
+    description: 'Strategi psikologis menjaga motivasi diri saat proses melamar kerja terasa panjang. Tetapkan batasan sehat, hindari burnout, dan rawat energi mentalmu.',
+    category: 'Mental Kesiapan Kerja',
+    author: 'Tim Riset Karier',
+    authorTitle: 'Psikometri & Well-being',
     readTime: '7 Min Baca',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBC2b3h7E7k74_F9u0DqN8jO436p4eS0F-JzGz8v0a_m1x3q7n9o2w5u8r1k4j6h8f2d5a7',
-    hasImage: true,
+    date: '24 Oktober 2026',
+    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80',
     content: [
-      { type: 'paragraph', text: 'Burnout bukan sekadar rasa lelah biasa setelah lembur semalaman. Ini adalah kondisi kelelahan fisik, emosional, dan mental yang kronis akibat stres berkepanjangan di tempat kerja yang tidak terkelola dengan baik.' },
-      { type: 'subheading', text: 'Tiga Dimensi Utama Burnout' },
-      { type: 'paragraph', text: 'Menurut Organisasi Kesehatan Dunia (WHO), burnout ditandai dengan tiga hal: perasaan energi terkuras atau kelelahan ekstrem, meningkatnya jarak mental dari pekerjaan atau sinisme terhadap tugas kantor, dan penurunan efikasi profesional (merasa tidak mampu lagi menghasilkan karya yang baik).' },
-      { type: 'subheading', text: 'Pemulihan Dimulai dari Ruang Kerja Anda' },
-      { type: 'paragraph', text: 'Jangan ragu untuk berbicara secara jujur dengan atasan mengenai beban kerja Anda. Fokuslah pada penyelesaian satu tugas dalam satu waktu (monotasking). Berhentilah membuka email pekerjaan di akhir pekan. Jika energi Anda tidak kunjung pulih setelah cuti liburan, itu adalah sinyal bahwa Anda membutuhkan bantuan profesional untuk menata kembali prioritas hidup.' }
+      { 
+        type: 'paragraph', 
+        text: 'Job-hunting fatigue atau kelelahan emosional saat mencari kerja adalah fenomena nyata yang dialami oleh mayoritas fresh graduate. Menunggu kabar seleksi yang tak kunjung datang atau menerima penolakan berulang dapat menurunkan rasa percaya diri secara drastis.' 
+      },
+      { 
+        type: 'subheading', 
+        text: 'Pisahkan Nilai Diri dari Respons Perusahaan' 
+      },
+      { 
+        type: 'paragraph', 
+        text: 'Penolakan lamaran bukan cerminan dari kegagalan atau harga dirimu sebagai manusia. Sering kali ada faktor eksternal di luar kendalimu, seperti penutupan kuota lowongan mendadak atau kecocokan teknis spesifik internal perusahaan.' 
+      },
+      { 
+        type: 'quote', 
+        text: '“Mencari kerja adalah sebuah maraton persiapan, bukan sprint instan. Menjaga ketenangan batin adalah fondasi agar performamu tetap prima saat kesempatan emas tiba.”' 
+      },
+      { 
+        type: 'subheading', 
+        text: 'Tiga Praktik Sederhana yang Membantu' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '1. Batasi Kuota Lamaran Harian: Kirim 2–3 lamaran berkualitas dengan CV yang dipersonalisasi, daripada menyebar 50 lamaran acak yang menguras energi.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '2. Tetapkan Jam "Off-Screen": Berhentilah merefresh email atau LinkedIn setelah pukul 18.00. Luangkan waktu untuk olahraga, hobi, dan istirahat berkualitas.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '3. Rayakan Proses Kecil: Mengikuti tes potensi minat bakat, merapikan portofolio, dan latihan interview adalah kemenangan harian yang layak kamu apresiasi.' 
+      }
+    ]
+  },
+  {
+    id: 'article-interview-2',
+    title: 'Membedah Metode STAR: Rahasia Lolos Behavioral Interview Perusahaan Global',
+    description: 'Panduan praktis menstrukturkan cerita pengalamanmu dengan Situation, Task, Action, dan Result agar dinilai konkret dan profesional oleh rekruter.',
+    category: 'Simulasi Interview',
+    author: 'Tim Kurasi Karier',
+    authorTitle: 'Spesialis Rekrutmen',
+    readTime: '6 Min Baca',
+    date: '22 Oktober 2026',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
+    content: [
+      { 
+        type: 'paragraph', 
+        text: 'Pernahkah kamu ditanya: "Ceritakan situasi ketika kamu menghadapi konflik dalam tim dan bagaimana cara kamu menyelesaikannya?" Ini adalah jenis pertanyaan behavioral yang digunakan rekruter untuk memprediksi perilakumu di masa depan.' 
+      },
+      { 
+        type: 'subheading', 
+        text: 'Empat Pilar Metode STAR' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '• S (Situation): Gambarkan konteks situasi atau tantangan awal secara ringkas (1-2 kalimat).' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '• T (Task): Jelaskan apa peran spesifik dan tanggung jawab yang harus kamu selesaikan.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '• A (Action): Ini adalah bagian terpenting (60% porsi jawaban). Uraikan langkah taktis apa yang kamu ambil secara pribadi untuk mengatasi hambatan.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '• R (Result): Tunjukkan hasil akhir yang dicapai beserta pelajaran berharga yang kamu petik.' 
+      },
+      { 
+        type: 'quote', 
+        text: '“Gunakan kata kerja aktif \'Saya mengambil inisiatif untuk...\' daripada selalu menggunakan kata \'Kami\', agar rekruter memahami kontribusi personalmu.”' 
+      }
+    ]
+  },
+  {
+    id: 'article-career-1',
+    title: 'Bagaimana Memilih Tempat Magang Pertama yang Tepat untuk Lompatan Karier?',
+    description: 'Kenali perbedaan program magang yang memberikan ruang ownership nyata vs sekadar tugas administratif, serta cara memvalidasi reputasi mentor.',
+    category: 'Strategi Karier',
+    author: 'Tim Riset Karier',
+    authorTitle: 'Konsultan Pengembangan Karier',
+    readTime: '5 Min Baca',
+    date: '20 Oktober 2026',
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80',
+    content: [
+      { 
+        type: 'paragraph', 
+        text: 'Magang pertama adalah batu loncatan paling penting dalam riwayat pengalaman seorang mahasiswa. Jangan sampai kamu hanya tergiur oleh nama besar perusahaan tanpa meneliti kualitas bimbingan mentor dan proyek kerja yang akan diberikan.' 
+      },
+      { 
+        type: 'subheading', 
+        text: 'Indikator Tempat Magang Berkualitas' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '1. Memiliki Project Scope yang Jelas: Perusahaan yang baik telah menyiapkan silabus atau deliverables yang diharapkan dari intern selama 3–6 bulan.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '2. Mentor yang Bersedia Mereview Kinerja: Tersedia sesi 1-on-1 berkala untuk memberikan umpan balik konstruktif terhadap hasil kerjamu.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '3. Peluang Portofolio Resmi: Hasil pekerjaanmu dapat dijadikan studi kasus portofolio yang dapat dipresentasikan saat melamar kerja full-time kelak.' 
+      }
+    ]
+  },
+  {
+    id: 'article-career-2',
+    title: 'Langkah Awal Membangun Networking di LinkedIn Tanpa Rasa Canggung',
+    description: 'Template pesan koneksi yang sopan, etika meninggalkan jejak profesional pada postingan industri, dan membangun relasi dua arah yang otentik.',
+    category: 'Strategi Karier',
+    author: 'Tim Kurasi Karier',
+    authorTitle: 'Spesialis Rekrutmen',
+    readTime: '4 Min Baca',
+    date: '18 Oktober 2026',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+    content: [
+      { 
+        type: 'paragraph', 
+        text: 'Banyak mahasiswa merasa segan menyapa praktisi profesional di LinkedIn karena takut dianggap mengganggu. Padahal, networking profesional adalah tentang apresiasi tulus dan rasa ingin tahu belajar.' 
+      },
+      { 
+        type: 'subheading', 
+        text: 'Template Pesan Koneksi Ramah & Sopan' 
+      },
+      { 
+        type: 'quote', 
+        text: '“Halo [Nama], salam kenal! Saya sangat terinspirasi dengan tulisan Anda seputar [Topik]. Sebagai fresh graduate yang sedang mendalami bidang yang sama, saya senang jika bisa terhubung dan belajar dari pengalaman Anda.”' 
+      },
+      { 
+        type: 'paragraph', 
+        text: 'Hindari langsung meminta lowongan pekerjaan pada pesan pertama. Bangun interaksi terlebih dahulu dengan memberikan komentar apresiatif di postingan mereka.' 
+      }
+    ]
+  },
+  {
+    id: 'article-ats-2',
+    title: '7 Kesalahan Fatal Format Dokumen CV yang Sering Membuat ATS Error',
+    description: 'Mulai dari tabel multi-kolom, ikon grafis berlebihan, hingga penempatan kontak di header. Hindari jebakan format yang membuat resumemu gagal dipindai.',
+    category: 'Resume & CV ATS',
+    author: 'Tim Riset Karier',
+    authorTitle: 'Teknologi Parser ATS',
+    readTime: '5 Min Baca',
+    date: '15 Oktober 2026',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
+    content: [
+      { 
+        type: 'paragraph', 
+        text: 'Tahukah kamu bahwa sebagian besar software ATS tidak bisa membaca teks yang ditaruh di dalam header atau footer Microsoft Word/PDF? Ini membuat nomor telepon dan emailmu hilang dari database rekruter.' 
+      },
+      { 
+        type: 'subheading', 
+        text: 'Daftar Kesalahan yang Harus Dihindari' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '1. Menggunakan Tabel dan Text Box: Struktur sel tabel sering membuat kalimat terputus secara acak.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '2. Foto Profil di Format ATS: Untuk rekrutmen perusahaan multinasional, foto tidak diperlukan dan justru memperbesar ukuran file.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '3. Progress Bar / Bintang Skill: Mesin tidak bisa mengukur apa arti "Bahasa Inggris: 4 dari 5 bintang". Gunakan kata keterangan standar seperti Fluent, Proficient, atau Conversational.' 
+      },
+      { 
+        type: 'paragraph', 
+        text: '4. Format File yang Salah: Simpan selalu dalam bentuk PDF berstandar teks atau DOCX, jangan pernah menyimpan hasil scan gambar (JPEG/PNG).' 
+      }
     ]
   }
 ];
 
 export default function Artikel() {
   const [activeCategory, setActiveCategory] = useState('Semua Topik');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [subscribedToast, setSubscribedToast] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
 
-  const filteredArticles = activeCategory === 'Semua Topik'
-    ? articles
-    : articles.filter((a) => a.category === activeCategory);
+  const handleShare = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    }
+  };
 
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    if (newsletterEmail) {
+      setSubscribedToast(true);
+      setNewsletterEmail('');
+      setTimeout(() => setSubscribedToast(false), 4000);
+    }
+  };
+
+  // Filter and search logic
+  const filteredArticles = useMemo(() => {
+    return articles.filter((art) => {
+      const matchCategory = activeCategory === 'Semua Topik' || art.category === activeCategory;
+      const matchSearch = searchQuery.trim() === '' || 
+        art.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        art.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        art.category.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchCategory && matchSearch;
+    });
+  }, [activeCategory, searchQuery]);
+
+  // Reading Mode View
   if (selectedArticle) {
+    const relatedArticles = articles
+      .filter(a => a.id !== selectedArticle.id)
+      .slice(0, 2);
+
     return (
-      <div className="pt-20 md:pt-[130px] pb-28 md:pb-24 px-4 sm:px-8 md:px-16 lg:px-24 w-full flex flex-col items-start">
-        {/* Back Button */}
-        <button
-          onClick={() => setSelectedArticle(null)}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm text-[#4b3b86] font-bold hover:text-[#8f78d8] mb-6 sm:mb-8 transition-colors focus:outline-none"
-        >
-          <ArrowLeft size={16} /> <span>Kembali ke Daftar Artikel</span>
-        </button>
+      <div className="pt-24 md:pt-[120px] pb-28 md:pb-24 px-4 sm:px-8 md:px-16 lg:px-24 w-full flex flex-col items-start font-quicksand">
+        {/* Back Button & Share */}
+        <div className="w-full max-w-4xl mx-auto flex items-center justify-between mb-6 sm:mb-8">
+          <button
+            onClick={() => {
+              setSelectedArticle(null);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="inline-flex items-center gap-2 text-xs sm:text-sm text-[#4b3b86] font-bold hover:text-[#8f78d8] transition-colors focus:outline-none bg-[#efeafb] px-3.5 py-1.5 rounded-xl border border-[#d9cff5]"
+          >
+            <ArrowLeft size={16} /> 
+            <span>Kembali ke Daftar Artikel</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleShare}
+            className="inline-flex items-center gap-1.5 text-xs text-[#5d5577] hover:text-[#4b3b86] font-semibold bg-white px-3 py-1.5 rounded-xl border border-[#d9cff5] transition-colors shadow-sm"
+          >
+            {copiedLink ? <Check size={14} className="text-[#198754]" /> : <Share2 size={14} />}
+            <span>{copiedLink ? 'Link Tersalin!' : 'Bagikan'}</span>
+          </button>
+        </div>
 
         {/* Article Container */}
-        <div className="max-w-4xl mx-auto flex flex-col gap-4 sm:gap-6 w-full">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <span className="px-3 py-1 bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] rounded-full text-xs font-semibold">
+        <article className="max-w-4xl mx-auto flex flex-col gap-5 sm:gap-7 w-full bg-white p-6 sm:p-10 md:p-12 rounded-3xl border border-[#d9cff5] shadow-card">
+          {/* Metadata Chips */}
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="px-3 py-1 bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] rounded-full text-xs font-bold inline-flex items-center gap-1">
+              <Tag size={12} />
               {selectedArticle.category}
             </span>
-            <span className="text-xs text-[#5d5577] font-medium">
+            <span className="text-xs text-[#5d5577] font-semibold inline-flex items-center gap-1">
+              <Clock size={13} />
               {selectedArticle.readTime}
             </span>
+            {selectedArticle.date && (
+              <span className="text-xs text-[#8a82a2] hidden sm:inline">
+                • {selectedArticle.date}
+              </span>
+            )}
           </div>
 
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-[#2b2542] leading-tight tracking-tight">
+          {/* Title */}
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#2b2542] leading-tight tracking-tight">
             {selectedArticle.title}
           </h1>
 
-          <div className="flex items-center gap-3 py-3 sm:py-4 border-y border-[#d9cff5]/60 my-1 sm:my-2">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] flex items-center justify-center font-bold text-sm sm:text-base">
-              {selectedArticle.author.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+          {/* Author Badge */}
+          <div className="flex items-center gap-3 py-4 border-y border-[#d9cff5]/60 my-1">
+            <div className="w-11 h-11 rounded-2xl bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] flex items-center justify-center font-bold text-sm shadow-sm">
+              <BookOpen size={18} />
             </div>
             <div>
-              <p className="text-xs sm:text-sm font-bold text-[#2b2542]">{selectedArticle.author}</p>
-              <p className="text-[11px] sm:text-xs text-[#5d5577]">{selectedArticle.authorTitle}</p>
+              <p className="text-sm font-bold text-[#2b2542]">{selectedArticle.author}</p>
+              <p className="text-xs text-[#5d5577]">{selectedArticle.authorTitle}</p>
             </div>
           </div>
 
-          {selectedArticle.hasImage && selectedArticle.image && (
-            <div className="w-full h-[200px] sm:h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-sm my-2 sm:my-4 border border-[#d9cff5]/50">
-              <img className="w-full h-full object-cover" src={selectedArticle.image} alt={selectedArticle.title} />
+          {/* Featured Image */}
+          {selectedArticle.image && (
+            <div className="w-full h-[220px] sm:h-[380px] md:h-[460px] rounded-2xl overflow-hidden shadow-sm my-2 border border-[#d9cff5]/60">
+              <img 
+                className="w-full h-full object-cover" 
+                src={selectedArticle.image} 
+                alt={selectedArticle.title} 
+              />
             </div>
           )}
 
-          <div className="flex flex-col gap-4 sm:gap-6 text-sm sm:text-base md:text-lg text-[#2b2542] leading-relaxed mt-4 sm:mt-6">
+          {/* Article Body Content */}
+          <div className="flex flex-col gap-4 sm:gap-6 text-sm sm:text-base md:text-lg text-[#2b2542] leading-relaxed mt-2">
             {selectedArticle.content.map((item, idx) => {
               if (item.type === 'paragraph') {
-                return <p key={idx} className="text-justify leading-relaxed">{item.text}</p>;
+                return (
+                  <p key={idx} className="leading-relaxed text-[#2b2542]">
+                    {item.text}
+                  </p>
+                );
               }
               if (item.type === 'subheading') {
-                return <h3 key={idx} className="text-lg sm:text-2xl font-bold text-[#4b3b86] mt-4 sm:mt-6 mb-1 sm:mb-2">{item.text}</h3>;
+                return (
+                  <h2 key={idx} className="text-lg sm:text-2xl font-bold text-[#4b3b86] mt-4 sm:mt-6 mb-1 tracking-tight">
+                    {item.text}
+                  </h2>
+                );
               }
               if (item.type === 'quote') {
                 return (
-                  <blockquote key={idx} className="border-l-4 border-[#8f78d8] bg-[#efeafb]/70 px-4 sm:px-6 py-3 sm:py-4 rounded-r-xl my-3 italic text-[#4b3b86] font-medium text-xs sm:text-base">
+                  <blockquote 
+                    key={idx} 
+                    className="border-l-4 border-[#8f78d8] bg-[#efeafb]/70 px-5 sm:px-7 py-3.5 sm:py-5 rounded-r-2xl my-3 italic text-[#4b3b86] font-semibold text-xs sm:text-base leading-relaxed"
+                  >
                     {item.text}
                   </blockquote>
                 );
@@ -155,106 +453,181 @@ export default function Artikel() {
             })}
           </div>
 
-          {/* Call to Action to WhatsApp Counseling */}
-          <div className="mt-10 sm:mt-16 bg-white/90 rounded-2xl p-6 sm:p-10 md:p-12 border border-[#d9cff5] shadow-card text-center flex flex-col items-center gap-4 sm:gap-6">
-            <h3 className="text-lg sm:text-2xl font-bold text-[#4b3b86]">
-              Butuh tempat bercerita tentang masalah serupa?
-            </h3>
-            <p className="text-xs sm:text-base text-[#5d5577] max-w-2xl leading-relaxed">
-              Jangan menanggung beban Anda sendiri. Tim konselor kami di Inner Whisper siap membantu dan mendengarkan keluh kesah Anda secara empatik tanpa menghakimi.
-            </p>
-            <a
-              href="https://wa.me/6281234567890"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto btn-lv text-xs sm:text-base px-6 sm:px-8 py-3.5 rounded-xl shadow-btn transition-all font-semibold inline-flex items-center justify-center gap-2 active:scale-95 text-white"
-            >
-              <span>Konsultasikan Sekarang via WA</span>
-            </a>
+          {/* In-Article Promotion CTA Card (PRO Career Platform) */}
+          <div className="mt-8 pt-8 border-t border-[#d9cff5]/60 bg-gradient-to-r from-white via-[#efeafb]/50 to-white rounded-2xl p-6 sm:p-8 border border-[#d9cff5] flex flex-col sm:flex-row items-center justify-between gap-5 shadow-sm">
+            <div className="space-y-1.5 text-center sm:text-left">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#8f78d8] text-white text-[10px] font-bold">
+                <Sparkles size={12} />
+                Inner Whisper Career Copilot
+              </div>
+              <h3 className="text-base sm:text-xl font-bold text-[#2b2542]">
+                Ingin Memastikan CV Format ATS &amp; Latihan Wawancaramu Siap?
+              </h3>
+              <p className="text-xs sm:text-sm text-[#5d5577] max-w-xl">
+                Coba audit CV format ATS instan dan pelajari 10 simulasi pertanyaan wawancara kerja metode STAR hanya <strong>Rp 35.000 / bulan</strong>.
+              </p>
+            </div>
+            <div className="shrink-0 flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
+              <Link
+                to="/login"
+                className="btn-lv text-xs sm:text-sm px-5 py-3 rounded-xl shadow-btn font-bold text-center inline-flex items-center justify-center gap-1.5 active:scale-95 text-white"
+              >
+                <span>Mulai Tes Gratis</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </article>
+
+        {/* Related Articles */}
+        <div className="max-w-4xl mx-auto w-full mt-10">
+          <h3 className="text-lg sm:text-xl font-bold text-[#2b2542] mb-4">
+            Artikel Terkait Lainnya
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {relatedArticles.map((rel) => (
+              <div
+                key={rel.id}
+                onClick={() => {
+                  setSelectedArticle(rel);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="card-s p-4 sm:p-5 flex gap-4 items-center cursor-pointer hover:border-[#8f78d8] hover:shadow-card transition-all bg-white"
+              >
+                <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                  <img src={rel.image} alt={rel.title} className="w-full h-full object-cover" />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[10px] font-bold text-[#8f78d8] uppercase tracking-wider block mb-0.5">
+                    {rel.category}
+                  </span>
+                  <h4 className="text-xs sm:text-sm font-bold text-[#2b2542] line-clamp-2 hover:text-[#4b3b86] transition-colors">
+                    {rel.title}
+                  </h4>
+                  <span className="text-[11px] text-[#5d5577] mt-1 block">
+                    {rel.readTime}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     );
   }
 
+  // Catalog / List View
   return (
-    <div className="pt-20 md:pt-[130px] pb-28 md:pb-24 px-4 sm:px-8 md:px-16 lg:px-24 w-full font-quicksand">
-      {/* Header */}
-      <div className="mb-6 sm:mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#4b3b86] mb-2 sm:mb-4 tracking-tight">
-            Artikel &amp; <span className="bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] bg-clip-text text-transparent">Edukasi</span>
-          </h1>
-          <p className="text-xs sm:text-base md:text-xl text-[#5d5577] max-w-4xl leading-relaxed">
-            Temukan wawasan, tips praktis, dan panduan untuk merawat kesehatan mental Anda setiap hari.
-          </p>
+    <div className="pt-24 md:pt-[125px] pb-28 md:pb-24 px-4 sm:px-8 md:px-16 lg:px-24 w-full font-quicksand">
+      {/* Header Banner */}
+      <section className="mb-8 sm:mb-12 text-center max-w-4xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#efeafb] text-[#4b3b86] text-xs font-bold mb-3 border border-[#d9cff5]">
+          <BookOpen size={14} className="text-[#8f78d8]" />
+          Wawasan &amp; Panduan Persiapan Kerja
         </div>
-      </div>
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#4b3b86] mb-3 sm:mb-4 tracking-tight">
+          Artikel &amp; <span className="bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] bg-clip-text text-transparent">Edukasi Karier</span>
+        </h1>
+        <p className="text-xs sm:text-base md:text-lg text-[#5d5577] leading-relaxed max-w-2xl mx-auto">
+          Wawasan praktis seputar optimasi resume standar ATS, teknik wawancara STAR, strategi networking, dan menjaga kesehatan mental saat melamar kerja.
+        </p>
 
-      {/* Category Chips with Horizontal Scroll on Mobile */}
-      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-8 sm:mb-12 -mx-4 px-4 sm:mx-0 sm:px-0">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => {
-              setActiveCategory(cat);
-              setSelectedArticle(null);
-            }}
-            className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shadow-sm focus:outline-none flex-shrink-0 ${
-              activeCategory === cat
-                ? 'bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] text-white shadow-btn'
-                : 'bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] hover:bg-[#e4daf7]'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+        {/* Search Bar */}
+        <div className="mt-6 max-w-lg mx-auto relative">
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8a82a2]" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Cari topik, resume ATS, wawancara STAR, strategi..."
+            className="w-full pl-11 pr-4 py-3 bg-white border border-[#d9cff5] rounded-2xl text-xs sm:text-sm text-[#2b2542] placeholder:text-[#8a82a2] outline-none focus:ring-2 focus:ring-[#8f78d8]/30 focus:border-[#8f78d8] shadow-sm transition-all"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-[#8a82a2] hover:text-[#2b2542]"
+            >
+              Hapus
+            </button>
+          )}
+        </div>
+      </section>
 
-      {/* Featured Article */}
-      {activeCategory === 'Semua Topik' && (
-        <section className="mb-8 sm:mb-14">
-          <div className="bg-white/90 backdrop-blur rounded-2xl overflow-hidden shadow-card hover:shadow-lg transition-all group flex flex-col md:flex-row border border-[#d9cff5]">
-            <div className="md:w-1/2 relative overflow-hidden h-48 sm:h-64 md:h-auto">
+      {/* Category Chips with Horizontal Scroll */}
+      <section className="mb-8 sm:mb-10 max-w-5xl mx-auto">
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar pb-2 px-1">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => {
+                setActiveCategory(cat);
+              }}
+              className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shadow-sm focus:outline-none flex-shrink-0 ${
+                activeCategory === cat
+                  ? 'bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] text-white shadow-btn'
+                  : 'bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] hover:bg-[#e4daf7]'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Article Hero (Shown when on "Semua Topik" without search query) */}
+      {activeCategory === 'Semua Topik' && !searchQuery && (
+        <section className="mb-10 sm:mb-14 max-w-5xl mx-auto">
+          <div className="bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-xl transition-all group flex flex-col md:flex-row border border-[#d9cff5]">
+            <div className="md:w-1/2 relative overflow-hidden h-52 sm:h-72 md:h-auto">
               <img
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                alt="Seseorang sedang menulis jurnal di ruangan yang tenang"
+                alt={featuredArticle.title}
                 src={featuredArticle.image}
               />
-              <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-xs text-[#4b3b86] font-bold shadow-sm border border-[#d9cff5]/60">
+              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur px-3.5 py-1 rounded-full text-xs text-[#4b3b86] font-extrabold shadow-sm border border-[#d9cff5]/80 flex items-center gap-1.5">
+                <Sparkles size={13} className="text-[#8f78d8]" />
                 Artikel Pilihan
               </div>
             </div>
-            <div className="md:w-1/2 p-5 sm:p-8 md:p-12 flex flex-col justify-center">
-              <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                <span className="text-xs text-[#8f78d8] font-bold">{featuredArticle.category}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8f78d8]" />
-                <span className="text-xs text-[#5d5577] font-medium">{featuredArticle.readTime}</span>
+            <div className="md:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                  <span className="text-xs text-[#8f78d8] font-bold">{featuredArticle.category}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#8f78d8]" />
+                  <span className="text-xs text-[#5d5577] font-medium">{featuredArticle.readTime}</span>
+                </div>
+                <h2
+                  className="text-lg sm:text-2xl font-bold text-[#2b2542] mb-2 sm:mb-3 group-hover:text-[#4b3b86] transition-colors cursor-pointer leading-snug"
+                  onClick={() => {
+                    setSelectedArticle(featuredArticle);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
+                  {featuredArticle.title}
+                </h2>
+                <p className="text-xs sm:text-sm text-[#5d5577] line-clamp-3 leading-relaxed mb-6">
+                  {featuredArticle.description}
+                </p>
               </div>
-              <h2
-                className="text-lg sm:text-2xl font-bold text-[#2b2542] mb-2 sm:mb-3 group-hover:text-[#4b3b86] transition-colors cursor-pointer"
-                onClick={() => setSelectedArticle(featuredArticle)}
-              >
-                {featuredArticle.title}
-              </h2>
-              <p className="text-xs sm:text-sm md:text-base text-[#5d5577] mb-4 sm:mb-6 line-clamp-3 leading-relaxed">
-                {featuredArticle.description}
-              </p>
-              <div className="flex items-center justify-between mt-auto pt-4 border-t border-[#d9cff5]/60">
+
+              <div className="flex items-center justify-between pt-4 border-t border-[#d9cff5]/60 mt-auto">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] flex items-center justify-center text-xs font-bold">
-                    AS
+                  <div className="w-9 h-9 rounded-xl bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5] flex items-center justify-center text-xs font-bold">
+                    <BookOpen size={16} />
                   </div>
                   <div>
                     <p className="text-xs font-bold text-[#2b2542]">{featuredArticle.author}</p>
-                    <p className="text-[10px] sm:text-xs text-[#5d5577]">{featuredArticle.authorTitle}</p>
+                    <p className="text-[10px] text-[#5d5577]">{featuredArticle.authorTitle}</p>
                   </div>
                 </div>
                 <button 
-                  onClick={() => setSelectedArticle(featuredArticle)}
-                  className="text-xs sm:text-sm text-[#4b3b86] hover:text-[#8f78d8] flex items-center gap-1.5 font-bold focus:outline-none transition-colors"
+                  onClick={() => {
+                    setSelectedArticle(featuredArticle);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="text-xs sm:text-sm text-[#4b3b86] hover:text-[#8f78d8] flex items-center gap-1 font-bold focus:outline-none transition-colors"
                 >
-                  <span>Baca Selengkapnya</span> <ArrowRight size={14} />
+                  <span>Baca</span> <ArrowRight size={14} />
                 </button>
               </div>
             </div>
@@ -262,89 +635,147 @@ export default function Artikel() {
         </section>
       )}
 
-      {/* Masonry Grid */}
-      {filteredArticles.length > 0 ? (
-        <div className="masonry-grid mb-10 sm:mb-16">
-          {filteredArticles.map((article, index) => (
-            <article
-              key={article.id}
-              className="masonry-item card-s overflow-hidden hover:-translate-y-1 transition-all group flex flex-col border border-[#d9cff5]"
-            >
-              {article.hasImage && article.image && (
+      {/* Clean 3-Column Responsive Grid (No Broken Masonry) */}
+      <section className="max-w-5xl mx-auto mb-12 sm:mb-16">
+        {filteredArticles.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+            {filteredArticles.map((article) => (
+              <article
+                key={article.id}
+                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-200 border border-[#d9cff5] flex flex-col justify-between group"
+              >
+                {/* Article Card Image */}
                 <div
-                  className={`relative ${index === 2 ? 'h-52 sm:h-64' : 'h-44 sm:h-52'} overflow-hidden cursor-pointer`}
-                  onClick={() => setSelectedArticle(article)}
+                  className="relative h-48 sm:h-52 overflow-hidden cursor-pointer bg-slate-50"
+                  onClick={() => {
+                    setSelectedArticle(article);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                 >
                   <img
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     alt={article.title}
                     src={article.image}
                   />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2.5 py-1 bg-white/95 backdrop-blur-sm text-[#4b3b86] border border-[#d9cff5]/70 rounded-lg text-[10px] font-extrabold shadow-sm">
+                      {article.category}
+                    </span>
+                  </div>
                 </div>
-              )}
-              <div className="p-5 sm:p-6 flex flex-col flex-grow">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="px-2.5 py-0.5 bg-[#efeafb] text-[#4b3b86] border border-[#d9cff5]/60 rounded-md text-[11px] font-semibold">
-                    {article.category}
-                  </span>
-                </div>
-                <h3
-                  className="text-base sm:text-xl font-bold text-[#2b2542] mb-2 group-hover:text-[#4b3b86] transition-colors cursor-pointer"
-                  onClick={() => setSelectedArticle(article)}
-                >
-                  {article.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#5d5577] mb-4 line-clamp-3 leading-relaxed">
-                  {article.description}
-                </p>
-                <div className="mt-auto pt-3 border-t border-[#d9cff5]/60 flex items-center justify-between">
-                  <p className="text-[11px] text-[#5d5577] font-medium">{article.author}</p>
-                  <button 
-                    onClick={() => setSelectedArticle(article)}
-                    className="text-xs text-[#4b3b86] hover:text-[#8f78d8] flex items-center font-bold focus:outline-none transition-colors"
-                  >
-                    <span>Baca</span> <ChevronRight size={14} className="ml-0.5" />
-                  </button>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12 sm:py-16 bg-[#efeafb]/50 border border-[#d9cff5] rounded-2xl mb-10 sm:mb-16">
-          <p className="text-sm text-[#5d5577]">Tidak ada artikel di kategori ini untuk saat ini.</p>
-        </div>
-      )}
 
-      {/* Newsletter Section */}
-      <section className="card-s bg-gradient-to-r from-white to-[#efeafb]/70 rounded-2xl p-6 sm:p-10 md:p-14 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 relative overflow-hidden border border-[#d9cff5]">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#8f78d8]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-        <div className="relative z-10 lg:w-1/2 text-center lg:text-left">
-          <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-[#4b3b86] mb-2 sm:mb-3">
-            Dapatkan tips kesehatan mental mingguan.
+                {/* Article Card Body */}
+                <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2 text-[11px] text-[#5d5577]">
+                      <span className="flex items-center gap-1 font-semibold">
+                        <Clock size={12} />
+                        {article.readTime}
+                      </span>
+                    </div>
+
+                    <h3
+                      className="text-base sm:text-lg font-bold text-[#2b2542] mb-2 group-hover:text-[#4b3b86] transition-colors cursor-pointer leading-snug line-clamp-2"
+                      onClick={() => {
+                        setSelectedArticle(article);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                    >
+                      {article.title}
+                    </h3>
+
+                    <p className="text-xs text-[#5d5577] line-clamp-3 leading-relaxed mb-4">
+                      {article.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#d9cff5]/60 flex items-center justify-between mt-auto">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-md bg-[#efeafb] text-[#4b3b86] text-[10px] font-bold flex items-center justify-center">
+                        IW
+                      </div>
+                      <p className="text-[11px] text-[#5d5577] font-medium truncate max-w-[120px]">
+                        {article.author}
+                      </p>
+                    </div>
+
+                    <button 
+                      onClick={() => {
+                        setSelectedArticle(article);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="text-xs text-[#8f78d8] group-hover:text-[#4b3b86] flex items-center font-bold focus:outline-none transition-colors"
+                    >
+                      <span>Baca</span> <ChevronRight size={14} className="ml-0.5" />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12 sm:py-16 bg-white border border-[#d9cff5] rounded-3xl p-8 max-w-lg mx-auto shadow-sm">
+            <div className="w-12 h-12 rounded-2xl bg-[#efeafb] text-[#8f78d8] flex items-center justify-center mx-auto mb-3">
+              <Search size={22} />
+            </div>
+            <h3 className="text-base font-bold text-[#2b2542]">Tidak Ada Artikel Ditemukan</h3>
+            <p className="text-xs text-[#5d5577] mt-1 mb-4 leading-relaxed">
+              Tidak ada artikel yang cocok dengan pencarian <strong>"{searchQuery}"</strong> atau kategori yang dipilih.
+            </p>
+            <button
+              onClick={() => {
+                setActiveCategory('Semua Topik');
+                setSearchQuery('');
+              }}
+              className="btn-lv text-xs px-4 py-2 rounded-xl text-white font-bold"
+            >
+              Reset Filter &amp; Pencarian
+            </button>
+          </div>
+        )}
+      </section>
+
+      {/* Newsletter & Career Guide Subscription */}
+      <section className="card-s bg-gradient-to-r from-white via-[#efeafb]/50 to-white rounded-3xl p-6 sm:p-10 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 border border-[#d9cff5] max-w-5xl mx-auto shadow-sm">
+        <div className="lg:w-1/2 text-center lg:text-left space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#efeafb] text-[#4b3b86] text-xs font-bold border border-[#d9cff5]">
+            <Sparkles size={13} className="text-[#8f78d8]" />
+            Newsletter Karier Mingguan
+          </div>
+          <h2 className="text-xl sm:text-3xl font-extrabold text-[#2b2542] tracking-tight">
+            Dapatkan Tips Persiapan Kerja &amp; Bedah CV Gratis
           </h2>
-          <p className="text-xs sm:text-base text-[#5d5577] leading-relaxed">
-            Bergabung dengan komunitas kami dan terima artikel pilihan serta panduan merawat diri langsung di kotak masuk Anda.
+          <p className="text-xs sm:text-sm text-[#5d5577] leading-relaxed">
+            Bergabunglah dengan ribuan mahasiswa dan job seeker untuk menerima artikel panduan wawancara dan checklist ATS langsung di emailmu.
           </p>
         </div>
-        <div className="relative z-10 lg:w-1/2 w-full max-w-md">
-          <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
-            <label className="sr-only" htmlFor="newsletter-email">Alamat Email</label>
-            <input
-              className="w-full bg-white border border-[#d9cff5] rounded-xl py-3 px-4 text-xs sm:text-sm text-[#2b2542] focus:ring-2 focus:ring-[#8f78d8]/30 outline-none shadow-sm transition-all"
-              id="newsletter-email"
-              placeholder="Alamat email Anda"
-              type="email"
-            />
-            <button
-              className="w-full btn-lv text-xs sm:text-sm py-3 px-6 rounded-xl transition-all shadow-btn font-semibold active:scale-95 text-white"
-              type="submit"
-            >
-              Berlangganan Sekarang
-            </button>
-          </form>
-          <p className="text-[11px] text-[#5d5577] mt-2 text-center lg:text-left">
-            Kami menjaga privasi Anda. Tidak ada spam.
+
+        <div className="lg:w-1/2 w-full max-w-md">
+          {subscribedToast ? (
+            <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-bold flex items-center gap-2 animate-fade-in">
+              <CheckCircle2 size={18} className="text-emerald-600 shrink-0" />
+              <span>Terima kasih! Anda telah terdaftar untuk menerima newsletter karier mingguan kami.</span>
+            </div>
+          ) : (
+            <form className="flex flex-col sm:flex-row gap-2.5" onSubmit={handleNewsletterSubmit}>
+              <input
+                required
+                className="w-full bg-white border border-[#d9cff5] rounded-xl py-3 px-4 text-xs sm:text-sm text-[#2b2542] focus:ring-2 focus:ring-[#8f78d8]/30 outline-none shadow-sm transition-all"
+                placeholder="Masukkan alamat email Anda"
+                type="email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+              />
+              <button
+                className="btn-lv text-xs sm:text-sm py-3 px-5 rounded-xl transition-all shadow-btn font-bold whitespace-nowrap active:scale-95 text-white"
+                type="submit"
+              >
+                Langganan
+              </button>
+            </form>
+          )}
+          <p className="text-[11px] text-[#8a82a2] mt-2 text-center lg:text-left">
+            Privasi Anda terjamin. Bebas spam, Anda dapat berhenti berlangganan kapan saja.
           </p>
         </div>
       </section>
