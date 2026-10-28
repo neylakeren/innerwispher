@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { Eye, EyeOff } from 'lucide-react';
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -35,7 +36,11 @@ export const Button = React.forwardRef(({ className, variant = 'primary', size =
   );
 });
 
-export const Input = React.forwardRef(({ className, label, error, ...props }, ref) => {
+export const Input = React.forwardRef(({ className, label, error, type, ...props }, ref) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const isPassword = type === 'password';
+  const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
+
   return (
     <div className="space-y-1.5 w-full">
       {label && (
@@ -43,15 +48,30 @@ export const Input = React.forwardRef(({ className, label, error, ...props }, re
           {label}
         </label>
       )}
-      <input
-        ref={ref}
-        className={cn(
-          'flex h-11 w-full rounded-xl border border-[#d9cff5] bg-white/90 px-3.5 py-2 text-sm text-[#2b2542] placeholder:text-[#8a82a2] focus:outline-none focus:border-[#8f78d8] focus:ring-2 focus:ring-[#8f78d8]/25 transition-all shadow-sm',
-          error && 'border-error focus:ring-error/20',
-          className
+      <div className="relative w-full">
+        <input
+          ref={ref}
+          type={inputType}
+          className={cn(
+            'flex h-11 w-full rounded-xl border border-[#d9cff5] bg-white/90 px-3.5 py-2 text-sm text-[#2b2542] placeholder:text-[#8a82a2] focus:outline-none focus:border-[#8f78d8] focus:ring-2 focus:ring-[#8f78d8]/25 transition-all shadow-sm',
+            isPassword && 'pr-11',
+            error && 'border-error focus:ring-error/20',
+            className
+          )}
+          {...props}
+        />
+        {isPassword && (
+          <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-[#8a82a2] hover:text-[#4b3b86] hover:bg-[#efeafb] transition-all rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8f78d8]/30"
+            tabIndex={-1}
+            aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
         )}
-        {...props}
-      />
+      </div>
       {error && (
         <p className="text-xs text-error font-medium">{error}</p>
       )}

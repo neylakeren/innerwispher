@@ -484,7 +484,10 @@ This document serves as the project memory for the frontend landing page and das
   - **5. Penghapusan UI Demo Account Helper di Login:**
     - Menghapus box "Pilih Akun Demo Cepat" dari [Login.jsx](file:///D:/Coding/neyla/frontend/src/pages/Login.jsx) agar form otentikasi bersih dan siap produksi.
     - Kredensial akun demo (Free tier, Pending transfer, PRO member, dan Admin) didokumentasikan untuk pengujian internal.
-  - **6. Kompilasi, Git Push & Live Production Deployment (`vps-bleber`):**
+  - **6. Fitur Toggle Visibilitas Password (Tanda Mata):**
+    - Mengintegrasikan tombol toggle ikon mata (`Eye` dan `EyeOff` dari Lucide React) langsung di dalam komponen reusable [`Input`](file:///D:/Coding/neyla/frontend/src/components/ui.jsx).
+    - Berfungsi secara otomatis pada seluruh kolom ber-tipe `password` (Login, Registrasi, Konfirmasi Password, dsb.) dengan padding protektif (`pr-11`) dan aksesibilitas `aria-label`.
+  - **7. Kompilasi, Git Push & Live Production Deployment (`vps-bleber`):**
     - Kompilasi production frontend via `npm run build` sukses 100% (`dist/assets/index-DuAwzQD7.js` dan `dist/assets/index-Bs9FdVuh.css`).
     - Sinkronisasi backend files ke VPS `/var/www/innerwhisper/backend/`.
     - Eksekusi migrasi database live: `php artisan migrate --force` sukses menambahkan kolom `pro_expires_at`.
