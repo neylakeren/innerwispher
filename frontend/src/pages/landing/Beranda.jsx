@@ -20,7 +20,7 @@ export default function Beranda() {
     {
       icon: Brain,
       title: 'Langkah 1: Tes Minat & Bakat Gratis',
-      description: 'Jawab 25 pertanyaan psikometri terarah untuk memetakan minat dominanmu dalam Teknologi, Kreatif, Bisnis, atau Sosial.',
+      description: 'Jawab 25 pertanyaan konsultasi karier terarah untuk memetakan minat dominanmu dalam Teknologi, Kreatif, Bisnis, atau Sosial.',
     },
     {
       icon: FileText,
@@ -106,7 +106,7 @@ export default function Beranda() {
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg text-[#5d5577] max-w-2xl mx-auto md:mx-0 leading-relaxed font-medium">
-            Ekosistem persiapan karier mandiri yang dirancang khusus untuk mahasiswa dan pencari kerja. Mulai dari tes minat psikometri, audit CV ATS instan, hingga simulasi wawancara kerja terarah.
+            Ekosistem persiapan karier mandiri yang dirancang khusus untuk mahasiswa dan pencari kerja. Mulai dari konsultasi karier &amp; tes minat, audit CV ATS instan, hingga simulasi wawancara kerja terarah.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 items-center justify-center md:justify-start pt-1">
@@ -154,7 +154,7 @@ export default function Beranda() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#2b2542]/70 via-transparent to-transparent flex items-end p-6">
               <div className="text-white">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#d9cff5]">Inner Whisper Career Copilot</span>
-                <p className="text-sm sm:text-base font-bold">Akurasi asesmen psikometri &amp; standar ATS rekruter modern.</p>
+                <p className="text-sm sm:text-base font-bold">Akurasi asesmen konsultasi karier &amp; standar ATS rekruter modern.</p>
               </div>
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function Beranda() {
             Dipercaya Lebih dari <span className="bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] bg-clip-text text-transparent">1.250+ Mahasiswa &amp; Job Seeker</span>
           </h2>
           <p className="text-xs sm:text-base text-[#5d5577] max-w-2xl mx-auto leading-relaxed">
-            Lihat bagaimana asesmen psikometri, scanner CV format ATS, dan simulator interview metode STAR membantu mereka lolos seleksi kerja impian.
+            Lihat bagaimana konsultasi karier, scanner CV format ATS, dan simulator interview metode STAR membantu mereka lolos seleksi kerja impian.
           </p>
         </div>
 

@@ -93,7 +93,7 @@ export const QUESTIONS = [
       { text: 'Tutorial teknologi, gadget, dan AI', cat: 'tech' },
       { text: 'Desain grafis, seni, dan film', cat: 'cre' },
       { text: 'Bisnis, investasi, dan startup', cat: 'biz' },
-      { text: 'Psikologi, relasi, dan pengembangan diri', cat: 'soc' }
+      { text: 'Konsultasi karier, relasi, dan pengembangan diri', cat: 'soc' }
     ]
   },
   {
@@ -147,7 +147,7 @@ export const QUESTIONS = [
       { text: 'Statistika, logika komputasi, atau rekayasa data', cat: 'tech' },
       { text: 'Desain komunikasi visual, estetika, atau seni', cat: 'cre' },
       { text: 'Manajemen, pemasaran terpadu, atau ekonomi', cat: 'biz' },
-      { text: 'Psikologi kepribadian, konseling, atau sosiologi', cat: 'soc' }
+      { text: 'Konsultasi karier, pengembangan diri, atau sosiologi', cat: 'soc' }
     ]
   },
   {
@@ -252,7 +252,7 @@ export const CAREERS = [
     id: 3,
     c: 'cre',
     n: 'UI/UX Designer',
-    d: 'Merancang antarmuka digital yang intuitif, estetis, dan memberikan kenyamanan psikologis bagi pengguna.',
+    d: 'Merancang antarmuka digital yang intuitif, estetis, dan memberikan kenyamanan pengalaman bagi pengguna.',
     s: ['Figma', 'User Research', 'Wireframing', 'Design System', 'Usability Testing']
   },
   {
@@ -301,7 +301,7 @@ export const ROADMAPS = {
     'Siapkan CV ATS-friendly dan lamar posisi junior dengan percaya diri'
   ],
   cre: [
-    'Pahami prinsip dasar desain visual, estetika warna, dan psikologi komunikasi',
+    'Pahami prinsip dasar desain visual, estetika warna, dan komunikasi visual',
     'Kuasai software utama industri (Figma, Adobe Suite, Illustrator)',
     'Susun 3 studi kasus mendalam: masalah, proses riset, dan solusi visual',
     'Ikuti kompetisi desain atau ambil proyek riil bersama klien',
@@ -315,7 +315,7 @@ export const ROADMAPS = {
     'Bangun networking profesional di LinkedIn dan lamar posisi akselerasi karier'
   ],
   soc: [
-    'Pelajari prinsip komunikasi antarpersona, konseling dasar, dan psikologi organisasi',
+    'Pelajari prinsip komunikasi antarpersona, konsultasi karier dasar, dan manajemen organisasi',
     'Aktif mengambil peran kepemimpinan dalam organisasi atau kepanitiaan',
     'Ikuti sertifikasi pelatihan fasilitasi, konseling sebaya, atau coaching',
     'Jalani magang di departemen HR, people development, atau lembaga sosial',
@@ -368,11 +368,11 @@ export const ZODIACS = [
   { name: 'Leo', date: '23 Jul – 22 Agu', desc: 'Percaya diri, inspiratif, dan karismatik. Menonjol saat mempresentasikan ide besar di hadapan audiens.', jobs: 'Creative Director, Brand Strategist, Trainer' },
   { name: 'Virgo', date: '23 Agu – 22 Sep', desc: 'Detail, sistematis, dan analitis. Memiliki ketajaman dalam menyempurnakan alur kerja agar zero-error.', jobs: 'Data Scientist, QA Engineer, Business Analyst' },
   { name: 'Libra', date: '23 Sep – 22 Okt', desc: 'Harmonis, estetis, dan adil. Pandai menengahi perbedaan serta merancang pengalaman visual yang seimbang.', jobs: 'UI/UX Designer, Mediator Kemitraan, Event Lead' },
-  { name: 'Scorpio', date: '23 Okt – 21 Nov', desc: 'Fokus mendalam, gigih, dan strategis. Sangat andal dalam riset mendalam dan investigasi permasalahan.', jobs: 'Cybersecurity Analyst, Psikolog Klinis, Market Researcher' },
+  { name: 'Scorpio', date: '23 Okt – 21 Nov', desc: 'Fokus mendalam, gigih, dan strategis. Sangat andal dalam riset mendalam dan investigasi permasalahan.', jobs: 'Cybersecurity Analyst, Konsultan Karier & Riset, Market Researcher' },
   { name: 'Sagittarius', date: '22 Nov – 21 Des', desc: 'Visioner, antusias, dan menyukai wawasan global. Sukses di peran yang memperluas horizon dan edukasi.', jobs: 'Konsultan Strategis, Educator, International Relations' },
   { name: 'Capricorn', date: '22 Des – 19 Jan', desc: 'Disiplin tinggi, pragmatis, dan berorientasi hasil jangka panjang. Piawai dalam tata kelola organisasi.', jobs: 'Operations Lead, Corporate Finance, General Manager' },
   { name: 'Aquarius', date: '20 Jan – 18 Feb', desc: 'Inovatif, visioner, dan berpikiran maju. Nyaman dengan terobosan teknologi baru yang berdampak sosial.', jobs: 'Software Architect, Social Innovator, Tech Lead' },
-  { name: 'Pisces', date: '19 Feb – 20 Mar', desc: 'Imajinatif, intuitif, dan memiliki empati mendalam. Sangat kuat dalam profesi kreatif dan pendampingan psikologis.', jobs: 'Penulis Narasi, Art Therapist, Konselor Karier' }
+  { name: 'Pisces', date: '19 Feb – 20 Mar', desc: 'Imajinatif, intuitif, dan memiliki empati mendalam. Sangat kuat dalam profesi kreatif dan konsultasi karier.', jobs: 'Penulis Narasi, Creative Strategist, Konsultan Karier' }
 ];
 
 export const ZODIAC_EXTRAS = {

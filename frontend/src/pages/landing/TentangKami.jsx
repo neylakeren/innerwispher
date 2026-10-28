@@ -6,7 +6,7 @@ export default function TentangKami() {
     {
       icon: Compass,
       title: 'Pemetaan Potensi Terarah',
-      description: 'Membantu Anda mengenali kekuatan diri, minat karier, dan jalur profesi yang paling selaras dengan kepribadian Anda lewat 25 indikator psikometri.',
+      description: 'Membantu Anda mengenali kekuatan diri, minat karier, dan jalur profesi yang paling selaras dengan kepribadian Anda lewat 25 indikator konsultasi karier.',
     },
     {
       icon: FileText,
@@ -32,7 +32,7 @@ export default function TentangKami() {
           Dedikasi untuk <span className="bg-gradient-to-r from-[#4b3b86] to-[#8f78d8] bg-clip-text text-transparent">Potensi &amp; Masa Depan Karier Anda</span>
         </h1>
         <p className="text-xs sm:text-base md:text-lg text-[#5d5577] max-w-4xl mx-auto leading-relaxed font-medium">
-          Di Inner Whisper, misi kami adalah mendemokratisasi akses persiapan karier berkualitas tinggi. Kami menggabungkan asesmen psikometri ilmiah, teknologi audit ATS, dan simulasi wawancara terarah dalam satu ekosistem mandiri yang cepat, privat, dan terjangkau.
+          Di Inner Whisper, misi kami adalah mendemokratisasi akses persiapan karier berkualitas tinggi. Kami menggabungkan layanan konsultasi karier ilmiah, teknologi audit ATS, dan simulasi wawancara terarah dalam satu ekosistem mandiri yang cepat, privat, dan terjangkau.
         </p>
       </section>
 

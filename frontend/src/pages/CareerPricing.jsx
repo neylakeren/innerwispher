@@ -101,7 +101,7 @@ export default function CareerPricing() {
                 )}
               </h4>
               <p className="text-xs text-emerald-800 mt-0.5 leading-relaxed">
-                Akun Anda memiliki akses penuh ke unduhan PDF laporan psikometri karier, audit CV ATS mendalam, dan simulasi interview STAR
+                Akun Anda memiliki akses penuh ke unduhan PDF laporan konsultasi karier, audit CV ATS mendalam, dan simulasi interview STAR
                 {proExpiresAt && ` hingga ${new Date(proExpiresAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}`}.
               </p>
             </div>
@@ -373,7 +373,7 @@ export default function CareerPricing() {
             <div>
               <h4 className="text-sm font-bold text-[#2b2542]">Standar HRD &amp; ATS Teruji</h4>
               <p className="text-xs text-[#5d5577] mt-0.5 leading-relaxed">
-                Laporan asesmen psikometri terstruktur, algoritma audit ATS, dan simulasi interview metode STAR.
+                Laporan asesmen konsultasi karier terstruktur, algoritma audit ATS, dan simulasi interview metode STAR.
               </p>
             </div>
           </div>

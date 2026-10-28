@@ -137,7 +137,7 @@ export default function UserProfile() {
               name="major"
               value={formData.major}
               onChange={handleChange}
-              placeholder="Contoh: Psikologi / Sistem Informasi"
+              placeholder="Contoh: Manajemen / Sistem Informasi"
             />
 
             <Input

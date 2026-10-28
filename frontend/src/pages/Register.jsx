@@ -71,7 +71,7 @@ export default function Register() {
                     Inner Whisper
                 </h2>
                 <p className="mt-1 text-sm font-medium text-[#5d5577]">
-                    Buat akunmu untuk memulai pemetaan karier & konseling
+                    Buat akunmu untuk memulai pemetaan &amp; konsultasi karier
                 </p>
             </div>
 

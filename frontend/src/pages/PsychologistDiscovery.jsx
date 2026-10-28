@@ -64,7 +64,7 @@ export default function PsychologistDiscovery() {
         <div className="space-y-6">
             <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-900">Cari Psikolog</h1>
+                    <h1 className="text-2xl font-bold text-slate-900">Konsultasi Karier</h1>
                     <p className="text-slate-500">Temukan tenaga ahli yang tepat untuk kesehatan mental Anda.</p>
                 </div>
                 <div className="relative w-full md:w-64">

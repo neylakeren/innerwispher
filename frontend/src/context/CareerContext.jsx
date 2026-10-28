@@ -158,7 +158,7 @@ export function CareerProvider({ children }) {
     if (!careerState?.testResult) {
       return {
         title: 'Ikuti Tes Karier',
-        desc: 'Jawab 25 pertanyaan untuk memetakan potensi & minat psikologis terbesarmu.',
+        desc: 'Jawab 25 pertanyaan untuk konsultasi karier dan memetakan potensi terbesarmu.',
         path: '/tes',
         actionLabel: 'Mulai Tes'
       };

@@ -553,6 +553,24 @@ This document serves as the project memory for the frontend landing page and das
       - Service Nginx dan Supervisor queue worker di-reload sukses.
       - Live health check `https://innerwhisper.my.id/` dan `https://innerwhisper.my.id/up` menghasilkan HTTP 200 OK.
 
+- **October 28, 2026:** Penyelarasan Terminologi Menyeluruh: Penggantian Istilah "Psikologi" / "Psikologis" menjadi "Konsultasi Karier" & Live Deployment Production.
+  - Sesuai arahan, seluruh istilah "psikologi" dan "psikologis" diubah menjadi "konsultasi karier" / "karier" agar positioning platform 100% konsisten sebagai Career Copilot & Konsultasi Karier Terpercaya.
+  - File yang diperbarui:
+    - [index.html](file:///D:/Coding/neyla/frontend/index.html): Title, Meta Description, Meta Keywords, Open Graph tags, Twitter Card tags, dan Schema.org JSON-LD diselaraskan ke "Layanan Konsultasi Karier & Asesmen Digital Terpercaya".
+    - [careerData.js](file:///D:/Coding/neyla/frontend/src/data/careerData.js): Opsi pertanyaan kuis, deskripsi karir, jalur karir, serta ramalan zodiak karier dibersihkan dari kata psikologi.
+    - [CareerTest.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerTest.jsx): "25 pertanyaan psikometri" diubah menjadi "25 pertanyaan konsultasi karier", analitika hasil dan paywall report terstruktur.
+    - [CareerPricing.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerPricing.jsx): Penjelasan paket dan benefit laporan asesmen konsultasi karier.
+    - [CareerCvInterview.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerCvInterview.jsx): Download file laporan diselaraskan.
+    - [Dashboard.jsx](file:///D:/Coding/neyla/frontend/src/pages/Dashboard.jsx): Widget ringkasan dan card pemetaan konsultasi karier.
+    - [CareerZodiac.jsx](file:///D:/Coding/neyla/frontend/src/pages/CareerZodiac.jsx) & [UserProfile.jsx](file:///D:/Coding/neyla/frontend/src/pages/UserProfile.jsx): Disclaimer dan placeholder bidang studi.
+    - [Beranda.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Beranda.jsx), [TentangKami.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/TentangKami.jsx), [Artikel.jsx](file:///D:/Coding/neyla/frontend/src/pages/landing/Artikel.jsx): Seluruh teks landing page, badge fitur, dan kategori artikel.
+    - [PWAInstallBanner.jsx](file:///D:/Coding/neyla/frontend/src/components/PWAInstallBanner.jsx) & [CareerContext.jsx](file:///D:/Coding/neyla/frontend/src/context/CareerContext.jsx): Banner instalasi PWA dan teks modal tes karier.
+  - Verifikasi:
+    - Audit teks `Select-String -Pattern "psikologi"` di seluruh frontend dan backend menghasilkan 0 temuan.
+    - Frontend build (`npm run build`) berhasil 100% tanpa error.
+    - Deployed ke VPS production (`vps-bleber` di `/var/www/innerwhisper/frontend-dist`).
+    - Verifikasi live `https://innerwhisper.my.id/` via curl menghasilkan HTTP 200 OK dengan konten dan meta tags terupdate.
+
 - **October 22, 2026 (Part 3):** Commit, Push to GitHub & VPS Production Deployment (`vps-bleber`).
   - Staged all modified files including terminology refactoring, codebase memory persistence, and .gitignore.
   - Committed changes locally and pushed to GitHub `origin main` (`https://github.com/neylakeren/innerwispher.git`).

@@ -253,7 +253,7 @@ export default function CareerCvInterview() {
                     Ingin Audit Kata Kunci Industri &amp; Rekomendasi Baris-per-Baris?
                   </h4>
                   <p className="text-xs text-[#5d5577] max-w-lg leading-relaxed">
-                    Buka akses Inner Whisper PRO: Rp 35.000 / bulan untuk membuka Audit CV ATS, Laporan Psikometri PDF, dan seluruh 10 soal wawancara STAR.
+                    Buka akses Inner Whisper PRO: Rp 35.000 / bulan untuk membuka Audit CV ATS, Laporan Konsultasi Karier PDF, dan seluruh 10 soal wawancara STAR.
                   </p>
                 </div>
 

@@ -95,7 +95,7 @@ export default function CareerTest() {
             Kenali Arah Karier & Kekuatanmu
           </h1>
           <p className="text-sm text-[#5d5577] mt-1">
-            25 pertanyaan psikometri untuk memetakan minat dominanmu dalam Teknologi, Kreatif, Bisnis, atau Sosial.
+            25 pertanyaan konsultasi karier untuk memetakan minat dominanmu dalam Teknologi, Kreatif, Bisnis, atau Sosial.
           </p>
         </div>
 
@@ -195,7 +195,7 @@ export default function CareerTest() {
                   Inner Whisper PRO Bundle
                 </div>
                 <h3 className="text-xl font-bold text-[#2b2542]">
-                  Ingin Analisis Psikometri Mendalam &amp; Unduh Laporan PDF?
+                  Ingin Analisis Konsultasi Karier Mendalam &amp; Unduh Laporan PDF?
                 </h3>
                 <p className="text-xs sm:text-sm text-[#5d5577] max-w-xl leading-relaxed">
                   Buka akses Inner Whisper PRO: Rp 35.000 / bulan untuk membuka Laporan PDF resmi, pemetaan 10+ industri, analisis SWOT, audit CV ATS, dan seluruh 10 soal simulasi wawancara STAR.
@@ -235,7 +235,7 @@ export default function CareerTest() {
                       <h3 className="text-lg font-bold text-[#2b2542]">Laporan Diagnostik Karier Lengkap</h3>
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#8f78d8] text-white">PRO Aktif</span>
                     </div>
-                    <p className="text-xs text-[#5d5577]">Hasil asesmen psikometri resmi Inner Whisper</p>
+                    <p className="text-xs text-[#5d5577]">Hasil asesmen konsultasi karier resmi Inner Whisper</p>
                   </div>
                 </div>
 

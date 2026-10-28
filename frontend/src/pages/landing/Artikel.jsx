@@ -124,10 +124,10 @@ const articles = [
   {
     id: 'article-mental-1',
     title: 'Menjaga Kesehatan Mental dan Mengatasi Job-Hunting Fatigue',
-    description: 'Strategi psikologis menjaga motivasi diri saat proses melamar kerja terasa panjang. Tetapkan batasan sehat, hindari burnout, dan rawat energi mentalmu.',
+    description: 'Strategi konsultasi karier menjaga motivasi diri saat proses melamar kerja terasa panjang. Tetapkan batasan sehat, hindari burnout, dan rawat energi mentalmu.',
     category: 'Mental Kesiapan Kerja',
     author: 'Tim Riset Karier',
-    authorTitle: 'Psikometri & Well-being',
+    authorTitle: 'Konsultasi Karier & Well-being',
     readTime: '7 Min Baca',
     date: '24 Oktober 2026',
     image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80',

@@ -34,7 +34,7 @@ export default function CareerZodiac() {
             Zodiak & Refleksi Karier
           </h1>
           <p className="text-sm text-[#5d5577] mt-1">
-            Pembacaan karakter dan pesan refleksi harian (hiburan psikologis untuk menyemangati langkahmu).
+            Pembacaan karakter dan pesan refleksi harian (hiburan konsultasi karier untuk menyemangati langkahmu).
           </p>
         </div>
 

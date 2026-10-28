@@ -64,7 +64,7 @@ export default function Dashboard() {
     },
     {
       title: 'Tes Karier',
-      desc: 'Petakan potensi psikologis & minat',
+      desc: 'Konsultasi karier & pemetaan minat',
       path: '/tes',
       icon: ClipboardCheck,
     },
@@ -211,7 +211,7 @@ export default function Dashboard() {
             </h2>
             <p className="text-xs sm:text-sm text-[#5d5577] max-w-xl leading-relaxed">
               {isProUnlocked 
-                ? 'Laporan psikometri lengkap, unduhan PDF resmi, audit mendalam CV ATS, dan 10 simulasi wawancara STAR siap kamu gunakan.'
+                ? 'Laporan konsultasi karier lengkap, unduhan PDF resmi, audit mendalam CV ATS, dan 10 simulasi wawancara STAR siap kamu gunakan.'
                 : 'Dapatkan akses penuh Laporan Diagnostik Karier, CV ATS Deep Diagnostic, dan 10 Soal Simulasi Interview STAR selama 30 hari tanpa perpanjangan otomatis diam-diam.'}
             </p>
           </div>

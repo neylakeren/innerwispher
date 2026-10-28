@@ -93,7 +93,7 @@ export default function PWAInstallBanner() {
           </div>
 
           <p className="text-xs text-[#5d5577] mt-1 leading-relaxed">
-            Akses layanan konseling psikologi & pengembangan karier langsung dari layar utama perangkat Anda.
+            Akses layanan konsultasi karier &amp; pengembangan potensi langsung dari layar utama perangkat Anda.
           </p>
 
           <div className="mt-3 flex items-center gap-2">
